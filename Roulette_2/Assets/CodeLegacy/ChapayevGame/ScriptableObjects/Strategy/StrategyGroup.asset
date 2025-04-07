@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31b8a39de40099f4ea383dd22ffd4795, type: 3}
+  m_Name: StrategyGroup
+  m_EditorClassIdentifier: 
+  Strategies:
+  - {fileID: 11400000, guid: 9e482cece29fff14ea8b21eea8a29dab, type: 2}
+  - {fileID: 11400000, guid: 402472361d52d8a4999cf0cc839279c4, type: 2}
+  - {fileID: 11400000, guid: 1df1df81c81355f4b82eb2ee189990a5, type: 2}
+  - {fileID: 11400000, guid: 8e473269aefb95948b7148a403a9bd32, type: 2}
+  - {fileID: 11400000, guid: 8e493d18811eb5442a0266fe4bed8974, type: 2}
+  - {fileID: 11400000, guid: 712b5f91734e8c04f9cb82a84974e1f8, type: 2}
+  - {fileID: 11400000, guid: df9a5d2902b47d846bdf0e09392d1e83, type: 2}
+  - {fileID: 11400000, guid: 22b63f1b648e9964985480d79a33a748, type: 2}
+  - {fileID: 11400000, guid: a65fd87d9e144354496a44e67ac9084a, type: 2}
+  - {fileID: 11400000, guid: cbffc9f4dc43bea4aa30fa7c381ce37c, type: 2}
+  - {fileID: 11400000, guid: 91d794f582f73754da5ec23b923a9bb7, type: 2}
+  - {fileID: 11400000, guid: cdba2536b03a4d54fafd62524bdf2047, type: 2}
