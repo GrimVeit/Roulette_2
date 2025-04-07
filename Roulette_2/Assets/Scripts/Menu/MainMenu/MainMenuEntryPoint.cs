@@ -55,12 +55,20 @@ public class MainMenuEntryPoint : MonoBehaviour
 
     private void ActivateTransitions()
     {
+        sceneRoot.OnClickToBack_DailyReward += sceneRoot.OpenMainPanel;
+        sceneRoot.OnClickToBack_Tasks += sceneRoot.OpenMainPanel;
 
+        sceneRoot.OnClickToDailyReward_Main += sceneRoot.OpenDailyRewardPanel;
+        sceneRoot.OnClickToTasks_Main += sceneRoot.OpenTasksPanel;
     }
 
     private void DeactivateTransitions()
     {
+        sceneRoot.OnClickToBack_DailyReward -= sceneRoot.OpenMainPanel;
+        sceneRoot.OnClickToBack_Tasks -= sceneRoot.OpenMainPanel;
 
+        sceneRoot.OnClickToDailyReward_Main -= sceneRoot.OpenDailyRewardPanel;
+        sceneRoot.OnClickToTasks_Main -= sceneRoot.OpenTasksPanel;
     }
 
     private void Deactivate()
