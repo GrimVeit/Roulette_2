@@ -47,7 +47,7 @@ public class MainMenuEntryPoint : MonoBehaviour
         dailyRewardScalePresenter = new DailyRewardScalePresenter(new DailyRewardScaleModel(), viewContainer.GetView<DailyRewardScaleView>());
         dailyRewardVisualPresenter = new DailyRewardVisualPresenter(new DailyRewardVisualModel(), viewContainer.GetView<DailyRewardVisualView>());
 
-        storeTaskPresenter = new StoreTaskPresenter(new StoreTaskModel(taskGroup));
+        storeTaskPresenter = new StoreTaskPresenter(new StoreTaskModel(taskGroup, bankPresenter));
         taskVisualPresenter = new TaskVisualPresenter(new TaskVisualModel(), viewContainer.GetView<TaskVisualView>());
 
         sceneRoot.SetSoundProvider(soundPresenter);

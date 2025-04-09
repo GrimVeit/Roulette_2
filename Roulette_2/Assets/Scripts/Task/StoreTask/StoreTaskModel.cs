@@ -15,9 +15,12 @@ public class StoreTaskModel
     private List<TaskData> _taskDatas = new();
     public readonly string FilePath = Path.Combine(Application.persistentDataPath, "Task.json");
 
-    public StoreTaskModel(TaskGroup taskGroup)
+    private readonly IMoneyProvider _moneyProvider;
+
+    public StoreTaskModel(TaskGroup taskGroup, IMoneyProvider moneyProvider)
     {
         _taskGroup = taskGroup;
+        _moneyProvider = moneyProvider;
     }
 
     public void Initialize()
@@ -82,6 +85,7 @@ public class StoreTaskModel
         if(task.TaskData.TaskStatus != TaskStatus.Active) return;
 
         task.TaskData.SetStatus(TaskStatus.Completed);
+        _moneyProvider.SendMoney(task.Bonus);
         OnCompletedTask?.Invoke(task);
     }
 }
