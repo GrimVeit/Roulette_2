@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RouletteNumber : MonoBehaviour
@@ -8,14 +9,14 @@ public class RouletteNumber : MonoBehaviour
     [SerializeField] private ColorNumber color;
     [SerializeField] private RowNumber row;
     [SerializeField] private ColumnNumber column;
-    [SerializeField] private Sprite sprite;
+    [SerializeField] private List<SixNumberRange> sixNumberRanges;
 
     public int Number => number;
     public ParityNumber Parity => parity;
     public ColorNumber Color => color;
     public RowNumber Row => row;
     public ColumnNumber Column => column;
-    public Sprite Sprite => sprite;
+    public List<SixNumberRange> SixNumberRanges => sixNumberRanges;
 
 }
 
@@ -31,10 +32,15 @@ public enum ColorNumber
 
 public enum RowNumber
 {
-    First, Second, Third, None
+    None, First, Second, Third
 }
 
 public enum ColumnNumber
 {
-    First, Second, Third, None
+    None, First, Second, Third
+}
+
+public enum SixNumberRange
+{
+    None, Range1to6, Range4to9,  Range7to12
 }

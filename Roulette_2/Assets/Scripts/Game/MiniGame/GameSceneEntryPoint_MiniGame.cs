@@ -1,14 +1,16 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class MiniGameSceneEntryPoint : MonoBehaviour
+public class GameSceneEntryPoint_MiniGame : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
     [SerializeField] private SpawnPointsData spawnPointsData;
     [SerializeField] private PathData pathData;
-    [SerializeField] private UIMiniGameSceneRoot sceneRootPrefab;
+    [SerializeField] private UIGameSceneRoot_MiniGame sceneRootPrefab;
 
-    private UIMiniGameSceneRoot sceneRoot;
+    private UIGameSceneRoot_MiniGame sceneRoot;
     private ViewContainer viewContainer;
     private BankPresenter bankPresenter;
     private SoundPresenter soundPresenter;
