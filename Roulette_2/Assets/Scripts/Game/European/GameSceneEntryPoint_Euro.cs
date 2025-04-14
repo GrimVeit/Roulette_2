@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameSceneEntryPoint_MiniGame : MonoBehaviour
+public class GameSceneEntryPoint_Euro : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
     [SerializeField] private UIGameSceneRoot_MiniGame sceneRootPrefab;
