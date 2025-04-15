@@ -4,6 +4,7 @@ using UnityEngine;
 public class MainMenuEntryPoint : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
+    [SerializeField] private ChipGroup chipGroup;
     [SerializeField] private DailyRewardValues dailyRewardValues;
     [SerializeField] private TaskGroup taskGroup;
     [SerializeField] private UIMainMenuRoot menuRootPrefab;
@@ -22,6 +23,10 @@ public class MainMenuEntryPoint : MonoBehaviour
 
     private StoreTaskPresenter storeTaskPresenter;
     private TaskVisualPresenter taskVisualPresenter;
+
+    private StoreChipPresenter storeChipPresenter;
+    private ChipBuyPresenter chipBuyPresenter;
+    private ChipCountVisualPresenter chipCountVisualPresenter;
 
     public void Run(UIRootView uIRootView)
     {
@@ -50,6 +55,10 @@ public class MainMenuEntryPoint : MonoBehaviour
         storeTaskPresenter = new StoreTaskPresenter(new StoreTaskModel(taskGroup, bankPresenter));
         taskVisualPresenter = new TaskVisualPresenter(new TaskVisualModel(), viewContainer.GetView<TaskVisualView>());
 
+        storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
+        chipBuyPresenter = new ChipBuyPresenter(new ChipBuyModel(chipGroup, storeChipPresenter, bankPresenter), viewContainer.GetView<ChipBuyView>());
+        chipCountVisualPresenter = new ChipCountVisualPresenter(new ChipCountVisualModel(), viewContainer.GetView<ChipCountVisualView>());
+
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
 
@@ -67,6 +76,10 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         taskVisualPresenter.Initialize();
         storeTaskPresenter.Initialize();
+
+        chipBuyPresenter.Initialize();
+        chipCountVisualPresenter.Initialize();
+        storeChipPresenter.Initialize();
 
     }
 
@@ -86,6 +99,8 @@ public class MainMenuEntryPoint : MonoBehaviour
         storeTaskPresenter.OnInactiveTask += taskVisualPresenter.SetInactivateTask;
         storeTaskPresenter.OnCompletedTask += taskVisualPresenter.SetCompletedTask;
         taskVisualPresenter.OnChooseTask += storeTaskPresenter.CompletedTask;
+
+        storeChipPresenter.OnChangeCountChips += chipCountVisualPresenter.ChangeChipsCount;
     }
 
     private void DeactivateEvents()
@@ -110,18 +125,22 @@ public class MainMenuEntryPoint : MonoBehaviour
     {
         sceneRoot.OnClickToBack_DailyReward += sceneRoot.OpenMainPanel;
         sceneRoot.OnClickToBack_Tasks += sceneRoot.OpenMainPanel;
+        sceneRoot.OnClickToBack_Chips += sceneRoot.OpenMainPanel;
 
         sceneRoot.OnClickToDailyReward_Main += sceneRoot.OpenDailyRewardPanel;
         sceneRoot.OnClickToTasks_Main += sceneRoot.OpenTasksPanel;
+        sceneRoot.OnClickToChips_Main += sceneRoot.OpenChipsPanel;
     }
 
     private void DeactivateTransitions()
     {
         sceneRoot.OnClickToBack_DailyReward -= sceneRoot.OpenMainPanel;
         sceneRoot.OnClickToBack_Tasks -= sceneRoot.OpenMainPanel;
+        sceneRoot.OnClickToBack_Chips -= sceneRoot.OpenMainPanel;
 
         sceneRoot.OnClickToDailyReward_Main -= sceneRoot.OpenDailyRewardPanel;
         sceneRoot.OnClickToTasks_Main -= sceneRoot.OpenTasksPanel;
+        sceneRoot.OnClickToChips_Main -= sceneRoot.OpenChipsPanel;
     }
 
     private void Deactivate()
@@ -146,6 +165,10 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         taskVisualPresenter?.Dispose();
         storeTaskPresenter?.Dispose();
+
+        chipCountVisualPresenter?.Dispose();
+        chipBuyPresenter?.Dispose();
+        storeChipPresenter?.Dispose();
     }
 
     private void Update()

@@ -6,6 +6,7 @@ public class UIMainMenuRoot : UIRoot
     [SerializeField] private MainPanel_Menu _mainPanel;
     [SerializeField] private DailyRewardPanel_Menu _dailyRewardPanel;
     [SerializeField] private TasksPanel_Menu _tasksPanel;
+    [SerializeField] private ChipsPanel_Menu _chipsPanel;
 
     private ISoundProvider _soundProvider;
 
@@ -19,15 +20,18 @@ public class UIMainMenuRoot : UIRoot
         _mainPanel.Initialize();
         _dailyRewardPanel.Initialize();
         _tasksPanel.Initialize();
+        _chipsPanel.Initialize();
     }
 
     public void Activate()
     {
         _dailyRewardPanel.OnClickToBack += HandleClickToBack_DailyReward;
         _tasksPanel.OnClickToBack += HandleClickToBack_Tasks;
+        _chipsPanel.OnClickToBack += HandleClickToBack_Chips;
 
         _mainPanel.OnClickToDailyReward += HandleClickToDailyReward_Main;
         _mainPanel.OnClickToTasks += HandleClickToTasks_Main;
+        _mainPanel.OnClickToChips += HandleClickToChips_Main;
 
         OpenMainPanel();
     }
@@ -37,9 +41,11 @@ public class UIMainMenuRoot : UIRoot
     {
         _dailyRewardPanel.OnClickToBack -= HandleClickToBack_DailyReward;
         _tasksPanel.OnClickToBack -= HandleClickToBack_Tasks;
+        _chipsPanel.OnClickToBack -= HandleClickToBack_Chips;
 
         _mainPanel.OnClickToDailyReward -= HandleClickToDailyReward_Main;
         _mainPanel.OnClickToTasks -= HandleClickToTasks_Main;
+        _mainPanel.OnClickToChips -= HandleClickToChips_Main;
 
         if (currentPanel != null)
             CloseOtherPanel(currentPanel);
@@ -50,6 +56,7 @@ public class UIMainMenuRoot : UIRoot
         _mainPanel.Dispose();
         _dailyRewardPanel.Dispose();
         _tasksPanel.Dispose();
+        _chipsPanel.Dispose();
     }
 
 
@@ -68,13 +75,19 @@ public class UIMainMenuRoot : UIRoot
         OpenPanel(_tasksPanel);
     }
 
+    public void OpenChipsPanel()
+    {
+        OpenPanel(_chipsPanel);
+    }
 
-    #region Input
+
+    #region Output
 
     #region MainPanel
 
     public event Action OnClickToDailyReward_Main;
     public event Action OnClickToTasks_Main;
+    public event Action OnClickToChips_Main;
 
     private void HandleClickToDailyReward_Main()
     {
@@ -84,6 +97,11 @@ public class UIMainMenuRoot : UIRoot
     private void HandleClickToTasks_Main()
     {
         OnClickToTasks_Main?.Invoke();
+    }
+
+    private void HandleClickToChips_Main()
+    {
+        OnClickToChips_Main?.Invoke();
     }
 
     #endregion
@@ -106,6 +124,17 @@ public class UIMainMenuRoot : UIRoot
     private void HandleClickToBack_Tasks()
     {
         OnClickToBack_Tasks?.Invoke();
+    }
+
+    #endregion
+
+    #region ChipsPanel
+
+    public event Action OnClickToBack_Chips;
+
+    private void HandleClickToBack_Chips()
+    {
+        OnClickToBack_Chips?.Invoke();
     }
 
     #endregion

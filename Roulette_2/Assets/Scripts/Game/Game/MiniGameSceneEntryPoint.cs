@@ -4,7 +4,6 @@ using UnityEngine;
 public class MiniGameSceneEntryPoint : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
-    [SerializeField] private SpawnPointsData spawnPointsData;
     [SerializeField] private PathData pathData;
     [SerializeField] private UIMiniGameSceneRoot sceneRootPrefab;
 
