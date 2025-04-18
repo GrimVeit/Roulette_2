@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HeaderPanel_MiniGame : MovePanel
+public class HeaderPanel_Game : MovePanel
 {
     [SerializeField] private Button buttonMenu;
 

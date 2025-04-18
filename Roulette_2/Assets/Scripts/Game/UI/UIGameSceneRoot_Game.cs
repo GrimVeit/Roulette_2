@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIGameSceneRoot_MiniGame : UIRoot
+public class UIGameSceneRoot_Game : UIRoot
 {
-    [SerializeField] private HeaderPanel_MiniGame headerPanel;
-    [SerializeField] private MainPanel_MiniGame mainPanel;
-    [SerializeField] private FooterPanel_MiniGame footerPanel;
-    [SerializeField] private RoulettePanel_MiniGame roulettePanel;
+    [SerializeField] private HeaderPanel_Game headerPanel;
+    [SerializeField] private MainPanel_Game mainPanel;
+    [SerializeField] private FooterPanel_Game footerPanel;
+    [SerializeField] private RoulettePanel_Game roulettePanel;
 
     private ISoundProvider soundProvider;
 
@@ -35,11 +35,16 @@ public class UIGameSceneRoot_MiniGame : UIRoot
 
     public void Activate()
     {
-
+        OpenMainPanel();
+        OpenHeaderPanel();
+        OpenFooterPanel();
     }
 
     public void Deactivate()
     {
+        OpenHeaderPanel();
+        OpenFooterPanel();
+
         if (currentPanel != null)
             CloseOtherPanel(currentPanel);
     }

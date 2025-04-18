@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoulettePanel_MiniGame : MovePanel
+public class MainPanel_Game : MovePanel
 {
     
 }

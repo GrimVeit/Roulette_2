@@ -6,9 +6,9 @@ using UnityEngine;
 public class GameSceneEntryPoint_Euro : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
-    [SerializeField] private UIGameSceneRoot_MiniGame sceneRootPrefab;
+    [SerializeField] private UIGameSceneRoot_Game sceneRootPrefab;
 
-    private UIGameSceneRoot_MiniGame sceneRoot;
+    private UIGameSceneRoot_Game sceneRoot;
     private ViewContainer viewContainer;
     private BankPresenter bankPresenter;
     private SoundPresenter soundPresenter;

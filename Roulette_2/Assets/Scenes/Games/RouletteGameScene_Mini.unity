@@ -12644,10 +12644,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b659a811341d1ed4fb7efe6444e5af08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  headerPanel: {fileID: 0}
-  mainPanel: {fileID: 0}
-  footerPanel: {fileID: 0}
-  roulettePanel: {fileID: 0}
+  headerPanel: {fileID: 633555577}
+  mainPanel: {fileID: 1372820914}
+  footerPanel: {fileID: 787151144}
+  roulettePanel: {fileID: 742484506}
 --- !u!224 &6186702370134061893
 RectTransform:
   m_ObjectHideFlags: 0
