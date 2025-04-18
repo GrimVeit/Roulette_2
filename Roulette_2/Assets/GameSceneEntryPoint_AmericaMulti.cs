@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class GameSceneEntryPoint_America : MonoBehaviour
+public class GameSceneEntryPoint_AmericaMulti : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
     [SerializeField] private UIGameSceneRoot_Game sceneRootPrefab;
