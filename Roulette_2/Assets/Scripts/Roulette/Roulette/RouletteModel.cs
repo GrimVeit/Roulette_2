@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class RouletteModel
 {
+    public event Action OnStopSpin;
+
     public event Action<RouletteSlotValue> OnGetRouletteSlotValue;
     public event Action<Vector3> OnRollBallToSlot;
     public event Action OnStartSpin;
@@ -28,5 +30,10 @@ public class RouletteModel
     public void RollBallToSlot(Vector3 vector)
     {
         OnRollBallToSlot?.Invoke(vector);
+    }
+
+    public void Stop()
+    {
+        OnStopSpin.Invoke();
     }
 }

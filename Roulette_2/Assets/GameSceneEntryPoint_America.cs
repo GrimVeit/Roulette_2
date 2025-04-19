@@ -49,17 +49,16 @@ public class GameSceneEntryPoint_America : MonoBehaviour
 
     private void ActivateTransitionsSceneEvents()
     {
-
+        sceneRoot.OnClickToMenu += HandleGoToMenu;
     }
 
     private void DeactivateTransitionsSceneEvents()
     {
-
+        sceneRoot.OnClickToMenu -= HandleGoToMenu;
     }
 
     public void Dispose()
     {
-        sceneRoot.Deactivate();
         sceneRoot.Dispose();
 
         DeactivateEvents();

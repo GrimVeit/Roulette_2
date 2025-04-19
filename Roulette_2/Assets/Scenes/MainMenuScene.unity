@@ -5459,6 +5459,12 @@ MonoBehaviour:
   buttonDailyReward: {fileID: 1802219460}
   buttonTasks: {fileID: 183213531}
   buttonChips: {fileID: 1773873738}
+  buttonMini: {fileID: 1727700119}
+  buttonEuro: {fileID: 1821248528}
+  buttonAmerica: {fileID: 1968954472}
+  buttonAmericaMulti: {fileID: 1557891954}
+  buttonFrench: {fileID: 1572171142}
+  buttonAmericaTracker: {fileID: 1754582083}
 --- !u!225 &748542596
 CanvasGroup:
   m_ObjectHideFlags: 0

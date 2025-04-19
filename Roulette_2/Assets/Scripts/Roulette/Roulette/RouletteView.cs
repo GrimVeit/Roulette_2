@@ -9,7 +9,6 @@ using UnityEngine.UI;
 
 public class RouletteView : View
 {
-    [SerializeField] private Button spinButton;
     [SerializeField] private Vector3 spinVector;
     [SerializeField] private Transform spinTransform;
     [SerializeField] private Transform centerPoint;
@@ -25,22 +24,22 @@ public class RouletteView : View
 
     public void Initialize()
     {
-        spinButton.onClick.AddListener(HandlerClickToSpinButton);
+
     }
 
     public void Dispose()
     {
-        spinButton.onClick.RemoveListener(HandlerClickToSpinButton);
+
     }
 
     public void RollBallToSlot(Vector3 vector)
     {
         RouletteSlotValue rouletteSlotValue = GetClosestSlot(vector);
+        OnGetRouletteNumber?.Invoke(rouletteSlotValue);
         ball.SetParent(rouletteSlotValue.transform);
         ball.SetLocalPositionAndRotation(rouletteSlotValue.StartTransform.localPosition, Quaternion.identity);
-        ball.DOLocalMove(rouletteSlotValue.EndTransform.localPosition, 0.5f).OnComplete(() => 
+        ball.DOLocalMove(rouletteSlotValue.EndTransform.localPosition, 1f).OnComplete(() => 
         {
-            OnGetRouletteNumber?.Invoke(rouletteSlotValue);
             Debug.Log("ּÿק ג סכמעו");
         });
     }
@@ -73,10 +72,12 @@ public class RouletteView : View
             elapsedTime += Time.deltaTime;
             float currentSpeed = Mathf.Lerp(startSpeed, endSpeed, elapsedTime / duration);
 
-            spinTransform.Rotate(spinVector * currentSpeed * Time.deltaTime);
+            spinTransform.Rotate(currentSpeed * Time.deltaTime * spinVector);
 
             yield return null;
         }
+
+        OnStop?.Invoke();
     }
 
     #endregion
@@ -84,12 +85,7 @@ public class RouletteView : View
     #region Input
 
     public event Action<RouletteSlotValue> OnGetRouletteNumber;
-    public event Action OnStartSpin;
-
-    private void HandlerClickToSpinButton()
-    {
-        OnStartSpin?.Invoke();
-    }
+    public event Action OnStop;
 
     #endregion
 }

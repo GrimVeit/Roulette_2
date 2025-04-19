@@ -35,15 +35,14 @@ public class UIGameSceneRoot_Game : UIRoot
 
     public void Activate()
     {
-        OpenMainPanel();
-        OpenHeaderPanel();
-        OpenFooterPanel();
+        footerPanel.OnClickToSpin += HandleClickToSpin;
+        headerPanel.OnClickToMenu += HandleClickToMenu;
     }
 
     public void Deactivate()
     {
-        OpenHeaderPanel();
-        OpenFooterPanel();
+        footerPanel.OnClickToSpin -= HandleClickToSpin;
+        headerPanel.OnClickToMenu -= HandleClickToMenu;
 
         if (currentPanel != null)
             CloseOtherPanel(currentPanel);
@@ -97,6 +96,25 @@ public class UIGameSceneRoot_Game : UIRoot
         if(!footerPanel.IsActive) return;
 
         CloseOtherPanel(footerPanel);
+    }
+
+    #endregion
+
+    #region Output
+
+    public event Action OnClickToMenu;
+
+    private void HandleClickToMenu()
+    {
+        OnClickToMenu?.Invoke();
+    }
+
+
+    public event Action OnClickToSpin;
+
+    private void HandleClickToSpin()
+    {
+        OnClickToSpin?.Invoke();
     }
 
     #endregion

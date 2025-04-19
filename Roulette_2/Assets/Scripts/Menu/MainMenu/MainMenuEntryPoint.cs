@@ -130,6 +130,14 @@ public class MainMenuEntryPoint : MonoBehaviour
         sceneRoot.OnClickToDailyReward_Main += sceneRoot.OpenDailyRewardPanel;
         sceneRoot.OnClickToTasks_Main += sceneRoot.OpenTasksPanel;
         sceneRoot.OnClickToChips_Main += sceneRoot.OpenChipsPanel;
+
+
+        sceneRoot.OnClickToMini += HandleGoToRoulette_Mini;
+        sceneRoot.OnClickToEuro += HandleGoToRoulette_Euro;
+        sceneRoot.OnClickToAmerica += HandleGoToRoulette_America;
+        sceneRoot.OnClickToAmericaMulti += HandleGoToRoulette_AmericaMulti;
+        sceneRoot.OnClickToFrench += HandleGoToRoulette_French;
+        sceneRoot.OnClickToAmericaTracker += HandleGoToRoulette_AmericaTracker;
     }
 
     private void DeactivateTransitions()
@@ -141,6 +149,13 @@ public class MainMenuEntryPoint : MonoBehaviour
         sceneRoot.OnClickToDailyReward_Main -= sceneRoot.OpenDailyRewardPanel;
         sceneRoot.OnClickToTasks_Main -= sceneRoot.OpenTasksPanel;
         sceneRoot.OnClickToChips_Main -= sceneRoot.OpenChipsPanel;
+
+        sceneRoot.OnClickToMini -= HandleGoToRoulette_Mini;
+        sceneRoot.OnClickToEuro -= HandleGoToRoulette_Euro;
+        sceneRoot.OnClickToAmerica -= HandleGoToRoulette_America;
+        sceneRoot.OnClickToAmericaMulti -= HandleGoToRoulette_AmericaMulti;
+        sceneRoot.OnClickToFrench -= HandleGoToRoulette_French;
+        sceneRoot.OnClickToAmericaTracker -= HandleGoToRoulette_AmericaTracker;
     }
 
     private void Deactivate()
@@ -201,12 +216,47 @@ public class MainMenuEntryPoint : MonoBehaviour
 
     #region Output
 
-    public event Action OnGoToGame;
+    public event Action OnGoToRoulette_Mini;
+    public event Action OnGoToRoulette_Euro;
+    public event Action OnGoToRoulette_America;
+    public event Action OnGoToRoulette_AmericaMulti;
+    public event Action OnGoToRoulette_French;
+    public event Action OnGoToRoulette_AmericaTracker;
 
-    private void HandleGoToGame()
+    private void HandleGoToRoulette_Mini()
     {
         Deactivate();
-        OnGoToGame?.Invoke();
+        OnGoToRoulette_Mini?.Invoke();
+    }
+
+    private void HandleGoToRoulette_Euro()
+    {
+        Deactivate();
+        OnGoToRoulette_Euro?.Invoke();
+    }
+
+    private void HandleGoToRoulette_America()
+    {
+        Deactivate();
+        OnGoToRoulette_America?.Invoke();
+    }
+
+    private void HandleGoToRoulette_AmericaMulti()
+    {
+        Deactivate();
+        OnGoToRoulette_AmericaMulti?.Invoke();
+    }
+
+    private void HandleGoToRoulette_French()
+    {
+        Deactivate();
+        OnGoToRoulette_French?.Invoke();
+    }
+
+    private void HandleGoToRoulette_AmericaTracker()
+    {
+        Deactivate();
+        OnGoToRoulette_French?.Invoke();
     }
 
     #endregion

@@ -33,6 +33,13 @@ public class UIMainMenuRoot : UIRoot
         _mainPanel.OnClickToTasks += HandleClickToTasks_Main;
         _mainPanel.OnClickToChips += HandleClickToChips_Main;
 
+        _mainPanel.OnClickToMini += HandleClickToMini;
+        _mainPanel.OnClickToEuro += HandleClickToEuro;
+        _mainPanel.OnClickToAmerica += HandleClickToAmerica;
+        _mainPanel.OnClickToAmericaMulti += HandleClickToAmericaMulti;
+        _mainPanel.OnClickToFrench += HandleClickToFrench;
+        _mainPanel.OnClickToAmericaTracker += HandleClickToAmericaTracker;
+
         OpenMainPanel();
     }
 
@@ -46,6 +53,13 @@ public class UIMainMenuRoot : UIRoot
         _mainPanel.OnClickToDailyReward -= HandleClickToDailyReward_Main;
         _mainPanel.OnClickToTasks -= HandleClickToTasks_Main;
         _mainPanel.OnClickToChips -= HandleClickToChips_Main;
+
+        _mainPanel.OnClickToMini -= HandleClickToMini;
+        _mainPanel.OnClickToEuro -= HandleClickToEuro;
+        _mainPanel.OnClickToAmerica -= HandleClickToAmerica;
+        _mainPanel.OnClickToAmericaMulti -= HandleClickToAmericaMulti;
+        _mainPanel.OnClickToFrench -= HandleClickToFrench;
+        _mainPanel.OnClickToAmericaTracker -= HandleClickToAmericaTracker;
 
         if (currentPanel != null)
             CloseOtherPanel(currentPanel);
@@ -102,6 +116,48 @@ public class UIMainMenuRoot : UIRoot
     private void HandleClickToChips_Main()
     {
         OnClickToChips_Main?.Invoke();
+    }
+
+
+
+
+
+
+    public event Action OnClickToMini;
+    public event Action OnClickToEuro;
+    public event Action OnClickToAmerica;
+    public event Action OnClickToAmericaMulti;
+    public event Action OnClickToFrench;
+    public event Action OnClickToAmericaTracker;
+
+    private void HandleClickToMini()
+    {
+        OnClickToMini?.Invoke();
+    }
+
+    private void HandleClickToEuro()
+    {
+        OnClickToEuro?.Invoke();
+    }
+
+    private void HandleClickToAmerica()
+    {
+        OnClickToAmerica?.Invoke();
+    }
+
+    private void HandleClickToAmericaMulti()
+    {
+        OnClickToAmericaMulti?.Invoke();
+    }
+
+    private void HandleClickToFrench()
+    {
+        OnClickToFrench?.Invoke();
+    }
+
+    private void HandleClickToAmericaTracker()
+    {
+        OnClickToAmericaTracker?.Invoke();
     }
 
     #endregion

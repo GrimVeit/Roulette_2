@@ -12,6 +12,21 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenuScene.unity
     guid: 6fc297440669ac240a2ff90cd35a551a
   - enabled: 1
-    path: Assets/Scenes/MiniGameScene.unity
-    guid: 69c5113af7da1154a946fb7039c05546
+    path: Assets/Scenes/Games/RouletteGameScene_1_Mini.unity
+    guid: a811477e5910d2148ac98de40ed9a227
+  - enabled: 1
+    path: Assets/Scenes/Games/RouletteGameScene_2_Euro.unity
+    guid: 9f25bfbf918daf140845d9157ad571b7
+  - enabled: 1
+    path: Assets/Scenes/Games/RouletteGameScene_3_America.unity
+    guid: 506c809a3fa4fbf4aaf68cd4b0941b19
+  - enabled: 1
+    path: Assets/Scenes/Games/RouletteGameScene_4_AmericaMulti.unity
+    guid: d88ab984cac37bb48b8a4e9a087e0493
+  - enabled: 1
+    path: Assets/Scenes/Games/RouletteGameScene_5_French.unity
+    guid: 2e9cced5b5760ce4498e7822cff6a9c9
+  - enabled: 1
+    path: Assets/Scenes/Games/RouletteGameScene_6_AmericaTracker.unity
+    guid: a5a4b816786f730449c8d796dcc90091
   m_configObjects: {}

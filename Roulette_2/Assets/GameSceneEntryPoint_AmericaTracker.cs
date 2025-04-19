@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameSceneEntryPoint_MiniGame : MonoBehaviour
+public class GameSceneEntryPoint_AmericaTracker : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
     [SerializeField] private UIGameSceneRoot_Game sceneRootPrefab;
@@ -13,11 +13,6 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
     private BankPresenter bankPresenter;
     private SoundPresenter soundPresenter;
     private ParticleEffectPresenter particleEffectPresenter;
-
-    private RoulettePresenter roulettePresenter;
-    private RouletteBallPresenter rouletteBallPresenter;
-
-    private StateMachine_Mini stateMachine;
 
     public void Run(UIRootView uIRootView)
     {
@@ -32,11 +27,6 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
         particleEffectPresenter = new ParticleEffectPresenter(new ParticleEffectModel(), viewContainer.GetView<ParticleEffectView>());
 
-        roulettePresenter = new RoulettePresenter(new RouletteModel(soundPresenter), viewContainer.GetView<RouletteView>());
-        rouletteBallPresenter = new RouletteBallPresenter(new RouletteBallModel(soundPresenter), viewContainer.GetView<RouletteBallView>());
-
-        stateMachine = new StateMachine_Mini(sceneRoot, rouletteBallPresenter, roulettePresenter);
-
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
 
@@ -47,11 +37,6 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         bankPresenter.Initialize();
         soundPresenter.Initialize();
         particleEffectPresenter.Initialize();
-
-        rouletteBallPresenter.Initialize();
-        roulettePresenter.Initialize();
-
-        stateMachine.Initialize();
     }
 
     private void ActivateEvents()
@@ -83,11 +68,6 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
 
         bankPresenter.Dispose();
         particleEffectPresenter.Dispose();
-
-        roulettePresenter?.Dispose();
-        rouletteBallPresenter?.Dispose();
-
-        stateMachine?.Dispose();
     }
 
     private void OnDestroy()

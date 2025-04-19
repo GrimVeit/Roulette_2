@@ -3,58 +3,75 @@ using UnityEngine;
 
 public class RoulettePresenter
 {
-    private RouletteModel rouletteModel;
-    private RouletteView rouletteView;
+    private readonly RouletteModel _model;
+    private readonly RouletteView _view;
 
-    public RoulettePresenter(RouletteModel rouletteModel, RouletteView rouletteView)
+    public RoulettePresenter(RouletteModel model, RouletteView view)
     {
-        this.rouletteModel = rouletteModel;
-        this.rouletteView = rouletteView;
+        _model = model;
+        _view = view;
     }
 
     public void Initialize()
     {
         ActivateEvents();
 
-        rouletteView.Initialize();
+        _view.Initialize();
     }
 
     public void Dispose()
     {
         DeactivateEvents();
 
-        rouletteView.Dispose();
+        _view.Dispose();
     }
 
     private void ActivateEvents()
     {
-        rouletteView.OnStartSpin += rouletteModel.StartSpin;
-        rouletteView.OnGetRouletteNumber += rouletteModel.GetRouletteNumber;
+        _view.OnGetRouletteNumber += _model.GetRouletteNumber;
+        _view.OnStop += _model.Stop;
 
-        rouletteModel.OnStartSpin += rouletteView.StartSpin;
-        rouletteModel.OnRollBallToSlot += rouletteView.RollBallToSlot;
+        _model.OnStartSpin += _view.StartSpin;
+        _model.OnRollBallToSlot += _view.RollBallToSlot;
     }
 
     private void DeactivateEvents()
     {
-        rouletteView.OnStartSpin -= rouletteModel.StartSpin;
-        rouletteView.OnGetRouletteNumber -= rouletteModel.GetRouletteNumber;
+        _view.OnGetRouletteNumber -= _model.GetRouletteNumber;
+        _view.OnStop -= _model.Stop;
 
-        rouletteModel.OnStartSpin -= rouletteView.StartSpin;
-        rouletteModel.OnRollBallToSlot -= rouletteView.RollBallToSlot;
+        _model.OnStartSpin -= _view.StartSpin;
+        _model.OnRollBallToSlot -= _view.RollBallToSlot;
     }
 
     #region Input
 
+    public void StartSpin()
+    {
+        _model.StartSpin();
+    }
+
     public void RollBallToSlot(Vector3 vector)
     {
-        rouletteModel.RollBallToSlot(vector);
+        _model.RollBallToSlot(vector);
     }
+
+    #endregion
+
+    #region Output
+
+
+    public event Action OnStopSpin
+    {
+        add => _model.OnStopSpin += value;
+        remove => _model.OnStopSpin -= value;
+    }
+
 
     public event Action<RouletteSlotValue> OnGetRouletteSlotValue
     {
-        add { rouletteModel.OnGetRouletteSlotValue += value; }
-        remove { rouletteModel.OnGetRouletteSlotValue -= value; }
+        add { _model.OnGetRouletteSlotValue += value; }
+        remove { _model.OnGetRouletteSlotValue -= value; }
     }
 
     #endregion
