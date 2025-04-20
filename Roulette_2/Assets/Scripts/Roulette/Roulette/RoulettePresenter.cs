@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class RoulettePresenter
+public class RoulettePresenter : IRouletteValueProvider
 {
     private readonly RouletteModel _model;
     private readonly RouletteView _view;
@@ -68,11 +68,16 @@ public class RoulettePresenter
     }
 
 
-    public event Action<RouletteSlotValue> OnGetRouletteSlotValue
+    public event Action<RouletteNumber> OnGetRouletteSlotValue
     {
         add { _model.OnGetRouletteSlotValue += value; }
         remove { _model.OnGetRouletteSlotValue -= value; }
     }
 
     #endregion
+}
+
+public interface IRouletteValueProvider
+{
+    public event Action<RouletteNumber> OnGetRouletteSlotValue;
 }

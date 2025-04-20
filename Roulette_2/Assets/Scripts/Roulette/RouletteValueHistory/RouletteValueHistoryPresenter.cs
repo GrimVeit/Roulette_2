@@ -2,17 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RouletteValueHistoryPresenter : MonoBehaviour
+public class RouletteValueHistoryPresenter
 {
-    // Start is called before the first frame update
-    void Start()
+    private readonly RouletteValueHistoryModel _model;
+    private readonly RouletteValueHistoryView _view;
+
+    public RouletteValueHistoryPresenter(RouletteValueHistoryModel model, RouletteValueHistoryView view)
     {
-        
+        _model = model;
+        _view = view;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Initialize()
     {
-        
+        ActivateEvents();
+
+        _model.Initialize();
+    }
+
+    public void Dispose()
+    {
+        DeactivateEvents();
+
+        _model.Dispose();
+    }
+
+    private void ActivateEvents()
+    {
+        _model.OnSlotValueChanged += _view.SetRouletteNumber;
+    }
+
+    private void DeactivateEvents()
+    {
+        _model.OnSlotValueChanged -= _view.SetRouletteNumber;
     }
 }

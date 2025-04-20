@@ -35,7 +35,7 @@ public class RouletteView : View
     public void RollBallToSlot(Vector3 vector)
     {
         RouletteSlotValue rouletteSlotValue = GetClosestSlot(vector);
-        OnGetRouletteNumber?.Invoke(rouletteSlotValue);
+        OnGetRouletteNumber?.Invoke(rouletteSlotValue.RouletteNumber);
         ball.SetParent(rouletteSlotValue.transform);
         ball.SetLocalPositionAndRotation(rouletteSlotValue.StartTransform.localPosition, Quaternion.identity);
         ball.DOLocalMove(rouletteSlotValue.EndTransform.localPosition, 1f).OnComplete(() => 
@@ -84,7 +84,7 @@ public class RouletteView : View
 
     #region Input
 
-    public event Action<RouletteSlotValue> OnGetRouletteNumber;
+    public event Action<RouletteNumber> OnGetRouletteNumber;
     public event Action OnStop;
 
     #endregion

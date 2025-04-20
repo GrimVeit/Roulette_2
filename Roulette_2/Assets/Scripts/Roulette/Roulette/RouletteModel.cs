@@ -5,7 +5,7 @@ public class RouletteModel
 {
     public event Action OnStopSpin;
 
-    public event Action<RouletteSlotValue> OnGetRouletteSlotValue;
+    public event Action<RouletteNumber> OnGetRouletteSlotValue;
     public event Action<Vector3> OnRollBallToSlot;
     public event Action OnStartSpin;
 
@@ -22,9 +22,9 @@ public class RouletteModel
         OnStartSpin?.Invoke();
     }
 
-    public void GetRouletteNumber(RouletteSlotValue rouletteSlotValue)
+    public void GetRouletteNumber(RouletteNumber rouletteNumber)
     {
-        OnGetRouletteSlotValue?.Invoke(rouletteSlotValue);
+        OnGetRouletteSlotValue?.Invoke(rouletteNumber);
     }
 
     public void RollBallToSlot(Vector3 vector)

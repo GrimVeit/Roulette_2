@@ -17,6 +17,8 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
     private RoulettePresenter roulettePresenter;
     private RouletteBallPresenter rouletteBallPresenter;
 
+    private RouletteValueHistoryPresenter rouletteValueHistoryPresenter;
+
     private StateMachine_Mini stateMachine;
 
     public void Run(UIRootView uIRootView)
@@ -35,6 +37,8 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         roulettePresenter = new RoulettePresenter(new RouletteModel(soundPresenter), viewContainer.GetView<RouletteView>());
         rouletteBallPresenter = new RouletteBallPresenter(new RouletteBallModel(soundPresenter), viewContainer.GetView<RouletteBallView>());
 
+        rouletteValueHistoryPresenter = new RouletteValueHistoryPresenter(new RouletteValueHistoryModel(new List<IRouletteValueProvider>() { roulettePresenter }), viewContainer.GetView<RouletteValueHistoryView>());
+
         stateMachine = new StateMachine_Mini(sceneRoot, rouletteBallPresenter, roulettePresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
@@ -50,6 +54,8 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
 
         rouletteBallPresenter.Initialize();
         roulettePresenter.Initialize();
+
+        rouletteValueHistoryPresenter.Initialize();
 
         stateMachine.Initialize();
     }
@@ -86,6 +92,8 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
 
         roulettePresenter?.Dispose();
         rouletteBallPresenter?.Dispose();
+
+        rouletteValueHistoryPresenter?.Dispose();
 
         stateMachine?.Dispose();
     }
