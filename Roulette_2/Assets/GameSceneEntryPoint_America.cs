@@ -38,7 +38,7 @@ public class GameSceneEntryPoint_America : MonoBehaviour
 
         rouletteValueHistoryPresenter = new RouletteValueHistoryPresenter(new RouletteValueHistoryModel(new List<IRouletteValueProvider>() { roulettePresenter }), viewContainer.GetView<RouletteValueHistoryView>());
 
-        stateMachine = new StateMachine_America(sceneRoot, rouletteBallPresenter, roulettePresenter);
+        stateMachine = new StateMachine_America(sceneRoot, rouletteBallPresenter, roulettePresenter, rouletteValueHistoryPresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();

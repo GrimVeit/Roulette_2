@@ -39,7 +39,7 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
 
         rouletteValueHistoryPresenter = new RouletteValueHistoryPresenter(new RouletteValueHistoryModel(new List<IRouletteValueProvider>() { roulettePresenter }), viewContainer.GetView<RouletteValueHistoryView>());
 
-        stateMachine = new StateMachine_Mini(sceneRoot, rouletteBallPresenter, roulettePresenter);
+        stateMachine = new StateMachine_Mini(sceneRoot, rouletteBallPresenter, roulettePresenter, rouletteValueHistoryPresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -72,12 +72,12 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
 
     private void ActivateTransitionsSceneEvents()
     {
-
+        sceneRoot.OnClickToMenu += HandleGoToMenu;
     }
 
     private void DeactivateTransitionsSceneEvents()
     {
-
+        sceneRoot.OnClickToMenu -= HandleGoToMenu;
     }
 
     public void Dispose()

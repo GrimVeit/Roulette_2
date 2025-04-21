@@ -38,7 +38,7 @@ public class GameSceneEntryPoint_Euro : MonoBehaviour
 
         rouletteValueHistoryPresenter = new RouletteValueHistoryPresenter(new RouletteValueHistoryModel(new List<IRouletteValueProvider>() { roulettePresenter }), viewContainer.GetView<RouletteValueHistoryView>());
 
-        stateMachine = new StateMachine_Euro(sceneRoot, rouletteBallPresenter, roulettePresenter);
+        stateMachine = new StateMachine_Euro(sceneRoot, rouletteBallPresenter, roulettePresenter, rouletteValueHistoryPresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -71,12 +71,12 @@ public class GameSceneEntryPoint_Euro : MonoBehaviour
 
     private void ActivateTransitionsSceneEvents()
     {
-
+        sceneRoot.OnClickToMenu += HandleGoToMenu;
     }
 
     private void DeactivateTransitionsSceneEvents()
     {
-
+        sceneRoot.OnClickToMenu -= HandleGoToMenu;
     }
 
     public void Dispose()

@@ -77,7 +77,8 @@ public class GameSceneEntryPoint_AmericaMulti : MonoBehaviour
                 roulettePresenter_4,
                 roulettePresenter_5,
                 roulettePresenter_6,
-            });
+            },
+            rouletteValueHistoryPresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -120,12 +121,12 @@ public class GameSceneEntryPoint_AmericaMulti : MonoBehaviour
 
     private void ActivateTransitionsSceneEvents()
     {
-
+        sceneRoot.OnClickToMenu += HandleGoToMenu;
     }
 
     private void DeactivateTransitionsSceneEvents()
     {
-
+        sceneRoot.OnClickToMenu -= HandleGoToMenu;
     }
 
     public void Dispose()

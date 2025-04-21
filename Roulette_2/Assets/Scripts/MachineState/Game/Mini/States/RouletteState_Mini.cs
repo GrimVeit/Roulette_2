@@ -8,13 +8,15 @@ public class RouletteState_Mini : IState
     private readonly UIGameSceneRoot_Game _sceneRoot;
     private readonly RoulettePresenter _roulettePresenter;
     private readonly RouletteBallPresenter _rouletteBallPresenter;
+    private readonly RouletteValueHistoryPresenter _rouletteValueHistoryPresenter;
 
-    public RouletteState_Mini(IGlobalStateMachineProvider machineProvider,  UIGameSceneRoot_Game sceneRoot, RoulettePresenter roulettePresenter, RouletteBallPresenter rouletteBallPresenter)
+    public RouletteState_Mini(IGlobalStateMachineProvider machineProvider,  UIGameSceneRoot_Game sceneRoot, RoulettePresenter roulettePresenter, RouletteBallPresenter rouletteBallPresenter, RouletteValueHistoryPresenter rouletteValueHistoryPresenter)
     {
         _machineProvider = machineProvider;
         _sceneRoot = sceneRoot;
         _roulettePresenter = roulettePresenter;
         _rouletteBallPresenter = rouletteBallPresenter;
+        _rouletteValueHistoryPresenter = rouletteValueHistoryPresenter;
     }
 
     public void EnterState()
@@ -24,6 +26,7 @@ public class RouletteState_Mini : IState
         _rouletteBallPresenter.OnBallStopped += _roulettePresenter.RollBallToSlot;
         _roulettePresenter.OnStopSpin += ChangeStateToResult;
 
+        _rouletteValueHistoryPresenter.ClearAll();
         _sceneRoot.OpenRoulettePanel();
         _roulettePresenter.StartSpin();
         _rouletteBallPresenter.StartSpin();

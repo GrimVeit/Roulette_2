@@ -9611,6 +9611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23e983b0f0e74224a9731211eb9e1e22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 
   spinVector: {x: 0, y: 0, z: -20}
   spinTransform: {fileID: 1332416710}
   centerPoint: {fileID: 1492396000}
@@ -18569,7 +18570,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1468903177
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21195,6 +21196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da31fed5189833a4ea54140a268deee9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 
   transformParent: {fileID: 1492396000}
   centerPoint: {fileID: 1332416710}
   ball: {fileID: 1328561273}

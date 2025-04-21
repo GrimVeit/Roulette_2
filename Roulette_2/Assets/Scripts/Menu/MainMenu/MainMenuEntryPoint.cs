@@ -256,7 +256,7 @@ public class MainMenuEntryPoint : MonoBehaviour
     private void HandleGoToRoulette_AmericaTracker()
     {
         Deactivate();
-        OnGoToRoulette_French?.Invoke();
+        OnGoToRoulette_AmericaTracker?.Invoke();
     }
 
     #endregion

@@ -36,4 +36,13 @@ public class RouletteValueHistoryPresenter
     {
         _model.OnSlotValueChanged -= _view.SetRouletteNumber;
     }
+
+    #region Input
+
+    public void ClearAll()
+    {
+        _view.ClearValues();
+    }
+
+    #endregion
 }

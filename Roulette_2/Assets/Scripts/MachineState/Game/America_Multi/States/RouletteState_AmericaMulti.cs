@@ -8,16 +8,18 @@ public class RouletteState_AmericaMulti : IState
     private readonly UIGameSceneRoot_Game _sceneRoot;
     private readonly List<RoulettePresenter> _roulettePresenters;
     private readonly List<RouletteBallPresenter> _rouletteBallPresenters;
+    private readonly RouletteValueHistoryPresenter _rouletteValueHistoryPresenter;
 
     private int RouletteCount => _roulettePresenters.Count;
     private int _currentCount = 0;
 
-    public RouletteState_AmericaMulti(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, List<RoulettePresenter> roulettePresenters, List<RouletteBallPresenter> rouletteBallPresenters)
+    public RouletteState_AmericaMulti(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, List<RoulettePresenter> roulettePresenters, List<RouletteBallPresenter> rouletteBallPresenters, RouletteValueHistoryPresenter rouletteValueHistoryPresenter)
     {
         _machineProvider = machineProvider;
         _sceneRoot = sceneRoot;
         _roulettePresenters = roulettePresenters;
         _rouletteBallPresenters = rouletteBallPresenters;
+        _rouletteValueHistoryPresenter = rouletteValueHistoryPresenter;
     }
 
     public void EnterState()
@@ -28,6 +30,8 @@ public class RouletteState_AmericaMulti : IState
         {
             _rouletteBallPresenters[i].OnBallStopped += _roulettePresenters[i].RollBallToSlot;
         }
+
+        _rouletteValueHistoryPresenter.ClearAll();
 
         _roulettePresenters.ForEach(rp => 
         {

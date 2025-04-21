@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RouletteState_Euro : IState
+public class RouletteState_AmericaTracker : IState
 {
     private readonly IGlobalStateMachineProvider _machineProvider;
     private readonly UIGameSceneRoot_Game _sceneRoot;
     private readonly RoulettePresenter _roulettePresenter;
     private readonly RouletteBallPresenter _rouletteBallPresenter;
-    private readonly RouletteValueHistoryPresenter _valueHistoryPresenter;
+    private readonly RouletteValueHistoryPresenter _rouletteValueHistoryPresenter;
 
-    public RouletteState_Euro(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, RoulettePresenter roulettePresenter, RouletteBallPresenter rouletteBallPresenter, RouletteValueHistoryPresenter valueHistoryPresenter)
+    public RouletteState_AmericaTracker(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, RoulettePresenter roulettePresenter, RouletteBallPresenter rouletteBallPresenter, RouletteValueHistoryPresenter rouletteValueHistoryPresenter)
     {
         _machineProvider = machineProvider;
         _sceneRoot = sceneRoot;
         _roulettePresenter = roulettePresenter;
         _rouletteBallPresenter = rouletteBallPresenter;
-        _valueHistoryPresenter = valueHistoryPresenter;
+        _rouletteValueHistoryPresenter = rouletteValueHistoryPresenter;
     }
 
     public void EnterState()
@@ -26,7 +26,7 @@ public class RouletteState_Euro : IState
         _rouletteBallPresenter.OnBallStopped += _roulettePresenter.RollBallToSlot;
         _roulettePresenter.OnStopSpin += ChangeStateToResult;
 
-        _valueHistoryPresenter.ClearAll();
+        _rouletteValueHistoryPresenter.ClearAll();
         _sceneRoot.OpenRoulettePanel();
         _roulettePresenter.StartSpin();
         _rouletteBallPresenter.StartSpin();
@@ -42,6 +42,6 @@ public class RouletteState_Euro : IState
 
     private void ChangeStateToResult()
     {
-        _machineProvider.SetState(_machineProvider.GetState<ResultState_Euro>());
+        _machineProvider.SetState(_machineProvider.GetState<ResultState_AmericaTracker>());
     }
 }

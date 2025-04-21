@@ -9,10 +9,10 @@ public class StateMachine_America : IGlobalStateMachineProvider
 
     private IState _currentState;
 
-    public StateMachine_America(UIGameSceneRoot_Game sceneRoot, RouletteBallPresenter rouletteBallPresenter, RoulettePresenter roulettePresenter)
+    public StateMachine_America(UIGameSceneRoot_Game sceneRoot, RouletteBallPresenter rouletteBallPresenter, RoulettePresenter roulettePresenter, RouletteValueHistoryPresenter rouletteValueHistoryPresenter)
     {
         states[typeof(MainState_America)] = new MainState_America(this, sceneRoot);
-        states[typeof(RouletteState_America)] = new RouletteState_America(this, sceneRoot, roulettePresenter, rouletteBallPresenter);
+        states[typeof(RouletteState_America)] = new RouletteState_America(this, sceneRoot, roulettePresenter, rouletteBallPresenter, rouletteValueHistoryPresenter);
         states[typeof(ResultState_America)] = new ResultState_America(this, sceneRoot);
     }
 
