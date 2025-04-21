@@ -5,6 +5,7 @@ using UnityEngine;
 public class RouletteNumber : MonoBehaviour
 {
     [SerializeField] private int number;
+    [SerializeField] private string numberVisual;
     [SerializeField] private ParityNumber parity;
     [SerializeField] private ColorNumber color;
     [SerializeField] private RowNumber row;
@@ -12,6 +13,7 @@ public class RouletteNumber : MonoBehaviour
     [SerializeField] private List<SixNumberRange> sixNumberRanges;
 
     public int Number => number;
+    public string NumberVisual => numberVisual;
     public ParityNumber Parity => parity;
     public ColorNumber Color => color;
     public RowNumber Row => row;

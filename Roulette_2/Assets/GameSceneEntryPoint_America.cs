@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameSceneEntryPoint_America : MonoBehaviour
@@ -11,6 +12,13 @@ public class GameSceneEntryPoint_America : MonoBehaviour
     private BankPresenter bankPresenter;
     private SoundPresenter soundPresenter;
     private ParticleEffectPresenter particleEffectPresenter;
+
+    private RoulettePresenter roulettePresenter;
+    private RouletteBallPresenter rouletteBallPresenter;
+
+    private RouletteValueHistoryPresenter rouletteValueHistoryPresenter;
+
+    private StateMachine_America stateMachine;
 
     public void Run(UIRootView uIRootView)
     {
@@ -25,6 +33,13 @@ public class GameSceneEntryPoint_America : MonoBehaviour
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
         particleEffectPresenter = new ParticleEffectPresenter(new ParticleEffectModel(), viewContainer.GetView<ParticleEffectView>());
 
+        roulettePresenter = new RoulettePresenter(new RouletteModel(soundPresenter), viewContainer.GetView<RouletteView>());
+        rouletteBallPresenter = new RouletteBallPresenter(new RouletteBallModel(soundPresenter), viewContainer.GetView<RouletteBallView>());
+
+        rouletteValueHistoryPresenter = new RouletteValueHistoryPresenter(new RouletteValueHistoryModel(new List<IRouletteValueProvider>() { roulettePresenter }), viewContainer.GetView<RouletteValueHistoryView>());
+
+        stateMachine = new StateMachine_America(sceneRoot, rouletteBallPresenter, roulettePresenter);
+
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
 
@@ -35,6 +50,13 @@ public class GameSceneEntryPoint_America : MonoBehaviour
         bankPresenter.Initialize();
         soundPresenter.Initialize();
         particleEffectPresenter.Initialize();
+
+        rouletteBallPresenter.Initialize();
+        roulettePresenter.Initialize();
+
+        rouletteValueHistoryPresenter.Initialize();
+
+        stateMachine.Initialize();
     }
 
     private void ActivateEvents()
@@ -65,6 +87,13 @@ public class GameSceneEntryPoint_America : MonoBehaviour
 
         bankPresenter.Dispose();
         particleEffectPresenter.Dispose();
+
+        rouletteBallPresenter.Dispose();
+        roulettePresenter.Dispose();
+
+        rouletteValueHistoryPresenter.Dispose();
+
+        stateMachine.Dispose();
     }
 
     private void OnDestroy()

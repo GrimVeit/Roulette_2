@@ -33,7 +33,7 @@ public class RouletteValueHistoryView : View
             return;
         }
 
-        rouletteValue.SetData(spriteColor.Sprite, spriteColor.ColorText, rouletteNumber.Number);
+        rouletteValue.SetData(spriteColor.Sprite, spriteColor.ColorText, rouletteNumber.NumberVisual);
     }
 
     public void ClearValues()
@@ -78,10 +78,10 @@ public class RouletteValue
     [SerializeField] private TextMeshProUGUI textNumber;
     [SerializeField] private Image imageNumber;
 
-    public void SetData(Sprite sprite, Color colorText, int number)
+    public void SetData(Sprite sprite, Color colorText, string number)
     {
         objectValue.SetActive(true);
-        textNumber.text = number.ToString();
+        textNumber.text = number;
         textNumber.color = colorText;
         imageNumber.sprite = sprite;
     }
@@ -109,7 +109,7 @@ public class RouletteStatistics
         }
 
         var number = Object.Instantiate(rouletteStatisticPrefab);
-        column.AddNumber(number, rouletteNumber.Number);
+        column.AddNumber(number, rouletteNumber.NumberVisual);
     }
 
     private RouletteStatisticColumn GetColumnByColor(ColorNumber colorNumber)
@@ -128,7 +128,7 @@ public class RouletteStatisticColumn
     [SerializeField] private Color color;
     [SerializeField] private int maxCountItems;
 
-    public void AddNumber(RouletteStatistic rouletteStatistic, int number)
+    public void AddNumber(RouletteStatistic rouletteStatistic, string number)
     {
         rouletteStatistic.transform.SetParent(content);
         rouletteStatistic.transform.localScale = Vector3.one;

@@ -2048,6 +2048,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   number: 8
+  numberVisual: 8
   parity: 0
   color: 1
   row: 0
@@ -2350,6 +2351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   number: 12
+  numberVisual: 12
   parity: 0
   color: 1
   row: 0
@@ -3041,6 +3043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   number: 11
+  numberVisual: 11
   parity: 1
   color: 0
   row: 0
@@ -4691,6 +4694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   number: 10
+  numberVisual: 10
   parity: 0
   color: 1
   row: 0
@@ -4858,6 +4862,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   number: 2
+  numberVisual: 2
   parity: 0
   color: 1
   row: 0
@@ -5153,6 +5158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   number: 3
+  numberVisual: 3
   parity: 1
   color: 0
   row: 0
@@ -5877,7 +5883,6 @@ GameObject:
   m_Component:
   - component: {fileID: 742484503}
   - component: {fileID: 742484505}
-  - component: {fileID: 742484504}
   - component: {fileID: 742484507}
   - component: {fileID: 742484506}
   m_Layer: 5
@@ -5908,36 +5913,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &742484504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 742484502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 41e0ff252e9742a4f91bc273ddf666cd, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &742484505
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8336,6 +8311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   number: 4
+  numberVisual: 4
   parity: 0
   color: 1
   row: 0
@@ -9110,6 +9086,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   number: 6
+  numberVisual: 6
   parity: 0
   color: 1
   row: 0
@@ -9325,6 +9302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   number: 7
+  numberVisual: 7
   parity: 1
   color: 0
   row: 0
@@ -9922,6 +9900,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   number: 9
+  numberVisual: 9
   parity: 1
   color: 0
   row: 0
@@ -10270,6 +10249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   number: 1
+  numberVisual: 1
   parity: 1
   color: 0
   row: 0
@@ -10964,6 +10944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   number: 5
+  numberVisual: 5
   parity: 1
   color: 0
   row: 0
@@ -11772,6 +11753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   number: 0
+  numberVisual: 0
   parity: 0
   color: 2
   row: 0

@@ -3,22 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateMachine_Mini : IGlobalStateMachineProvider
+public class StateMachine_Euro : IGlobalStateMachineProvider
 {
     private readonly Dictionary<Type, IState> states = new();
 
     private IState _currentState;
 
-    public StateMachine_Mini(UIGameSceneRoot_Game sceneRoot, RouletteBallPresenter rouletteBallPresenter, RoulettePresenter roulettePresenter)
+    public StateMachine_Euro(UIGameSceneRoot_Game sceneRoot, RouletteBallPresenter rouletteBallPresenter, RoulettePresenter roulettePresenter)
     {
-        states[typeof(MainState_Mini)] = new MainState_Mini(this, sceneRoot);
-        states[typeof(RouletteState_Mini)] = new RouletteState_Mini(this, sceneRoot, roulettePresenter, rouletteBallPresenter);
-        states[typeof(ResultState_Mini)] = new ResultState_Mini(this, sceneRoot);
+        states[typeof(MainState_Euro)] = new MainState_Euro(this, sceneRoot);
+        states[typeof(RouletteState_Euro)] = new RouletteState_Euro(this, sceneRoot, roulettePresenter, rouletteBallPresenter);
+        states[typeof(ResultState_Euro)] = new ResultState_Euro(this, sceneRoot);
     }
 
     public void Initialize()
     {
-        SetState(GetState<MainState_Mini>());
+        SetState(GetState<MainState_Euro>());
     }
 
     public void Dispose()

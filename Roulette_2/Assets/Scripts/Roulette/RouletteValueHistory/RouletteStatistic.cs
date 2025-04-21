@@ -7,9 +7,9 @@ public class RouletteStatistic : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI text;
 
-    public void SetData(Color color, int number)
+    public void SetData(Color color, string number)
     {
         text.color = color;
-        text.text = number.ToString();
+        text.text = number;
     }
 }
