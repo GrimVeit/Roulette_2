@@ -14,13 +14,13 @@ public class RouletteBallModel
     }
     public void StartSpin()
     {
-        soundProvider.PlayOneShot("RouletteBallWheel");
+        //soundProvider.PlayOneShot("RouletteBallWheel");
         OnStartSpin?.Invoke();
     }
 
     public void BallStopped(Vector3 vector)
     {
-        soundProvider.PlayOneShot("RouletteBallFallen");
+        //soundProvider.PlayOneShot("RouletteBallFallen");
         OnBallStopped?.Invoke(vector);
     }
 }

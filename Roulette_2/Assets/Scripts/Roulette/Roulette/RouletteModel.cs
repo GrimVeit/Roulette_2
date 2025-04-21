@@ -18,7 +18,7 @@ public class RouletteModel
 
     public void StartSpin()
     {
-        soundProvider.PlayOneShot("RouletteWheel");
+        //soundProvider.PlayOneShot("RouletteWheel");
         OnStartSpin?.Invoke();
     }
 

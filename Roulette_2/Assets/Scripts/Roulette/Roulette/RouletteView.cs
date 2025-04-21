@@ -7,8 +7,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RouletteView : View
+public class RouletteView : View, IIdentify
 {
+    public string GetID() => id;
+
+    [SerializeField] private string id;
     [SerializeField] private Vector3 spinVector;
     [SerializeField] private Transform spinTransform;
     [SerializeField] private Transform centerPoint;

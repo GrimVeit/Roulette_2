@@ -4,10 +4,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RouletteBallView : View
+public class RouletteBallView : View, IIdentify
 {
     public event Action<Vector3> OnBallStopped;
+    public string GetID() => id;
 
+    [SerializeField] private string id;
     [SerializeField] private Transform transformParent;
     [SerializeField] private Transform centerPoint;
     [SerializeField] private Transform ball;

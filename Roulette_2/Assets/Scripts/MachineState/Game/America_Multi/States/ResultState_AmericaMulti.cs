@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResultState_America : IState
+public class ResultState_AmericaMulti : IState
 {
     private readonly IGlobalStateMachineProvider _machineProvider;
     private readonly UIGameSceneRoot_Game _sceneRoot;
 
-    public ResultState_America(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot)
+    public ResultState_AmericaMulti(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot)
     {
         _machineProvider = machineProvider;
         _sceneRoot = sceneRoot;

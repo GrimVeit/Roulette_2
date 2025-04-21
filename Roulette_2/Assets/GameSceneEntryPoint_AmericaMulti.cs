@@ -14,6 +14,23 @@ public class GameSceneEntryPoint_AmericaMulti : MonoBehaviour
     private SoundPresenter soundPresenter;
     private ParticleEffectPresenter particleEffectPresenter;
 
+    private RoulettePresenter roulettePresenter_1;
+    private RouletteBallPresenter rouletteBallPresenter_1;
+    private RoulettePresenter roulettePresenter_2;
+    private RouletteBallPresenter rouletteBallPresenter_2;
+    private RoulettePresenter roulettePresenter_3;
+    private RouletteBallPresenter rouletteBallPresenter_3;
+    private RoulettePresenter roulettePresenter_4;
+    private RouletteBallPresenter rouletteBallPresenter_4;
+    private RoulettePresenter roulettePresenter_5;
+    private RouletteBallPresenter rouletteBallPresenter_5;
+    private RoulettePresenter roulettePresenter_6;
+    private RouletteBallPresenter rouletteBallPresenter_6;
+
+    private RouletteValueHistoryPresenter rouletteValueHistoryPresenter;
+
+    private StateMachine_AmericaMulti stateMachine;
+
     public void Run(UIRootView uIRootView)
     {
         sceneRoot = sceneRootPrefab;
@@ -27,6 +44,41 @@ public class GameSceneEntryPoint_AmericaMulti : MonoBehaviour
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
         particleEffectPresenter = new ParticleEffectPresenter(new ParticleEffectModel(), viewContainer.GetView<ParticleEffectView>());
 
+        roulettePresenter_1 = new RoulettePresenter(new RouletteModel(soundPresenter), viewContainer.GetView<RouletteView>("Roulette_1"));
+        rouletteBallPresenter_1 = new RouletteBallPresenter(new RouletteBallModel(soundPresenter), viewContainer.GetView<RouletteBallView>("Roulette_1"));
+        roulettePresenter_2 = new RoulettePresenter(new RouletteModel(soundPresenter), viewContainer.GetView<RouletteView>("Roulette_2"));
+        rouletteBallPresenter_2 = new RouletteBallPresenter(new RouletteBallModel(soundPresenter), viewContainer.GetView<RouletteBallView>("Roulette_2"));
+        roulettePresenter_3 = new RoulettePresenter(new RouletteModel(soundPresenter), viewContainer.GetView<RouletteView>("Roulette_3"));
+        rouletteBallPresenter_3 = new RouletteBallPresenter(new RouletteBallModel(soundPresenter), viewContainer.GetView<RouletteBallView>("Roulette_3"));
+        roulettePresenter_4 = new RoulettePresenter(new RouletteModel(soundPresenter), viewContainer.GetView<RouletteView>("Roulette_4"));
+        rouletteBallPresenter_4 = new RouletteBallPresenter(new RouletteBallModel(soundPresenter), viewContainer.GetView<RouletteBallView>("Roulette_4"));
+        roulettePresenter_5 = new RoulettePresenter(new RouletteModel(soundPresenter), viewContainer.GetView<RouletteView>("Roulette_5"));
+        rouletteBallPresenter_5 = new RouletteBallPresenter(new RouletteBallModel(soundPresenter), viewContainer.GetView<RouletteBallView>("Roulette_5"));
+        roulettePresenter_6 = new RoulettePresenter(new RouletteModel(soundPresenter), viewContainer.GetView<RouletteView>("Roulette_6"));
+        rouletteBallPresenter_6 = new RouletteBallPresenter(new RouletteBallModel(soundPresenter), viewContainer.GetView<RouletteBallView>("Roulette_6"));
+
+        rouletteValueHistoryPresenter = new RouletteValueHistoryPresenter(new RouletteValueHistoryModel(new List<IRouletteValueProvider>() 
+        { roulettePresenter_1, roulettePresenter_2, roulettePresenter_3, roulettePresenter_4, roulettePresenter_5, roulettePresenter_6 }), viewContainer.GetView<RouletteValueHistoryView>());
+
+        stateMachine = new StateMachine_AmericaMulti(
+            sceneRoot, 
+            new List<RouletteBallPresenter>() { 
+                rouletteBallPresenter_1, 
+                rouletteBallPresenter_2, 
+                rouletteBallPresenter_3, 
+                rouletteBallPresenter_4, 
+                rouletteBallPresenter_5, 
+                rouletteBallPresenter_6},
+            new List<RoulettePresenter>()
+            {
+                roulettePresenter_1,
+                roulettePresenter_2,
+                roulettePresenter_3,
+                roulettePresenter_4,
+                roulettePresenter_5,
+                roulettePresenter_6,
+            });
+
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
 
@@ -37,6 +89,23 @@ public class GameSceneEntryPoint_AmericaMulti : MonoBehaviour
         bankPresenter.Initialize();
         soundPresenter.Initialize();
         particleEffectPresenter.Initialize();
+
+        rouletteBallPresenter_1.Initialize();
+        roulettePresenter_1.Initialize();
+        rouletteBallPresenter_2.Initialize();
+        roulettePresenter_2.Initialize();
+        rouletteBallPresenter_3.Initialize();
+        roulettePresenter_3.Initialize();
+        rouletteBallPresenter_4.Initialize();
+        roulettePresenter_4.Initialize();
+        rouletteBallPresenter_5.Initialize();
+        roulettePresenter_5.Initialize();
+        rouletteBallPresenter_6.Initialize();
+        roulettePresenter_6.Initialize();
+
+        rouletteValueHistoryPresenter.Initialize();
+
+        stateMachine.Initialize();
     }
 
     private void ActivateEvents()
@@ -68,6 +137,23 @@ public class GameSceneEntryPoint_AmericaMulti : MonoBehaviour
 
         bankPresenter.Dispose();
         particleEffectPresenter.Dispose();
+
+        rouletteBallPresenter_1.Dispose();
+        roulettePresenter_1.Dispose();
+        rouletteBallPresenter_2.Dispose();
+        roulettePresenter_2.Dispose();
+        rouletteBallPresenter_3.Dispose();
+        roulettePresenter_3.Dispose();
+        rouletteBallPresenter_4.Dispose();
+        roulettePresenter_4.Dispose();
+        rouletteBallPresenter_5.Dispose();
+        roulettePresenter_5.Dispose();
+        rouletteBallPresenter_6.Dispose();
+        roulettePresenter_6.Dispose();
+
+        rouletteValueHistoryPresenter.Dispose();
+
+        stateMachine.Dispose();
     }
 
     private void OnDestroy()
