@@ -4334,7 +4334,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 581256095}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -4382,6 +4382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskNumber: 1
   transformTask: {fileID: 581256091}
+  objectTask: {fileID: 581256090}
   buttonTask: {fileID: 581256094}
   objectMark: {fileID: 2011207673}
   objectWindow: {fileID: 564967439}
@@ -5289,7 +5290,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 743106230}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -5337,6 +5338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskNumber: 3
   transformTask: {fileID: 743106226}
+  objectTask: {fileID: 743106225}
   buttonTask: {fileID: 743106229}
   objectMark: {fileID: 803015660}
   objectWindow: {fileID: 688415468}
@@ -8570,7 +8572,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1301705562}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -8618,6 +8620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskNumber: 2
   transformTask: {fileID: 1301705558}
+  objectTask: {fileID: 1301705557}
   buttonTask: {fileID: 1301705561}
   objectMark: {fileID: 1842035462}
   objectWindow: {fileID: 374290272}
@@ -9791,6 +9794,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskNumber: 0
   transformTask: {fileID: 1477590929}
+  objectTask: {fileID: 1477590928}
   buttonTask: {fileID: 1477590933}
   objectMark: {fileID: 2080688648}
   objectWindow: {fileID: 728093496}
@@ -9846,7 +9850,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1477590934}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -13529,7 +13533,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1911704726}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -13577,6 +13581,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskNumber: 4
   transformTask: {fileID: 1911704722}
+  objectTask: {fileID: 1911704721}
   buttonTask: {fileID: 1911704725}
   objectMark: {fileID: 1952246307}
   objectWindow: {fileID: 153498381}

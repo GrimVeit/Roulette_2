@@ -30,13 +30,31 @@ public class TaskVisualView : View
 
     #region Input
 
+    public void Activate(int id)
+    {
+        var taskVisual = GetTaskVisualByNumber(id);
+
+        if (taskVisual == null) return;
+
+        taskVisual.Activate();
+    }
+
+    public void Deactivate(int id)
+    {
+        var taskVisual = GetTaskVisualByNumber(id);
+
+        if (taskVisual == null) return;
+
+        taskVisual.Deactivate();
+    }
+
     public void SetActivateTask(Task task)
     {
         var taskVisual = GetTaskVisualByNumber(task.Number);
 
         if (taskVisual == null) return;
 
-        taskVisual.Activate();
+        taskVisual.ActivateTask();
     }
 
     public void SetDeactivateTask(Task task)
@@ -45,7 +63,7 @@ public class TaskVisualView : View
 
         if (taskVisual == null) return;
 
-        taskVisual.Deactivate();
+        taskVisual.DeactivateTask();
     }
 
     public void SetCompletedTask(Task task)
@@ -54,7 +72,7 @@ public class TaskVisualView : View
 
         if(taskVisual == null) return;
 
-        taskVisual.Complete();
+        taskVisual.CompleteTask();
     }
 
     private TaskVisual GetTaskVisualByNumber(int number)

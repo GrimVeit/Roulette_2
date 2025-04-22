@@ -6,8 +6,8 @@ public class CooldownModel
 {
     public event Action OnRewardOverDay;
 
-    public event Action OnSetAvailableButton;
-    public event Action OnSetUnvailableButton;
+    public event Action OnAvailable;
+    public event Action OnUnvailable;
 
     public event Action<string> OnCountdownTimer;
 
@@ -71,7 +71,7 @@ public class CooldownModel
 
     private IEnumerator Countdown_Coroutine()
     {
-        OnSetUnvailableButton?.Invoke();
+        OnUnvailable?.Invoke();
 
         Debug.Log(isRewardAvailable);
 
@@ -83,13 +83,13 @@ public class CooldownModel
 
             if (timeRemaining.TotalSeconds == 0)
             {
-                OnSetAvailableButton?.Invoke();
+                OnAvailable?.Invoke();
                 break;
             }
 
             yield return new WaitForSeconds(1);
         }
 
-        OnSetAvailableButton?.Invoke();
+        OnAvailable?.Invoke();
     }
 }

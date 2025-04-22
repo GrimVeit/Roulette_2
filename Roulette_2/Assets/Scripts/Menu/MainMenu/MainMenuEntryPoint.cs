@@ -53,7 +53,7 @@ public class MainMenuEntryPoint : MonoBehaviour
         dailyRewardVisualPresenter = new DailyRewardVisualPresenter(new DailyRewardVisualModel(), viewContainer.GetView<DailyRewardVisualView>());
 
         storeTaskPresenter = new StoreTaskPresenter(new StoreTaskModel(taskGroup, bankPresenter));
-        taskVisualPresenter = new TaskVisualPresenter(new TaskVisualModel(), viewContainer.GetView<TaskVisualView>());
+        taskVisualPresenter = new TaskVisualPresenter(new TaskVisualModel(storeTaskPresenter, storeTaskPresenter), viewContainer.GetView<TaskVisualView>());
 
         storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
         chipBuyPresenter = new ChipBuyPresenter(new ChipBuyModel(chipGroup, storeChipPresenter, bankPresenter), viewContainer.GetView<ChipBuyView>());
@@ -95,11 +95,6 @@ public class MainMenuEntryPoint : MonoBehaviour
         dailyRewardPresenter.OnResetDays += dailyRewardVisualPresenter.DeactivateDays;
         dailyRewardPresenter.OnLastOpenDay += dailyRewardVisualPresenter.ActivateDay;
 
-        storeTaskPresenter.OnActiveTask += taskVisualPresenter.SetActivateTask;
-        storeTaskPresenter.OnInactiveTask += taskVisualPresenter.SetInactivateTask;
-        storeTaskPresenter.OnCompletedTask += taskVisualPresenter.SetCompletedTask;
-        taskVisualPresenter.OnChooseTask += storeTaskPresenter.CompletedTask;
-
         storeChipPresenter.OnChangeCountChips += chipCountVisualPresenter.ChangeChipsCount;
     }
 
@@ -114,11 +109,6 @@ public class MainMenuEntryPoint : MonoBehaviour
         dailyRewardPresenter.OnChangeDay -= dailyRewardScalePresenter.SetIndex;
         dailyRewardPresenter.OnResetDays -= dailyRewardVisualPresenter.DeactivateDays;
         dailyRewardPresenter.OnLastOpenDay -= dailyRewardVisualPresenter.ActivateDay;
-
-        storeTaskPresenter.OnActiveTask -= taskVisualPresenter.SetActivateTask;
-        storeTaskPresenter.OnInactiveTask -= taskVisualPresenter.SetInactivateTask;
-        storeTaskPresenter.OnCompletedTask -= taskVisualPresenter.SetCompletedTask;
-        taskVisualPresenter.OnChooseTask -= storeTaskPresenter.CompletedTask;
     }
 
     private void ActivateTransitions()
@@ -206,6 +196,11 @@ public class MainMenuEntryPoint : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D))
         {
             storeTaskPresenter.ActivateTask("Spend15Minutes");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            storeTaskPresenter.ChangeTasks();
         }
     }
 

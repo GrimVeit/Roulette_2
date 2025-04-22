@@ -10,6 +10,7 @@ public class TaskVisual : MonoBehaviour
 
     [SerializeField] private int taskNumber;
     [SerializeField] private Transform transformTask;
+    [SerializeField] private GameObject objectTask;
     [SerializeField] private Button buttonTask;
 
     [Header("Window")]
@@ -50,6 +51,16 @@ public class TaskVisual : MonoBehaviour
 
     public void Activate()
     {
+        objectTask.SetActive(true);
+    }
+
+    public void Deactivate()
+    {
+        objectTask.SetActive(false);
+    }
+
+    public void ActivateTask()
+    {
         tweenScale?.Kill();
 
         objectMark.SetActive(true);
@@ -68,7 +79,7 @@ public class TaskVisual : MonoBehaviour
             .SetEase(Ease.Linear);
     }
 
-    public void Deactivate()
+    public void DeactivateTask()
     {
         tweenScale?.Kill();
 
@@ -86,7 +97,7 @@ public class TaskVisual : MonoBehaviour
         transformTask.localScale = Vector3.one; 
     }
 
-    public void Complete()
+    public void CompleteTask()
     {
         tweenScale?.Kill();
 

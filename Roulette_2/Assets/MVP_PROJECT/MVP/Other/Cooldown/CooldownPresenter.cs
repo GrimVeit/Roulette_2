@@ -17,8 +17,8 @@ public class CooldownPresenter
     public void Initialize()
     {
         _model.OnCountdownTimer += _view.ChangeTimer;
-        _model.OnSetAvailableButton += _view.ActivateButton;
-        _model.OnSetUnvailableButton += _view.DeactivateButton;
+        _model.OnAvailable += _view.ActivateButton;
+        _model.OnUnvailable += _view.DeactivateButton;
 
         _model.Initialize();
     }
@@ -26,8 +26,8 @@ public class CooldownPresenter
     public void Dispose()
     {
         _model.OnCountdownTimer -= _view.ChangeTimer;
-        _model.OnSetAvailableButton -= _view.ActivateButton;
-        _model.OnSetUnvailableButton -= _view.DeactivateButton;
+        _model.OnAvailable -= _view.ActivateButton;
+        _model.OnUnvailable -= _view.DeactivateButton;
 
         _model.Dispose();
     }
@@ -51,14 +51,14 @@ public class CooldownPresenter
 
     public event Action OnAvailable
     {
-        add { _model.OnSetAvailableButton += value; }
-        remove { _model.OnSetAvailableButton -= value; }
+        add { _model.OnAvailable += value; }
+        remove { _model.OnAvailable -= value; }
     }
 
     public event Action OnUnvailable
     {
-        add { _model.OnSetUnvailableButton += value; }
-        remove { _model.OnSetUnvailableButton -= value; }
+        add { _model.OnUnvailable += value; }
+        remove { _model.OnUnvailable -= value; }
     }
 
     #endregion

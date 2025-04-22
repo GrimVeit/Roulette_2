@@ -1,8 +1,8 @@
 using System;
 
-public class StoreTaskPresenter : ITaskProvider
+public class StoreTaskPresenter : ITaskProviderEvents, IActivateTaskProvider, ICompleteTaskProvider
 {
-    private StoreTaskModel _model;
+    private readonly StoreTaskModel _model;
 
     public StoreTaskPresenter(StoreTaskModel model)
     {
@@ -31,9 +31,28 @@ public class StoreTaskPresenter : ITaskProvider
         _model.CompletedTask(number);
     }
 
+    public void ChangeTasks()
+    {
+        _model.ChangeTasks();
+    }
+
     #endregion
 
     #region Output
+
+    public event Action<Task> OnActivate
+    {
+        add => _model.OnActivate += value;
+        remove => _model.OnActivate -= value;
+    }
+
+    public event Action<Task> OnDeactivate
+    {
+        add => _model.OnDeactivate += value;
+        remove => _model.OnDeactivate -= value;
+    }
+
+
 
     public event Action<Task> OnInactiveTask
     {
@@ -55,7 +74,22 @@ public class StoreTaskPresenter : ITaskProvider
     #endregion
 }
 
-public interface ITaskProvider
+public interface ITaskProviderEvents
+{
+    public event Action<Task> OnActivate;
+    public event Action<Task> OnDeactivate;
+
+    public event Action<Task> OnInactiveTask;
+    public event Action<Task> OnActiveTask;
+    public event Action<Task> OnCompletedTask;
+}
+
+public interface IActivateTaskProvider
 {
     public void ActivateTask(string id);
+}
+
+public interface ICompleteTaskProvider
+{
+    public void CompletedTask(int id);
 }
