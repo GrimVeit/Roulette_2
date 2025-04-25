@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameSceneEntryPoint_MiniGame : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
+    [SerializeField] private TaskGroup taskGroup;
     [SerializeField] private UIGameSceneRoot_Game sceneRootPrefab;
 
     private UIGameSceneRoot_Game sceneRoot;
@@ -18,6 +19,11 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
     private RouletteBallPresenter rouletteBallPresenter;
 
     private RouletteValueHistoryPresenter rouletteValueHistoryPresenter;
+
+    private StoreTaskPresenter storeTaskPresenter;
+    private TimerDailyPresenter timerDailyPresenter;
+
+    private Metric_GameCountPresenter metric_GameCountPresenter;
 
     private StateMachine_Mini stateMachine;
 
@@ -39,7 +45,11 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
 
         rouletteValueHistoryPresenter = new RouletteValueHistoryPresenter(new RouletteValueHistoryModel(new List<IRouletteValueProvider>() { roulettePresenter }), viewContainer.GetView<RouletteValueHistoryView>());
 
-        stateMachine = new StateMachine_Mini(sceneRoot, rouletteBallPresenter, roulettePresenter, rouletteValueHistoryPresenter);
+        timerDailyPresenter = new TimerDailyPresenter(new TimerDailyModel(PlayerPrefsKeys.LAST_EXIT_DATE));
+        storeTaskPresenter = new StoreTaskPresenter(new StoreTaskModel(taskGroup, bankPresenter, timerDailyPresenter));
+        metric_GameCountPresenter = new Metric_GameCountPresenter(new Metric_GameCountModel(PlayerPrefsKeys.METRIC_GAME_COUNTS, storeTaskPresenter, timerDailyPresenter, 10));
+
+        stateMachine = new StateMachine_Mini(sceneRoot, rouletteBallPresenter, roulettePresenter, rouletteValueHistoryPresenter, metric_GameCountPresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -56,6 +66,10 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         roulettePresenter.Initialize();
 
         rouletteValueHistoryPresenter.Initialize();
+
+        timerDailyPresenter.Initialize();
+        storeTaskPresenter.Initialize();
+        metric_GameCountPresenter.Initialize();
 
         stateMachine.Initialize();
     }
@@ -96,6 +110,10 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         rouletteValueHistoryPresenter?.Dispose();
 
         stateMachine?.Dispose();
+
+        timerDailyPresenter.Dispose();
+        storeTaskPresenter.Dispose();
+        metric_GameCountPresenter.Dispose();
     }
 
     private void OnDestroy()

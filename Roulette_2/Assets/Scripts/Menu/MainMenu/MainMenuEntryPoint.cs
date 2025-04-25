@@ -28,6 +28,9 @@ public class MainMenuEntryPoint : MonoBehaviour
     private ChipBuyPresenter chipBuyPresenter;
     private ChipCountVisualPresenter chipCountVisualPresenter;
 
+    private TimerDailyPresenter timerDailyPresenter;
+    private TimerDailyVisualPresenter timerDailyVisualPresenter;
+
     public void Run(UIRootView uIRootView)
     {
         sceneRoot = menuRootPrefab;
@@ -47,12 +50,15 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
 
+        timerDailyPresenter = new TimerDailyPresenter(new TimerDailyModel(PlayerPrefsKeys.LAST_EXIT_DATE));
+        timerDailyVisualPresenter = new TimerDailyVisualPresenter(new TimerDailyVisualModel(timerDailyPresenter), viewContainer.GetView<TimerDailyVisualView>());
+
         cooldownPresenter_DailyReward = new CooldownPresenter(new CooldownModel(PlayerPrefsKeys.COOLDOWN_DAILY_REWARD, TimeSpan.FromSeconds(5)), viewContainer.GetView<CooldownView>());
         dailyRewardPresenter = new DailyRewardPresenter(new DailyRewardModel(PlayerPrefsKeys.DAY_DAILY_REWARD, dailyRewardValues, bankPresenter), viewContainer.GetView<DailyRewardView>());
         dailyRewardScalePresenter = new DailyRewardScalePresenter(new DailyRewardScaleModel(), viewContainer.GetView<DailyRewardScaleView>());
         dailyRewardVisualPresenter = new DailyRewardVisualPresenter(new DailyRewardVisualModel(), viewContainer.GetView<DailyRewardVisualView>());
 
-        storeTaskPresenter = new StoreTaskPresenter(new StoreTaskModel(taskGroup, bankPresenter));
+        storeTaskPresenter = new StoreTaskPresenter(new StoreTaskModel(taskGroup, bankPresenter, timerDailyPresenter));
         taskVisualPresenter = new TaskVisualPresenter(new TaskVisualModel(storeTaskPresenter, storeTaskPresenter), viewContainer.GetView<TaskVisualView>());
 
         storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
@@ -80,6 +86,9 @@ public class MainMenuEntryPoint : MonoBehaviour
         chipBuyPresenter.Initialize();
         chipCountVisualPresenter.Initialize();
         storeChipPresenter.Initialize();
+
+        timerDailyPresenter.Initialize();
+        timerDailyVisualPresenter.Initialize();
 
     }
 
@@ -174,6 +183,9 @@ public class MainMenuEntryPoint : MonoBehaviour
         chipCountVisualPresenter?.Dispose();
         chipBuyPresenter?.Dispose();
         storeChipPresenter?.Dispose();
+
+        timerDailyPresenter?.Dispose();
+        timerDailyVisualPresenter?.Dispose();
     }
 
     private void Update()

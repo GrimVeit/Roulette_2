@@ -6482,6 +6482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds: {fileID: 1084492703}
+  taskGroup: {fileID: 11400000, guid: ddc1252e8eaf0fd4b8470c5fcbb726d4, type: 2}
   sceneRootPrefab: {fileID: 5759112182369476050}
 --- !u!1 &845388431
 GameObject:
@@ -6728,6 +6729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23e983b0f0e74224a9731211eb9e1e22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 
   spinVector: {x: 0, y: 0, z: -20}
   spinTransform: {fileID: 1252880230}
   centerPoint: {fileID: 189267379}
@@ -12991,6 +12993,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da31fed5189833a4ea54140a268deee9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 
   transformParent: {fileID: 189267379}
   centerPoint: {fileID: 1252880230}
   ball: {fileID: 975677106}

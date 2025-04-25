@@ -19,11 +19,15 @@ public class StoreTaskModel
     public readonly string FilePath = Path.Combine(Application.persistentDataPath, "Task.json");
 
     private readonly IMoneyProvider _moneyProvider;
+    private readonly ITimerDailyChangeDay _timerDailyChangeDay;
 
-    public StoreTaskModel(TaskGroup taskGroup, IMoneyProvider moneyProvider)
+    public StoreTaskModel(TaskGroup taskGroup, IMoneyProvider moneyProvider, ITimerDailyChangeDay timerDailyChangeDay)
     {
         _taskGroup = taskGroup;
         _moneyProvider = moneyProvider;
+        _timerDailyChangeDay = timerDailyChangeDay;
+
+        _timerDailyChangeDay.OnChangeDay += ChangeTasks;
     }
 
     public void Initialize()
@@ -105,6 +109,8 @@ public class StoreTaskModel
 
     public void Dispose()
     {
+        _timerDailyChangeDay.OnChangeDay -= ChangeTasks;
+
         string json = JsonUtility.ToJson(new TaskDatas(_taskDatas.ToArray()));
         File.WriteAllText(FilePath, json);
     }

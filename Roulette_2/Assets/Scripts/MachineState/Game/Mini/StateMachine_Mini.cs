@@ -9,10 +9,15 @@ public class StateMachine_Mini : IGlobalStateMachineProvider
 
     private IState _currentState;
 
-    public StateMachine_Mini(UIGameSceneRoot_Game sceneRoot, RouletteBallPresenter rouletteBallPresenter, RoulettePresenter roulettePresenter, RouletteValueHistoryPresenter rouletteValueHistoryPresenter)
+    public StateMachine_Mini
+        (UIGameSceneRoot_Game sceneRoot, 
+        RouletteBallPresenter rouletteBallPresenter, 
+        RoulettePresenter roulettePresenter, 
+        RouletteValueHistoryPresenter rouletteValueHistoryPresenter,
+        IMetric_GameCount metric_GameCount)
     {
         states[typeof(MainState_Mini)] = new MainState_Mini(this, sceneRoot);
-        states[typeof(RouletteState_Mini)] = new RouletteState_Mini(this, sceneRoot, roulettePresenter, rouletteBallPresenter, rouletteValueHistoryPresenter);
+        states[typeof(RouletteState_Mini)] = new RouletteState_Mini(this, sceneRoot, roulettePresenter, rouletteBallPresenter, rouletteValueHistoryPresenter, metric_GameCount);
         states[typeof(ResultState_Mini)] = new ResultState_Mini(this, sceneRoot);
     }
 

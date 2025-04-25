@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TimerDailyModel
@@ -8,11 +7,10 @@ public class TimerDailyModel
     public event Action<string> OnTimerTick;
     public event Action OnChangeDay;
 
-    private float timeUntilNextDay;
-
-    private DateTime lastExitDate;
     private DateTime currentDate => DateTime.UtcNow;
+    private DateTime lastExitDate;
     private DateTime nextMidnight;
+
     private readonly string KEY;
 
     private IEnumerator coroutineTimer;
@@ -26,7 +24,7 @@ public class TimerDailyModel
     {
         lastExitDate = LoadLastExitDate();
 
-        if(currentDate > lastExitDate)
+        if(currentDate.Day != lastExitDate.Day)
         {
             Debug.Log("CHANGE DAY");
             OnChangeDay?.Invoke();
@@ -47,6 +45,9 @@ public class TimerDailyModel
 
     public void Dispose()
     {
+        if (coroutineTimer != null)
+            Coroutines.Stop(coroutineTimer);
+
         SaveExitDate();
     }
 
@@ -58,8 +59,10 @@ public class TimerDailyModel
 
             if(timeLeft.TotalSeconds <= 0)
             {
+                Debug.Log("CHANGE DAY");
                 OnChangeDay?.Invoke();
                 nextMidnight = currentDate.Date.AddDays(1);
+                continue;
             }
 
             string formatted = string.Format("{0:D2}:{1:D2}:{2:D2}", timeLeft.Hours, timeLeft.Minutes, timeLeft.Seconds);
