@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ChipGroup", menuName = "Game/Chip/New Group")]
-public class ChipGroup : ScriptableObject, IChipGroupStore
+public class ChipGroup : ScriptableObject, IChipGroupStore, IChipGroupBet
 {
     public List<Chips> Chips = new List<Chips>();
 
@@ -31,6 +31,16 @@ public class ChipGroup : ScriptableObject, IChipGroupStore
     {
         return Chips.Any(cc => cc.ID == id);
     }
+
+    public bool CanHaveCountChips(int id, int countChip)
+    {
+        return GetChipsById(id).ChipData.ChipsCount >= countChip;
+    }
+
+    public Chip GetChipById(int id)
+    {
+        return GetChipsById(id).Chip;
+    }
 }
 
 public interface IChipGroupStore
@@ -39,4 +49,9 @@ public interface IChipGroupStore
 
     public int GetCountChipsByID(int id);
     public bool HasElementByID(int id);
+}
+
+public interface IChipGroupBet
+{
+    public bool CanHaveCountChips(int id, int countChip);
 }

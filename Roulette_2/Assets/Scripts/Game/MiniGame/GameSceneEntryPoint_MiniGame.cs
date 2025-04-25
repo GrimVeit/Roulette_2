@@ -7,6 +7,7 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
     [SerializeField] private TaskGroup taskGroup;
+    [SerializeField] private ChipGroup chipGroup;
     [SerializeField] private UIGameSceneRoot_Game sceneRootPrefab;
 
     private UIGameSceneRoot_Game sceneRoot;
@@ -19,6 +20,11 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
     private RouletteBallPresenter rouletteBallPresenter;
 
     private RouletteValueHistoryPresenter rouletteValueHistoryPresenter;
+
+    private StoreChipPresenter storeChipPresenter;
+    private ChipGameCountVisualPresenter chipGameCountVisualPresenter;
+    private PseudoChipPresenter pseudoChipPresenter;
+    private BetCellPresenter betCellPresenter;
 
     private StoreTaskPresenter storeTaskPresenter;
     private TimerDailyPresenter timerDailyPresenter;
@@ -48,6 +54,11 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
 
         rouletteValueHistoryPresenter = new RouletteValueHistoryPresenter(new RouletteValueHistoryModel(new List<IRouletteValueProvider>() { roulettePresenter }), viewContainer.GetView<RouletteValueHistoryView>());
 
+        storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
+        chipGameCountVisualPresenter = new ChipGameCountVisualPresenter(new ChipGameCountVisualModel(storeChipPresenter), viewContainer.GetView<ChipGameCountVisualView>());
+        pseudoChipPresenter = new PseudoChipPresenter(new PseudoChipModel(soundPresenter), viewContainer.GetView<PseudoChipView>());
+        betCellPresenter = new BetCellPresenter(new BetCellModel(chipGroup, storeChipPresenter), viewContainer.GetView<BetCellView>());
+
         timerDailyPresenter = new TimerDailyPresenter(new TimerDailyModel(PlayerPrefsKeys.LAST_EXIT_DATE));
         storeTaskPresenter = new StoreTaskPresenter(new StoreTaskModel(taskGroup, bankPresenter, timerDailyPresenter));
         metric_GameCountPresenter = new Metric_GameCountPresenter(new Metric_GameCountModel(PlayerPrefsKeys.METRIC_GAME_COUNTS, storeTaskPresenter, timerDailyPresenter, 10));
@@ -73,6 +84,11 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         roulettePresenter.Initialize();
 
         rouletteValueHistoryPresenter.Initialize();
+
+        chipGameCountVisualPresenter.Initialize();
+        storeChipPresenter.Initialize();
+        pseudoChipPresenter.Initialize();
+        betCellPresenter.Initialize();
 
         timerDailyPresenter.Initialize();
         storeTaskPresenter.Initialize();
@@ -121,6 +137,11 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         rouletteValueHistoryPresenter?.Dispose();
 
         stateMachine?.Dispose();
+
+        chipGameCountVisualPresenter.Dispose();
+        storeChipPresenter.Dispose();
+        pseudoChipPresenter?.Dispose();
+        betCellPresenter.Dispose();
 
         timerDailyPresenter.Dispose();
         storeTaskPresenter.Dispose();

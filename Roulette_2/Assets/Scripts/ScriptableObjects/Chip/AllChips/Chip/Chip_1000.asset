@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aaae617575a1a74e905f29336e0d1c0, type: 3}
   m_Name: Chip_1000
   m_EditorClassIdentifier: 
-  id: 6
   nominal: 1000
-  spriteChip: {fileID: 0}
+  spriteChip: {fileID: 21300000, guid: 7c133b56a4ef840448150556a5cebaef, type: 3}

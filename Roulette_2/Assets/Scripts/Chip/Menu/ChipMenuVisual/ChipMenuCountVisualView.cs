@@ -4,9 +4,9 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 
-public class ChipCountVisualView : View
+public class ChipMenuCountVisualView : View
 {
-    [SerializeField] private List<ChipCountVisual> chipCountVisuals = new List<ChipCountVisual>();
+    [SerializeField] private List<ChipMenuCountVisual> chipCountVisuals = new List<ChipMenuCountVisual>();
 
     public void SetData(int id, int count)
     {
@@ -21,14 +21,14 @@ public class ChipCountVisualView : View
         visual.SetData(count);
     }
 
-    private ChipCountVisual GetChipCountVisualById(int id)
+    private ChipMenuCountVisual GetChipCountVisualById(int id)
     {
         return chipCountVisuals.FirstOrDefault(ccv => ccv.ID == id);
     }
 }
 
 [System.Serializable]
-public class ChipCountVisual
+public class ChipMenuCountVisual
 {
     public int ID => id;
 

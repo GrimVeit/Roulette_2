@@ -26,7 +26,7 @@ public class MainMenuEntryPoint : MonoBehaviour
 
     private StoreChipPresenter storeChipPresenter;
     private ChipBuyPresenter chipBuyPresenter;
-    private ChipCountVisualPresenter chipCountVisualPresenter;
+    private ChipMenuCountVisualPresenter chipCountVisualPresenter;
 
     private TimerDailyPresenter timerDailyPresenter;
     private TimerDailyVisualPresenter timerDailyVisualPresenter;
@@ -68,7 +68,7 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
         chipBuyPresenter = new ChipBuyPresenter(new ChipBuyModel(chipGroup, storeChipPresenter, bankPresenter), viewContainer.GetView<ChipBuyView>());
-        chipCountVisualPresenter = new ChipCountVisualPresenter(new ChipCountVisualModel(), viewContainer.GetView<ChipCountVisualView>());
+        chipCountVisualPresenter = new ChipMenuCountVisualPresenter(new ChipMenuCountVisualModel(), viewContainer.GetView<ChipMenuCountVisualView>());
 
         metric_GameTimeSessionPresenter = new Metric_GameTimeSessionPresenter(new Metric_GameTimeSessionModel(PlayerPrefsKeys.METRIC_GAME_TIME_SESSION, timerDailyPresenter, storeTaskPresenter, 15));
         metric_GameCountPresenter = new Metric_GameCountPresenter(new Metric_GameCountModel(PlayerPrefsKeys.METRIC_GAME_COUNTS, storeTaskPresenter, timerDailyPresenter, 10));

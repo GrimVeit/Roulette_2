@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChipCountVisualModel
+public class ChipMenuCountVisualModel
 {
     public event Action<int, int> OnChangeChipsCount;
 

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Chip_10
   m_EditorClassIdentifier: 
   nominal: 10
-  spriteChip: {fileID: 0}
+  spriteChip: {fileID: 21300000, guid: 1e338726fe90a004aa19fc225414d9cb, type: 3}

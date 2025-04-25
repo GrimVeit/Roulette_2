@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChipCountVisualPresenter
+public class ChipMenuCountVisualPresenter
 {
-    private readonly ChipCountVisualModel _model;
-    private readonly ChipCountVisualView _view;
+    private readonly ChipMenuCountVisualModel _model;
+    private readonly ChipMenuCountVisualView _view;
 
-    public ChipCountVisualPresenter(ChipCountVisualModel model, ChipCountVisualView view)
+    public ChipMenuCountVisualPresenter(ChipMenuCountVisualModel model, ChipMenuCountVisualView view)
     {
         _model = model;
         _view = view;

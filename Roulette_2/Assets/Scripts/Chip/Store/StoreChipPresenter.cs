@@ -1,6 +1,6 @@
 using System;
 
-public class StoreChipPresenter : IStoreChip
+public class StoreChipPresenter : IStoreChip, IStoreChipChangeEvents
 { 
     private readonly StoreChipModel _model;
 
@@ -42,6 +42,11 @@ public class StoreChipPresenter : IStoreChip
     }
 
     #endregion
+}
+
+public interface IStoreChipChangeEvents
+{
+    public event Action<int, int> OnChangeCountChips;
 }
 
 public interface IStoreChip
