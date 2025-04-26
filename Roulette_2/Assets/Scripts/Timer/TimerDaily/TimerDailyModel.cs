@@ -67,7 +67,7 @@ public class TimerDailyModel
 
             string formatted = string.Format("{0:D2}:{1:D2}:{2:D2}", timeLeft.Hours, timeLeft.Minutes, timeLeft.Seconds);
             OnTimerTick?.Invoke(formatted);
-            Debug.Log(formatted);
+            //Debug.Log(formatted);
 
             yield return new WaitForSeconds(1);
         }

@@ -30,10 +30,14 @@ public class BetCellPresenter
     private void ActivatewEvents()
     {
         _view.OnAddBet += _model.AddBet;
+        _view.OnReturnAllBets += _model.ReturnAllBets;
+        _view.OnReturnLastBet += _model.ReturnLastBet;
     }
 
     private void DeactivateEvents()
     {
         _view.OnAddBet -= _model.AddBet;
+        _view.OnReturnAllBets -= _model.ReturnAllBets;
+        _view.OnReturnLastBet -= _model.ReturnLastBet;
     }
 }

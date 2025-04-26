@@ -4745,6 +4745,8 @@ MonoBehaviour:
   - {fileID: 42847658}
   - {fileID: 1569556225}
   - {fileID: 1216939938}
+  buttonReturnAllBets: {fileID: 94392675}
+  buttonReturnLastBet: {fileID: 2117844922}
 --- !u!1 &457604356
 GameObject:
   m_ObjectHideFlags: 0
@@ -19030,7 +19032,7 @@ GameObject:
   - component: {fileID: 2117844920}
   - component: {fileID: 2117844922}
   m_Layer: 5
-  m_Name: DoubleBet_BUTTON
+  m_Name: ReturnBet_BUTTON
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

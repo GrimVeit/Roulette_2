@@ -65,9 +65,9 @@ public class Metric_GameTimeSessionModel
         {
             totalGameTime = totalGameTime.Add(TimeSpan.FromSeconds(1));
 
-            Debug.Log($"Time after first activate - " +
-                $"{totalGameTime.TotalMinutes} minutes, " +
-                $"{totalGameTime.TotalSeconds} second");
+            //Debug.Log($"Time after first activate - " +
+            //    $"{totalGameTime.TotalMinutes} minutes, " +
+            //    $"{totalGameTime.TotalSeconds} second");
 
             yield return new WaitForSeconds(1);
         }
