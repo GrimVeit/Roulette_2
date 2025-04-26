@@ -1,14 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
+using System.Numerics;
 
 public class BetCellModel
 {
+    public event Action<int, Chip, int, TypeCell, Vector3> OnAddChip;
+    public event Action<int, int> OnReturnChip;
+
     private readonly IChipGroupBet _chipGroupBet;
     private readonly IStoreChip _storeChip;
 
-    private List<BetInfo> betInfos = new();
+    private readonly List<BetInfo> betInfos = new();
 
     public BetCellModel(IChipGroupBet chipGroupBet, IStoreChip storeChip)
     {
@@ -16,26 +20,27 @@ public class BetCellModel
         _storeChip = storeChip;
     }
 
-    public void AddBet(int id, Chip chip, Transform transform, List<int> positionIndexes)
+    public void AddBet(int id, Chip chip, List<int> positionIndexes, TypeCell typeCell, Vector3 vector)
     {
         if (_chipGroupBet.CanHaveCountChips(id, positionIndexes.Count))
         {
-            Debug.Log("SUCCESS");
+            UnityEngine.Debug.Log("SUCCESS");
 
-            RemoveChipsFromStore(id, positionIndexes);
+            RemoveChipsFromStore(id, chip, positionIndexes, typeCell, vector);
 
         }
         else
         {
-            Debug.Log("ERROR");
+            UnityEngine.Debug.Log("ERROR");
         }
     }
 
-    private void RemoveChipsFromStore(int id, List<int> positionIndexes)
+    private void RemoveChipsFromStore(int id, Chip chip, List<int> positionIndexes, TypeCell typeCell, Vector3 vector)
     {
         for (int i = 0; i < positionIndexes.Count; i++)
         {
             RemoveChipFromStore(id);
+            OnAddChip?.Invoke(id, chip, positionIndexes[i], typeCell, vector);
 
             betInfos.Add(new BetInfo(id, positionIndexes[i]));
         }
@@ -48,6 +53,7 @@ public class BetCellModel
         var lastBet = betInfos.Last();
 
         AddChipInStore(lastBet.idChipGroup);
+        OnReturnChip?.Invoke(lastBet.idChipGroup, lastBet.posIndex);
 
         betInfos.Remove(lastBet);
     }
@@ -59,7 +65,10 @@ public class BetCellModel
         for (int i = 0; i < betInfos.Count; i++)
         {
             AddChipInStore(betInfos[i].idChipGroup);
+            OnReturnChip?.Invoke(betInfos[i].idChipGroup, betInfos[i].posIndex);
         }
+
+        betInfos.Clear();
     }
 
     public void ClearBets()

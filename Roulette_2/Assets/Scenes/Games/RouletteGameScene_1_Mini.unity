@@ -379,6 +379,7 @@ GameObject:
   - component: {fileID: 42847656}
   - component: {fileID: 42847655}
   - component: {fileID: 42847657}
+  - component: {fileID: 42847659}
   - component: {fileID: 42847658}
   m_Layer: 5
   m_Name: Red
@@ -473,7 +474,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bettCells: 0200000001000000
+  typeCell: 0
+  bettCells: 14000000
+--- !u!61 &42847659
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42847653}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 125.5, y: 126}
+  m_EdgeRadius: 0
 --- !u!1 &44601710
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,7 +1040,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bettCells: 0200000001000000
+  typeCell: 0
+  bettCells: 06000000
 --- !u!1 &90812401
 GameObject:
   m_ObjectHideFlags: 0
@@ -1146,7 +1194,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bettCells: 0200000001000000
+  typeCell: 0
+  bettCells: 0a000000
 --- !u!1 &94392671
 GameObject:
   m_ObjectHideFlags: 0
@@ -1744,7 +1793,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bettCells: 0200000001000000
+  typeCell: 0
+  bettCells: 0f000000
 --- !u!1 &189267378
 GameObject:
   m_ObjectHideFlags: 0
@@ -1976,7 +2026,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bettCells: 0200000001000000
+  typeCell: 0
+  bettCells: 0c000000
 --- !u!1 &193920375
 GameObject:
   m_ObjectHideFlags: 0
@@ -2694,6 +2745,167 @@ MonoBehaviour:
   size: 0.05
   color: {r: 0.022267671, g: 0.019607855, b: 0.5686275, a: 1}
   drawType: 0
+--- !u!1 &289170090
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 289170091}
+  - component: {fileID: 289170092}
+  m_Layer: 5
+  m_Name: ChipGameVisual
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &289170091
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289170090}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1912193093}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &289170092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289170090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4813969284d8b8d4ebea394dd7ad7a36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chipGameVisualPrefab: {fileID: 9147622474943179282, guid: 5b69fd372e3298047be3b3285ed94148, type: 3}
+  chipGamePositions:
+  - id: 0
+    transform: {fileID: 1216939934}
+    displacement_x: 0.2
+    displacement_y: 0.2
+  - id: 1
+    transform: {fileID: 616510861}
+    displacement_x: 0.2
+    displacement_y: 0.2
+  - id: 2
+    transform: {fileID: 1010844978}
+    displacement_x: 0.2
+    displacement_y: 0.2
+  - id: 3
+    transform: {fileID: 1097680074}
+    displacement_x: 0.2
+    displacement_y: 0.2
+  - id: 4
+    transform: {fileID: 892506839}
+    displacement_x: 0.2
+    displacement_y: 0.2
+  - id: 5
+    transform: {fileID: 1409754119}
+    displacement_x: 0.2
+    displacement_y: 0.2
+  - id: 6
+    transform: {fileID: 85135959}
+    displacement_x: 0.2
+    displacement_y: 0.2
+  - id: 7
+    transform: {fileID: 1325721633}
+    displacement_x: 0.2
+    displacement_y: 0.2
+  - id: 8
+    transform: {fileID: 477978193}
+    displacement_x: 0.2
+    displacement_y: 0.2
+  - id: 9
+    transform: {fileID: 1539070900}
+    displacement_x: 0.2
+    displacement_y: 0.2
+  - id: 10
+    transform: {fileID: 90812402}
+    displacement_x: 0.2
+    displacement_y: 0.2
+  - id: 11
+    transform: {fileID: 815178603}
+    displacement_x: 0.2
+    displacement_y: 0.2
+  - id: 12
+    transform: {fileID: 191691792}
+    displacement_x: 0.2
+    displacement_y: 0.2
+  - id: 13
+    transform: {fileID: 1087581952}
+    displacement_x: 0.2
+    displacement_y: 0.2
+  - id: 14
+    transform: {fileID: 868532523}
+    displacement_x: 0.2
+    displacement_y: 0.2
+  - id: 15
+    transform: {fileID: 180858624}
+    displacement_x: 0.2
+    displacement_y: 0.2
+  - id: 16
+    transform: {fileID: 365983984}
+    displacement_x: 0.2
+    displacement_y: 0.2
+  - id: 17
+    transform: {fileID: 330435104}
+    displacement_x: 0.2
+    displacement_y: 0.2
+  - id: 18
+    transform: {fileID: 411066714}
+    displacement_x: 0.2
+    displacement_y: 0.2
+  - id: 19
+    transform: {fileID: 595282303}
+    displacement_x: 0.2
+    displacement_y: 0.2
+  - id: 20
+    transform: {fileID: 42847654}
+    displacement_x: 0.2
+    displacement_y: 0.2
+  - id: 21
+    transform: {fileID: 1569556221}
+    displacement_x: 0.2
+    displacement_y: 0.2
+  - id: 22
+    transform: {fileID: 1957738887}
+    displacement_x: 0.2
+    displacement_y: 0.2
+  transformByIds:
+  - id: 0
+    transformSpawn: {fileID: 1791633932}
+  - id: 1
+    transformSpawn: {fileID: 166989768}
+  - id: 2
+    transformSpawn: {fileID: 1032768090}
+  - id: 3
+    transformSpawn: {fileID: 1838667140}
+  - id: 4
+    transformSpawn: {fileID: 1396505018}
+  - id: 5
+    transformSpawn: {fileID: 2084328182}
+  - id: 6
+    transformSpawn: {fileID: 1744908290}
+  - id: 7
+    transformSpawn: {fileID: 892288097}
+  - id: 8
+    transformSpawn: {fileID: 1833098273}
 --- !u!1 &299492115
 GameObject:
   m_ObjectHideFlags: 0
@@ -3277,6 +3489,7 @@ GameObject:
   - component: {fileID: 330435106}
   - component: {fileID: 330435105}
   - component: {fileID: 330435107}
+  - component: {fileID: 330435109}
   - component: {fileID: 330435108}
   m_Layer: 5
   m_Name: 4-9
@@ -3303,7 +3516,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -134.4, y: -13.3}
-  m_SizeDelta: {x: 168.4, y: 126}
+  m_SizeDelta: {x: 168.5, y: 126}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &330435105
 MonoBehaviour:
@@ -3371,7 +3584,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bettCells: 0200000001000000
+  typeCell: 1
+  bettCells: 11000000
+--- !u!61 &330435109
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330435103}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 168.5, y: 126}
+  m_EdgeRadius: 0
 --- !u!1 &333372269
 GameObject:
   m_ObjectHideFlags: 0
@@ -3969,6 +4228,7 @@ GameObject:
   - component: {fileID: 365983986}
   - component: {fileID: 365983985}
   - component: {fileID: 365983987}
+  - component: {fileID: 365983989}
   - component: {fileID: 365983988}
   m_Layer: 5
   m_Name: 1-6
@@ -3995,7 +4255,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -134.4, y: 163.7}
-  m_SizeDelta: {x: 168.4, y: 126}
+  m_SizeDelta: {x: 168.5, y: 126}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &365983985
 MonoBehaviour:
@@ -4063,7 +4323,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bettCells: 0200000001000000
+  typeCell: 1
+  bettCells: 10000000
+--- !u!61 &365983989
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365983983}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 168.5, y: 126}
+  m_EdgeRadius: 0
 --- !u!1 &392662143
 GameObject:
   m_ObjectHideFlags: 0
@@ -4210,6 +4516,7 @@ GameObject:
   - component: {fileID: 411066716}
   - component: {fileID: 411066715}
   - component: {fileID: 411066717}
+  - component: {fileID: 411066719}
   - component: {fileID: 411066718}
   m_Layer: 5
   m_Name: 7-12
@@ -4236,7 +4543,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -134.4, y: -189.3}
-  m_SizeDelta: {x: 168.4, y: 126}
+  m_SizeDelta: {x: 168.5, y: 126}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &411066715
 MonoBehaviour:
@@ -4304,7 +4611,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bettCells: 0200000001000000
+  typeCell: 1
+  bettCells: 12000000
+--- !u!61 &411066719
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411066713}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 168.5, y: 126}
+  m_EdgeRadius: 0
 --- !u!1 &417851263
 GameObject:
   m_ObjectHideFlags: 0
@@ -5214,7 +5567,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bettCells: 0200000001000000
+  typeCell: 0
+  bettCells: 08000000
 --- !u!1 &488224051
 GameObject:
   m_ObjectHideFlags: 0
@@ -5936,6 +6290,7 @@ GameObject:
   - component: {fileID: 595282305}
   - component: {fileID: 595282304}
   - component: {fileID: 595282306}
+  - component: {fileID: 595282308}
   - component: {fileID: 595282307}
   m_Layer: 5
   m_Name: Even
@@ -6030,7 +6385,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bettCells: 0200000001000000
+  typeCell: 0
+  bettCells: 13000000
+--- !u!61 &595282308
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595282302}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 125.5, y: 126}
+  m_EdgeRadius: 0
 --- !u!1 &599100819
 GameObject:
   m_ObjectHideFlags: 0
@@ -6418,7 +6819,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bettCells: 0200000001000000
+  typeCell: 0
+  bettCells: 01000000
 --- !u!1 &622028367
 GameObject:
   m_ObjectHideFlags: 0
@@ -7902,7 +8304,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bettCells: 0200000001000000
+  typeCell: 0
+  bettCells: 0b000000
 --- !u!1 &816418972
 GameObject:
   m_ObjectHideFlags: 0
@@ -8312,7 +8715,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bettCells: 0200000001000000
+  typeCell: 0
+  bettCells: 0e000000
 --- !u!1 &869537754
 GameObject:
   m_ObjectHideFlags: 0
@@ -8769,7 +9173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bettCells: 0200000001000000
+  typeCell: 0
+  bettCells: 04000000
 --- !u!1 &915828731
 GameObject:
   m_ObjectHideFlags: 0
@@ -9644,7 +10049,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bettCells: 0200000001000000
+  typeCell: 0
+  bettCells: 02000000
 --- !u!1 &1021997324
 GameObject:
   m_ObjectHideFlags: 0
@@ -10334,7 +10740,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bettCells: 0200000001000000
+  typeCell: 0
+  bettCells: 0d000000
 --- !u!1 &1090047442
 GameObject:
   m_ObjectHideFlags: 0
@@ -10621,7 +11028,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bettCells: 0200000001000000
+  typeCell: 0
+  bettCells: 03000000
 --- !u!1 &1119596932
 GameObject:
   m_ObjectHideFlags: 0
@@ -10652,6 +11060,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1216939934}
   - {fileID: 616510861}
   - {fileID: 1010844978}
   - {fileID: 1097680074}
@@ -10671,10 +11080,9 @@ RectTransform:
   - {fileID: 330435104}
   - {fileID: 411066714}
   - {fileID: 595282303}
-  - {fileID: 1957738887}
   - {fileID: 42847654}
   - {fileID: 1569556221}
-  - {fileID: 1216939934}
+  - {fileID: 1957738887}
   m_Father: {fileID: 1372820909}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -11857,6 +12265,7 @@ GameObject:
   - component: {fileID: 1216939936}
   - component: {fileID: 1216939935}
   - component: {fileID: 1216939937}
+  - component: {fileID: 1216939939}
   - component: {fileID: 1216939938}
   m_Layer: 5
   m_Name: Zero
@@ -11883,7 +12292,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 133.1, y: 314}
-  m_SizeDelta: {x: 393.6, y: 118}
+  m_SizeDelta: {x: 394, y: 118}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1216939935
 MonoBehaviour:
@@ -11951,7 +12360,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bettCells: 0200000001000000
+  typeCell: 0
+  bettCells: 00000000
+--- !u!61 &1216939939
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216939933}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 394, y: 118}
+  m_EdgeRadius: 0
 --- !u!1 &1223707793
 GameObject:
   m_ObjectHideFlags: 0
@@ -12568,7 +13023,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bettCells: 0200000001000000
+  typeCell: 0
+  bettCells: 07000000
 --- !u!1 &1326748700
 GameObject:
   m_ObjectHideFlags: 0
@@ -13267,7 +13723,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bettCells: 0200000001000000
+  typeCell: 0
+  bettCells: 05000000
 --- !u!1 &1416399686
 GameObject:
   m_ObjectHideFlags: 0
@@ -14226,7 +14683,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bettCells: 0200000001000000
+  typeCell: 0
+  bettCells: 09000000
 --- !u!1 &1545562676
 GameObject:
   m_ObjectHideFlags: 0
@@ -14646,6 +15104,7 @@ GameObject:
   - component: {fileID: 1569556223}
   - component: {fileID: 1569556222}
   - component: {fileID: 1569556224}
+  - component: {fileID: 1569556226}
   - component: {fileID: 1569556225}
   m_Layer: 5
   m_Name: Black
@@ -14740,7 +15199,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bettCells: 0200000001000000
+  typeCell: 0
+  bettCells: 15000000
+--- !u!61 &1569556226
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569556220}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 125.5, y: 126}
+  m_EdgeRadius: 0
 --- !u!1 &1610941262
 GameObject:
   m_ObjectHideFlags: 0
@@ -16893,6 +17398,7 @@ RectTransform:
   - {fileID: 1941437558}
   - {fileID: 2036724701}
   - {fileID: 455808032}
+  - {fileID: 289170091}
   m_Father: {fileID: 4824859691456313426}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -17365,6 +17871,7 @@ GameObject:
   - component: {fileID: 1957738889}
   - component: {fileID: 1957738888}
   - component: {fileID: 1957738890}
+  - component: {fileID: 1957738892}
   - component: {fileID: 1957738891}
   m_Layer: 5
   m_Name: Odd
@@ -17459,7 +17966,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bettCells: 0200000001000000
+  typeCell: 0
+  bettCells: 16000000
+--- !u!61 &1957738892
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957738886}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 125.5, y: 126}
+  m_EdgeRadius: 0
 --- !u!1 &1961469611
 GameObject:
   m_ObjectHideFlags: 0

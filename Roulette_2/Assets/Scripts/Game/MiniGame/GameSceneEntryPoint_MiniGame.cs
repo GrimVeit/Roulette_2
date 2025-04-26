@@ -8,6 +8,7 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
     [SerializeField] private Sounds sounds;
     [SerializeField] private TaskGroup taskGroup;
     [SerializeField] private ChipGroup chipGroup;
+    [SerializeField] private Bets bets;
     [SerializeField] private UIGameSceneRoot_Game sceneRootPrefab;
 
     private UIGameSceneRoot_Game sceneRoot;
@@ -25,6 +26,7 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
     private ChipGameCountVisualPresenter chipGameCountVisualPresenter;
     private PseudoChipPresenter pseudoChipPresenter;
     private BetCellPresenter betCellPresenter;
+    private ChipGameVisualPresenter chipGameVisualPresenter;
 
     private StoreTaskPresenter storeTaskPresenter;
     private TimerDailyPresenter timerDailyPresenter;
@@ -58,6 +60,7 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         chipGameCountVisualPresenter = new ChipGameCountVisualPresenter(new ChipGameCountVisualModel(storeChipPresenter), viewContainer.GetView<ChipGameCountVisualView>());
         pseudoChipPresenter = new PseudoChipPresenter(new PseudoChipModel(soundPresenter), viewContainer.GetView<PseudoChipView>());
         betCellPresenter = new BetCellPresenter(new BetCellModel(chipGroup, storeChipPresenter), viewContainer.GetView<BetCellView>());
+        chipGameVisualPresenter = new ChipGameVisualPresenter(new ChipGameVisualModel(betCellPresenter), viewContainer.GetView<ChipGameVisualView>());
 
         timerDailyPresenter = new TimerDailyPresenter(new TimerDailyModel(PlayerPrefsKeys.LAST_EXIT_DATE));
         storeTaskPresenter = new StoreTaskPresenter(new StoreTaskModel(taskGroup, bankPresenter, timerDailyPresenter));
@@ -89,6 +92,7 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         storeChipPresenter.Initialize();
         pseudoChipPresenter.Initialize();
         betCellPresenter.Initialize();
+        chipGameVisualPresenter.Initialize();
 
         timerDailyPresenter.Initialize();
         storeTaskPresenter.Initialize();
@@ -142,6 +146,7 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         storeChipPresenter.Dispose();
         pseudoChipPresenter?.Dispose();
         betCellPresenter.Dispose();
+        chipGameVisualPresenter?.Dispose();
 
         timerDailyPresenter.Dispose();
         storeTaskPresenter.Dispose();

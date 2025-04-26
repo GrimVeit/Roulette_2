@@ -25,12 +25,14 @@ public class ChipGameVisualPresenter
 
     private void ActivateEvents()
     {
-
+        _model.OnAddChip += _view.AddChip;
+        _model.OnReturnChip += _view.ReturnChip;
     }
 
     private void DeactivasteEvents()
     {
-
+        _model.OnAddChip -= _view.AddChip;
+        _model.OnReturnChip -= _view.ReturnChip;
     }
 
     #region Input

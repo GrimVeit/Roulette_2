@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e8a3fa016d178429165ae89ccb416e, type: 3}
+  m_Name: BetGroup_Mini
+  m_EditorClassIdentifier: 
+  bets:
+  - id: 0
+    numbers: 00000000
+    multiplyPayout: 12
+  - id: 1
+    numbers: 01000000
+    multiplyPayout: 12
+  - id: 2
+    numbers: 02000000
+    multiplyPayout: 12
+  - id: 3
+    numbers: 03000000
+    multiplyPayout: 12
+  - id: 4
+    numbers: 04000000
+    multiplyPayout: 12
+  - id: 5
+    numbers: 05000000
+    multiplyPayout: 12
+  - id: 6
+    numbers: 06000000
+    multiplyPayout: 12
+  - id: 7
+    numbers: 07000000
+    multiplyPayout: 12
+  - id: 8
+    numbers: 08000000
+    multiplyPayout: 12
+  - id: 9
+    numbers: 09000000
+    multiplyPayout: 12
+  - id: 10
+    numbers: 0a000000
+    multiplyPayout: 12
+  - id: 11
+    numbers: 0b000000
+    multiplyPayout: 12
+  - id: 12
+    numbers: 0c000000
+    multiplyPayout: 12
+  - id: 13
+    numbers: 0100000004000000070000000a000000
+    multiplyPayout: 3
+  - id: 14
+    numbers: 0200000005000000080000000b000000
+    multiplyPayout: 3
+  - id: 15
+    numbers: 0300000006000000090000000c000000
+    multiplyPayout: 3
+  - id: 16
+    numbers: 010000000200000003000000040000000500000006000000
+    multiplyPayout: 2
+  - id: 17
+    numbers: 040000000500000006000000070000000800000009000000
+    multiplyPayout: 2
+  - id: 18
+    numbers: 0700000008000000090000000a0000000b0000000c000000
+    multiplyPayout: 2
+  - id: 19
+    numbers: 020000000400000006000000080000000a0000000c000000
+    multiplyPayout: 2
+  - id: 20
+    numbers: 01000000030000000500000007000000090000000c000000
+    multiplyPayout: 2
+  - id: 21
+    numbers: 020000000400000006000000080000000a0000000b000000
+    multiplyPayout: 2
+  - id: 22
+    numbers: 01000000030000000500000007000000090000000b000000
+    multiplyPayout: 2
