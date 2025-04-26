@@ -16,11 +16,15 @@ public class ChipGameVisualPresenter
     public void Initialize()
     {
         ActivateEvents();
+
+        _model.Initialize();
     }
 
     public void Dispose()
     {
         DeactivasteEvents();
+
+        _model.Dispose();
     }
 
     private void ActivateEvents()

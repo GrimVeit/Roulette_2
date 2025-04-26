@@ -459,7 +459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bet:
-    type: 0
+    id: 0
     numbers: 01000000030000000500000007000000090000000c000000
     multiplyPayout: 0
 --- !u!114 &42847658
@@ -980,7 +980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bet:
-    type: 0
+    id: 0
     numbers: 06000000
     multiplyPayout: 0
 --- !u!61 &85135963
@@ -1134,7 +1134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bet:
-    type: 0
+    id: 0
     numbers: 0a000000
     multiplyPayout: 0
 --- !u!61 &90812406
@@ -1778,7 +1778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bet:
-    type: 0
+    id: 0
     numbers: 030000000600000009000000
     multiplyPayout: 0
 --- !u!114 &180858628
@@ -1966,7 +1966,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bet:
-    type: 0
+    id: 0
     numbers: 0c000000
     multiplyPayout: 0
 --- !u!61 &191691796
@@ -3569,7 +3569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bet:
-    type: 0
+    id: 0
     numbers: 040000000500000006000000070000000800000009000000
     multiplyPayout: 0
 --- !u!114 &330435108
@@ -4308,7 +4308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bet:
-    type: 0
+    id: 0
     numbers: 010000000200000003000000040000000500000006000000
     multiplyPayout: 0
 --- !u!114 &365983988
@@ -4596,7 +4596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bet:
-    type: 0
+    id: 0
     numbers: 0700000008000000090000000a0000000b0000000c000000
     multiplyPayout: 0
 --- !u!114 &411066718
@@ -5507,7 +5507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bet:
-    type: 0
+    id: 0
     numbers: 08000000
     multiplyPayout: 0
 --- !u!61 &477978197
@@ -6370,7 +6370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bet:
-    type: 0
+    id: 0
     numbers: 020000000400000006000000080000000a0000000c000000
     multiplyPayout: 0
 --- !u!114 &595282307
@@ -6759,7 +6759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bet:
-    type: 0
+    id: 0
     numbers: 01000000
     multiplyPayout: 2
 --- !u!61 &616510865
@@ -8244,7 +8244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bet:
-    type: 0
+    id: 0
     numbers: 0b000000
     multiplyPayout: 0
 --- !u!61 &815178607
@@ -8487,6 +8487,7 @@ MonoBehaviour:
   sounds: {fileID: 1084492703}
   taskGroup: {fileID: 11400000, guid: ddc1252e8eaf0fd4b8470c5fcbb726d4, type: 2}
   chipGroup: {fileID: 11400000, guid: c8a43538f2496fd45820a53af8a64019, type: 2}
+  bets: {fileID: 11400000, guid: f6eb400facee18b48bfbffd84f13129b, type: 2}
   sceneRootPrefab: {fileID: 5759112182369476050}
 --- !u!1 &845388431
 GameObject:
@@ -8700,7 +8701,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bet:
-    type: 0
+    id: 0
     numbers: 020000000500000008000000
     multiplyPayout: 0
 --- !u!114 &868532527
@@ -9113,7 +9114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bet:
-    type: 0
+    id: 0
     numbers: 04000000
     multiplyPayout: 0
 --- !u!61 &892506843
@@ -9989,7 +9990,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bet:
-    type: 0
+    id: 0
     numbers: 02000000
     multiplyPayout: 0
 --- !u!61 &1010844982
@@ -10725,7 +10726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bet:
-    type: 0
+    id: 0
     numbers: 010000000400000007000000
     multiplyPayout: 0
 --- !u!114 &1087581956
@@ -10968,7 +10969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bet:
-    type: 0
+    id: 0
     numbers: 03000000
     multiplyPayout: 0
 --- !u!61 &1097680078
@@ -12345,7 +12346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bet:
-    type: 0
+    id: 0
     numbers: 00000000
     multiplyPayout: 0
 --- !u!114 &1216939938
@@ -12963,7 +12964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bet:
-    type: 0
+    id: 0
     numbers: 07000000
     multiplyPayout: 0
 --- !u!61 &1325721637
@@ -13663,7 +13664,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bet:
-    type: 0
+    id: 0
     numbers: 05000000
     multiplyPayout: 0
 --- !u!61 &1409754123
@@ -14623,7 +14624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bet:
-    type: 0
+    id: 0
     numbers: 09000000
     multiplyPayout: 0
 --- !u!61 &1539070904
@@ -15184,7 +15185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bet:
-    type: 0
+    id: 0
     numbers: 020000000400000006000000080000000a0000000b000000
     multiplyPayout: 0
 --- !u!114 &1569556225
@@ -17951,7 +17952,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bet:
-    type: 0
+    id: 0
     numbers: 01000000030000000500000007000000090000000b000000
     multiplyPayout: 0
 --- !u!114 &1957738891

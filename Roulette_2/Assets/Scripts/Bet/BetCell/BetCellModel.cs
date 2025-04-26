@@ -6,95 +6,25 @@ using System.Numerics;
 
 public class BetCellModel
 {
-    public event Action<int, Chip, int, TypeCell, Vector3> OnAddChip;
-    public event Action<int, int> OnReturnChip;
+    private readonly IBetProvider _betProvider;
 
-    private readonly IChipGroupBet _chipGroupBet;
-    private readonly IStoreChip _storeChip;
-
-    private readonly List<BetInfo> betInfos = new();
-
-    public BetCellModel(IChipGroupBet chipGroupBet, IStoreChip storeChip)
+    public BetCellModel(IBetProvider betProvider)
     {
-        _chipGroupBet = chipGroupBet;
-        _storeChip = storeChip;
+        _betProvider = betProvider;
     }
 
-    public void AddBet(int id, Chip chip, List<int> positionIndexes, TypeCell typeCell, Vector3 vector)
+    public void AddChip(int id, Chip chip, List<int> positionIndexes, TypeCell typeCell, Vector3 vector)
     {
-        if (_chipGroupBet.CanHaveCountChips(id, positionIndexes.Count))
-        {
-            UnityEngine.Debug.Log("SUCCESS");
-
-            RemoveChipsFromStore(id, chip, positionIndexes, typeCell, vector);
-
-        }
-        else
-        {
-            UnityEngine.Debug.Log("ERROR");
-        }
+        _betProvider.AddChip(id, chip, positionIndexes, typeCell, vector);
     }
 
-    private void RemoveChipsFromStore(int id, Chip chip, List<int> positionIndexes, TypeCell typeCell, Vector3 vector)
+    public void ReturnLastChip()
     {
-        for (int i = 0; i < positionIndexes.Count; i++)
-        {
-            RemoveChipFromStore(id);
-            OnAddChip?.Invoke(id, chip, positionIndexes[i], typeCell, vector);
-
-            betInfos.Add(new BetInfo(id, positionIndexes[i]));
-        }
+        _betProvider.ReturnLastChip();
     }
 
-    public void ReturnLastBet()
+    public void ReturnAllChips()
     {
-        if(betInfos.Count == 0) return;
-
-        var lastBet = betInfos.Last();
-
-        AddChipInStore(lastBet.idChipGroup);
-        OnReturnChip?.Invoke(lastBet.idChipGroup, lastBet.posIndex);
-
-        betInfos.Remove(lastBet);
-    }
-
-    public void ReturnAllBets()
-    {
-        if(betInfos.Count == 0) return;
-
-        for (int i = 0; i < betInfos.Count; i++)
-        {
-            AddChipInStore(betInfos[i].idChipGroup);
-            OnReturnChip?.Invoke(betInfos[i].idChipGroup, betInfos[i].posIndex);
-        }
-
-        betInfos.Clear();
-    }
-
-    public void ClearBets()
-    {
-        betInfos.Clear();
-    }
-
-    private void AddChipInStore(int id)
-    {
-        _storeChip.AddChip(id);
-    }
-
-    private void RemoveChipFromStore(int id)
-    {
-        _storeChip.RemoveChip(id);
-    }
-}
-
-public record BetInfo
-{
-    public int idChipGroup;
-    public int posIndex;
-
-    public BetInfo(int idChipGroup, int posIndex)
-    {
-        this.idChipGroup = idChipGroup;
-        this.posIndex = posIndex;
+        _betProvider.ReturnAllChips();
     }
 }

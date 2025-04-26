@@ -26,6 +26,7 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
     private ChipGameCountVisualPresenter chipGameCountVisualPresenter;
     private PseudoChipPresenter pseudoChipPresenter;
     private BetCellPresenter betCellPresenter;
+    private BetPresenter betPresenter;
     private ChipGameVisualPresenter chipGameVisualPresenter;
 
     private StoreTaskPresenter storeTaskPresenter;
@@ -59,8 +60,9 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
         chipGameCountVisualPresenter = new ChipGameCountVisualPresenter(new ChipGameCountVisualModel(storeChipPresenter), viewContainer.GetView<ChipGameCountVisualView>());
         pseudoChipPresenter = new PseudoChipPresenter(new PseudoChipModel(soundPresenter), viewContainer.GetView<PseudoChipView>());
-        betCellPresenter = new BetCellPresenter(new BetCellModel(chipGroup, storeChipPresenter), viewContainer.GetView<BetCellView>());
-        chipGameVisualPresenter = new ChipGameVisualPresenter(new ChipGameVisualModel(betCellPresenter), viewContainer.GetView<ChipGameVisualView>());
+        betPresenter = new BetPresenter(new BetModel(chipGroup, storeChipPresenter, bets, new List<IRouletteValueProvider>() { roulettePresenter }));
+        betCellPresenter = new BetCellPresenter(new BetCellModel(betPresenter), viewContainer.GetView<BetCellView>());
+        chipGameVisualPresenter = new ChipGameVisualPresenter(new ChipGameVisualModel(betPresenter), viewContainer.GetView<ChipGameVisualView>());
 
         timerDailyPresenter = new TimerDailyPresenter(new TimerDailyModel(PlayerPrefsKeys.LAST_EXIT_DATE));
         storeTaskPresenter = new StoreTaskPresenter(new StoreTaskModel(taskGroup, bankPresenter, timerDailyPresenter));
@@ -70,7 +72,7 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         metric_WinCountPresenter = new Metric_WinCountPresenter(new Metric_WinCountModel(PlayerPrefsKeys.METRIC_WIN_ROW_COUNTS, 3, timerDailyPresenter, storeTaskPresenter));
         metric_BetNumberPresenter = new Metric_BetNumberPresenter(new Metric_BetNumberModel(PlayerPrefsKeys.METRIC_BET_NUMBER_COUNTS, 1, timerDailyPresenter, storeTaskPresenter));
 
-        stateMachine = new StateMachine_Mini(sceneRoot, rouletteBallPresenter, roulettePresenter, rouletteValueHistoryPresenter, metric_GameCountPresenter, metric_GameTypeCountPresenter);
+        stateMachine = new StateMachine_Mini(sceneRoot, rouletteBallPresenter, roulettePresenter, rouletteValueHistoryPresenter, betPresenter, metric_GameCountPresenter, metric_GameTypeCountPresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -91,6 +93,7 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         chipGameCountVisualPresenter.Initialize();
         storeChipPresenter.Initialize();
         pseudoChipPresenter.Initialize();
+        betPresenter.Initialize();
         betCellPresenter.Initialize();
         chipGameVisualPresenter.Initialize();
 
@@ -145,6 +148,7 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         chipGameCountVisualPresenter.Dispose();
         storeChipPresenter.Dispose();
         pseudoChipPresenter?.Dispose();
+        betPresenter.Dispose();
         betCellPresenter.Dispose();
         chipGameVisualPresenter?.Dispose();
 
