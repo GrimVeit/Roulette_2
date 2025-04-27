@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 
@@ -39,6 +38,11 @@ public class BetPresenter : IBetProvider, IBetChipEventsProvider
         _model.ReturnLastChip();
     }
 
+    public void ReturnAllBets()
+    {
+        _model.ReturnAllBets();
+    }
+
     public void SearchWin()
     {
         _model.SearchWin();
@@ -65,16 +69,10 @@ public class BetPresenter : IBetProvider, IBetChipEventsProvider
         remove => _model.OnReturnChip -= value;
     }
 
-    public event Action<int> OnFallenChips
+    public event Action<int, int> OnFallenChip
     {
-        add => _model.OnFallenChips += value;
-        remove => _model.OnFallenChips -= value;
-    }
-
-    public event Action<int> OnReturnChips
-    {
-        add => _model.OnReturnChips += value;
-        remove => _model.OnReturnChips -= value;
+        add => _model.OnFallenChip += value;
+        remove => _model.OnFallenChip -= value;
     }
 
     #endregion
@@ -86,12 +84,12 @@ public interface IBetProvider
 
     public void ReturnAllChips();
     public void ReturnLastChip();
+    public void ReturnAllBets();
 }
 
 public interface IBetChipEventsProvider
 {
     public event Action<int, Chip, int, TypeCell, Vector3> OnAddChip;
     public event Action<int, int> OnReturnChip;
-    public event Action<int> OnFallenChips;
-    public event Action<int> OnReturnChips;
+    public event Action<int, int> OnFallenChip;
 }

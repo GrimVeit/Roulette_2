@@ -5,8 +5,7 @@ public class ChipGameVisualModel
 {
     public event Action<int, Chip, int, TypeCell, Vector3> OnAddChip;
     public event Action<int, int> OnReturnChip;
-    public event Action<int> OnFallenChips;
-    public event Action<int> OnReturnChips;
+    public event Action<int, int> OnFallenChip;
 
     private readonly IBetChipEventsProvider _betChipEventsProvider;
 
@@ -19,16 +18,14 @@ public class ChipGameVisualModel
     {
         _betChipEventsProvider.OnAddChip += AddChip;
         _betChipEventsProvider.OnReturnChip += ReturnChip;
-        _betChipEventsProvider.OnReturnChips += ReturnChips;
-        _betChipEventsProvider.OnFallenChips += FallenChips;
+        _betChipEventsProvider.OnFallenChip += FallenChip;
     }
 
     public void Dispose()
     {
         _betChipEventsProvider.OnAddChip -= AddChip;
         _betChipEventsProvider.OnReturnChip -= ReturnChip;
-        _betChipEventsProvider.OnReturnChips -= ReturnChips;
-        _betChipEventsProvider.OnFallenChips -= FallenChips;
+        _betChipEventsProvider.OnFallenChip -= FallenChip;
     }
 
     private void AddChip(int id, Chip chip, int positionIndex, TypeCell typeCell, Vector3 vectorPosition)
@@ -42,14 +39,9 @@ public class ChipGameVisualModel
         OnReturnChip?.Invoke(idChipGroup, indexPosition);
     }
 
-    private void ReturnChips(int indexPositions)
+    private void FallenChip(int chipId, int indexPositions)
     {
-        OnReturnChips?.Invoke(indexPositions);
-    }
-
-    private void FallenChips(int indexPositions)
-    {
-        OnFallenChips?.Invoke(indexPositions);
+        OnFallenChip?.Invoke(chipId, indexPositions);
     }
 
 }

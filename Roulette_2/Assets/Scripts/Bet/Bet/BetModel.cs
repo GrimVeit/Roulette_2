@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using UnityEngine;
 using Vector3 = System.Numerics.Vector3;
 
@@ -8,8 +9,7 @@ public class BetModel
 {
     public event Action<int, Chip, int, TypeCell, Vector3> OnAddChip;
     public event Action<int, int> OnReturnChip;
-    public event Action<int> OnFallenChips;
-    public event Action<int> OnReturnChips;
+    public event Action<int, int> OnFallenChip;
 
     private readonly IChipGroupBet _chipGroupBet;
     private readonly IStoreChip _storeChip;
@@ -17,9 +17,10 @@ public class BetModel
     private readonly Bets _bets;
     private readonly List<RouletteNumber> rouletteNumbers = new();
 
-    private readonly List<BetInfo> betInfos = new();
+    private readonly List<BetInfo> _currentBets = new();
+    private readonly List<BetInfo> _savedBets = new();
 
-    private List<IRouletteValueProvider> _rouletteValueProviders = new();
+    private readonly List<IRouletteValueProvider> _rouletteValueProviders = new();
 
     public BetModel(IChipGroupBet chipGroupBet, IStoreChip storeChip, Bets bets, List<IRouletteValueProvider> rouletteValueProviders)
     {
@@ -46,21 +47,236 @@ public class BetModel
 
     public void AddChip(int id, Chip chip, List<int> positionIndexes, TypeCell typeCell, Vector3 vector)
     {
-        if (_chipGroupBet.CanHaveCountChips(id, positionIndexes.Count))
+        if (_chipGroupBet.CanHaveCountChipsByOneId(id, positionIndexes.Count))
         {
-            SubmitBet(id, chip, positionIndexes, typeCell, vector);
+            for (int i = 0; i < positionIndexes.Count; i++)
+            {
+                RemoveChipFromStore(id);
+                OnAddChip?.Invoke(id, chip, positionIndexes[i], typeCell, vector);
+
+                _currentBets.Add(new BetInfo(id, chip, positionIndexes[i]));
+            }
+        }
+    }
+    
+    public void ReturnLastChip()
+    {
+        if (_currentBets.Count == 0) return;
+
+        var lastBet = _currentBets.Last();
+
+        AddChipInStore(lastBet.IdChipGroup);
+        OnReturnChip?.Invoke(lastBet.IdChipGroup, lastBet.PosIndex);
+
+        _currentBets.Remove(lastBet);
+    }
+
+    public void ReturnAllChips()
+    {
+        if (_currentBets.Count == 0) return;
+
+        for (int i = 0; i < _currentBets.Count; i++)
+        {
+            AddChipInStore(_currentBets[i].IdChipGroup);
+            OnReturnChip?.Invoke(_currentBets[i].IdChipGroup, _currentBets[i].PosIndex);
+        }
+
+        _currentBets.Clear();
+    }
+
+    public void ReturnAllBets()
+    {
+        if(_savedBets.Count == 0) return;
+
+        var requiredChips = new Dictionary<int, int>();
+
+        foreach (var chip in _savedBets)
+        {
+            if (requiredChips.ContainsKey(chip.IdChipGroup))
+            {
+                requiredChips[chip.IdChipGroup] += 1;
+            }
+            else
+            {
+                requiredChips[chip.IdChipGroup] = 1;
+            }
+        }
+
+        bool potentialReturnBet = _chipGroupBet.CanHaveCountChipsByManyId(requiredChips);
+
+        if (potentialReturnBet)
+        {
+            Rebet();
+        }
+        else
+        {
+            Debug.Log("Õ≈ ’¬¿“¿≈“ ‘»ÿ≈ ");
         }
     }
 
-    private void SubmitBet(int id, Chip chip, List<int> positionIndexes, TypeCell typeCell, Vector3 vector)
+    private void Rebet()
     {
-        for (int i = 0; i < positionIndexes.Count; i++)
-        {
-            RemoveChipFromStore(id);
-            OnAddChip?.Invoke(id, chip, positionIndexes[i], typeCell, vector);
+        //List<BetInfo> betsToRemove = new();
+        //foreach (var currentBet in _currentBetInfos)
+        //{
+        //    int savedCount = _historyBetInfos.Count(b => b.IdChipGroup == currentBet.IdChipGroup && b.PosIndex == currentBet.PosIndex);
+        //    int currentCount = _currentBetInfos.Count(b => b.IdChipGroup == currentBet.IdChipGroup && b.PosIndex == currentBet.PosIndex);
 
-            betInfos.Add(new BetInfo(id, chip, positionIndexes[i]));
+        //    if(savedCount == 0)
+        //    {
+        //        int toRemove = currentCount;
+        //        for (int i = 0; i < toRemove; i++)
+        //        {
+        //            betsToRemove.Add(currentBet);
+        //        }
+        //    }
+
+        //    if(currentCount > savedCount)
+        //    {
+        //        int toRemove = currentCount - savedCount;
+        //        for (int i = 0; i < toRemove; i++)
+        //        {
+        //            betsToRemove.Add(currentBet);
+        //        }
+        //    }
+        //}
+
+        //foreach (var bet in betsToRemove)
+        //{
+        //    AddChipInStore(bet.IdChipGroup);
+        //    OnReturnChip?.Invoke(bet.IdChipGroup, bet.PosIndex);
+        //    _currentBetInfos.Remove(bet);
+        //}
+
+        //List<BetInfo> betsToAdd = new();
+        //foreach (var savedBet in _historyBetInfos)
+        //{
+        //    int savedCount = _historyBetInfos.Count(b => b.IdChipGroup == savedBet.IdChipGroup && b.PosIndex == savedBet.PosIndex);
+        //    int currentCount = _currentBetInfos.Count(b => b.IdChipGroup == savedBet.IdChipGroup && b.PosIndex == savedBet.PosIndex);
+
+        //    if (currentCount < savedCount)
+        //    {
+        //        int toAdd = savedCount - currentCount;
+        //        for (int i = 0; i < toAdd; i++)
+        //        {
+        //            var newBet = new BetInfo(savedBet.IdChipGroup, savedBet.Chip, savedBet.PosIndex);
+
+        //            if(!_currentBetInfos.Any(b => b.IdChipGroup == newBet.IdChipGroup && b.PosIndex == newBet.PosIndex))
+        //            {
+        //                _currentBetInfos.Add(newBet);
+        //                RemoveChipFromStore(newBet.IdChipGroup);
+        //                OnAddChip?.Invoke(newBet.IdChipGroup, newBet.Chip, newBet.PosIndex, TypeCell.Tracker, new Vector3());
+        //            }
+        //            else
+        //            {
+        //                RemoveChipFromStore(newBet.IdChipGroup);
+        //                OnAddChip?.Invoke(newBet.IdChipGroup, newBet.Chip, newBet.PosIndex, TypeCell.Tracker, new Vector3());
+        //            }
+        //        }
+        //    }
+        //}
+
+        //foreach (var bet in betsToAdd)
+        //{
+        //    RemoveChipFromStore(bet.IdChipGroup);
+        //    OnAddChip?.Invoke(bet.IdChipGroup, bet.Chip, bet.PosIndex, TypeCell.Tracker, new Vector3());
+        //    _currentBetInfos.Add(bet);
+        //}
+
+
+        Dictionary<(int, int), int> currentBetCount = new();
+
+        foreach(var bet in _currentBets)
+        {
+            var key = (bet.IdChipGroup, bet.PosIndex);
+
+            if (currentBetCount.ContainsKey(key))
+            {
+                currentBetCount[key]++;
+            }
+            else
+            {
+                currentBetCount[key] = 1;
+            }
         }
+
+        List<BetInfo> betsToRemove = new List<BetInfo>();
+
+        foreach (var savedBet in _savedBets)
+        {
+            var key = (savedBet.IdChipGroup, savedBet.PosIndex);
+
+            int savedCount = _savedBets.Count(b => b.IdChipGroup == savedBet.IdChipGroup && b.PosIndex == savedBet.PosIndex);
+
+            if (currentBetCount.ContainsKey(key))
+            {
+                int currentCount = currentBetCount[key];
+
+                if(currentCount > savedCount)
+                {
+                    int toRemove = currentCount - savedCount;
+
+                    for (int i = 0; i < toRemove; i++)
+                    {
+                        var betToRemove = _currentBets.FirstOrDefault(b => b.IdChipGroup == savedBet.IdChipGroup && b.PosIndex == savedBet.PosIndex);
+                        betsToRemove.Add(betToRemove);
+                    }
+                }
+            }
+        }
+
+        foreach (var betToRemove in betsToRemove)
+        {
+            _currentBets.Remove(betToRemove);
+            OnReturnChip?.Invoke(betToRemove.IdChipGroup, betToRemove.PosIndex);
+            AddChipInStore(betToRemove.IdChipGroup);
+        }
+
+
+        Dictionary<(int, int), int> savedBetCount = new();
+
+        foreach (var savedBet in _savedBets)
+        {
+            var key = (savedBet.IdChipGroup, savedBet.PosIndex);
+
+            if (savedBetCount.ContainsKey(key))
+            {
+                savedBetCount[key]++;
+            }
+            else
+            {
+                savedBetCount[key] = 1;
+            }
+        }
+
+        foreach (var savedBet in savedBetCount)
+        {
+            int savedCount = savedBet.Value;
+            int currentCount = _currentBets.Count(b => b.IdChipGroup == savedBet.Key.Item1 && b.PosIndex == savedBet.Key.Item2);
+
+            if(currentCount < savedCount)
+            {
+                int toAdd = savedCount - currentCount;
+
+                for (int i = 0; i < toAdd; i++)
+                {
+                    var betInfo = new BetInfo(savedBet.Key.Item1, _savedBets.FirstOrDefault(b => b.IdChipGroup == savedBet.Key.Item1 && b.PosIndex == savedBet.Key.Item2).Chip, savedBet.Key.Item2);
+                    _currentBets.Add(betInfo);
+                    OnAddChip?.Invoke(betInfo.IdChipGroup, betInfo.Chip, betInfo.PosIndex, TypeCell.Tracker, new Vector3());
+                    RemoveChipFromStore(betInfo.IdChipGroup);
+                }
+            }
+        }
+    }
+
+    private void AddChipInStore(int id)
+    {
+        _storeChip.AddChip(id);
+    }
+
+    private void RemoveChipFromStore(int id)
+    {
+        _storeChip.RemoveChip(id);
     }
 
     public void SearchWin()
@@ -69,10 +285,9 @@ public class BetModel
 
         for (int i = 0; i < rouletteNumbers.Count; i++)
         {
-            foreach (var info in betInfos)
+            foreach (var info in _currentBets)
             {
-
-                var bet = _bets.bets[info.PosIndex];
+                var bet = _bets.GetBetById(info.PosIndex);
 
                 if (bet.Numbers.Contains(rouletteNumbers[i].Number))
                 {
@@ -88,60 +303,37 @@ public class BetModel
     {
         for (int i = 0; i < rouletteNumbers.Count; i++)
         {
-            foreach (var info in betInfos)
+            foreach (var info in _currentBets)
             {
                 var bet = _bets.bets[info.PosIndex];
 
+                var list = _currentBets.Where(data => data.PosIndex == info.PosIndex).ToList();
+
                 if (bet.Numbers.Contains(rouletteNumbers[i].Number))
                 {
-                    OnReturnChips?.Invoke(info.PosIndex);
+                    for (int j = 0; j < list.Count; j++)
+                    {
+                        AddChipInStore(list[j].IdChipGroup);
+                        OnReturnChip?.Invoke(list[j].IdChipGroup, list[j].PosIndex);
+                    }
                 }
                 else
                 {
-                    OnFallenChips?.Invoke(info.PosIndex);
+                    for (int j = 0; j < list.Count; j++)
+                    {
+                        OnFallenChip?.Invoke(list[j].IdChipGroup, list[j].PosIndex);
+                    }
                 }
             }
         }
-    }
-    
-    public void ReturnLastChip()
-    {
-        if (betInfos.Count == 0) return;
 
-        var lastBet = betInfos.Last();
+        //–Â¯ËÚ¸ ÔÓ·ÎÂËÛ ÏÌÓ„ÓÍ‡ÚÌÓ„Ó ÔÓ‰Ò˜∏Ú‡
 
-        AddChipInStore(lastBet.IdChipGroup);
-        OnReturnChip?.Invoke(lastBet.IdChipGroup, lastBet.PosIndex);
+        _savedBets.Clear();
+        _savedBets.AddRange(_currentBets);
+        _currentBets.Clear();
 
-        betInfos.Remove(lastBet);
-    }
-
-    public void ReturnAllChips()
-    {
-        if (betInfos.Count == 0) return;
-
-        for (int i = 0; i < betInfos.Count; i++)
-        {
-            AddChipInStore(betInfos[i].IdChipGroup);
-            OnReturnChip?.Invoke(betInfos[i].IdChipGroup, betInfos[i].PosIndex);
-        }
-
-        betInfos.Clear();
-    }
-
-    public void ClearBets()
-    {
-
-    }
-
-    private void AddChipInStore(int id)
-    {
-        _storeChip.AddChip(id);
-    }
-
-    private void RemoveChipFromStore(int id)
-    {
-        _storeChip.RemoveChip(id);
+        Debug.Log(_savedBets.Count);
     }
 
 }

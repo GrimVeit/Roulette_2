@@ -32,9 +32,22 @@ public class ChipGroup : ScriptableObject, IChipGroupStore, IChipGroupBet
         return Chips.Any(cc => cc.ID == id);
     }
 
-    public bool CanHaveCountChips(int id, int countChip)
+    public bool CanHaveCountChipsByOneId(int id, int countChip)
     {
         return GetChipsById(id).ChipData.ChipsCount >= countChip;
+    }
+
+    public bool CanHaveCountChipsByManyId(Dictionary<int, int> chipsGroups)
+    {
+        foreach (var chipGroup in chipsGroups)
+        {
+            if(!CanHaveCountChipsByOneId(chipGroup.Key, chipGroup.Value))
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public Chip GetChipById(int id)
@@ -53,5 +66,6 @@ public interface IChipGroupStore
 
 public interface IChipGroupBet
 {
-    public bool CanHaveCountChips(int id, int countChip);
+    public bool CanHaveCountChipsByOneId(int id, int countChip);
+    public bool CanHaveCountChipsByManyId(Dictionary<int, int> countChips);
 }

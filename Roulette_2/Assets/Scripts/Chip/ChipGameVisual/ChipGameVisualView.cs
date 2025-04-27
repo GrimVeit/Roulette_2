@@ -30,18 +30,11 @@ public class ChipGameVisualView : View
         chipGamePosition.ReturnChip(id);
     }
 
-    public void ReturnChips(int posIndex)
+    public void FallenChip(int id, int posIndex)
     {
         var chipGamePosition = GetGamePositionById(posIndex);
 
-        chipGamePosition.ReturnChips();
-    }
-
-    public void FallenChips(int posIndex)
-    {
-        var chipGamePosition = GetGamePositionById(posIndex);
-
-        chipGamePosition.FallenChips(transformFallen.position);
+        chipGamePosition.FallenChip(id, transformFallen.position);
     }
 
     private void AddChipInMainType(int id, Chip chip, int posId, Vector3 vector)
@@ -127,28 +120,20 @@ public class ChipGamePosition
         chip.Return();
     }
 
-    public void ReturnChips()
+    public void FallenChip(int id, Vector3 vector)
     {
         if (chipGameVisuals.Count == 0) return;
 
-        foreach (var gameVisual in chipGameVisuals.Keys)
+        var chip = GetChipById(id);
+
+        if (chip == null)
         {
-            gameVisual.Return();
+            Debug.LogError("Not found chip by id group - " + id);
+            return;
         }
 
-        chipGameVisuals.Clear();
-    }
-
-    public void FallenChips(Vector3 vector)
-    {
-        if (chipGameVisuals.Count == 0) return;
-
-        foreach (var gameVisual in chipGameVisuals.Keys)
-        {
-            gameVisual.Fallen(vector);
-        }
-
-        chipGameVisuals.Clear();
+        chipGameVisuals.Remove(chip);
+        chip.Fallen(vector);
     }
 
     private ChipGameVisual GetChipById(int id)

@@ -31,15 +31,13 @@ public class ChipGameVisualPresenter
     {
         _model.OnAddChip += _view.AddChip;
         _model.OnReturnChip += _view.ReturnChip;
-        _model.OnReturnChips += _view.ReturnChips;
-        _model.OnFallenChips += _view.FallenChips;
+        _model.OnFallenChip += _view.FallenChip;
     }
 
     private void DeactivasteEvents()
     {
         _model.OnAddChip -= _view.AddChip;
         _model.OnReturnChip -= _view.ReturnChip;
-        _model.OnReturnChips -= _view.ReturnChips;
-        _model.OnFallenChips -= _view.FallenChips;
+        _model.OnFallenChip -= _view.FallenChip;
     }
 }

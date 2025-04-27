@@ -29,14 +29,16 @@ public class BetCellPresenter
     private void ActivatewEvents()
     {
         _view.OnAddBet += _model.AddChip;
-        _view.OnReturnAllBets += _model.ReturnAllChips;
-        _view.OnReturnLastBet += _model.ReturnLastChip;
+        _view.OnReturnAllChips += _model.ReturnAllChips;
+        _view.OnReturnLastChip += _model.ReturnLastChip;
+        _view.OnReturnAllBets += _model.ReturnAllBets;
     }
 
     private void DeactivateEvents()
     {
         _view.OnAddBet -= _model.AddChip;
-        _view.OnReturnAllBets -= _model.ReturnAllChips;
-        _view.OnReturnLastBet -= _model.ReturnLastChip;
+        _view.OnReturnAllChips -= _model.ReturnAllChips;
+        _view.OnReturnLastChip -= _model.ReturnLastChip;
+        _view.OnReturnAllBets -= _model.ReturnAllBets;
     }
 }

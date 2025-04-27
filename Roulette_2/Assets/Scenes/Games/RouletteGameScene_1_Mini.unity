@@ -378,7 +378,6 @@ GameObject:
   - component: {fileID: 42847654}
   - component: {fileID: 42847656}
   - component: {fileID: 42847655}
-  - component: {fileID: 42847657}
   - component: {fileID: 42847659}
   - component: {fileID: 42847658}
   m_Layer: 5
@@ -446,22 +445,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 42847653}
   m_CullTransparentMesh: 1
---- !u!114 &42847657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 42847653}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85dd7176cec71b4c9e1c54cc38f307b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bet:
-    id: 0
-    numbers: 01000000030000000500000007000000090000000c000000
-    multiplyPayout: 0
 --- !u!114 &42847658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -899,7 +882,6 @@ GameObject:
   - component: {fileID: 85135959}
   - component: {fileID: 85135961}
   - component: {fileID: 85135960}
-  - component: {fileID: 85135962}
   - component: {fileID: 85135963}
   - component: {fileID: 85135964}
   m_Layer: 5
@@ -967,22 +949,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 85135958}
   m_CullTransparentMesh: 1
---- !u!114 &85135962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 85135958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85dd7176cec71b4c9e1c54cc38f307b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bet:
-    id: 0
-    numbers: 06000000
-    multiplyPayout: 0
 --- !u!61 &85135963
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1053,7 +1019,6 @@ GameObject:
   - component: {fileID: 90812402}
   - component: {fileID: 90812404}
   - component: {fileID: 90812403}
-  - component: {fileID: 90812405}
   - component: {fileID: 90812406}
   - component: {fileID: 90812407}
   m_Layer: 5
@@ -1121,22 +1086,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 90812401}
   m_CullTransparentMesh: 1
---- !u!114 &90812405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 90812401}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85dd7176cec71b4c9e1c54cc38f307b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bet:
-    id: 0
-    numbers: 0a000000
-    multiplyPayout: 0
 --- !u!61 &90812406
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1209,7 +1158,7 @@ GameObject:
   - component: {fileID: 94392673}
   - component: {fileID: 94392675}
   m_Layer: 5
-  m_Name: Clear_BUTTON
+  m_Name: ReturnAllChips_BUTTON
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1698,7 +1647,7 @@ GameObject:
   - component: {fileID: 180858624}
   - component: {fileID: 180858626}
   - component: {fileID: 180858625}
-  - component: {fileID: 180858627}
+  - component: {fileID: 180858629}
   - component: {fileID: 180858628}
   m_Layer: 5
   m_Name: 2TO1_3
@@ -1765,22 +1714,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 180858623}
   m_CullTransparentMesh: 1
---- !u!114 &180858627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 180858623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85dd7176cec71b4c9e1c54cc38f307b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bet:
-    id: 0
-    numbers: 030000000600000009000000
-    multiplyPayout: 0
 --- !u!114 &180858628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1795,6 +1728,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeCell: 0
   bettCells: 0f000000
+--- !u!61 &180858629
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180858623}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 128, y: 92}
+  m_EdgeRadius: 0
 --- !u!1 &189267378
 GameObject:
   m_ObjectHideFlags: 0
@@ -1885,11 +1863,10 @@ GameObject:
   - component: {fileID: 191691792}
   - component: {fileID: 191691794}
   - component: {fileID: 191691793}
-  - component: {fileID: 191691795}
   - component: {fileID: 191691796}
   - component: {fileID: 191691797}
   m_Layer: 5
-  m_Name: RED_12
+  m_Name: BLACK_12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1935,7 +1912,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: caf9f318227247e48a3373b7c2211dc4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 55085ffa22b8987489865293ddddcc07, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1953,22 +1930,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 191691791}
   m_CullTransparentMesh: 1
---- !u!114 &191691795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 191691791}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85dd7176cec71b4c9e1c54cc38f307b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bet:
-    id: 0
-    numbers: 0c000000
-    multiplyPayout: 0
 --- !u!61 &191691796
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3017,7 +2978,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -60, y: 7}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &299492117
 MonoBehaviour:
@@ -3564,7 +3525,6 @@ GameObject:
   - component: {fileID: 330435104}
   - component: {fileID: 330435106}
   - component: {fileID: 330435105}
-  - component: {fileID: 330435107}
   - component: {fileID: 330435109}
   - component: {fileID: 330435108}
   m_Layer: 5
@@ -3632,22 +3592,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330435103}
   m_CullTransparentMesh: 1
---- !u!114 &330435107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330435103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85dd7176cec71b4c9e1c54cc38f307b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bet:
-    id: 0
-    numbers: 040000000500000006000000070000000800000009000000
-    multiplyPayout: 0
 --- !u!114 &330435108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3660,7 +3604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeCell: 1
+  typeCell: 0
   bettCells: 11000000
 --- !u!61 &330435109
 BoxCollider2D:
@@ -4303,7 +4247,6 @@ GameObject:
   - component: {fileID: 365983984}
   - component: {fileID: 365983986}
   - component: {fileID: 365983985}
-  - component: {fileID: 365983987}
   - component: {fileID: 365983989}
   - component: {fileID: 365983988}
   m_Layer: 5
@@ -4371,22 +4314,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 365983983}
   m_CullTransparentMesh: 1
---- !u!114 &365983987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 365983983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85dd7176cec71b4c9e1c54cc38f307b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bet:
-    id: 0
-    numbers: 010000000200000003000000040000000500000006000000
-    multiplyPayout: 0
 --- !u!114 &365983988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4399,7 +4326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeCell: 1
+  typeCell: 0
   bettCells: 10000000
 --- !u!61 &365983989
 BoxCollider2D:
@@ -4591,7 +4518,6 @@ GameObject:
   - component: {fileID: 411066714}
   - component: {fileID: 411066716}
   - component: {fileID: 411066715}
-  - component: {fileID: 411066717}
   - component: {fileID: 411066719}
   - component: {fileID: 411066718}
   m_Layer: 5
@@ -4659,22 +4585,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 411066713}
   m_CullTransparentMesh: 1
---- !u!114 &411066717
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 411066713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85dd7176cec71b4c9e1c54cc38f307b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bet:
-    id: 0
-    numbers: 0700000008000000090000000a0000000b0000000c000000
-    multiplyPayout: 0
 --- !u!114 &411066718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4687,7 +4597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f67588313be4cb4db66c1db699851c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeCell: 1
+  typeCell: 0
   bettCells: 12000000
 --- !u!61 &411066719
 BoxCollider2D:
@@ -5174,8 +5084,9 @@ MonoBehaviour:
   - {fileID: 42847658}
   - {fileID: 1569556225}
   - {fileID: 1216939938}
-  buttonReturnAllBets: {fileID: 94392675}
-  buttonReturnLastBet: {fileID: 2117844922}
+  buttonReturnAllChips: {fileID: 94392675}
+  buttonReturnLastChip: {fileID: 2117844922}
+  buttonReturnAllBets: {fileID: 845388435}
 --- !u!1 &457604356
 GameObject:
   m_ObjectHideFlags: 0
@@ -5577,7 +5488,6 @@ GameObject:
   - component: {fileID: 477978193}
   - component: {fileID: 477978195}
   - component: {fileID: 477978194}
-  - component: {fileID: 477978196}
   - component: {fileID: 477978197}
   - component: {fileID: 477978198}
   m_Layer: 5
@@ -5645,22 +5555,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 477978192}
   m_CullTransparentMesh: 1
---- !u!114 &477978196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 477978192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85dd7176cec71b4c9e1c54cc38f307b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bet:
-    id: 0
-    numbers: 08000000
-    multiplyPayout: 0
 --- !u!61 &477978197
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6440,7 +6334,6 @@ GameObject:
   - component: {fileID: 595282303}
   - component: {fileID: 595282305}
   - component: {fileID: 595282304}
-  - component: {fileID: 595282306}
   - component: {fileID: 595282308}
   - component: {fileID: 595282307}
   m_Layer: 5
@@ -6508,22 +6401,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 595282302}
   m_CullTransparentMesh: 1
---- !u!114 &595282306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 595282302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85dd7176cec71b4c9e1c54cc38f307b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bet:
-    id: 0
-    numbers: 020000000400000006000000080000000a0000000c000000
-    multiplyPayout: 0
 --- !u!114 &595282307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6829,7 +6706,6 @@ GameObject:
   - component: {fileID: 616510861}
   - component: {fileID: 616510863}
   - component: {fileID: 616510862}
-  - component: {fileID: 616510864}
   - component: {fileID: 616510865}
   - component: {fileID: 616510866}
   m_Layer: 5
@@ -6897,22 +6773,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 616510860}
   m_CullTransparentMesh: 1
---- !u!114 &616510864
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 616510860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85dd7176cec71b4c9e1c54cc38f307b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bet:
-    id: 0
-    numbers: 01000000
-    multiplyPayout: 2
 --- !u!61 &616510865
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7833,7 +7693,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &742484503
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7852,7 +7712,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 1083, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &742484505
@@ -7888,7 +7748,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 742484502}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -8390,11 +8250,10 @@ GameObject:
   - component: {fileID: 815178603}
   - component: {fileID: 815178605}
   - component: {fileID: 815178604}
-  - component: {fileID: 815178606}
   - component: {fileID: 815178607}
   - component: {fileID: 815178608}
   m_Layer: 5
-  m_Name: BLACK_11
+  m_Name: RED_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8440,7 +8299,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 55085ffa22b8987489865293ddddcc07, type: 3}
+  m_Sprite: {fileID: 21300000, guid: caf9f318227247e48a3373b7c2211dc4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8458,22 +8317,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 815178602}
   m_CullTransparentMesh: 1
---- !u!114 &815178606
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 815178602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85dd7176cec71b4c9e1c54cc38f307b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bet:
-    id: 0
-    numbers: 0b000000
-    multiplyPayout: 0
 --- !u!61 &815178607
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8848,7 +8691,7 @@ GameObject:
   - component: {fileID: 868532523}
   - component: {fileID: 868532525}
   - component: {fileID: 868532524}
-  - component: {fileID: 868532526}
+  - component: {fileID: 868532528}
   - component: {fileID: 868532527}
   m_Layer: 5
   m_Name: 2TO1_2
@@ -8915,22 +8758,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 868532522}
   m_CullTransparentMesh: 1
---- !u!114 &868532526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 868532522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85dd7176cec71b4c9e1c54cc38f307b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bet:
-    id: 0
-    numbers: 020000000500000008000000
-    multiplyPayout: 0
 --- !u!114 &868532527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8945,6 +8772,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeCell: 0
   bettCells: 0e000000
+--- !u!61 &868532528
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868532522}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 128, y: 92}
+  m_EdgeRadius: 0
 --- !u!1 &869537754
 GameObject:
   m_ObjectHideFlags: 0
@@ -9340,7 +9212,6 @@ GameObject:
   - component: {fileID: 892506839}
   - component: {fileID: 892506841}
   - component: {fileID: 892506840}
-  - component: {fileID: 892506842}
   - component: {fileID: 892506843}
   - component: {fileID: 892506844}
   m_Layer: 5
@@ -9408,22 +9279,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 892506838}
   m_CullTransparentMesh: 1
---- !u!114 &892506842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 892506838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85dd7176cec71b4c9e1c54cc38f307b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bet:
-    id: 0
-    numbers: 04000000
-    multiplyPayout: 0
 --- !u!61 &892506843
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10251,7 +10106,6 @@ GameObject:
   - component: {fileID: 1010844978}
   - component: {fileID: 1010844980}
   - component: {fileID: 1010844979}
-  - component: {fileID: 1010844981}
   - component: {fileID: 1010844982}
   - component: {fileID: 1010844983}
   m_Layer: 5
@@ -10319,22 +10173,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1010844977}
   m_CullTransparentMesh: 1
---- !u!114 &1010844981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1010844977}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85dd7176cec71b4c9e1c54cc38f307b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bet:
-    id: 0
-    numbers: 02000000
-    multiplyPayout: 0
 --- !u!61 &1010844982
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11122,7 +10960,7 @@ GameObject:
   - component: {fileID: 1087581952}
   - component: {fileID: 1087581954}
   - component: {fileID: 1087581953}
-  - component: {fileID: 1087581955}
+  - component: {fileID: 1087581957}
   - component: {fileID: 1087581956}
   m_Layer: 5
   m_Name: 2TO1_1
@@ -11189,22 +11027,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1087581951}
   m_CullTransparentMesh: 1
---- !u!114 &1087581955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1087581951}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85dd7176cec71b4c9e1c54cc38f307b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bet:
-    id: 0
-    numbers: 010000000400000007000000
-    multiplyPayout: 0
 --- !u!114 &1087581956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11219,6 +11041,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeCell: 0
   bettCells: 0d000000
+--- !u!61 &1087581957
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087581951}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 128, y: 92}
+  m_EdgeRadius: 0
 --- !u!1 &1090047442
 GameObject:
   m_ObjectHideFlags: 0
@@ -11364,7 +11231,6 @@ GameObject:
   - component: {fileID: 1097680074}
   - component: {fileID: 1097680076}
   - component: {fileID: 1097680075}
-  - component: {fileID: 1097680077}
   - component: {fileID: 1097680078}
   - component: {fileID: 1097680079}
   m_Layer: 5
@@ -11432,22 +11298,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097680073}
   m_CullTransparentMesh: 1
---- !u!114 &1097680077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1097680073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85dd7176cec71b4c9e1c54cc38f307b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bet:
-    id: 0
-    numbers: 03000000
-    multiplyPayout: 0
 --- !u!61 &1097680078
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12741,7 +12591,6 @@ GameObject:
   - component: {fileID: 1216939934}
   - component: {fileID: 1216939936}
   - component: {fileID: 1216939935}
-  - component: {fileID: 1216939937}
   - component: {fileID: 1216939939}
   - component: {fileID: 1216939938}
   m_Layer: 5
@@ -12809,22 +12658,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1216939933}
   m_CullTransparentMesh: 1
---- !u!114 &1216939937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1216939933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85dd7176cec71b4c9e1c54cc38f307b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bet:
-    id: 0
-    numbers: 00000000
-    multiplyPayout: 0
 --- !u!114 &1216939938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13359,7 +13192,6 @@ GameObject:
   - component: {fileID: 1325721633}
   - component: {fileID: 1325721635}
   - component: {fileID: 1325721634}
-  - component: {fileID: 1325721636}
   - component: {fileID: 1325721637}
   - component: {fileID: 1325721638}
   m_Layer: 5
@@ -13427,22 +13259,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1325721632}
   m_CullTransparentMesh: 1
---- !u!114 &1325721636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1325721632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85dd7176cec71b4c9e1c54cc38f307b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bet:
-    id: 0
-    numbers: 07000000
-    multiplyPayout: 0
 --- !u!61 &1325721637
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13537,7 +13353,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -60, y: 7}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1326748702
 MonoBehaviour:
@@ -13597,7 +13413,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1372820909
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13636,7 +13452,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1372820908}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -14059,7 +13875,6 @@ GameObject:
   - component: {fileID: 1409754119}
   - component: {fileID: 1409754121}
   - component: {fileID: 1409754120}
-  - component: {fileID: 1409754122}
   - component: {fileID: 1409754123}
   - component: {fileID: 1409754124}
   m_Layer: 5
@@ -14127,22 +13942,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1409754118}
   m_CullTransparentMesh: 1
---- !u!114 &1409754122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1409754118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85dd7176cec71b4c9e1c54cc38f307b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bet:
-    id: 0
-    numbers: 05000000
-    multiplyPayout: 0
 --- !u!61 &1409754123
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15019,7 +14818,6 @@ GameObject:
   - component: {fileID: 1539070900}
   - component: {fileID: 1539070902}
   - component: {fileID: 1539070901}
-  - component: {fileID: 1539070903}
   - component: {fileID: 1539070904}
   - component: {fileID: 1539070905}
   m_Layer: 5
@@ -15087,22 +14885,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1539070899}
   m_CullTransparentMesh: 1
---- !u!114 &1539070903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1539070899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85dd7176cec71b4c9e1c54cc38f307b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bet:
-    id: 0
-    numbers: 09000000
-    multiplyPayout: 0
 --- !u!61 &1539070904
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15580,7 +15362,6 @@ GameObject:
   - component: {fileID: 1569556221}
   - component: {fileID: 1569556223}
   - component: {fileID: 1569556222}
-  - component: {fileID: 1569556224}
   - component: {fileID: 1569556226}
   - component: {fileID: 1569556225}
   m_Layer: 5
@@ -15648,22 +15429,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1569556220}
   m_CullTransparentMesh: 1
---- !u!114 &1569556224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1569556220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85dd7176cec71b4c9e1c54cc38f307b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bet:
-    id: 0
-    numbers: 020000000400000006000000080000000a0000000b000000
-    multiplyPayout: 0
 --- !u!114 &1569556225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18438,7 +18203,6 @@ GameObject:
   - component: {fileID: 1957738887}
   - component: {fileID: 1957738889}
   - component: {fileID: 1957738888}
-  - component: {fileID: 1957738890}
   - component: {fileID: 1957738892}
   - component: {fileID: 1957738891}
   m_Layer: 5
@@ -18506,22 +18270,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1957738886}
   m_CullTransparentMesh: 1
---- !u!114 &1957738890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1957738886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85dd7176cec71b4c9e1c54cc38f307b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bet:
-    id: 0
-    numbers: 01000000030000000500000007000000090000000b000000
-    multiplyPayout: 0
 --- !u!114 &1957738891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19107,7 +18855,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -28.599976, y: 99}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1995687442
 MonoBehaviour:
@@ -20229,7 +19977,7 @@ GameObject:
   - component: {fileID: 2117844920}
   - component: {fileID: 2117844922}
   m_Layer: 5
-  m_Name: ReturnBet_BUTTON
+  m_Name: ReturnLastBet_BUTTON
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

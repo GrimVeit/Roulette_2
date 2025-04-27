@@ -27,4 +27,9 @@ public class BetCellModel
     {
         _betProvider.ReturnAllChips();
     }
+
+    public void ReturnAllBets()
+    {
+        _betProvider.ReturnAllBets();
+    }
 }
