@@ -9,6 +9,7 @@ public class ChipGameVisualView : View
     [SerializeField] private ChipGameVisual chipGameVisualPrefab;
     [SerializeField] private List<ChipGamePosition> chipGamePositions = new List<ChipGamePosition>();
     [SerializeField] private List<TransformById> transformByIds = new List<TransformById>();
+    [SerializeField] private Transform transformFallen;
 
     public void AddChip(int id, Chip chip, int posId, TypeCell typeCell, System.Numerics.Vector3 vector)
     {
@@ -27,6 +28,20 @@ public class ChipGameVisualView : View
         var chipGamePosition = GetGamePositionById(posIndex);
 
         chipGamePosition.ReturnChip(id);
+    }
+
+    public void ReturnChips(int posIndex)
+    {
+        var chipGamePosition = GetGamePositionById(posIndex);
+
+        chipGamePosition.ReturnChips();
+    }
+
+    public void FallenChips(int posIndex)
+    {
+        var chipGamePosition = GetGamePositionById(posIndex);
+
+        chipGamePosition.FallenChips(transformFallen.position);
     }
 
     private void AddChipInMainType(int id, Chip chip, int posId, Vector3 vector)
@@ -98,6 +113,8 @@ public class ChipGamePosition
 
     public void ReturnChip(int id)
     {
+        if (chipGameVisuals.Count == 0) return;
+
         var chip = GetChipById(id);
 
         if(chip == null)
@@ -107,8 +124,31 @@ public class ChipGamePosition
         }
 
         chipGameVisuals.Remove(chip);
-
         chip.Return();
+    }
+
+    public void ReturnChips()
+    {
+        if (chipGameVisuals.Count == 0) return;
+
+        foreach (var gameVisual in chipGameVisuals.Keys)
+        {
+            gameVisual.Return();
+        }
+
+        chipGameVisuals.Clear();
+    }
+
+    public void FallenChips(Vector3 vector)
+    {
+        if (chipGameVisuals.Count == 0) return;
+
+        foreach (var gameVisual in chipGameVisuals.Keys)
+        {
+            gameVisual.Fallen(vector);
+        }
+
+        chipGameVisuals.Clear();
     }
 
     private ChipGameVisual GetChipById(int id)

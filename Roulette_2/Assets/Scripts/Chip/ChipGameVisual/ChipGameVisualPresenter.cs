@@ -31,20 +31,15 @@ public class ChipGameVisualPresenter
     {
         _model.OnAddChip += _view.AddChip;
         _model.OnReturnChip += _view.ReturnChip;
+        _model.OnReturnChips += _view.ReturnChips;
+        _model.OnFallenChips += _view.FallenChips;
     }
 
     private void DeactivasteEvents()
     {
         _model.OnAddChip -= _view.AddChip;
         _model.OnReturnChip -= _view.ReturnChip;
+        _model.OnReturnChips -= _view.ReturnChips;
+        _model.OnFallenChips -= _view.FallenChips;
     }
-
-    #region Input
-
-    public void SpawnChips(int id, List<int> positionsIndex)
-    {
-
-    }
-
-    #endregion
 }

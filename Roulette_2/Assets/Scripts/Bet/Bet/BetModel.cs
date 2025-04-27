@@ -84,6 +84,26 @@ public class BetModel
         Debug.Log(totalWin);
     }
 
+    public void ClearTable()
+    {
+        for (int i = 0; i < rouletteNumbers.Count; i++)
+        {
+            foreach (var info in betInfos)
+            {
+                var bet = _bets.bets[info.PosIndex];
+
+                if (bet.Numbers.Contains(rouletteNumbers[i].Number))
+                {
+                    OnReturnChips?.Invoke(info.PosIndex);
+                }
+                else
+                {
+                    OnFallenChips?.Invoke(info.PosIndex);
+                }
+            }
+        }
+    }
+    
     public void ReturnLastChip()
     {
         if (betInfos.Count == 0) return;
@@ -111,7 +131,7 @@ public class BetModel
 
     public void ClearBets()
     {
-        betInfos.Clear();
+
     }
 
     private void AddChipInStore(int id)

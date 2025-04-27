@@ -44,6 +44,11 @@ public class BetPresenter : IBetProvider, IBetChipEventsProvider
         _model.SearchWin();
     }
 
+    public void ClearTable()
+    {
+        _model.ClearTable();
+    }
+
     #endregion
 
     #region Output

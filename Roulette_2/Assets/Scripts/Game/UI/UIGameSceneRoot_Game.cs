@@ -9,6 +9,7 @@ public class UIGameSceneRoot_Game : UIRoot
     [SerializeField] private MainPanel_Game mainPanel;
     [SerializeField] private FooterPanel_Game footerPanel;
     [SerializeField] private RoulettePanel_Game roulettePanel;
+    [SerializeField] private ResultPanel_Game resultPanel;
 
     private ISoundProvider soundProvider;
 
@@ -23,6 +24,7 @@ public class UIGameSceneRoot_Game : UIRoot
         mainPanel.Initialize();
         footerPanel.Initialize();
         roulettePanel.Initialize();
+        resultPanel.Initialize();
     }
 
     public void Dispose()
@@ -31,6 +33,7 @@ public class UIGameSceneRoot_Game : UIRoot
         mainPanel.Dispose();
         footerPanel.Dispose();
         roulettePanel.Dispose();
+        resultPanel.Dispose();
     }
 
     public void Activate()
@@ -63,6 +66,13 @@ public class UIGameSceneRoot_Game : UIRoot
         if(roulettePanel.IsActive) return;
 
         OpenPanel(roulettePanel);
+    }
+
+    public void OpenResultPanel()
+    {
+        if(resultPanel.IsActive) return;
+
+        OpenPanel(resultPanel);
     }
 
 

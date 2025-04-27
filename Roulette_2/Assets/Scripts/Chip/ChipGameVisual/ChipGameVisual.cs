@@ -25,6 +25,11 @@ public class ChipGameVisual : MonoBehaviour
 
     public void Return()
     {
-        transform.DOLocalMove(Vector3.zero, 0.1f).OnComplete(() => Destroy(gameObject));
+        transform.DOLocalMove(Vector3.zero, 1f).OnComplete(() => Destroy(gameObject));
+    }
+
+    public void Fallen(Vector3 vector)
+    {
+        transform.DOMove(vector, 1f).OnComplete(() => Destroy(gameObject));
     }
 }
