@@ -11,6 +11,8 @@ public class BetModel
     public event Action<int, int> OnReturnChip;
     public event Action<int, int> OnFallenChip;
 
+    public event Action<int> OnGetWin;
+
     private readonly IChipGroupBet _chipGroupBet;
     private readonly IStoreChip _storeChip;
 
@@ -24,12 +26,15 @@ public class BetModel
 
     private readonly HashSet<int> winningPosIndexes = new();
 
-    public BetModel(IChipGroupBet chipGroupBet, IStoreChip storeChip, Bets bets, List<IRouletteValueProvider> rouletteValueProviders)
+    private readonly IMoneyProvider _moneyProvider;
+
+    public BetModel(IChipGroupBet chipGroupBet, IStoreChip storeChip, Bets bets, List<IRouletteValueProvider> rouletteValueProviders, IMoneyProvider moneyProvider)
     {
         _chipGroupBet = chipGroupBet;
         _storeChip = storeChip;
         _bets = bets;
         _rouletteValueProviders = rouletteValueProviders;
+        _moneyProvider = moneyProvider;
     }
 
     public void Initialize()
@@ -239,6 +244,9 @@ public class BetModel
                 }
             }
         }
+
+        _moneyProvider.SendMoney(totalWin);
+        OnGetWin?.Invoke(totalWin);
 
         Debug.Log("Winnings:" + string.Join(", ", winningPosIndexes));
     }

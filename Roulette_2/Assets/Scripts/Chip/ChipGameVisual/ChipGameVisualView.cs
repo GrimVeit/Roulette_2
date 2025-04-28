@@ -9,6 +9,7 @@ public class ChipGameVisualView : View
     [SerializeField] private ChipGameVisual chipGameVisualPrefab;
     [SerializeField] private List<ChipGamePosition> chipGamePositions = new List<ChipGamePosition>();
     [SerializeField] private List<TransformById> transformByIds = new List<TransformById>();
+    [SerializeField] private Transform transformSpawnChip;
     [SerializeField] private Transform transformFallen;
 
     public void AddChip(int id, Chip chip, int posId, TypeCell typeCell, System.Numerics.Vector3 vector)
@@ -42,8 +43,8 @@ public class ChipGameVisualView : View
         var chipGamePosition = GetGamePositionById(posId);
         var transformSpawn = GetTransformById(id);
 
-        var chipVisual = Instantiate(chipGameVisualPrefab, transformSpawn.TransformSpawn);
-        chipVisual.SetData(chip);
+        var chipVisual = Instantiate(chipGameVisualPrefab, transformSpawnChip);
+        chipVisual.SetData(chip, transformSpawn.TransformSpawn);
         chipVisual.TeleportTo(vector);
 
         chipGamePosition.AddChip(chipVisual, id);
@@ -54,8 +55,8 @@ public class ChipGameVisualView : View
         var chipGamePosition = GetGamePositionById(posId);
         var transformSpawn = GetTransformById(id);
 
-        var chipVisual = Instantiate(chipGameVisualPrefab, transformSpawn.TransformSpawn);
-        chipVisual.SetData(chip);
+        var chipVisual = Instantiate(chipGameVisualPrefab, transformSpawnChip);
+        chipVisual.SetData(chip, transformSpawn.TransformSpawn);
         chipVisual.MoveTo(chipGamePosition.GetPosition());
 
         chipGamePosition.AddChip(chipVisual, id);

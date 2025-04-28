@@ -1,18 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class BetView : MonoBehaviour
+public class BetView : View
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private TextMeshProUGUI textWin;
 
-    // Update is called once per frame
-    void Update()
+    public void SetWin(int win)
     {
-        
+        textWin.text = win.ToString();
     }
 }

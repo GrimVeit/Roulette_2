@@ -8,9 +8,12 @@ public class ChipGameVisual : MonoBehaviour
 {
     [SerializeField] private Image image;
 
-    public void SetData(Chip chip)
+    private Transform _transformParent;
+
+    public void SetData(Chip chip, Transform transformParent)
     {
         image.sprite = chip.SpriteChip;
+        _transformParent = transformParent;
     }
 
     public void MoveTo(Vector3 pos)
@@ -25,6 +28,7 @@ public class ChipGameVisual : MonoBehaviour
 
     public void Return()
     {
+        transform.SetParent(_transformParent);
         transform.DOLocalMove(Vector3.zero, 1f).OnComplete(() => Destroy(gameObject));
     }
 

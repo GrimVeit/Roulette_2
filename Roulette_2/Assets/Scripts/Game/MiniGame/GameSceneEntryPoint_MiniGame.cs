@@ -37,6 +37,8 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
     private Metric_WinCountPresenter metric_WinCountPresenter;
     private Metric_BetNumberPresenter metric_BetNumberPresenter;
 
+    private AnimationFramePresenter animationFramePresenter;
+
     private StateMachine_Mini stateMachine;
 
     public void Run(UIRootView uIRootView)
@@ -60,7 +62,7 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
         chipGameCountVisualPresenter = new ChipGameCountVisualPresenter(new ChipGameCountVisualModel(storeChipPresenter), viewContainer.GetView<ChipGameCountVisualView>());
         pseudoChipPresenter = new PseudoChipPresenter(new PseudoChipModel(soundPresenter), viewContainer.GetView<PseudoChipView>());
-        betPresenter = new BetPresenter(new BetModel(chipGroup, storeChipPresenter, bets, new List<IRouletteValueProvider>() { roulettePresenter }));
+        betPresenter = new BetPresenter(new BetModel(chipGroup, storeChipPresenter, bets, new List<IRouletteValueProvider>() { roulettePresenter }, bankPresenter), viewContainer.GetView<BetView>());
         betCellPresenter = new BetCellPresenter(new BetCellModel(betPresenter), viewContainer.GetView<BetCellView>());
         chipGameVisualPresenter = new ChipGameVisualPresenter(new ChipGameVisualModel(betPresenter), viewContainer.GetView<ChipGameVisualView>());
 
@@ -72,7 +74,9 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         metric_WinCountPresenter = new Metric_WinCountPresenter(new Metric_WinCountModel(PlayerPrefsKeys.METRIC_WIN_ROW_COUNTS, 3, timerDailyPresenter, storeTaskPresenter));
         metric_BetNumberPresenter = new Metric_BetNumberPresenter(new Metric_BetNumberModel(PlayerPrefsKeys.METRIC_BET_NUMBER_COUNTS, 1, timerDailyPresenter, storeTaskPresenter));
 
-        stateMachine = new StateMachine_Mini(sceneRoot, rouletteBallPresenter, roulettePresenter, rouletteValueHistoryPresenter, betPresenter, metric_GameCountPresenter, metric_GameTypeCountPresenter);
+        animationFramePresenter = new AnimationFramePresenter(new AnimationFrameModel(), viewContainer.GetView<AnimationFrameView>());
+
+        stateMachine = new StateMachine_Mini(sceneRoot, rouletteBallPresenter, roulettePresenter, rouletteValueHistoryPresenter, betPresenter, metric_GameCountPresenter, metric_GameTypeCountPresenter, animationFramePresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -104,6 +108,8 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         metric_GameTimeSessionPresenter.Initialize();
         metric_WinCountPresenter.Initialize();
         metric_BetNumberPresenter.Initialize();
+
+        animationFramePresenter.Initialize();
 
         stateMachine.Initialize();
     }
@@ -159,6 +165,8 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         metric_GameTimeSessionPresenter.Dispose();
         metric_WinCountPresenter?.Dispose();
         metric_BetNumberPresenter?.Dispose();
+
+        animationFramePresenter.Dispose();
     }
 
     private void OnDestroy()

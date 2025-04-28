@@ -7,14 +7,16 @@ public class ResultState_Mini : IState
     private readonly IGlobalStateMachineProvider _machineProvider;
     private readonly UIGameSceneRoot_Game _sceneRoot;
     private readonly BetPresenter _betPresenter;
+    private readonly IAnimationFrameProvider _frameProvider;
 
     private IEnumerator timerCoroutine;
 
-    public ResultState_Mini(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, BetPresenter betPresenter)
+    public ResultState_Mini(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, BetPresenter betPresenter, IAnimationFrameProvider frameProvider)
     {
         _machineProvider = machineProvider;
         _sceneRoot = sceneRoot;
         _betPresenter = betPresenter;
+        _frameProvider = frameProvider;
     }
 
     public void EnterState()
@@ -25,10 +27,13 @@ public class ResultState_Mini : IState
         _sceneRoot.OpenHeaderPanel();
         _sceneRoot.OpenResultPanel();
 
+        _frameProvider.ActivateAnimation("Stars", 1);
+        _frameProvider.ActivateAnimation("Confetti", 3);
+
         if(timerCoroutine != null)
             Coroutines.Stop(timerCoroutine);
 
-        timerCoroutine = Timer(5);
+        timerCoroutine = Timer(3);
         Coroutines.Start(timerCoroutine);
     }
 

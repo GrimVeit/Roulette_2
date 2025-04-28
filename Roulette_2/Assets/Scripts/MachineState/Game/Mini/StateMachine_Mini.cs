@@ -16,11 +16,12 @@ public class StateMachine_Mini : IGlobalStateMachineProvider
         RouletteValueHistoryPresenter rouletteValueHistoryPresenter,
         BetPresenter betPresenter,
         IMetric_GameCount metric_GameCount,
-        IMetric_GameTypeCount metric_GameTypeCount)
+        IMetric_GameTypeCount metric_GameTypeCount,
+        IAnimationFrameProvider animationFrameProvider)
     {
         states[typeof(MainState_Mini)] = new MainState_Mini(this, sceneRoot, betPresenter);
         states[typeof(RouletteState_Mini)] = new RouletteState_Mini(this, sceneRoot, roulettePresenter, rouletteBallPresenter, rouletteValueHistoryPresenter, metric_GameCount, metric_GameTypeCount);
-        states[typeof(ResultState_Mini)] = new ResultState_Mini(this, sceneRoot, betPresenter);
+        states[typeof(ResultState_Mini)] = new ResultState_Mini(this, sceneRoot, betPresenter, animationFrameProvider);
     }
 
     public void Initialize()

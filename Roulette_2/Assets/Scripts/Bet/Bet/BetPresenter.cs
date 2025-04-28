@@ -5,20 +5,36 @@ using System.Numerics;
 public class BetPresenter : IBetProvider, IBetChipEventsProvider
 {
     private readonly BetModel _model;
+    private readonly BetView _view;
 
-    public BetPresenter(BetModel model)
+    public BetPresenter(BetModel model, BetView view)
     {
         _model = model;
+        _view = view;
     }
 
     public void Initialize()
     {
+        ActivateEvents();
+
         _model.Initialize();
     }
 
     public void Dispose()
     {
+        DeactivateEvents();
+
         _model?.Dispose();
+    }
+
+    private void ActivateEvents()
+    {
+        _model.OnGetWin += _view.SetWin;
+    }
+
+    private void DeactivateEvents()
+    {
+        _model.OnGetWin -= _view.SetWin;
     }
 
     #region Input
