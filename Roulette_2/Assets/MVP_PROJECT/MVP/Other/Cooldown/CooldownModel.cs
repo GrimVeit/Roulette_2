@@ -4,73 +4,45 @@ using UnityEngine;
 
 public class CooldownModel
 {
+    public event Action OnRewardOverDay;
+
     public event Action OnSetAvailableButton;
     public event Action OnSetUnvailableButton;
 
-    public event Action OnClickToActivatedButton;
-    public event Action OnClickToDeactivatedButton;
     public event Action<string> OnCountdownTimer;
 
-    private string ID;
     private readonly string KEY;
 
     private TimeSpan timeToReload;
     private DateTime nextRewardTime;
     private bool isRewardAvailable => DateTime.Now >= nextRewardTime;
-
-    private ISoundProvider soundProvider;
-    //private IParticleEffectProvider particleEffectProvider;
-    //private IParticleEffect effectReload;
+    private bool isRewardAvailableOverDay => DateTime.Now >= nextRewardTime + timeToReload;
 
     private IEnumerator countdownButton_coroutine;
 
-    public CooldownModel(string key, TimeSpan timeToReload, ISoundProvider soundProvider)
+    public CooldownModel(string key, TimeSpan timeToReload)
     {
         KEY = key;
         this.timeToReload = timeToReload;
-        this.soundProvider = soundProvider;
-        //this.particleEffectProvider = particleEffectProvider;
     }
 
     public void Initialize()
     {
-        //effectReload = particleEffectProvider.GetParticleEffect(ID);
-
         nextRewardTime = DateTime.Parse(PlayerPrefs.GetString(KEY, DateTime.Now.ToString()));
-    }
 
-    public void Activate()
-    {
+        if (isRewardAvailableOverDay)
+        {
+            OnRewardOverDay?.Invoke();
+        }
+
+        Debug.Log(nextRewardTime);
+
         ActivateCountdown();
-    }
-
-    public void Deactivate()
-    {
-        DeactivateCountdown();
-        //effectReload.Stop();
-    }
-
-    public void SetID(string ID)
-    {
-        this.ID = ID;
     }
 
     public void Dispose()
     {
 
-    }
-
-    public void ClickButton()
-    {
-        if (isRewardAvailable)
-        {
-            OnClickToActivatedButton?.Invoke();
-            soundProvider.PlayOneShot("Click");
-            return;
-        }
-
-        OnClickToDeactivatedButton?.Invoke();
-        soundProvider.PlayOneShot("Lock");
     }
 
     public void ActivateCooldown()
@@ -80,7 +52,6 @@ public class CooldownModel
         ActivateCountdown();
 
         Debug.Log("Запуск нового таймера");
-        //soundProvider.PlayOneShot("Error");
     }
 
     private void ActivateCountdown()
@@ -100,12 +71,15 @@ public class CooldownModel
 
     private IEnumerator Countdown_Coroutine()
     {
-        //effectReload.Stop();
         OnSetUnvailableButton?.Invoke();
+
+        Debug.Log(isRewardAvailable);
 
         while (!isRewardAvailable)
         {
             TimeSpan timeRemaining = nextRewardTime - DateTime.Now;
+
+            OnCountdownTimer?.Invoke(string.Format("{0:D2}:{1:D2}:{2:D2}", timeRemaining.Hours, timeRemaining.Minutes, timeRemaining.Seconds));
 
             if (timeRemaining.TotalSeconds == 0)
             {
@@ -113,15 +87,9 @@ public class CooldownModel
                 break;
             }
 
-            OnCountdownTimer?.Invoke(string.Format("{0:D2}:{1:D2}:{2:D2}", timeRemaining.Hours, timeRemaining.Minutes, timeRemaining.Seconds));
-
-            soundProvider.Play("Timer");
-
             yield return new WaitForSeconds(1);
         }
-        soundProvider.Play("TimerDone");
-        //soundProvider.PlayOneShot(ID);
-        //effectReload.Play();
+
         OnSetAvailableButton?.Invoke();
     }
 }

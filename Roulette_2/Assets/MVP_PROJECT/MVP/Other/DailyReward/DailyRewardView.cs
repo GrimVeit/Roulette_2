@@ -10,18 +10,11 @@ public class DailyRewardView : View
 
     [SerializeField] private Button dailyRewardButton;
 
-    private Vector3 normalScaleRewardButton;
     private Tween scaleTween;
 
     public void Initialize()
     {
-        normalScaleRewardButton = dailyRewardButton.transform.localScale;
-
-        scaleTween = dailyRewardButton.transform.DOScale(new Vector3(1.1f, 1.1f, 1.1f), 0.6f)
-            .SetLoops(-1, LoopType.Yoyo)
-            .SetEase(Ease.Linear);
-
-        dailyRewardButton.onClick.AddListener(HandlerClickToDailyReward);
+        dailyRewardButton.onClick.AddListener(() => OnClickDailyReward?.Invoke());
     }
 
     public void Dispose()
@@ -29,11 +22,25 @@ public class DailyRewardView : View
         if (scaleTween != null)
             scaleTween.Kill();
 
-        dailyRewardButton.onClick.RemoveListener(HandlerClickToDailyReward);
+        dailyRewardButton.onClick.RemoveListener(() => OnClickDailyReward?.Invoke());
     }
 
-    private void HandlerClickToDailyReward()
+    public void ActivateDailyRewardButton()
     {
-        OnClickDailyReward?.Invoke();
+        dailyRewardButton.gameObject.SetActive(true);
+        dailyRewardButton.enabled = true;
+
+        scaleTween = dailyRewardButton.transform.DOScale(new Vector3(1.1f, 1.1f, 1.1f), 0.6f)
+            .SetLoops(-1, LoopType.Yoyo)
+            .SetEase(Ease.Linear);
+    }
+
+    public void DeactivateDailyRewardButton()
+    {
+        scaleTween?.Kill();
+
+        dailyRewardButton.transform.localScale = Vector3.one;
+        dailyRewardButton.gameObject.SetActive(false);
+        dailyRewardButton.enabled = false;
     }
 }

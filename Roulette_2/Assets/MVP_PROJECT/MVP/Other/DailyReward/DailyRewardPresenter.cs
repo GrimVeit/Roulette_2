@@ -1,61 +1,93 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class DailyRewardPresenter
 {
-    private DailyRewardModel dailyRewardModel;
-    private DailyRewardView dailyRewardView;
+    private DailyRewardModel _model;
+    private DailyRewardView _view;
 
-    public DailyRewardPresenter(DailyRewardModel dailyRewardModel, DailyRewardView dailyRewardView)
+    public DailyRewardPresenter(DailyRewardModel model, DailyRewardView view)
     {
-        this.dailyRewardModel = dailyRewardModel;
-        this.dailyRewardView = dailyRewardView;
+        _model = model;
+        _view = view;
+
+        ActivateEvents();
     }
 
     public void Initialize()
     {
-        dailyRewardView.OnClickDailyReward += dailyRewardModel.DailyReward;
-
-        dailyRewardModel.Initialize();
-        dailyRewardView.Initialize();
+        _model.Initialize();
+        _view.Initialize();
 
     }
 
     public void Dispose()
     {
-        dailyRewardView.OnClickDailyReward -= dailyRewardModel.DailyReward;
+        DeactivateEvents();
 
-        dailyRewardModel.Dispose();
-        dailyRewardView.Dispose();
+        _model.Dispose();
+        _view.Dispose();
     }
 
-    #region Input Actions
-
-    public event Action<int> OnGetDailyReward_Count
+    private void ActivateEvents()
     {
-        add { dailyRewardModel.OnGetDailyReward_Count += value; }
-        remove { dailyRewardModel.OnGetDailyReward_Count -= value; }
+        _view.OnClickDailyReward += _model.GetDailyReward;
+
+        _model.OnActivateButtonReward += _view.ActivateDailyRewardButton;
+        _model.OnDeactivateButtonReward += _view.DeactivateDailyRewardButton;
     }
+
+    private void DeactivateEvents()
+    {
+        _view.OnClickDailyReward -= _model.GetDailyReward;
+
+        _model.OnActivateButtonReward -= _view.ActivateDailyRewardButton;
+        _model.OnDeactivateButtonReward -= _view.DeactivateDailyRewardButton;
+    }
+
+    #region Input
+
+    public void ActivateButtonReward()
+    {
+        _model.ActivateButtonReward();
+    }
+
+    public void DeactivateButtonReward()
+    {
+        _model.DeactivateButtonReward();
+    }
+
+    public void ResetDailyReward()
+    {
+        _model.ResetDailyReward();
+    }
+
+    #endregion
+
+    #region Output
 
     public event Action OnGetDailyReward
     {
-        add { dailyRewardModel.OnGetDailyReward += value; }
-        remove { dailyRewardModel.OnGetDailyReward -= value; }
+        add => _model.OnGetDailyReward += value;
+        remove => _model.OnGetDailyReward -= value;
     }
 
-    //public event Action OnSetAvailableDailyReward
-    //{
-    //    add { dailyRewardModel.OnSetAvailableDailyReward += value; }
-    //    remove { dailyRewardModel.OnSetAvailableDailyReward -= value; }
-    //}
+    public event Action<int> OnChangeDay
+    {
+        add => _model.OnChangeCurrentDay += value;
+        remove => _model.OnChangeCurrentDay -= value;
+    }
 
-    //public event Action OnSetUnvailableDailyReward
-    //{
-    //    add { dailyRewardModel.OnSetUnvailableDailyReward += value; }
-    //    remove { dailyRewardModel.OnSetUnvailableDailyReward -= value; }
-    //}
+    public event Action<int> OnLastOpenDay
+    {
+        add => _model.OnLastOpenDay += value;
+        remove => _model.OnLastOpenDay -= value;
+    }
+
+    public event Action OnResetDays
+    {
+        add => _model.OnResetDays += value;
+        remove => _model.OnResetDays -= value;
+    }
 
     #endregion
 }

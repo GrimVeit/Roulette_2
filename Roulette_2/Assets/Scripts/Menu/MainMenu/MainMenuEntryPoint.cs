@@ -4,6 +4,7 @@ using UnityEngine;
 public class MainMenuEntryPoint : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
+    [SerializeField] private DailyRewardValues dailyRewardValues;
     [SerializeField] private UIMainMenuRoot menuRootPrefab;
 
     private UIMainMenuRoot sceneRoot;
@@ -12,6 +13,11 @@ public class MainMenuEntryPoint : MonoBehaviour
     private BankPresenter bankPresenter;
     private ParticleEffectPresenter particleEffectPresenter;
     private SoundPresenter soundPresenter;
+
+    private CooldownPresenter cooldownPresenter_DailyReward;
+    private DailyRewardPresenter dailyRewardPresenter;
+    private DailyRewardScalePresenter dailyRewardScalePresenter;
+    private DailyRewardVisualPresenter dailyRewardVisualPresenter;
 
     public void Run(UIRootView uIRootView)
     {
@@ -32,6 +38,11 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
 
+        cooldownPresenter_DailyReward = new CooldownPresenter(new CooldownModel(PlayerPrefsKeys.COOLDOWN_DAILY_REWARD, TimeSpan.FromSeconds(5)), viewContainer.GetView<CooldownView>());
+        dailyRewardPresenter = new DailyRewardPresenter(new DailyRewardModel(PlayerPrefsKeys.DAY_DAILY_REWARD, dailyRewardValues, bankPresenter), viewContainer.GetView<DailyRewardView>());
+        dailyRewardScalePresenter = new DailyRewardScalePresenter(new DailyRewardScaleModel(), viewContainer.GetView<DailyRewardScaleView>());
+        dailyRewardVisualPresenter = new DailyRewardVisualPresenter(new DailyRewardVisualModel(), viewContainer.GetView<DailyRewardVisualView>());
+
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
 
@@ -41,16 +52,37 @@ public class MainMenuEntryPoint : MonoBehaviour
         particleEffectPresenter.Initialize();
         sceneRoot.Initialize();
         bankPresenter.Initialize();
+
+        dailyRewardPresenter.Initialize();
+        cooldownPresenter_DailyReward.Initialize();
+        dailyRewardScalePresenter.Initialize();
+        dailyRewardVisualPresenter.Initialize();
     }
 
     private void ActivateEvents()
     {
         ActivateTransitions();
+
+        cooldownPresenter_DailyReward.OnRewardOverDay += dailyRewardPresenter.ResetDailyReward;
+        cooldownPresenter_DailyReward.OnAvailable += dailyRewardPresenter.ActivateButtonReward;
+        cooldownPresenter_DailyReward.OnUnvailable += dailyRewardPresenter.DeactivateButtonReward;
+        dailyRewardPresenter.OnGetDailyReward += cooldownPresenter_DailyReward.ActivateCooldown;
+        dailyRewardPresenter.OnChangeDay += dailyRewardScalePresenter.SetIndex;
+        dailyRewardPresenter.OnResetDays += dailyRewardVisualPresenter.DeactivateDays;
+        dailyRewardPresenter.OnLastOpenDay += dailyRewardVisualPresenter.ActivateDay;
     }
 
     private void DeactivateEvents()
     {
         DeactivateTransitions();
+
+        cooldownPresenter_DailyReward.OnRewardOverDay -= dailyRewardPresenter.ResetDailyReward;
+        cooldownPresenter_DailyReward.OnAvailable -= dailyRewardPresenter.ActivateButtonReward;
+        cooldownPresenter_DailyReward.OnUnvailable -= dailyRewardPresenter.DeactivateButtonReward;
+        dailyRewardPresenter.OnGetDailyReward -= cooldownPresenter_DailyReward.ActivateCooldown;
+        dailyRewardPresenter.OnChangeDay -= dailyRewardScalePresenter.SetIndex;
+        dailyRewardPresenter.OnResetDays -= dailyRewardVisualPresenter.DeactivateDays;
+        dailyRewardPresenter.OnLastOpenDay -= dailyRewardVisualPresenter.ActivateDay;
     }
 
     private void ActivateTransitions()
@@ -85,6 +117,11 @@ public class MainMenuEntryPoint : MonoBehaviour
         sceneRoot?.Dispose();
         particleEffectPresenter?.Dispose();
         bankPresenter?.Dispose();
+
+        cooldownPresenter_DailyReward?.Dispose();
+        dailyRewardPresenter?.Dispose();
+        dailyRewardScalePresenter?.Dispose();
+        dailyRewardVisualPresenter?.Dispose();
     }
 
     private void OnDestroy()

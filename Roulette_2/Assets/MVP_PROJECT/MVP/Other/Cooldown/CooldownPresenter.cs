@@ -5,79 +5,60 @@ using UnityEngine;
 
 public class CooldownPresenter
 {
-    private CooldownModel cooldownButtonModel;
-    private CooldownView cooldownButtonView;
+    private readonly CooldownModel _model;
+    private readonly CooldownView _view;
 
-    public CooldownPresenter(CooldownModel cooldownButtonModel, CooldownView cooldownButtonView)
+    public CooldownPresenter(CooldownModel model, CooldownView view)
     {
-        this.cooldownButtonModel = cooldownButtonModel;
-        this.cooldownButtonView = cooldownButtonView;
+        _model = model;
+        _view = view;
     }
 
     public void Initialize()
     {
-        cooldownButtonView.OnClickCooldownButton += cooldownButtonModel.ClickButton;
+        _model.OnCountdownTimer += _view.ChangeTimer;
+        _model.OnSetAvailableButton += _view.ActivateButton;
+        _model.OnSetUnvailableButton += _view.DeactivateButton;
 
-        cooldownButtonModel.OnCountdownTimer += cooldownButtonView.ChangeTimer;
-        cooldownButtonModel.OnSetAvailableButton += cooldownButtonView.OnActivateButton;
-        cooldownButtonModel.OnSetUnvailableButton += cooldownButtonView.OnDeactivateButton;
-
-        cooldownButtonModel.SetID(cooldownButtonView.GetID());
-        cooldownButtonModel.Initialize();
-        cooldownButtonView.Initialize();
-    }
-
-    public void Activate()
-    {
-        cooldownButtonModel.Activate();
-    }
-
-    public void Deactivate()
-    {
-        cooldownButtonModel.Deactivate();
+        _model.Initialize();
     }
 
     public void Dispose()
     {
-        //cooldownButtonView.OnClickCooldownButton -= cooldownButtonModel.ActivateCooldown;
+        _model.OnCountdownTimer -= _view.ChangeTimer;
+        _model.OnSetAvailableButton -= _view.ActivateButton;
+        _model.OnSetUnvailableButton -= _view.DeactivateButton;
 
-        cooldownButtonModel.OnCountdownTimer -= cooldownButtonView.ChangeTimer;
-        cooldownButtonModel.OnSetAvailableButton -= cooldownButtonView.OnActivateButton;
-        cooldownButtonModel.OnSetUnvailableButton -= cooldownButtonView.OnDeactivateButton;
-
-        cooldownButtonModel.Dispose();
-        cooldownButtonView.Dispose();
+        _model.Dispose();
     }
 
     #region Input
 
     public void ActivateCooldown()
     {
-        cooldownButtonModel.ActivateCooldown();
+        _model.ActivateCooldown();
     }
 
-    public event Action OnClickToActivatedButton
-    {
-        add { cooldownButtonModel.OnClickToActivatedButton += value; }
-        remove { cooldownButtonModel.OnClickToActivatedButton -= value; }
-    }
+    #endregion
 
-    public event Action OnClickToDeactivatedButton
+    #region Output
+
+    public event Action OnRewardOverDay
     {
-        add { cooldownButtonModel.OnClickToDeactivatedButton += value; }
-        remove { cooldownButtonModel.OnClickToDeactivatedButton -= value; }
+        add => _model.OnRewardOverDay += value;
+        remove => _model.OnRewardOverDay -= value;
     }
 
     public event Action OnAvailable
     {
-        add { cooldownButtonModel.OnSetAvailableButton += value; }
-        remove { cooldownButtonModel.OnSetAvailableButton -= value; }
+        add { _model.OnSetAvailableButton += value; }
+        remove { _model.OnSetAvailableButton -= value; }
     }
 
     public event Action OnUnvailable
     {
-        add { cooldownButtonModel.OnSetUnvailableButton += value; }
-        remove { cooldownButtonModel.OnSetUnvailableButton -= value; }
+        add { _model.OnSetUnvailableButton += value; }
+        remove { _model.OnSetUnvailableButton -= value; }
     }
 
     #endregion
