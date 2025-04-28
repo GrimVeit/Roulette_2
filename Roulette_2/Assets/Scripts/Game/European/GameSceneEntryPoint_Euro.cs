@@ -24,6 +24,8 @@ public class GameSceneEntryPoint_Euro : MonoBehaviour
     private Metric_GameCountPresenter metric_GameCountPresenter;
     private Metric_GameTypeCountPresenter metric_GameTypeCountPresenter;
     private Metric_GameTimeSessionPresenter metric_GameTimeSessionPresenter;
+    private Metric_WinCountPresenter metric_WinCountPresenter;
+    private Metric_BetNumberPresenter metric_BetNumberPresenter;
 
     private StateMachine_Euro stateMachine;
 
@@ -50,6 +52,8 @@ public class GameSceneEntryPoint_Euro : MonoBehaviour
         metric_GameCountPresenter = new Metric_GameCountPresenter(new Metric_GameCountModel(PlayerPrefsKeys.METRIC_GAME_COUNTS, storeTaskPresenter, timerDailyPresenter, 10));
         metric_GameTypeCountPresenter = new Metric_GameTypeCountPresenter(new Metric_GameTypeCountModel(PlayerPrefsKeys.METRIC_GAME_TYPE_COUNTS, 4, storeTaskPresenter, timerDailyPresenter));
         metric_GameTimeSessionPresenter = new Metric_GameTimeSessionPresenter(new Metric_GameTimeSessionModel(PlayerPrefsKeys.METRIC_GAME_TIME_SESSION, timerDailyPresenter, storeTaskPresenter, 15));
+        metric_WinCountPresenter = new Metric_WinCountPresenter(new Metric_WinCountModel(PlayerPrefsKeys.METRIC_WIN_ROW_COUNTS, 3, timerDailyPresenter, storeTaskPresenter));
+        metric_BetNumberPresenter = new Metric_BetNumberPresenter(new Metric_BetNumberModel(PlayerPrefsKeys.METRIC_BET_NUMBER_COUNTS, 1, timerDailyPresenter, storeTaskPresenter));
 
         stateMachine = new StateMachine_Euro(sceneRoot, rouletteBallPresenter, roulettePresenter, rouletteValueHistoryPresenter, metric_GameCountPresenter, metric_GameTypeCountPresenter);
 
@@ -74,6 +78,8 @@ public class GameSceneEntryPoint_Euro : MonoBehaviour
         metric_GameCountPresenter.Initialize();
         metric_GameTypeCountPresenter.Initialize();
         metric_GameTimeSessionPresenter.Initialize();
+        metric_WinCountPresenter.Initialize();
+        metric_BetNumberPresenter.Initialize();
 
         stateMachine.Initialize();
     }
@@ -118,6 +124,8 @@ public class GameSceneEntryPoint_Euro : MonoBehaviour
         metric_GameCountPresenter.Dispose();
         metric_GameTypeCountPresenter.Dispose();
         metric_GameTimeSessionPresenter.Dispose();
+        metric_WinCountPresenter?.Dispose();
+        metric_BetNumberPresenter?.Dispose();
 
         stateMachine.Dispose();
     }
