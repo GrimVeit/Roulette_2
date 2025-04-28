@@ -22,6 +22,8 @@ public class BetModel
 
     private readonly List<IRouletteValueProvider> _rouletteValueProviders = new();
 
+    private readonly HashSet<int> winningPosIndexes = new();
+
     public BetModel(IChipGroupBet chipGroupBet, IStoreChip storeChip, Bets bets, List<IRouletteValueProvider> rouletteValueProviders)
     {
         _chipGroupBet = chipGroupBet;
@@ -116,74 +118,6 @@ public class BetModel
 
     private void Rebet()
     {
-        //List<BetInfo> betsToRemove = new();
-        //foreach (var currentBet in _currentBetInfos)
-        //{
-        //    int savedCount = _historyBetInfos.Count(b => b.IdChipGroup == currentBet.IdChipGroup && b.PosIndex == currentBet.PosIndex);
-        //    int currentCount = _currentBetInfos.Count(b => b.IdChipGroup == currentBet.IdChipGroup && b.PosIndex == currentBet.PosIndex);
-
-        //    if(savedCount == 0)
-        //    {
-        //        int toRemove = currentCount;
-        //        for (int i = 0; i < toRemove; i++)
-        //        {
-        //            betsToRemove.Add(currentBet);
-        //        }
-        //    }
-
-        //    if(currentCount > savedCount)
-        //    {
-        //        int toRemove = currentCount - savedCount;
-        //        for (int i = 0; i < toRemove; i++)
-        //        {
-        //            betsToRemove.Add(currentBet);
-        //        }
-        //    }
-        //}
-
-        //foreach (var bet in betsToRemove)
-        //{
-        //    AddChipInStore(bet.IdChipGroup);
-        //    OnReturnChip?.Invoke(bet.IdChipGroup, bet.PosIndex);
-        //    _currentBetInfos.Remove(bet);
-        //}
-
-        //List<BetInfo> betsToAdd = new();
-        //foreach (var savedBet in _historyBetInfos)
-        //{
-        //    int savedCount = _historyBetInfos.Count(b => b.IdChipGroup == savedBet.IdChipGroup && b.PosIndex == savedBet.PosIndex);
-        //    int currentCount = _currentBetInfos.Count(b => b.IdChipGroup == savedBet.IdChipGroup && b.PosIndex == savedBet.PosIndex);
-
-        //    if (currentCount < savedCount)
-        //    {
-        //        int toAdd = savedCount - currentCount;
-        //        for (int i = 0; i < toAdd; i++)
-        //        {
-        //            var newBet = new BetInfo(savedBet.IdChipGroup, savedBet.Chip, savedBet.PosIndex);
-
-        //            if(!_currentBetInfos.Any(b => b.IdChipGroup == newBet.IdChipGroup && b.PosIndex == newBet.PosIndex))
-        //            {
-        //                _currentBetInfos.Add(newBet);
-        //                RemoveChipFromStore(newBet.IdChipGroup);
-        //                OnAddChip?.Invoke(newBet.IdChipGroup, newBet.Chip, newBet.PosIndex, TypeCell.Tracker, new Vector3());
-        //            }
-        //            else
-        //            {
-        //                RemoveChipFromStore(newBet.IdChipGroup);
-        //                OnAddChip?.Invoke(newBet.IdChipGroup, newBet.Chip, newBet.PosIndex, TypeCell.Tracker, new Vector3());
-        //            }
-        //        }
-        //    }
-        //}
-
-        //foreach (var bet in betsToAdd)
-        //{
-        //    RemoveChipFromStore(bet.IdChipGroup);
-        //    OnAddChip?.Invoke(bet.IdChipGroup, bet.Chip, bet.PosIndex, TypeCell.Tracker, new Vector3());
-        //    _currentBetInfos.Add(bet);
-        //}
-
-
         Dictionary<(int, int), int> currentBetCount = new();
 
         foreach(var bet in _currentBets)
@@ -281,59 +215,94 @@ public class BetModel
 
     public void SearchWin()
     {
-        var totalWin = 0;
+        int totalWin = 0;
+        winningPosIndexes.Clear();
 
-        for (int i = 0; i < rouletteNumbers.Count; i++)
+        Debug.Log(winningPosIndexes.Count);
+
+        foreach (var number in rouletteNumbers)
         {
-            foreach (var info in _currentBets)
+            for (int i = 0; i < _currentBets.Count; i++)
             {
-                var bet = _bets.GetBetById(info.PosIndex);
+                var betInfo = _currentBets[i];
 
-                if (bet.Numbers.Contains(rouletteNumbers[i].Number))
+                if (winningPosIndexes.Contains(betInfo.PosIndex))
+                    continue;
+
+                Bet bet = _bets.GetBetById(betInfo.PosIndex);
+
+                if (bet.Numbers.Contains(number.Number))
                 {
-                    totalWin += info.Chip.Nominal * bet.MultiplyPayout;
+                    winningPosIndexes.Add(betInfo.PosIndex);
+                    int win = betInfo.Chip.Nominal * bet.MultiplyPayout;
+                    totalWin += win;
                 }
             }
         }
 
-        Debug.Log(totalWin);
+        Debug.Log("Winnings:" + string.Join(", ", winningPosIndexes));
     }
 
     public void ClearTable()
     {
-        for (int i = 0; i < rouletteNumbers.Count; i++)
+        //for (int i = 0; i < rouletteNumbers.Count; i++)
+        //{
+        //    foreach (var info in _currentBets)
+        //    {
+        //        var bet = _bets.bets[info.PosIndex];
+
+        //        var list = _currentBets.Where(data => data.PosIndex == info.PosIndex).ToList();
+
+        //        if (bet.Numbers.Contains(rouletteNumbers[i].Number))
+        //        {
+        //            for (int j = 0; j < list.Count; j++)
+        //            {
+        //                AddChipInStore(list[j].IdChipGroup);
+        //                OnReturnChip?.Invoke(list[j].IdChipGroup, list[j].PosIndex);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            for (int j = 0; j < list.Count; j++)
+        //            {
+        //                OnFallenChip?.Invoke(list[j].IdChipGroup, list[j].PosIndex);
+        //            }
+        //        }
+        //    }
+        //}
+
+        foreach (var currentBet in _currentBets)
         {
-            foreach (var info in _currentBets)
+            var listChips = _currentBets.Where(data => data.PosIndex == currentBet.PosIndex).ToList();
+
+            if (winningPosIndexes.Contains(currentBet.PosIndex))
             {
-                var bet = _bets.bets[info.PosIndex];
-
-                var list = _currentBets.Where(data => data.PosIndex == info.PosIndex).ToList();
-
-                if (bet.Numbers.Contains(rouletteNumbers[i].Number))
+                for (int i = 0; i < listChips.Count; i++)
                 {
-                    for (int j = 0; j < list.Count; j++)
-                    {
-                        AddChipInStore(list[j].IdChipGroup);
-                        OnReturnChip?.Invoke(list[j].IdChipGroup, list[j].PosIndex);
-                    }
+                    AddChipInStore(listChips[i].IdChipGroup);
+                    OnReturnChip?.Invoke(listChips[i].IdChipGroup, listChips[i].PosIndex);
                 }
-                else
+
+                Debug.Log("Winnings:" + string.Join(", ", listChips));
+            }
+            else
+            {
+                for (int i = 0; i < listChips.Count; i++)
                 {
-                    for (int j = 0; j < list.Count; j++)
-                    {
-                        OnFallenChip?.Invoke(list[j].IdChipGroup, list[j].PosIndex);
-                    }
+                    OnFallenChip?.Invoke(listChips[i].IdChipGroup, listChips[i].PosIndex);
                 }
+
+                Debug.Log("Failure:" + string.Join(", ", listChips));
             }
         }
-
-        //Решить проблеиу многократного подсчёта
 
         _savedBets.Clear();
         _savedBets.AddRange(_currentBets);
         _currentBets.Clear();
+        winningPosIndexes.Clear();
+        rouletteNumbers.Clear();
 
-        Debug.Log(_savedBets.Count);
+        Debug.Log(winningPosIndexes.Count);
     }
 
 }
