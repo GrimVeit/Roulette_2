@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameSceneEntryPoint_French : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
+    [SerializeField] private TaskGroup taskGroup;
     [SerializeField] private UIGameSceneRoot_Game sceneRootPrefab;
 
     private UIGameSceneRoot_Game sceneRoot;
@@ -18,6 +19,12 @@ public class GameSceneEntryPoint_French : MonoBehaviour
     private RouletteBallPresenter rouletteBallPresenter;
 
     private RouletteValueHistoryPresenter rouletteValueHistoryPresenter;
+
+    private StoreTaskPresenter storeTaskPresenter;
+    private TimerDailyPresenter timerDailyPresenter;
+    private Metric_GameCountPresenter metric_GameCountPresenter;
+    private Metric_GameTypeCountPresenter metric_GameTypeCountPresenter;
+    private Metric_GameTimeSessionPresenter metric_GameTimeSessionPresenter;
 
     private StateMachine_French stateMachine;
 
@@ -39,7 +46,13 @@ public class GameSceneEntryPoint_French : MonoBehaviour
 
         rouletteValueHistoryPresenter = new RouletteValueHistoryPresenter(new RouletteValueHistoryModel(new List<IRouletteValueProvider>() { roulettePresenter }), viewContainer.GetView<RouletteValueHistoryView>());
 
-        stateMachine = new StateMachine_French(sceneRoot, rouletteBallPresenter, roulettePresenter, rouletteValueHistoryPresenter);
+        timerDailyPresenter = new TimerDailyPresenter(new TimerDailyModel(PlayerPrefsKeys.LAST_EXIT_DATE));
+        storeTaskPresenter = new StoreTaskPresenter(new StoreTaskModel(taskGroup, bankPresenter, timerDailyPresenter));
+        metric_GameCountPresenter = new Metric_GameCountPresenter(new Metric_GameCountModel(PlayerPrefsKeys.METRIC_GAME_COUNTS, storeTaskPresenter, timerDailyPresenter, 10));
+        metric_GameTypeCountPresenter = new Metric_GameTypeCountPresenter(new Metric_GameTypeCountModel(PlayerPrefsKeys.METRIC_GAME_TYPE_COUNTS, 4, storeTaskPresenter, timerDailyPresenter));
+        metric_GameTimeSessionPresenter = new Metric_GameTimeSessionPresenter(new Metric_GameTimeSessionModel(PlayerPrefsKeys.METRIC_GAME_TIME_SESSION, timerDailyPresenter, storeTaskPresenter, 15));
+
+        stateMachine = new StateMachine_French(sceneRoot, rouletteBallPresenter, roulettePresenter, rouletteValueHistoryPresenter, metric_GameCountPresenter, metric_GameTypeCountPresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -56,6 +69,12 @@ public class GameSceneEntryPoint_French : MonoBehaviour
         roulettePresenter.Initialize();
 
         rouletteValueHistoryPresenter.Initialize();
+
+        timerDailyPresenter.Initialize();
+        storeTaskPresenter.Initialize();
+        metric_GameCountPresenter.Initialize();
+        metric_GameTypeCountPresenter.Initialize();
+        metric_GameTimeSessionPresenter.Initialize();
 
         stateMachine.Initialize();
     }
@@ -94,6 +113,12 @@ public class GameSceneEntryPoint_French : MonoBehaviour
         roulettePresenter.Dispose();
 
         rouletteValueHistoryPresenter.Dispose();
+
+        timerDailyPresenter.Dispose();
+        storeTaskPresenter.Dispose();
+        metric_GameCountPresenter.Dispose();
+        metric_GameTypeCountPresenter.Dispose();
+        metric_GameTimeSessionPresenter.Dispose();
 
         stateMachine.Dispose();
     }

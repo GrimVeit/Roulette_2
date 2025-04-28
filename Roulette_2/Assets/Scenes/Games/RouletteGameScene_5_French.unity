@@ -8180,6 +8180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds: {fileID: 33927979}
+  taskGroup: {fileID: 11400000, guid: ddc1252e8eaf0fd4b8470c5fcbb726d4, type: 2}
   sceneRootPrefab: {fileID: 333361754}
 --- !u!1 &660668405
 GameObject:

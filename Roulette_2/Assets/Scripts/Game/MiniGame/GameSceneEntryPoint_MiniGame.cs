@@ -22,8 +22,9 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
 
     private StoreTaskPresenter storeTaskPresenter;
     private TimerDailyPresenter timerDailyPresenter;
-
     private Metric_GameCountPresenter metric_GameCountPresenter;
+    private Metric_GameTypeCountPresenter metric_GameTypeCountPresenter;
+    private Metric_GameTimeSessionPresenter metric_GameTimeSessionPresenter;
 
     private StateMachine_Mini stateMachine;
 
@@ -48,8 +49,10 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         timerDailyPresenter = new TimerDailyPresenter(new TimerDailyModel(PlayerPrefsKeys.LAST_EXIT_DATE));
         storeTaskPresenter = new StoreTaskPresenter(new StoreTaskModel(taskGroup, bankPresenter, timerDailyPresenter));
         metric_GameCountPresenter = new Metric_GameCountPresenter(new Metric_GameCountModel(PlayerPrefsKeys.METRIC_GAME_COUNTS, storeTaskPresenter, timerDailyPresenter, 10));
+        metric_GameTypeCountPresenter = new Metric_GameTypeCountPresenter(new Metric_GameTypeCountModel(PlayerPrefsKeys.METRIC_GAME_TYPE_COUNTS, 4, storeTaskPresenter, timerDailyPresenter));
+        metric_GameTimeSessionPresenter = new Metric_GameTimeSessionPresenter(new Metric_GameTimeSessionModel(PlayerPrefsKeys.METRIC_GAME_TIME_SESSION, timerDailyPresenter, storeTaskPresenter, 15));
 
-        stateMachine = new StateMachine_Mini(sceneRoot, rouletteBallPresenter, roulettePresenter, rouletteValueHistoryPresenter, metric_GameCountPresenter);
+        stateMachine = new StateMachine_Mini(sceneRoot, rouletteBallPresenter, roulettePresenter, rouletteValueHistoryPresenter, metric_GameCountPresenter, metric_GameTypeCountPresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -70,6 +73,8 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         timerDailyPresenter.Initialize();
         storeTaskPresenter.Initialize();
         metric_GameCountPresenter.Initialize();
+        metric_GameTypeCountPresenter.Initialize();
+        metric_GameTimeSessionPresenter.Initialize();
 
         stateMachine.Initialize();
     }
@@ -114,6 +119,8 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         timerDailyPresenter.Dispose();
         storeTaskPresenter.Dispose();
         metric_GameCountPresenter.Dispose();
+        metric_GameTypeCountPresenter.Dispose();
+        metric_GameTimeSessionPresenter.Dispose();
     }
 
     private void OnDestroy()

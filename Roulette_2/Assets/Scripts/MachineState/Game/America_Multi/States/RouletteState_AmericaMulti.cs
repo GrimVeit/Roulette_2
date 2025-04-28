@@ -10,16 +10,22 @@ public class RouletteState_AmericaMulti : IState
     private readonly List<RouletteBallPresenter> _rouletteBallPresenters;
     private readonly RouletteValueHistoryPresenter _rouletteValueHistoryPresenter;
 
+    private readonly IMetric_GameCount _gameCountMetric;
+    private readonly IMetric_GameTypeCount _gameTypeCountMetric;
+
     private int RouletteCount => _roulettePresenters.Count;
     private int _currentCount = 0;
 
-    public RouletteState_AmericaMulti(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, List<RoulettePresenter> roulettePresenters, List<RouletteBallPresenter> rouletteBallPresenters, RouletteValueHistoryPresenter rouletteValueHistoryPresenter)
+    public RouletteState_AmericaMulti(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, List<RoulettePresenter> roulettePresenters, List<RouletteBallPresenter> rouletteBallPresenters, RouletteValueHistoryPresenter rouletteValueHistoryPresenter, IMetric_GameCount gameCount, IMetric_GameTypeCount typeCount)
     {
         _machineProvider = machineProvider;
         _sceneRoot = sceneRoot;
         _roulettePresenters = roulettePresenters;
         _rouletteBallPresenters = rouletteBallPresenters;
         _rouletteValueHistoryPresenter = rouletteValueHistoryPresenter;
+
+        _gameCountMetric = gameCount;
+        _gameTypeCountMetric = typeCount;
     }
 
     public void EnterState()
@@ -41,6 +47,9 @@ public class RouletteState_AmericaMulti : IState
 
         _rouletteBallPresenters.ForEach(rp => rp.StartSpin());
         _sceneRoot.OpenRoulettePanel();
+
+        _gameCountMetric.AddGame();
+        _gameTypeCountMetric.AddGameType(4);
     }
 
     public void ExitState()

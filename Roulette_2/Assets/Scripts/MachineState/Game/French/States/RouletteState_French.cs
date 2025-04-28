@@ -10,13 +10,19 @@ public class RouletteState_French : IState
     private readonly RouletteBallPresenter _rouletteBallPresenter;
     private readonly RouletteValueHistoryPresenter _rouletteValueHistoryPresenter;
 
-    public RouletteState_French(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, RoulettePresenter roulettePresenter, RouletteBallPresenter rouletteBallPresenter, RouletteValueHistoryPresenter rouletteValueHistoryPresenter)
+    private readonly IMetric_GameCount _gameCountMetric;
+    private readonly IMetric_GameTypeCount _gameTypeCountMetric;
+
+    public RouletteState_French(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, RoulettePresenter roulettePresenter, RouletteBallPresenter rouletteBallPresenter, RouletteValueHistoryPresenter rouletteValueHistoryPresenter, IMetric_GameCount gameCount, IMetric_GameTypeCount typeCount)
     {
         _machineProvider = machineProvider;
         _sceneRoot = sceneRoot;
         _roulettePresenter = roulettePresenter;
         _rouletteBallPresenter = rouletteBallPresenter;
         _rouletteValueHistoryPresenter = rouletteValueHistoryPresenter;
+
+        _gameCountMetric = gameCount;
+        _gameTypeCountMetric = typeCount;
     }
 
     public void EnterState()
@@ -30,6 +36,9 @@ public class RouletteState_French : IState
         _sceneRoot.OpenRoulettePanel();
         _roulettePresenter.StartSpin();
         _rouletteBallPresenter.StartSpin();
+
+        _gameCountMetric.AddGame();
+        _gameTypeCountMetric.AddGameType(5);
     }
 
     public void ExitState()

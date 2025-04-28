@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeGameSessionPresenter
+public class Metric_GameTimeSessionPresenter
 {
-    private TimeGameSessionModel timeGameSessionModel;
+    private readonly Metric_GameTimeSessionModel timeGameSessionModel;
 
-    public TimeGameSessionPresenter(TimeGameSessionModel timeGameSessionModel)
+    public Metric_GameTimeSessionPresenter(Metric_GameTimeSessionModel timeGameSessionModel)
     {
         this.timeGameSessionModel = timeGameSessionModel;
     }

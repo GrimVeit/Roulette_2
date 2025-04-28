@@ -30,6 +30,9 @@ public class MainMenuEntryPoint : MonoBehaviour
 
     private TimerDailyPresenter timerDailyPresenter;
     private TimerDailyVisualPresenter timerDailyVisualPresenter;
+    private Metric_GameTimeSessionPresenter metric_GameTimeSessionPresenter;
+    private Metric_GameCountPresenter metric_GameCountPresenter;
+    private Metric_GameTypeCountPresenter metric_GameTypeCountPresenter;
 
     public void Run(UIRootView uIRootView)
     {
@@ -65,6 +68,10 @@ public class MainMenuEntryPoint : MonoBehaviour
         chipBuyPresenter = new ChipBuyPresenter(new ChipBuyModel(chipGroup, storeChipPresenter, bankPresenter), viewContainer.GetView<ChipBuyView>());
         chipCountVisualPresenter = new ChipCountVisualPresenter(new ChipCountVisualModel(), viewContainer.GetView<ChipCountVisualView>());
 
+        metric_GameTimeSessionPresenter = new Metric_GameTimeSessionPresenter(new Metric_GameTimeSessionModel(PlayerPrefsKeys.METRIC_GAME_TIME_SESSION, timerDailyPresenter, storeTaskPresenter, 15));
+        metric_GameCountPresenter = new Metric_GameCountPresenter(new Metric_GameCountModel(PlayerPrefsKeys.METRIC_GAME_COUNTS, storeTaskPresenter, timerDailyPresenter, 10));
+        metric_GameTypeCountPresenter = new Metric_GameTypeCountPresenter(new Metric_GameTypeCountModel(PlayerPrefsKeys.METRIC_GAME_TYPE_COUNTS, 4, storeTaskPresenter, timerDailyPresenter));
+
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
 
@@ -89,6 +96,10 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         timerDailyPresenter.Initialize();
         timerDailyVisualPresenter.Initialize();
+
+        metric_GameTimeSessionPresenter.Initialize();
+        metric_GameCountPresenter.Initialize();
+        metric_GameTypeCountPresenter.Initialize();
 
     }
 
@@ -186,6 +197,10 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         timerDailyPresenter?.Dispose();
         timerDailyVisualPresenter?.Dispose();
+
+        metric_GameTimeSessionPresenter?.Dispose();
+        metric_GameCountPresenter?.Dispose();
+        metric_GameTypeCountPresenter?.Dispose();
     }
 
     private void Update()

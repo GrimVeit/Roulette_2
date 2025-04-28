@@ -9,9 +9,11 @@ public class RouletteState_Mini : IState
     private readonly RoulettePresenter _roulettePresenter;
     private readonly RouletteBallPresenter _rouletteBallPresenter;
     private readonly RouletteValueHistoryPresenter _rouletteValueHistoryPresenter;
-    private readonly IMetric_GameCount _gameCountMetric;
 
-    public RouletteState_Mini(IGlobalStateMachineProvider machineProvider,  UIGameSceneRoot_Game sceneRoot, RoulettePresenter roulettePresenter, RouletteBallPresenter rouletteBallPresenter, RouletteValueHistoryPresenter rouletteValueHistoryPresenter, IMetric_GameCount gameCountMetric)
+    private readonly IMetric_GameCount _gameCountMetric;
+    private readonly IMetric_GameTypeCount _gameTypeCountMetric;
+
+    public RouletteState_Mini(IGlobalStateMachineProvider machineProvider,  UIGameSceneRoot_Game sceneRoot, RoulettePresenter roulettePresenter, RouletteBallPresenter rouletteBallPresenter, RouletteValueHistoryPresenter rouletteValueHistoryPresenter, IMetric_GameCount gameCountMetric, IMetric_GameTypeCount gameTypeCount)
     {
         _machineProvider = machineProvider;
         _sceneRoot = sceneRoot;
@@ -19,6 +21,7 @@ public class RouletteState_Mini : IState
         _rouletteBallPresenter = rouletteBallPresenter;
         _rouletteValueHistoryPresenter = rouletteValueHistoryPresenter;
         _gameCountMetric = gameCountMetric;
+        _gameTypeCountMetric = gameTypeCount;
     }
 
     public void EnterState()
@@ -34,6 +37,7 @@ public class RouletteState_Mini : IState
         _rouletteBallPresenter.StartSpin();
 
         _gameCountMetric.AddGame();
+        _gameTypeCountMetric.AddGameType(1);
     }
 
     public void ExitState()

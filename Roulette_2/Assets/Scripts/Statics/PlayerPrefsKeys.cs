@@ -10,4 +10,6 @@ public static class PlayerPrefsKeys
     public const string LAST_EXIT_DATE = "LAST_EXIT_DATE";
 
     public const string METRIC_GAME_COUNTS = "METRIC_GAME_COUNTS";
+    public const string METRIC_GAME_TIME_SESSION = "METRIC_GAME_TIME_SESSION";
+    public const string METRIC_GAME_TYPE_COUNTS = "METRIC_GAME_TYPE_COUNTS";
 }
