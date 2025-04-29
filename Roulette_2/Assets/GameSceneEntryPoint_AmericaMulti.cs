@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +6,8 @@ public class GameSceneEntryPoint_AmericaMulti : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
     [SerializeField] private TaskGroup taskGroup;
+    [SerializeField] private ChipGroup chipGroup;
+    [SerializeField] private Bets bets;
     [SerializeField] private UIGameSceneRoot_Game sceneRootPrefab;
 
     private UIGameSceneRoot_Game sceneRoot;
@@ -30,6 +31,13 @@ public class GameSceneEntryPoint_AmericaMulti : MonoBehaviour
 
     private RouletteValueHistoryPresenter rouletteValueHistoryPresenter;
 
+    private StoreChipPresenter storeChipPresenter;
+    private ChipGameCountVisualPresenter chipGameCountVisualPresenter;
+    private PseudoChipPresenter pseudoChipPresenter;
+    private BetCellPresenter betCellPresenter;
+    private BetPresenter betPresenter;
+    private ChipGameVisualPresenter chipGameVisualPresenter;
+
     private StoreTaskPresenter storeTaskPresenter;
     private TimerDailyPresenter timerDailyPresenter;
     private Metric_GameCountPresenter metric_GameCountPresenter;
@@ -37,6 +45,8 @@ public class GameSceneEntryPoint_AmericaMulti : MonoBehaviour
     private Metric_GameTimeSessionPresenter metric_GameTimeSessionPresenter;
     private Metric_WinCountPresenter metric_WinCountPresenter;
     private Metric_BetNumberPresenter metric_BetNumberPresenter;
+
+    private AnimationFramePresenter animationFramePresenter;
 
     private StateMachine_AmericaMulti stateMachine;
 
@@ -68,7 +78,14 @@ public class GameSceneEntryPoint_AmericaMulti : MonoBehaviour
 
         rouletteValueHistoryPresenter = new RouletteValueHistoryPresenter(new RouletteValueHistoryModel(new List<IRouletteValueProvider>() 
         { roulettePresenter_1, roulettePresenter_2, roulettePresenter_3, roulettePresenter_4, roulettePresenter_5, roulettePresenter_6 }), viewContainer.GetView<RouletteValueHistoryView>());
-        
+
+        storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
+        chipGameCountVisualPresenter = new ChipGameCountVisualPresenter(new ChipGameCountVisualModel(storeChipPresenter), viewContainer.GetView<ChipGameCountVisualView>());
+        pseudoChipPresenter = new PseudoChipPresenter(new PseudoChipModel(soundPresenter), viewContainer.GetView<PseudoChipView>());
+        betPresenter = new BetPresenter(new BetModel(chipGroup, storeChipPresenter, bets, new List<IRouletteValueProvider>() { roulettePresenter_1, roulettePresenter_2, roulettePresenter_3, roulettePresenter_4, roulettePresenter_5, roulettePresenter_6 }, bankPresenter), viewContainer.GetView<BetView>());
+        betCellPresenter = new BetCellPresenter(new BetCellModel(betPresenter), viewContainer.GetView<BetCellView>());
+        chipGameVisualPresenter = new ChipGameVisualPresenter(new ChipGameVisualModel(betPresenter), viewContainer.GetView<ChipGameVisualView>());
+
         timerDailyPresenter = new TimerDailyPresenter(new TimerDailyModel(PlayerPrefsKeys.LAST_EXIT_DATE));
         storeTaskPresenter = new StoreTaskPresenter(new StoreTaskModel(taskGroup, bankPresenter, timerDailyPresenter));
         metric_GameCountPresenter = new Metric_GameCountPresenter(new Metric_GameCountModel(PlayerPrefsKeys.METRIC_GAME_COUNTS, storeTaskPresenter, timerDailyPresenter, 10));
@@ -76,6 +93,8 @@ public class GameSceneEntryPoint_AmericaMulti : MonoBehaviour
         metric_GameTimeSessionPresenter = new Metric_GameTimeSessionPresenter(new Metric_GameTimeSessionModel(PlayerPrefsKeys.METRIC_GAME_TIME_SESSION, timerDailyPresenter, storeTaskPresenter, 15));
         metric_WinCountPresenter = new Metric_WinCountPresenter(new Metric_WinCountModel(PlayerPrefsKeys.METRIC_WIN_ROW_COUNTS, 3, timerDailyPresenter, storeTaskPresenter));
         metric_BetNumberPresenter = new Metric_BetNumberPresenter(new Metric_BetNumberModel(PlayerPrefsKeys.METRIC_BET_NUMBER_COUNTS, 1, timerDailyPresenter, storeTaskPresenter));
+
+        animationFramePresenter = new AnimationFramePresenter(new AnimationFrameModel(), viewContainer.GetView<AnimationFrameView>());
 
         stateMachine = new StateMachine_AmericaMulti(
             sceneRoot, 
@@ -96,8 +115,10 @@ public class GameSceneEntryPoint_AmericaMulti : MonoBehaviour
                 roulettePresenter_6,
             },
             rouletteValueHistoryPresenter,
+            betPresenter,
             metric_GameCountPresenter,
-            metric_GameTypeCountPresenter);
+            metric_GameTypeCountPresenter,
+            animationFramePresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -125,6 +146,13 @@ public class GameSceneEntryPoint_AmericaMulti : MonoBehaviour
 
         rouletteValueHistoryPresenter.Initialize();
 
+        chipGameCountVisualPresenter.Initialize();
+        storeChipPresenter.Initialize();
+        pseudoChipPresenter.Initialize();
+        betPresenter.Initialize();
+        betCellPresenter.Initialize();
+        chipGameVisualPresenter.Initialize();
+
         timerDailyPresenter.Initialize();
         storeTaskPresenter.Initialize();
         metric_GameCountPresenter.Initialize();
@@ -132,6 +160,8 @@ public class GameSceneEntryPoint_AmericaMulti : MonoBehaviour
         metric_GameTimeSessionPresenter.Initialize();
         metric_WinCountPresenter.Initialize();
         metric_BetNumberPresenter.Initialize();
+
+        animationFramePresenter.Initialize();
 
         stateMachine.Initialize();
     }
@@ -181,6 +211,13 @@ public class GameSceneEntryPoint_AmericaMulti : MonoBehaviour
 
         rouletteValueHistoryPresenter.Dispose();
 
+        chipGameCountVisualPresenter.Dispose();
+        storeChipPresenter.Dispose();
+        pseudoChipPresenter?.Dispose();
+        betPresenter.Dispose();
+        betCellPresenter.Dispose();
+        chipGameVisualPresenter?.Dispose();
+
         timerDailyPresenter.Dispose();
         storeTaskPresenter.Dispose();
         metric_GameCountPresenter.Dispose();
@@ -188,6 +225,8 @@ public class GameSceneEntryPoint_AmericaMulti : MonoBehaviour
         metric_GameTimeSessionPresenter.Dispose();
         metric_WinCountPresenter?.Dispose();
         metric_BetNumberPresenter?.Dispose();
+
+        animationFramePresenter.Dispose();
 
         stateMachine.Dispose();
     }

@@ -6,11 +6,13 @@ public class MainState_French : IState
 {
     private readonly IGlobalStateMachineProvider _stateProvider;
     private readonly UIGameSceneRoot_Game _sceneRoot;
+    private readonly BetPresenter _betPresenter;
     
-    public MainState_French(IGlobalStateMachineProvider stateProvider, UIGameSceneRoot_Game sceneRoot)
+    public MainState_French(IGlobalStateMachineProvider stateProvider, UIGameSceneRoot_Game sceneRoot, BetPresenter betPresenter)
     {
         _sceneRoot = sceneRoot;
         _stateProvider = stateProvider;
+        _betPresenter = betPresenter;
     }
 
     public void EnterState()
@@ -22,6 +24,8 @@ public class MainState_French : IState
         _sceneRoot.OpenFooterPanel();
         _sceneRoot.OpenHeaderPanel();
         _sceneRoot.OpenMainPanel();
+
+        _betPresenter.ClearTable();
     }
 
     public void ExitState()

@@ -7,6 +7,8 @@ public class GameSceneEntryPoint_French : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
     [SerializeField] private TaskGroup taskGroup;
+    [SerializeField] private ChipGroup chipGroup;
+    [SerializeField] private Bets bets;
     [SerializeField] private UIGameSceneRoot_Game sceneRootPrefab;
 
     private UIGameSceneRoot_Game sceneRoot;
@@ -20,11 +22,20 @@ public class GameSceneEntryPoint_French : MonoBehaviour
 
     private RouletteValueHistoryPresenter rouletteValueHistoryPresenter;
 
+    private StoreChipPresenter storeChipPresenter;
+    private ChipGameCountVisualPresenter chipGameCountVisualPresenter;
+    private PseudoChipPresenter pseudoChipPresenter;
+    private BetCellPresenter betCellPresenter;
+    private BetPresenter betPresenter;
+    private ChipGameVisualPresenter chipGameVisualPresenter;
+
     private StoreTaskPresenter storeTaskPresenter;
     private TimerDailyPresenter timerDailyPresenter;
     private Metric_GameCountPresenter metric_GameCountPresenter;
     private Metric_GameTypeCountPresenter metric_GameTypeCountPresenter;
     private Metric_GameTimeSessionPresenter metric_GameTimeSessionPresenter;
+
+    private AnimationFramePresenter animationFramePresenter;
 
     private StateMachine_French stateMachine;
 
@@ -46,13 +57,22 @@ public class GameSceneEntryPoint_French : MonoBehaviour
 
         rouletteValueHistoryPresenter = new RouletteValueHistoryPresenter(new RouletteValueHistoryModel(new List<IRouletteValueProvider>() { roulettePresenter }), viewContainer.GetView<RouletteValueHistoryView>());
 
+        storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
+        chipGameCountVisualPresenter = new ChipGameCountVisualPresenter(new ChipGameCountVisualModel(storeChipPresenter), viewContainer.GetView<ChipGameCountVisualView>());
+        pseudoChipPresenter = new PseudoChipPresenter(new PseudoChipModel(soundPresenter), viewContainer.GetView<PseudoChipView>());
+        betPresenter = new BetPresenter(new BetModel(chipGroup, storeChipPresenter, bets, new List<IRouletteValueProvider>() { roulettePresenter }, bankPresenter), viewContainer.GetView<BetView>());
+        betCellPresenter = new BetCellPresenter(new BetCellModel(betPresenter), viewContainer.GetView<BetCellView>());
+        chipGameVisualPresenter = new ChipGameVisualPresenter(new ChipGameVisualModel(betPresenter), viewContainer.GetView<ChipGameVisualView>());
+
         timerDailyPresenter = new TimerDailyPresenter(new TimerDailyModel(PlayerPrefsKeys.LAST_EXIT_DATE));
         storeTaskPresenter = new StoreTaskPresenter(new StoreTaskModel(taskGroup, bankPresenter, timerDailyPresenter));
         metric_GameCountPresenter = new Metric_GameCountPresenter(new Metric_GameCountModel(PlayerPrefsKeys.METRIC_GAME_COUNTS, storeTaskPresenter, timerDailyPresenter, 10));
         metric_GameTypeCountPresenter = new Metric_GameTypeCountPresenter(new Metric_GameTypeCountModel(PlayerPrefsKeys.METRIC_GAME_TYPE_COUNTS, 4, storeTaskPresenter, timerDailyPresenter));
         metric_GameTimeSessionPresenter = new Metric_GameTimeSessionPresenter(new Metric_GameTimeSessionModel(PlayerPrefsKeys.METRIC_GAME_TIME_SESSION, timerDailyPresenter, storeTaskPresenter, 15));
 
-        stateMachine = new StateMachine_French(sceneRoot, rouletteBallPresenter, roulettePresenter, rouletteValueHistoryPresenter, metric_GameCountPresenter, metric_GameTypeCountPresenter);
+        animationFramePresenter = new AnimationFramePresenter(new AnimationFrameModel(), viewContainer.GetView<AnimationFrameView>());
+
+        stateMachine = new StateMachine_French(sceneRoot, rouletteBallPresenter, roulettePresenter, rouletteValueHistoryPresenter,  betPresenter, metric_GameCountPresenter, metric_GameTypeCountPresenter, animationFramePresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -70,11 +90,20 @@ public class GameSceneEntryPoint_French : MonoBehaviour
 
         rouletteValueHistoryPresenter.Initialize();
 
+        chipGameCountVisualPresenter.Initialize();
+        storeChipPresenter.Initialize();
+        pseudoChipPresenter.Initialize();
+        betPresenter.Initialize();
+        betCellPresenter.Initialize();
+        chipGameVisualPresenter.Initialize();
+
         timerDailyPresenter.Initialize();
         storeTaskPresenter.Initialize();
         metric_GameCountPresenter.Initialize();
         metric_GameTypeCountPresenter.Initialize();
         metric_GameTimeSessionPresenter.Initialize();
+
+        animationFramePresenter.Initialize();
 
         stateMachine.Initialize();
     }
@@ -114,11 +143,20 @@ public class GameSceneEntryPoint_French : MonoBehaviour
 
         rouletteValueHistoryPresenter.Dispose();
 
+        chipGameCountVisualPresenter.Dispose();
+        storeChipPresenter.Dispose();
+        pseudoChipPresenter?.Dispose();
+        betPresenter.Dispose();
+        betCellPresenter.Dispose();
+        chipGameVisualPresenter?.Dispose();
+
         timerDailyPresenter.Dispose();
         storeTaskPresenter.Dispose();
         metric_GameCountPresenter.Dispose();
         metric_GameTypeCountPresenter.Dispose();
         metric_GameTimeSessionPresenter.Dispose();
+
+        animationFramePresenter.Dispose();
 
         stateMachine.Dispose();
     }

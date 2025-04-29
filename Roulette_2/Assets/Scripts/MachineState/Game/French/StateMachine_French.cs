@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class StateMachine_French : IGlobalStateMachineProvider
 {
@@ -9,11 +7,19 @@ public class StateMachine_French : IGlobalStateMachineProvider
 
     private IState _currentState;
 
-    public StateMachine_French(UIGameSceneRoot_Game sceneRoot, RouletteBallPresenter rouletteBallPresenter, RoulettePresenter roulettePresenter, RouletteValueHistoryPresenter rouletteValueHistoryPresenter, IMetric_GameCount gameCount, IMetric_GameTypeCount typeCount)
+    public StateMachine_French
+        (UIGameSceneRoot_Game sceneRoot, 
+        RouletteBallPresenter rouletteBallPresenter, 
+        RoulettePresenter roulettePresenter, 
+        RouletteValueHistoryPresenter rouletteValueHistoryPresenter,
+        BetPresenter betPresenter,
+        IMetric_GameCount gameCount, 
+        IMetric_GameTypeCount typeCount,
+        IAnimationFrameProvider animationFrameProvider)
     {
-        states[typeof(MainState_French)] = new MainState_French(this, sceneRoot);
+        states[typeof(MainState_French)] = new MainState_French(this, sceneRoot, betPresenter);
         states[typeof(RouletteState_French)] = new RouletteState_French(this, sceneRoot, roulettePresenter, rouletteBallPresenter, rouletteValueHistoryPresenter, gameCount, typeCount);
-        states[typeof(ResultState_French)] = new ResultState_French(this, sceneRoot);
+        states[typeof(ResultState_French)] = new ResultState_French(this, sceneRoot, betPresenter, animationFrameProvider);
     }
 
     public void Initialize()

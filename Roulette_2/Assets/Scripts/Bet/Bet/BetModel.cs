@@ -223,7 +223,7 @@ public class BetModel
         int totalWin = 0;
         winningPosIndexes.Clear();
 
-        Debug.Log(winningPosIndexes.Count);
+        Debug.Log(rouletteNumbers.Count);
 
         foreach (var number in rouletteNumbers)
         {
@@ -236,7 +236,7 @@ public class BetModel
 
                 Bet bet = _bets.GetBetById(betInfo.PosIndex);
 
-                Debug.Log(bet + "//" + betInfo.PosIndex);
+                Debug.Log("Number:" + number.NumberVisual + "//" + bet + "//" + betInfo.PosIndex);
 
                 if (bet.Numbers.Contains(number.Number))
                 {
