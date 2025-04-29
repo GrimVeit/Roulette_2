@@ -5,6 +5,7 @@ public class MainMenuEntryPoint : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
     [SerializeField] private DailyRewardValues dailyRewardValues;
+    [SerializeField] private TaskGroup taskGroup;
     [SerializeField] private UIMainMenuRoot menuRootPrefab;
 
     private UIMainMenuRoot sceneRoot;
@@ -18,6 +19,9 @@ public class MainMenuEntryPoint : MonoBehaviour
     private DailyRewardPresenter dailyRewardPresenter;
     private DailyRewardScalePresenter dailyRewardScalePresenter;
     private DailyRewardVisualPresenter dailyRewardVisualPresenter;
+
+    private StoreTaskPresenter storeTaskPresenter;
+    private TaskVisualPresenter taskVisualPresenter;
 
     public void Run(UIRootView uIRootView)
     {
@@ -43,6 +47,9 @@ public class MainMenuEntryPoint : MonoBehaviour
         dailyRewardScalePresenter = new DailyRewardScalePresenter(new DailyRewardScaleModel(), viewContainer.GetView<DailyRewardScaleView>());
         dailyRewardVisualPresenter = new DailyRewardVisualPresenter(new DailyRewardVisualModel(), viewContainer.GetView<DailyRewardVisualView>());
 
+        storeTaskPresenter = new StoreTaskPresenter(new StoreTaskModel(taskGroup));
+        taskVisualPresenter = new TaskVisualPresenter(new TaskVisualModel(), viewContainer.GetView<TaskVisualView>());
+
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
 
@@ -57,6 +64,10 @@ public class MainMenuEntryPoint : MonoBehaviour
         cooldownPresenter_DailyReward.Initialize();
         dailyRewardScalePresenter.Initialize();
         dailyRewardVisualPresenter.Initialize();
+
+        taskVisualPresenter.Initialize();
+        storeTaskPresenter.Initialize();
+
     }
 
     private void ActivateEvents()
@@ -70,6 +81,11 @@ public class MainMenuEntryPoint : MonoBehaviour
         dailyRewardPresenter.OnChangeDay += dailyRewardScalePresenter.SetIndex;
         dailyRewardPresenter.OnResetDays += dailyRewardVisualPresenter.DeactivateDays;
         dailyRewardPresenter.OnLastOpenDay += dailyRewardVisualPresenter.ActivateDay;
+
+        storeTaskPresenter.OnActiveTask += taskVisualPresenter.SetActivateTask;
+        storeTaskPresenter.OnInactiveTask += taskVisualPresenter.SetInactivateTask;
+        storeTaskPresenter.OnCompletedTask += taskVisualPresenter.SetCompletedTask;
+        taskVisualPresenter.OnChooseTask += storeTaskPresenter.CompletedTask;
     }
 
     private void DeactivateEvents()
@@ -83,6 +99,11 @@ public class MainMenuEntryPoint : MonoBehaviour
         dailyRewardPresenter.OnChangeDay -= dailyRewardScalePresenter.SetIndex;
         dailyRewardPresenter.OnResetDays -= dailyRewardVisualPresenter.DeactivateDays;
         dailyRewardPresenter.OnLastOpenDay -= dailyRewardVisualPresenter.ActivateDay;
+
+        storeTaskPresenter.OnActiveTask -= taskVisualPresenter.SetActivateTask;
+        storeTaskPresenter.OnInactiveTask -= taskVisualPresenter.SetInactivateTask;
+        storeTaskPresenter.OnCompletedTask -= taskVisualPresenter.SetCompletedTask;
+        taskVisualPresenter.OnChooseTask -= storeTaskPresenter.CompletedTask;
     }
 
     private void ActivateTransitions()
@@ -122,6 +143,32 @@ public class MainMenuEntryPoint : MonoBehaviour
         dailyRewardPresenter?.Dispose();
         dailyRewardScalePresenter?.Dispose();
         dailyRewardVisualPresenter?.Dispose();
+
+        taskVisualPresenter?.Dispose();
+        storeTaskPresenter?.Dispose();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            storeTaskPresenter.ActivateTask("10games");
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            storeTaskPresenter.ActivateTask("4DifferentRoulettes");
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            storeTaskPresenter.ActivateTask("Win3TimesRow");
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            storeTaskPresenter.ActivateTask("Spend15Minutes");
+        }
     }
 
     private void OnDestroy()
