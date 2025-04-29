@@ -236,6 +236,8 @@ public class BetModel
 
                 Bet bet = _bets.GetBetById(betInfo.PosIndex);
 
+                Debug.Log(bet + "//" + betInfo.PosIndex);
+
                 if (bet.Numbers.Contains(number.Number))
                 {
                     winningPosIndexes.Add(betInfo.PosIndex);

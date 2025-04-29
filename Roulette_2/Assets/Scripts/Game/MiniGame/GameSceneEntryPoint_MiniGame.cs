@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -149,8 +148,6 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
 
         rouletteValueHistoryPresenter?.Dispose();
 
-        stateMachine?.Dispose();
-
         chipGameCountVisualPresenter.Dispose();
         storeChipPresenter.Dispose();
         pseudoChipPresenter?.Dispose();
@@ -167,6 +164,8 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         metric_BetNumberPresenter?.Dispose();
 
         animationFramePresenter.Dispose();
+
+        stateMachine?.Dispose();
     }
 
     private void OnDestroy()

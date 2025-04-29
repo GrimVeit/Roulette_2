@@ -18,6 +18,7 @@ public class ChipGameVisual : MonoBehaviour
 
     public void MoveTo(Vector3 pos)
     {
+        transform.position = _transformParent.position;
         transform.DOMove(pos, 0.1f);
     }
 

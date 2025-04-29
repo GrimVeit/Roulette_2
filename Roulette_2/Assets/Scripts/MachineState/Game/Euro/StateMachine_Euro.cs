@@ -9,11 +9,19 @@ public class StateMachine_Euro : IGlobalStateMachineProvider
 
     private IState _currentState;
 
-    public StateMachine_Euro(UIGameSceneRoot_Game sceneRoot, RouletteBallPresenter rouletteBallPresenter, RoulettePresenter roulettePresenter, RouletteValueHistoryPresenter rouletteValueHistoryPresenter, IMetric_GameCount gameCount, IMetric_GameTypeCount typeCount)
+    public StateMachine_Euro
+        (UIGameSceneRoot_Game sceneRoot, 
+        RouletteBallPresenter rouletteBallPresenter, 
+        RoulettePresenter roulettePresenter, 
+        RouletteValueHistoryPresenter rouletteValueHistoryPresenter,
+        BetPresenter betPresenter,
+        IMetric_GameCount gameCount, 
+        IMetric_GameTypeCount typeCount,
+        IAnimationFrameProvider animationFrameProvider)
     {
-        states[typeof(MainState_Euro)] = new MainState_Euro(this, sceneRoot);
+        states[typeof(MainState_Euro)] = new MainState_Euro(this, sceneRoot, betPresenter);
         states[typeof(RouletteState_Euro)] = new RouletteState_Euro(this, sceneRoot, roulettePresenter, rouletteBallPresenter, rouletteValueHistoryPresenter, gameCount, typeCount);
-        states[typeof(ResultState_Euro)] = new ResultState_Euro(this, sceneRoot);
+        states[typeof(ResultState_Euro)] = new ResultState_Euro(this, sceneRoot, betPresenter, animationFrameProvider);
     }
 
     public void Initialize()
