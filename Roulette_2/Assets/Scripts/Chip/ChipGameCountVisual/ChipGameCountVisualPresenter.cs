@@ -30,10 +30,14 @@ public class ChipGameCountVisualPresenter
     private void ActivateEvents()
     {
         _model.OnChangeChipsCount += _view.SetData;
+        _model.OnHideChips += _view.Hide;
+        _model.OnShowChips += _view.Show;
     }
 
     private void DeactivateEvents()
     {
         _model.OnChangeChipsCount -= _view.SetData;
+        _model.OnHideChips -= _view.Hide;
+        _model.OnShowChips -= _view.Show;
     }
 }

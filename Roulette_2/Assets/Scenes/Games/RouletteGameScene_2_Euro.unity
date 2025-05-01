@@ -173,22 +173,31 @@ MonoBehaviour:
   chipCountVisuals:
   - id: 0
     textCount: {fileID: 505340824}
+    objectChips: {fileID: 89147731}
   - id: 1
     textCount: {fileID: 171060476}
+    objectChips: {fileID: 1700426432}
   - id: 2
     textCount: {fileID: 1481041974}
+    objectChips: {fileID: 1061137205}
   - id: 3
     textCount: {fileID: 652750561}
+    objectChips: {fileID: 323192899}
   - id: 4
     textCount: {fileID: 1606239343}
+    objectChips: {fileID: 574538972}
   - id: 5
     textCount: {fileID: 1175944485}
+    objectChips: {fileID: 597781689}
   - id: 6
     textCount: {fileID: 1535625860}
+    objectChips: {fileID: 496502736}
   - id: 7
     textCount: {fileID: 1709471679}
+    objectChips: {fileID: 790851014}
   - id: 8
     textCount: {fileID: 1439955934}
+    objectChips: {fileID: 358569156}
 --- !u!1 &15472005
 GameObject:
   m_ObjectHideFlags: 0

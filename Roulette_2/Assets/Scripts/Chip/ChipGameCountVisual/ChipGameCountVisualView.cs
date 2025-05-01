@@ -21,6 +21,32 @@ public class ChipGameCountVisualView : View
         visual.SetData(count);
     }
 
+    public void Show(int id)
+    {
+        var visual = GetChipCountVisualById(id);
+
+        if (visual == null)
+        {
+            Debug.LogError("Not found chip count visual by id - " + id);
+            return;
+        }
+
+        visual.Show();
+    }
+
+    public void Hide(int id)
+    {
+        var visual = GetChipCountVisualById(id);
+
+        if (visual == null)
+        {
+            Debug.LogError("Not found chip count visual by id - " + id);
+            return;
+        }
+
+        visual.Hide();
+    }
+
     private ChipGameCountVisual GetChipCountVisualById(int id)
     {
         return chipCountVisuals.FirstOrDefault(ccv => ccv.ID == id);
@@ -34,9 +60,20 @@ public class ChipGameCountVisual
 
     [SerializeField] private int id;
     [SerializeField] private TextMeshProUGUI textCount;
+    [SerializeField] private GameObject objectChips;
 
     public void SetData(int count)
     {
         textCount.text = $"x{count}";
+    }
+
+    public void Show()
+    {
+        objectChips.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        objectChips.SetActive(false);
     }
 }

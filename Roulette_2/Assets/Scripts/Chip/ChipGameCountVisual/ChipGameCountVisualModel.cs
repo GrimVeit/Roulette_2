@@ -2,6 +2,8 @@ using System;
 
 public class ChipGameCountVisualModel
 {
+    public event Action<int> OnHideChips;
+    public event Action<int> OnShowChips;
     public event Action<int, int> OnChangeChipsCount;
 
     private readonly IStoreChipChangeEvents _storeChipChangeEvents;
@@ -25,6 +27,15 @@ public class ChipGameCountVisualModel
 
     private void ChangeChipsCount(int id, int count)
     {
+        if(count <= 0)
+        {
+            OnHideChips?.Invoke(id);
+        }
+        else
+        {
+            OnShowChips?.Invoke(id);
+        }
+
         OnChangeChipsCount?.Invoke(id, count);
     }
 }
