@@ -9,11 +9,19 @@ public class StateMachine_AmericaTracker : IGlobalStateMachineProvider
 
     private IState _currentState;
 
-    public StateMachine_AmericaTracker(UIGameSceneRoot_Game sceneRoot, RouletteBallPresenter rouletteBallPresenter, RoulettePresenter roulettePresenter, RouletteValueHistoryPresenter rouletteValueHistoryPresenter, IMetric_GameCount gameCount, IMetric_GameTypeCount typeCount)
+    public StateMachine_AmericaTracker
+        (UIGameSceneRoot_Game sceneRoot, 
+        RouletteBallPresenter rouletteBallPresenter, 
+        RoulettePresenter roulettePresenter, 
+        RouletteValueHistoryPresenter rouletteValueHistoryPresenter, 
+        BetPresenter betPresenter,
+        IMetric_GameCount gameCount, 
+        IMetric_GameTypeCount typeCount,
+        IAnimationFrameProvider animationFrameProvider)
     {
-        states[typeof(MainState_AmericaTracker)] = new MainState_AmericaTracker(this, sceneRoot);
+        states[typeof(MainState_AmericaTracker)] = new MainState_AmericaTracker(this, sceneRoot, betPresenter);
         states[typeof(RouletteState_AmericaTracker)] = new RouletteState_AmericaTracker(this, sceneRoot, roulettePresenter, rouletteBallPresenter, rouletteValueHistoryPresenter, gameCount, typeCount);
-        states[typeof(ResultState_AmericaTracker)] = new ResultState_AmericaTracker(this, sceneRoot);
+        states[typeof(ResultState_AmericaTracker)] = new ResultState_AmericaTracker(this, sceneRoot, betPresenter, animationFrameProvider);
     }
 
     public void Initialize()

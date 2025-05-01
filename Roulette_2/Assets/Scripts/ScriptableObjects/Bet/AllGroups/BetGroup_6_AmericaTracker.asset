@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e8a3fa016d178429165ae89ccb416e, type: 3}
+  m_Name: BetGroup_6_AmericaTracker
+  m_EditorClassIdentifier: 
+  bets:
+  - id: 0
+    numbers: 00000000
+    multiplyPayout: 36
+  - id: 1
+    numbers: 01000000
+    multiplyPayout: 36
+  - id: 2
+    numbers: 02000000
+    multiplyPayout: 36
+  - id: 3
+    numbers: 03000000
+    multiplyPayout: 36
+  - id: 4
+    numbers: 04000000
+    multiplyPayout: 36
+  - id: 5
+    numbers: 05000000
+    multiplyPayout: 36
+  - id: 6
+    numbers: 06000000
+    multiplyPayout: 36
+  - id: 7
+    numbers: 07000000
+    multiplyPayout: 36
+  - id: 8
+    numbers: 08000000
+    multiplyPayout: 36
+  - id: 9
+    numbers: 09000000
+    multiplyPayout: 36
+  - id: 10
+    numbers: 0a000000
+    multiplyPayout: 36
+  - id: 11
+    numbers: 0b000000
+    multiplyPayout: 36
+  - id: 12
+    numbers: 0c000000
+    multiplyPayout: 36
+  - id: 13
+    numbers: 0d000000
+    multiplyPayout: 36
+  - id: 14
+    numbers: 0e000000
+    multiplyPayout: 36
+  - id: 15
+    numbers: 0f000000
+    multiplyPayout: 36
+  - id: 16
+    numbers: 10000000
+    multiplyPayout: 36
+  - id: 17
+    numbers: 11000000
+    multiplyPayout: 36
+  - id: 18
+    numbers: 12000000
+    multiplyPayout: 36
+  - id: 19
+    numbers: 13000000
+    multiplyPayout: 36
+  - id: 20
+    numbers: 14000000
+    multiplyPayout: 36
+  - id: 21
+    numbers: 15000000
+    multiplyPayout: 36
+  - id: 22
+    numbers: 16000000
+    multiplyPayout: 36
+  - id: 23
+    numbers: 17000000
+    multiplyPayout: 36
+  - id: 24
+    numbers: 18000000
+    multiplyPayout: 36
+  - id: 25
+    numbers: 19000000
+    multiplyPayout: 36
+  - id: 26
+    numbers: 1a000000
+    multiplyPayout: 36
+  - id: 27
+    numbers: 1b000000
+    multiplyPayout: 36
+  - id: 28
+    numbers: 1c000000
+    multiplyPayout: 36
+  - id: 29
+    numbers: 1d000000
+    multiplyPayout: 36
+  - id: 30
+    numbers: 1e000000
+    multiplyPayout: 36
+  - id: 31
+    numbers: 1f000000
+    multiplyPayout: 36
+  - id: 32
+    numbers: 20000000
+    multiplyPayout: 36
+  - id: 33
+    numbers: 21000000
+    multiplyPayout: 36
+  - id: 34
+    numbers: 22000000
+    multiplyPayout: 36
+  - id: 35
+    numbers: 23000000
+    multiplyPayout: 36
+  - id: 36
+    numbers: 24000000
+    multiplyPayout: 36
+  - id: 37
+    numbers: 0100000004000000070000000a0000000d000000100000001300000016000000190000001c0000001f00000022000000
+    multiplyPayout: 3
+  - id: 38
+    numbers: 0200000005000000080000000b0000000e0000001100000014000000170000001a0000001d0000002000000023000000
+    multiplyPayout: 3
+  - id: 39
+    numbers: 0300000006000000090000000c0000000f0000001200000015000000180000001b0000001e0000002100000024000000
+    multiplyPayout: 3
+  - id: 40
+    numbers: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c000000
+    multiplyPayout: 3
+  - id: 41
+    numbers: 0d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000
+    multiplyPayout: 3
+  - id: 42
+    numbers: 190000001a0000001b0000001c0000001d0000001e0000001f0000002000000021000000220000002300000024000000
+    multiplyPayout: 3
+  - id: 43
+    numbers: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000
+    multiplyPayout: 2
+  - id: 44
+    numbers: 00000000020000000400000006000000080000000a0000000c0000000e00000010000000120000001400000016000000180000001a0000001c0000001e000000200000002200000024000000
+    multiplyPayout: 2
+  - id: 45
+    numbers: 01000000030000000500000007000000090000000c0000000e0000001000000012000000130000001500000017000000190000001b0000001e000000200000002200000024000000
+    multiplyPayout: 2
+  - id: 46
+    numbers: 020000000400000006000000080000000a0000000b0000000d0000000f000000110000001400000016000000180000001a0000001c0000001d0000001f0000002100000023000000
+    multiplyPayout: 2
+  - id: 47
+    numbers: 01000000030000000500000007000000090000000b0000000d0000000f00000011000000130000001500000017000000190000001b0000001d0000001f0000002100000023000000
+    multiplyPayout: 2
+  - id: 48
+    numbers: 130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f0000002000000021000000220000002300000024000000
+    multiplyPayout: 2
+  - id: -1
+    numbers: ffffffff
+    multiplyPayout: 2
