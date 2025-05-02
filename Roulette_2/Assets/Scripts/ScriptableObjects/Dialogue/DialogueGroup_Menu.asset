@@ -39,5 +39,8 @@ MonoBehaviour:
     idDesign: 3
     description: You can get even more coins by completing daily quests
   - idPerson: 0
-    idDesign: 4
+    idDesign: 5
     description: Completing these hundredth tasks can make you a little richer
+  - idPerson: 0
+    idDesign: 3
+    description: Let's start learning roulette!

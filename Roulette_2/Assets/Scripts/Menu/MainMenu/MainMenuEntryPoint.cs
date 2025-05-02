@@ -89,7 +89,7 @@ public class MainMenuEntryPoint : MonoBehaviour
         metric_WinCountPresenter = new Metric_WinCountPresenter(new Metric_WinCountModel(PlayerPrefsKeys.METRIC_WIN_ROW_COUNTS, 3, timerDailyPresenter, storeTaskPresenter));
         metric_BetNumberPresenter = new Metric_BetNumberPresenter(new Metric_BetNumberModel(PlayerPrefsKeys.METRIC_BET_NUMBER_COUNTS, 1, timerDailyPresenter, storeTaskPresenter));
 
-        stateMachine = new StateMachine_Menu(sceneRoot, dialoguePresenter, storeGameProgressPresenter);
+        stateMachine = new StateMachine_Menu(sceneRoot, dialoguePresenter, storeGameProgressPresenter, storeGameProgressPresenter, storeGameProgressPresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();

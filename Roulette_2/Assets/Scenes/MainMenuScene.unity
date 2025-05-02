@@ -7563,6 +7563,7 @@ MonoBehaviour:
   - {fileID: 9143993832319287595, guid: 1a99d25d8f5e24f478a03950a2d4a9cd, type: 3}
   - {fileID: 5328662694255654562, guid: 54d6b89b5d960bf4ba9a7a340bf93bb8, type: 3}
   - {fileID: 1196955248793160838, guid: 4cfcf8c5d4830cb40a71a30173d023c8, type: 3}
+  - {fileID: 1196955248793160838, guid: e73c4426558c5ea4bbf72874d065e505, type: 3}
   transformSpawnDialogues: {fileID: 9851453}
 --- !u!1 &844701565
 GameObject:

@@ -27,7 +27,7 @@ public class Tutorial_08_HighlightTasksBtnState_Menu : IState
 
     public void ExitState()
     {
-        _sceneRoot.OnClickToDailyReward_Main -= ChangeStateTo_09;
+        _sceneRoot.OnClickToTasks_Main -= ChangeStateTo_09;
     }
 
     private void ChangeStateTo_09()

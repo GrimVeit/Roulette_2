@@ -39,7 +39,7 @@ public class StoreGameProgressPresenter : IStoreGameProgressEvents, IGameProgres
         _model.OpenGame(id);
     }
 
-    public void CompleteTutuorial(int id)
+    public void CompleteTutorial(int id)
     {
         _model.CompleteTutuorial(id);
     }
@@ -64,7 +64,7 @@ public interface ITutorialProgressProvider_Read
 
 public interface ITutorialProgressProvider_Write
 {
-    public void CompleteTutuorial(int id);
+    public void CompleteTutorial(int id);
 }
 
 public interface IGameProgressProvider_Write
