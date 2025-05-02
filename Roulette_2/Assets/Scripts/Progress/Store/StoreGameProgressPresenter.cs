@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoreGameProgressPresenter : IStoreGameProgressEvents
+public class StoreGameProgressPresenter : IStoreGameProgressEvents, IGameProgressProvider_Write, ITutorialProgressProvider_Read, ITutorialProgressProvider_Write
 {
     private readonly StoreGameProgressModel _model;
 
@@ -55,4 +55,19 @@ public class StoreGameProgressPresenter : IStoreGameProgressEvents
 public interface IStoreGameProgressEvents
 {
     public event Action<int, bool> OnChangeGameStatus;
+}
+
+public interface ITutorialProgressProvider_Read
+{
+    public bool HasPlayedTutorialById(int id);
+}
+
+public interface ITutorialProgressProvider_Write
+{
+    public void CompleteTutuorial(int id);
+}
+
+public interface IGameProgressProvider_Write
+{
+    public void OpenGame(int id);
 }

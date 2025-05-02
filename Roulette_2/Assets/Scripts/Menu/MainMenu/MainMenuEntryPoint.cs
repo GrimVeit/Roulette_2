@@ -39,6 +39,8 @@ public class MainMenuEntryPoint : MonoBehaviour
     private Metric_WinCountPresenter metric_WinCountPresenter;
     private Metric_BetNumberPresenter metric_BetNumberPresenter;
 
+    private StateMachine_Menu stateMachine;
+
     public void Run(UIRootView uIRootView)
     {
         sceneRoot = menuRootPrefab;
@@ -61,7 +63,7 @@ public class MainMenuEntryPoint : MonoBehaviour
         timerDailyPresenter = new TimerDailyPresenter(new TimerDailyModel(PlayerPrefsKeys.LAST_EXIT_DATE));
         timerDailyVisualPresenter = new TimerDailyVisualPresenter(new TimerDailyVisualModel(timerDailyPresenter), viewContainer.GetView<TimerDailyVisualView>());
 
-        cooldownPresenter_DailyReward = new CooldownPresenter(new CooldownModel(PlayerPrefsKeys.COOLDOWN_DAILY_REWARD, TimeSpan.FromSeconds(5)), viewContainer.GetView<CooldownView>());
+        cooldownPresenter_DailyReward = new CooldownPresenter(new CooldownModel(PlayerPrefsKeys.COOLDOWN_DAILY_REWARD, TimeSpan.FromDays(1)), viewContainer.GetView<CooldownView>());
         dailyRewardPresenter = new DailyRewardPresenter(new DailyRewardModel(PlayerPrefsKeys.DAY_DAILY_REWARD, dailyRewardValues, bankPresenter), viewContainer.GetView<DailyRewardView>());
         dailyRewardScalePresenter = new DailyRewardScalePresenter(new DailyRewardScaleModel(), viewContainer.GetView<DailyRewardScaleView>());
         dailyRewardVisualPresenter = new DailyRewardVisualPresenter(new DailyRewardVisualModel(), viewContainer.GetView<DailyRewardVisualView>());
@@ -81,6 +83,8 @@ public class MainMenuEntryPoint : MonoBehaviour
         metric_GameTypeCountPresenter = new Metric_GameTypeCountPresenter(new Metric_GameTypeCountModel(PlayerPrefsKeys.METRIC_GAME_TYPE_COUNTS, 4, storeTaskPresenter, timerDailyPresenter));
         metric_WinCountPresenter = new Metric_WinCountPresenter(new Metric_WinCountModel(PlayerPrefsKeys.METRIC_WIN_ROW_COUNTS, 3, timerDailyPresenter, storeTaskPresenter));
         metric_BetNumberPresenter = new Metric_BetNumberPresenter(new Metric_BetNumberModel(PlayerPrefsKeys.METRIC_BET_NUMBER_COUNTS, 1, timerDailyPresenter, storeTaskPresenter));
+
+        stateMachine = new StateMachine_Menu(sceneRoot);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -116,6 +120,8 @@ public class MainMenuEntryPoint : MonoBehaviour
         metric_WinCountPresenter.Initialize();
         metric_BetNumberPresenter.Initialize();
 
+        stateMachine.Initialize();
+
     }
 
     private void ActivateEvents()
@@ -148,15 +154,6 @@ public class MainMenuEntryPoint : MonoBehaviour
 
     private void ActivateTransitions()
     {
-        sceneRoot.OnClickToBack_DailyReward += sceneRoot.OpenMainPanel;
-        sceneRoot.OnClickToBack_Tasks += sceneRoot.OpenMainPanel;
-        sceneRoot.OnClickToBack_Chips += sceneRoot.OpenMainPanel;
-
-        sceneRoot.OnClickToDailyReward_Main += sceneRoot.OpenDailyRewardPanel;
-        sceneRoot.OnClickToTasks_Main += sceneRoot.OpenTasksPanel;
-        sceneRoot.OnClickToChips_Main += sceneRoot.OpenChipsPanel;
-
-
         sceneRoot.OnClickToMini += HandleGoToRoulette_Mini;
         sceneRoot.OnClickToEuro += HandleGoToRoulette_Euro;
         sceneRoot.OnClickToAmerica += HandleGoToRoulette_America;
@@ -167,14 +164,6 @@ public class MainMenuEntryPoint : MonoBehaviour
 
     private void DeactivateTransitions()
     {
-        sceneRoot.OnClickToBack_DailyReward -= sceneRoot.OpenMainPanel;
-        sceneRoot.OnClickToBack_Tasks -= sceneRoot.OpenMainPanel;
-        sceneRoot.OnClickToBack_Chips -= sceneRoot.OpenMainPanel;
-
-        sceneRoot.OnClickToDailyReward_Main -= sceneRoot.OpenDailyRewardPanel;
-        sceneRoot.OnClickToTasks_Main -= sceneRoot.OpenTasksPanel;
-        sceneRoot.OnClickToChips_Main -= sceneRoot.OpenChipsPanel;
-
         sceneRoot.OnClickToMini -= HandleGoToRoulette_Mini;
         sceneRoot.OnClickToEuro -= HandleGoToRoulette_Euro;
         sceneRoot.OnClickToAmerica -= HandleGoToRoulette_America;
@@ -221,34 +210,36 @@ public class MainMenuEntryPoint : MonoBehaviour
         metric_GameTypeCountPresenter?.Dispose();
         metric_WinCountPresenter?.Dispose();
         metric_BetNumberPresenter?.Dispose();
+
+        stateMachine?.Dispose();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            storeGameProgressPresenter.OpenGame(2);
-        }
+        //if (Input.GetKeyDown(KeyCode.W))
+        //{
+        //    storeGameProgressPresenter.OpenGame(2);
+        //}
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            storeGameProgressPresenter.OpenGame(4);
-        }
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    storeGameProgressPresenter.OpenGame(4);
+        //}
 
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            storeGameProgressPresenter.OpenGame(1);
-        }
+        //if (Input.GetKeyDown(KeyCode.S))
+        //{
+        //    storeGameProgressPresenter.OpenGame(1);
+        //}
 
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            storeGameProgressPresenter.OpenGame(6);
-        }
+        //if (Input.GetKeyDown(KeyCode.D))
+        //{
+        //    storeGameProgressPresenter.OpenGame(6);
+        //}
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            storeGameProgressPresenter.OpenGame(5);
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    storeGameProgressPresenter.OpenGame(5);
+        //}
     }
 
     private void OnDestroy()
