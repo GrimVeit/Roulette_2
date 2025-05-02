@@ -5,6 +5,7 @@ public class MainMenuEntryPoint : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
     [SerializeField] private ChipGroup chipGroup;
+    [SerializeField] private DialogueGroup dialogueGroup;
     [SerializeField] private DailyRewardValues dailyRewardValues;
     [SerializeField] private TaskGroup taskGroup;
     [SerializeField] private UIMainMenuRoot menuRootPrefab;
@@ -30,6 +31,8 @@ public class MainMenuEntryPoint : MonoBehaviour
 
     private StoreGameProgressPresenter storeGameProgressPresenter;
     private GameProgressVisualPresenter gameProgressVisualPresenter;
+
+    private DialoguePresenter dialoguePresenter;
 
     private TimerDailyPresenter timerDailyPresenter;
     private TimerDailyVisualPresenter timerDailyVisualPresenter;
@@ -78,13 +81,15 @@ public class MainMenuEntryPoint : MonoBehaviour
         storeGameProgressPresenter = new StoreGameProgressPresenter(new StoreGameProgressModel());
         gameProgressVisualPresenter = new GameProgressVisualPresenter(new GameProgressVisualModel(storeGameProgressPresenter), viewContainer.GetView<GameProgressVisualView>());
 
+        dialoguePresenter = new DialoguePresenter(new DialogueModel(dialogueGroup), viewContainer.GetView<DialogueView>());
+
         metric_GameTimeSessionPresenter = new Metric_GameTimeSessionPresenter(new Metric_GameTimeSessionModel(PlayerPrefsKeys.METRIC_GAME_TIME_SESSION, timerDailyPresenter, storeTaskPresenter, 15));
         metric_GameCountPresenter = new Metric_GameCountPresenter(new Metric_GameCountModel(PlayerPrefsKeys.METRIC_GAME_COUNTS, storeTaskPresenter, timerDailyPresenter, 10));
         metric_GameTypeCountPresenter = new Metric_GameTypeCountPresenter(new Metric_GameTypeCountModel(PlayerPrefsKeys.METRIC_GAME_TYPE_COUNTS, 4, storeTaskPresenter, timerDailyPresenter));
         metric_WinCountPresenter = new Metric_WinCountPresenter(new Metric_WinCountModel(PlayerPrefsKeys.METRIC_WIN_ROW_COUNTS, 3, timerDailyPresenter, storeTaskPresenter));
         metric_BetNumberPresenter = new Metric_BetNumberPresenter(new Metric_BetNumberModel(PlayerPrefsKeys.METRIC_BET_NUMBER_COUNTS, 1, timerDailyPresenter, storeTaskPresenter));
 
-        stateMachine = new StateMachine_Menu(sceneRoot);
+        stateMachine = new StateMachine_Menu(sceneRoot, dialoguePresenter, storeGameProgressPresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -113,6 +118,8 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         gameProgressVisualPresenter.Initialize();
         storeGameProgressPresenter.Initialize();
+
+        dialoguePresenter.Initialize();
 
         metric_GameTimeSessionPresenter.Initialize();
         metric_GameCountPresenter.Initialize();
@@ -204,6 +211,8 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         gameProgressVisualPresenter.Dispose();
         storeGameProgressPresenter.Dispose();
+
+        dialoguePresenter?.Dispose();
 
         metric_GameTimeSessionPresenter?.Dispose();
         metric_GameCountPresenter?.Dispose();

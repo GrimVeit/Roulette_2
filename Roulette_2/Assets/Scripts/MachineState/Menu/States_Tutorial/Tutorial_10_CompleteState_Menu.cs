@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tutorial_10_CompleteState_Menu : MonoBehaviour
+public class Tutorial_10_CompleteState_Menu : IState
 {
-    // Start is called before the first frame update
-    void Start()
+    public void EnterState()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ExitState()
     {
-        
+
     }
 }

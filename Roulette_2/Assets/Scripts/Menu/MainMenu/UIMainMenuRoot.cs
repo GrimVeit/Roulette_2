@@ -8,6 +8,9 @@ public class UIMainMenuRoot : UIRoot
     [SerializeField] private TasksPanel_Menu _tasksPanel;
     [SerializeField] private ChipsPanel_Menu _chipsPanel;
 
+    [Header("Others")]
+    [SerializeField] private MovePanel _avatarNicknamePanel;
+
     private ISoundProvider _soundProvider;
 
     public void SetSoundProvider(ISoundProvider soundProvider)
@@ -21,6 +24,8 @@ public class UIMainMenuRoot : UIRoot
         _dailyRewardPanel.Initialize();
         _tasksPanel.Initialize();
         _chipsPanel.Initialize();
+
+        _avatarNicknamePanel.Initialize();
     }
 
     public void Activate()
@@ -39,8 +44,6 @@ public class UIMainMenuRoot : UIRoot
         _mainPanel.OnClickToAmericaMulti += HandleClickToAmericaMulti;
         _mainPanel.OnClickToFrench += HandleClickToFrench;
         _mainPanel.OnClickToAmericaTracker += HandleClickToAmericaTracker;
-
-        OpenMainPanel();
     }
 
 
@@ -93,6 +96,20 @@ public class UIMainMenuRoot : UIRoot
     {
         OpenPanel(_chipsPanel);
     }
+
+    #region OTHERS
+
+    public void OpenAvatarNicknamePanel()
+    {
+        OpenOtherPanel(_avatarNicknamePanel);
+    }
+
+    public void CloseAvatarNicknamePanel()
+    {
+        CloseOtherPanel(_avatarNicknamePanel);
+    }
+
+    #endregion
 
 
     #region Output

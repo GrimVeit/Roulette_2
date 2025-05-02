@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93bc8d4795036ca4eac8752f5fabacf7, type: 3}
+  m_Name: DialogueGroup_Menu
+  m_EditorClassIdentifier: 
+  dialogues:
+  - idPerson: 0
+    idDesign: 0
+    description: Hi, my name is Olivia and I am glad to welcome you to our Roulette
+  - idPerson: 0
+    idDesign: 1
+    description: What should I call you?
+  - idPerson: 0
+    idDesign: 2
+    description: Nice to meet you. I'll introduce you to the interface with my friends
+  - idPerson: 0
+    idDesign: 3
+    description: It's your balance sheet
+  - idPerson: 0
+    idDesign: 3
+    description: Lets's give you some coins. Log in to the game every day and earn
+      free coins
+  - idPerson: 0
+    idDesign: 4
+    description: You'll earn more coins every day! Maximum 3000!
+  - idPerson: 0
+    idDesign: 4
+    description: But if you miss even one day, you will lose all progress
+  - idPerson: 0
+    idDesign: 3
+    description: You can get even more coins by completing daily quests
+  - idPerson: 0
+    idDesign: 4
+    description: Completing these hundredth tasks can make you a little richer

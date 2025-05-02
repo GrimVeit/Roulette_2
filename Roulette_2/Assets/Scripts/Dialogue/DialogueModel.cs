@@ -46,5 +46,7 @@ public class DialogueModel
             Debug.LogError("Not found dialogue with id - " + _dialogueIndex);
             return;
         }
+
+        OnChangeDialogue?.Invoke(dialogue);
     }
 }
