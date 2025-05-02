@@ -28,6 +28,9 @@ public class MainMenuEntryPoint : MonoBehaviour
     private ChipBuyPresenter chipBuyPresenter;
     private ChipMenuCountVisualPresenter chipCountVisualPresenter;
 
+    private StoreGameProgressPresenter storeGameProgressPresenter;
+    private GameProgressVisualPresenter gameProgressVisualPresenter;
+
     private TimerDailyPresenter timerDailyPresenter;
     private TimerDailyVisualPresenter timerDailyVisualPresenter;
     private Metric_GameTimeSessionPresenter metric_GameTimeSessionPresenter;
@@ -70,6 +73,9 @@ public class MainMenuEntryPoint : MonoBehaviour
         chipBuyPresenter = new ChipBuyPresenter(new ChipBuyModel(chipGroup, storeChipPresenter, bankPresenter), viewContainer.GetView<ChipBuyView>());
         chipCountVisualPresenter = new ChipMenuCountVisualPresenter(new ChipMenuCountVisualModel(), viewContainer.GetView<ChipMenuCountVisualView>());
 
+        storeGameProgressPresenter = new StoreGameProgressPresenter(new StoreGameProgressModel());
+        gameProgressVisualPresenter = new GameProgressVisualPresenter(new GameProgressVisualModel(storeGameProgressPresenter), viewContainer.GetView<GameProgressVisualView>());
+
         metric_GameTimeSessionPresenter = new Metric_GameTimeSessionPresenter(new Metric_GameTimeSessionModel(PlayerPrefsKeys.METRIC_GAME_TIME_SESSION, timerDailyPresenter, storeTaskPresenter, 15));
         metric_GameCountPresenter = new Metric_GameCountPresenter(new Metric_GameCountModel(PlayerPrefsKeys.METRIC_GAME_COUNTS, storeTaskPresenter, timerDailyPresenter, 10));
         metric_GameTypeCountPresenter = new Metric_GameTypeCountPresenter(new Metric_GameTypeCountModel(PlayerPrefsKeys.METRIC_GAME_TYPE_COUNTS, 4, storeTaskPresenter, timerDailyPresenter));
@@ -100,6 +106,9 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         timerDailyPresenter.Initialize();
         timerDailyVisualPresenter.Initialize();
+
+        gameProgressVisualPresenter.Initialize();
+        storeGameProgressPresenter.Initialize();
 
         metric_GameTimeSessionPresenter.Initialize();
         metric_GameCountPresenter.Initialize();
@@ -204,6 +213,9 @@ public class MainMenuEntryPoint : MonoBehaviour
         timerDailyPresenter?.Dispose();
         timerDailyVisualPresenter?.Dispose();
 
+        gameProgressVisualPresenter.Dispose();
+        storeGameProgressPresenter.Dispose();
+
         metric_GameTimeSessionPresenter?.Dispose();
         metric_GameCountPresenter?.Dispose();
         metric_GameTypeCountPresenter?.Dispose();
@@ -215,27 +227,27 @@ public class MainMenuEntryPoint : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            storeTaskPresenter.ActivateTask("10games");
+            storeGameProgressPresenter.OpenGame(2);
         }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-            storeTaskPresenter.ActivateTask("4DifferentRoulettes");
+            storeGameProgressPresenter.OpenGame(4);
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            storeTaskPresenter.ActivateTask("Win3TimesRow");
+            storeGameProgressPresenter.OpenGame(1);
         }
 
         if (Input.GetKeyDown(KeyCode.D))
         {
-            storeTaskPresenter.ActivateTask("Spend15Minutes");
+            storeGameProgressPresenter.OpenGame(6);
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            storeTaskPresenter.ChangeTasks();
+            storeGameProgressPresenter.OpenGame(5);
         }
     }
 

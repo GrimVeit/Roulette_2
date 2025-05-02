@@ -285,17 +285,7 @@ public class BetModel
         {
             var listChips = _currentBets.Where(data => data.PosIndex == currentBet.PosIndex).ToList();
 
-            if (winningPosIndexes.Contains(currentBet.PosIndex))
-            {
-                for (int i = 0; i < listChips.Count; i++)
-                {
-                    AddChipInStore(listChips[i].IdChipGroup);
-                    OnReturnChip?.Invoke(listChips[i].IdChipGroup, listChips[i].PosIndex);
-                }
-
-                Debug.Log("Winnings:" + string.Join(", ", listChips));
-            }
-            else
+            if (!winningPosIndexes.Contains(currentBet.PosIndex))
             {
                 for (int i = 0; i < listChips.Count; i++)
                 {
@@ -304,6 +294,39 @@ public class BetModel
 
                 Debug.Log("Failure:" + string.Join(", ", listChips));
             }
+
+            //if (winningPosIndexes.Contains(currentBet.PosIndex))
+            //{
+            //    for (int i = 0; i < listChips.Count; i++)
+            //    {
+            //        AddChipInStore(listChips[i].IdChipGroup);
+            //        OnReturnChip?.Invoke(listChips[i].IdChipGroup, listChips[i].PosIndex);
+            //    }
+
+            //    Debug.Log("Winnings:" + string.Join(", ", listChips));
+            //}
+            //else
+            //{
+            //    for (int i = 0; i < listChips.Count; i++)
+            //    {
+            //        OnFallenChip?.Invoke(listChips[i].IdChipGroup, listChips[i].PosIndex);
+            //    }
+
+            //    Debug.Log("Failure:" + string.Join(", ", listChips));
+            //}
+        }
+
+        foreach (var currentBetIndex in winningPosIndexes)
+        {
+            var listChips = _currentBets.Where(data => data.PosIndex == currentBetIndex).ToList();
+
+            for (int i = 0; i < listChips.Count; i++)
+            {
+                AddChipInStore(listChips[i].IdChipGroup);
+                OnReturnChip?.Invoke(listChips[i].IdChipGroup, listChips[i].PosIndex);
+            }
+
+            Debug.Log("Winnings:" + string.Join(", ", listChips));
         }
 
         _savedBets.Clear();
