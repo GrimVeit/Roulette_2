@@ -9,7 +9,8 @@ public class UIMainMenuRoot : UIRoot
     [SerializeField] private ChipsPanel_Menu _chipsPanel;
 
     [Header("Others")]
-    [SerializeField] private MovePanel _avatarNicknamePanel;
+    [SerializeField] private AvatarNicknamePanel_Menu _avatarNicknamePanel;
+    [SerializeField] private SaveAvatarNicknameDataPanel_Menu _saveAvatarNicknameDataPanel;
 
     private ISoundProvider _soundProvider;
 
@@ -26,10 +27,13 @@ public class UIMainMenuRoot : UIRoot
         _chipsPanel.Initialize();
 
         _avatarNicknamePanel.Initialize();
+        _saveAvatarNicknameDataPanel.Initialize();
     }
 
     public void Activate()
     {
+        _saveAvatarNicknameDataPanel.OnClickToSave += HandleClickToSave_AvatarNickname;
+
         _dailyRewardPanel.OnClickToBack += HandleClickToBack_DailyReward;
         _tasksPanel.OnClickToBack += HandleClickToBack_Tasks;
         _chipsPanel.OnClickToBack += HandleClickToBack_Chips;
@@ -49,6 +53,8 @@ public class UIMainMenuRoot : UIRoot
 
     public void Deactivate()
     {
+        _saveAvatarNicknameDataPanel.OnClickToSave -= HandleClickToSave_AvatarNickname;
+
         _dailyRewardPanel.OnClickToBack -= HandleClickToBack_DailyReward;
         _tasksPanel.OnClickToBack -= HandleClickToBack_Tasks;
         _chipsPanel.OnClickToBack -= HandleClickToBack_Chips;
@@ -74,6 +80,9 @@ public class UIMainMenuRoot : UIRoot
         _dailyRewardPanel.Dispose();
         _tasksPanel.Dispose();
         _chipsPanel.Dispose();
+
+        _avatarNicknamePanel.Dispose();
+        _saveAvatarNicknameDataPanel.Dispose();
     }
 
 
@@ -109,10 +118,33 @@ public class UIMainMenuRoot : UIRoot
         CloseOtherPanel(_avatarNicknamePanel);
     }
 
+
+
+    public void OpenSaveAvatarDataPanel()
+    {
+        OpenOtherPanel(_saveAvatarNicknameDataPanel);
+    }
+
+    public void CloseSaveAvatarDataPanel()
+    {
+        CloseOtherPanel(_saveAvatarNicknameDataPanel);
+    }
+
     #endregion
 
 
     #region Output
+
+    #region OTHER
+
+    public event Action OnClickToSave_AvatarNickname;
+
+    private void HandleClickToSave_AvatarNickname()
+    {
+        OnClickToSave_AvatarNickname?.Invoke();
+    }
+
+    #endregion
 
     #region MainPanel
 

@@ -7,14 +7,16 @@ public class Tutorial_07_DailyBonus2State_Menu : IState
     private readonly IGlobalStateMachineProvider _globalStateMachineProvider;
     private readonly DialoguePresenter _dialoguePresenter;
     private readonly UIMainMenuRoot _sceneRoot;
+    private readonly IHandPointerProvider _handPointerProvider;
 
     private IEnumerator coroutineTimer;
 
-    public Tutorial_07_DailyBonus2State_Menu(IGlobalStateMachineProvider globalStateMachineProvider, DialoguePresenter dialoguePresenter, UIMainMenuRoot sceneRoot)
+    public Tutorial_07_DailyBonus2State_Menu(IGlobalStateMachineProvider globalStateMachineProvider, DialoguePresenter dialoguePresenter, UIMainMenuRoot sceneRoot, IHandPointerProvider handPointerProvider)
     {
         _globalStateMachineProvider = globalStateMachineProvider;
         _dialoguePresenter = dialoguePresenter;
         _sceneRoot = sceneRoot;
+        _handPointerProvider = handPointerProvider;
     }
 
     public void EnterState()
@@ -22,6 +24,7 @@ public class Tutorial_07_DailyBonus2State_Menu : IState
         Debug.Log("<color=red>ACTIVATE STATE - TUTORIAL 07 STATE / MENU</color>");
 
         _dialoguePresenter.Next();
+        _handPointerProvider.Move(3);
 
         if (coroutineTimer != null) Coroutines.Stop(coroutineTimer);
 
@@ -31,8 +34,6 @@ public class Tutorial_07_DailyBonus2State_Menu : IState
 
     public void ExitState()
     {
-        _sceneRoot.CloseAvatarNicknamePanel();
-
         if (coroutineTimer != null) Coroutines.Stop(coroutineTimer);
     }
 

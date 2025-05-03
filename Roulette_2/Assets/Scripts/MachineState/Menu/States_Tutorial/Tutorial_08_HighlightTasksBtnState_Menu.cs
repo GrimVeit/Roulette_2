@@ -7,12 +7,14 @@ public class Tutorial_08_HighlightTasksBtnState_Menu : IState
     private readonly IGlobalStateMachineProvider _globalStateMachineProvider;
     private readonly DialoguePresenter _dialoguePresenter;
     private readonly UIMainMenuRoot _sceneRoot;
+    private readonly IHandPointerProvider _handPointerProvider;
 
-    public Tutorial_08_HighlightTasksBtnState_Menu(IGlobalStateMachineProvider globalStateMachineProvider, DialoguePresenter dialoguePresenter, UIMainMenuRoot sceneRoot)
+    public Tutorial_08_HighlightTasksBtnState_Menu(IGlobalStateMachineProvider globalStateMachineProvider, DialoguePresenter dialoguePresenter, UIMainMenuRoot sceneRoot, IHandPointerProvider handPointerProvider)
     {
         _globalStateMachineProvider = globalStateMachineProvider;
         _dialoguePresenter = dialoguePresenter;
         _sceneRoot = sceneRoot;
+        _handPointerProvider = handPointerProvider;
     }
 
     public void EnterState()
@@ -23,6 +25,7 @@ public class Tutorial_08_HighlightTasksBtnState_Menu : IState
         _sceneRoot.OpenMainPanel();
 
         _dialoguePresenter.Next();
+        _handPointerProvider.Move(4);
     }
 
     public void ExitState()
@@ -32,6 +35,7 @@ public class Tutorial_08_HighlightTasksBtnState_Menu : IState
 
     private void ChangeStateTo_09()
     {
+        _handPointerProvider.Deactivate();
         _globalStateMachineProvider.SetState(_globalStateMachineProvider.GetState<Tutorial_09_DailyTasksState_Menu>());
     }
 }

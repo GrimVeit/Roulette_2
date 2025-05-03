@@ -31,8 +31,6 @@ public class Tutorial_09_DailyTasksState_Menu : IState
 
     public void ExitState()
     {
-        _sceneRoot.CloseAvatarNicknamePanel();
-
         if (coroutineTimer != null) Coroutines.Stop(coroutineTimer);
     }
 

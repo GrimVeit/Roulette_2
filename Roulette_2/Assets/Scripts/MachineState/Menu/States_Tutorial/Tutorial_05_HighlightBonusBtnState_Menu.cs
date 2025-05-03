@@ -7,12 +7,14 @@ public class Tutorial_05_HighlightBonusBtnState_Menu : IState
     private readonly IGlobalStateMachineProvider _globalStateMachineProvider;
     private readonly DialoguePresenter _dialoguePresenter;
     private readonly UIMainMenuRoot _sceneRoot;
+    private readonly IHandPointerProvider _handPointerProvider;
 
-    public Tutorial_05_HighlightBonusBtnState_Menu(IGlobalStateMachineProvider globalStateMachineProvider, DialoguePresenter dialoguePresenter, UIMainMenuRoot sceneRoot)
+    public Tutorial_05_HighlightBonusBtnState_Menu(IGlobalStateMachineProvider globalStateMachineProvider, DialoguePresenter dialoguePresenter, UIMainMenuRoot sceneRoot, IHandPointerProvider handPointerProvider)
     {
         _globalStateMachineProvider = globalStateMachineProvider;
         _dialoguePresenter = dialoguePresenter;
         _sceneRoot = sceneRoot;
+        _handPointerProvider = handPointerProvider;
     }
 
     public void EnterState()
@@ -22,6 +24,7 @@ public class Tutorial_05_HighlightBonusBtnState_Menu : IState
         _sceneRoot.OnClickToDailyReward_Main += ChangeStateTo_06;
 
         _dialoguePresenter.Next();
+        _handPointerProvider.Move(1);
     }
 
     public void ExitState()

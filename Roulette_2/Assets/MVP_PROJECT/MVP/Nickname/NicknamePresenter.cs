@@ -15,7 +15,6 @@ public class NicknamePresenter
     {
         ActivateEvents();
 
-        nicknameModel.Initialize();
         nicknameView.Initialize();
     }
 
@@ -32,6 +31,9 @@ public class NicknamePresenter
 
         nicknameModel.OnGetNickname += nicknameView.ChangeNickname;
         nicknameModel.OnEnterRegisterLoginError += nicknameView.DisplayDescription;
+
+        nicknameModel.OnCorrectNickname += nicknameView.ActivateButton;
+        nicknameModel.OnIncorrectNickname += nicknameView.DeactivateButton;
     }
 
     private void DeactivateEvents()
@@ -40,6 +42,9 @@ public class NicknamePresenter
 
         nicknameModel.OnGetNickname -= nicknameView.ChangeNickname;
         nicknameModel.OnEnterRegisterLoginError -= nicknameView.DisplayDescription;
+
+        nicknameModel.OnCorrectNickname -= nicknameView.ActivateButton;
+        nicknameModel.OnIncorrectNickname -= nicknameView.DeactivateButton;
     }
 
     #region Input

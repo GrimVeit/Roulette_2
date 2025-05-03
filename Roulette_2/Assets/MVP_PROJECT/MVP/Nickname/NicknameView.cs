@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NicknameView : View
 {
@@ -12,6 +13,7 @@ public class NicknameView : View
 
     [SerializeField] private TMP_InputField inputFieldNickname;
     [SerializeField] private TextMeshProUGUI textDescription;
+    [SerializeField] private Button button;
 
     public void Initialize()
     {
@@ -21,6 +23,16 @@ public class NicknameView : View
     public void Dispose()
     {
         inputFieldNickname.onValueChanged.RemoveListener(HandlerOnNicknameTextValueChanged);
+    }
+
+    public void ActivateButton()
+    {
+        button.gameObject.SetActive(true);
+    }
+
+    public void DeactivateButton()
+    {
+        button.gameObject.SetActive(false);
     }
 
     public void ChangeNickname(string nickname)

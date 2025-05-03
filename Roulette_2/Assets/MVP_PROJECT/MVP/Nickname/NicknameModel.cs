@@ -20,20 +20,11 @@ public class NicknameModel
 
     public string Nickname { get; private set; }
 
-    private readonly string keyNickname;
-
     private ISoundProvider soundProvider;
 
-    public NicknameModel(string keyNickname, ISoundProvider soundProvider)
+    public NicknameModel(ISoundProvider soundProvider)
     {
-        this.keyNickname = keyNickname;
         this.soundProvider = soundProvider;
-    }
-
-    public void Initialize()
-    {
-        Nickname = PlayerPrefs.GetString(keyNickname, "Error");
-        OnGetNickname?.Invoke(Nickname);
     }
 
     public void ChangeNickname(string value)
@@ -41,7 +32,7 @@ public class NicknameModel
         Nickname = value;
         OnGetNickname?.Invoke(Nickname);
 
-        soundProvider.PlayOneShot("TextEnter");
+        //soundProvider.PlayOneShot("TextEnter");
 
         if (value.Length < 5)
         {
@@ -79,28 +70,5 @@ public class NicknameModel
 
         OnEnterRegisterLoginError?.Invoke("");
         OnCorrectNickname?.Invoke();
-    }
-
-    public void RandomNickname()
-    {
-        Coroutines.Start(RandomizerCoroutine());
-    }
-
-    private IEnumerator RandomizerCoroutine()
-    {
-        UnityWebRequest request = UnityWebRequest.Get(URL);
-
-        yield return request.SendWebRequest();
-
-        if (request.result != UnityWebRequest.Result.Success)
-        {
-            Debug.Log("No randomizing nickname");
-            OnGetRandomNickname?.Invoke("NoConnect");
-            yield break;
-        }
-
-        string nick = request.downloadHandler.text;
-
-        OnGetRandomNickname?.Invoke(nick.Remove(nick.Length - 3));
     }
 }
