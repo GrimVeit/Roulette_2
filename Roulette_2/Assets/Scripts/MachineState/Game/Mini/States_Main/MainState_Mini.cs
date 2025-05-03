@@ -7,12 +7,16 @@ public class MainState_Mini : IState
     private readonly IGlobalStateMachineProvider _stateProvider;
     private readonly UIGameSceneRoot_Game _sceneRoot;
     private readonly BetPresenter _betPresenter;
+    private readonly IPseudoChipActivatorProvider _pseudoChipActivatorProvider;
+    private readonly IBetCellActivatorProvider _betCellActivatorProvider;
 
-    public MainState_Mini(IGlobalStateMachineProvider stateProvider, UIGameSceneRoot_Game sceneRoot, BetPresenter betPresenter)
+    public MainState_Mini(IGlobalStateMachineProvider stateProvider, UIGameSceneRoot_Game sceneRoot, BetPresenter betPresenter, IPseudoChipActivatorProvider pseudoChipActivatorProvider, IBetCellActivatorProvider betCellActivatorProvider)
     {
         _sceneRoot = sceneRoot;
         _stateProvider = stateProvider;
         _betPresenter = betPresenter;
+        _pseudoChipActivatorProvider = pseudoChipActivatorProvider;
+        _betCellActivatorProvider = betCellActivatorProvider;
     }
 
     public void EnterState()
@@ -22,8 +26,12 @@ public class MainState_Mini : IState
         _sceneRoot.OnClickToSpin += ChangeStateToRoulette;
 
         _sceneRoot.OpenFooterPanel();
-        _sceneRoot.OpenHeaderPanel();
+        _sceneRoot.OpenBalancePanel();
         _sceneRoot.OpenMainPanel();
+        _sceneRoot.OpenMenuPanel();
+
+        _pseudoChipActivatorProvider.Activate();
+        _betCellActivatorProvider.Activate();
 
         _betPresenter.ClearTable();
     }
@@ -35,7 +43,11 @@ public class MainState_Mini : IState
         _sceneRoot.OnClickToSpin -= ChangeStateToRoulette;
 
         _sceneRoot.CloseFooterPanel();
-        _sceneRoot.CloseHeaderPanel();
+        _sceneRoot.CloseBalancePanel();
+        _sceneRoot.CloseMenuPanel();
+
+        _pseudoChipActivatorProvider.Deactivate();
+        _betCellActivatorProvider.Deactivate();
     }
 
     private void ChangeStateToRoulette()

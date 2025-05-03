@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameSceneEntryPoint_MiniGame : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
+    [SerializeField] private DialogueGroup dialogueGroup;
     [SerializeField] private TaskGroup taskGroup;
     [SerializeField] private ChipGroup chipGroup;
     [SerializeField] private Bets bets;
@@ -20,6 +21,10 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
     private RouletteBallPresenter rouletteBallPresenter;
 
     private RouletteValueHistoryPresenter rouletteValueHistoryPresenter;
+
+    private StoreGameProgressPresenter storeGameProgressPresenter;
+    private DialoguePresenter dialoguePresenter;
+    //private HandPointerPresenter handPointerPresenter;
 
     private StoreChipPresenter storeChipPresenter;
     private ChipGameCountVisualPresenter chipGameCountVisualPresenter;
@@ -75,7 +80,24 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
 
         animationFramePresenter = new AnimationFramePresenter(new AnimationFrameModel(), viewContainer.GetView<AnimationFrameView>());
 
-        stateMachine = new StateMachine_Mini(sceneRoot, rouletteBallPresenter, roulettePresenter, rouletteValueHistoryPresenter, betPresenter, metric_GameCountPresenter, metric_GameTypeCountPresenter, animationFramePresenter);
+        storeGameProgressPresenter = new StoreGameProgressPresenter(new StoreGameProgressModel());
+        dialoguePresenter = new DialoguePresenter(new DialogueModel(dialogueGroup), viewContainer.GetView<DialogueView>());
+        //handPointerPresenter = new HandPointerPresenter(new HandPointerModel(), viewContainer.GetView<HandPointerView>());
+
+        stateMachine = new StateMachine_Mini
+            (sceneRoot,
+            rouletteBallPresenter,
+            roulettePresenter,
+            rouletteValueHistoryPresenter,
+            storeGameProgressPresenter,
+            betPresenter,
+            dialoguePresenter,
+            betCellPresenter,
+            pseudoChipPresenter,
+            metric_GameCountPresenter,
+            metric_GameTypeCountPresenter,
+            animationFramePresenter
+            );
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -109,6 +131,10 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         metric_BetNumberPresenter.Initialize();
 
         animationFramePresenter.Initialize();
+
+        //handPointerPresenter.Initialize();
+        dialoguePresenter.Initialize();
+        storeGameProgressPresenter.Initialize();
 
         stateMachine.Initialize();
     }
@@ -164,6 +190,10 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         metric_BetNumberPresenter?.Dispose();
 
         animationFramePresenter.Dispose();
+
+        //handPointerPresenter.Dispose();
+        dialoguePresenter.Dispose();
+        storeGameProgressPresenter.Dispose();
 
         stateMachine?.Dispose();
     }

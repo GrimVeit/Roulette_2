@@ -8,6 +8,8 @@ public class BetCellModel
 {
     private readonly IBetProvider _betProvider;
 
+    private bool isActive;
+
     public BetCellModel(IBetProvider betProvider)
     {
         _betProvider = betProvider;
@@ -20,16 +22,34 @@ public class BetCellModel
 
     public void ReturnLastChip()
     {
+        if(!isActive) return;
+
         _betProvider.ReturnLastChip();
     }
 
     public void ReturnAllChips()
     {
+        if (!isActive) return;
+
         _betProvider.ReturnAllChips();
     }
 
     public void ReturnAllBets()
     {
+        if (!isActive) return;
+
         _betProvider.ReturnAllBets();
+    }
+
+
+
+    public void Activate()
+    {
+        isActive = true;
+    }
+
+    public void Deactivate()
+    {
+        isActive = false;
     }
 }

@@ -14,19 +14,36 @@ public class StateMachine_Mini : IGlobalStateMachineProvider
         RouletteBallPresenter rouletteBallPresenter, 
         RoulettePresenter roulettePresenter, 
         RouletteValueHistoryPresenter rouletteValueHistoryPresenter,
+        StoreGameProgressPresenter storeGameProgressPresenter,
         BetPresenter betPresenter,
+        DialoguePresenter dialoguePresenter,
+        IBetCellActivatorProvider betCellActivatorProvider,
+        IPseudoChipActivatorProvider pseudoChipActivatorProvider,
         IMetric_GameCount metric_GameCount,
         IMetric_GameTypeCount metric_GameTypeCount,
         IAnimationFrameProvider animationFrameProvider)
     {
-        states[typeof(MainState_Mini)] = new MainState_Mini(this, sceneRoot, betPresenter);
+        states[typeof(CheckTutorialState_Mini)] = new CheckTutorialState_Mini(this, storeGameProgressPresenter);
+        states[typeof(Tutorial_01_IntroOliviaState_Mini)] = new Tutorial_01_IntroOliviaState_Mini(this, dialoguePresenter, betCellActivatorProvider, pseudoChipActivatorProvider);
+        states[typeof(Tutorial_02_IntroMonicaState_Mini)] = new Tutorial_02_IntroMonicaState_Mini(this, dialoguePresenter);
+        states[typeof(Tutorial_03_ShowNumbersState_Mini)] = new Tutorial_03_ShowNumbersState_Mini(this, dialoguePresenter, sceneRoot);
+        states[typeof(Tutorial_04_ShowColorFieldsState_Mini)] = new Tutorial_04_ShowColorFieldsState_Mini(this, dialoguePresenter);
+        states[typeof(Tutorial_05_ShowChipsState_Mini)] = new Tutorial_05_ShowChipsState_Mini(this, dialoguePresenter, sceneRoot);
+        states[typeof(Tutorial_06_ExplainChipPlaceState_Mini)] = new Tutorial_06_ExplainChipPlaceState_Mini(this, dialoguePresenter);
+        states[typeof(Tutorial_07_WaitChipPlaceState_Mini)] = new Tutorial_07_WaitChipPlaceState_Mini(this, betPresenter, pseudoChipActivatorProvider, dialoguePresenter);
+        states[typeof(Tutorial_08_ClickSpinState_Mini)] = new Tutorial_08_ClickSpinState_Mini(this, dialoguePresenter);
+        states[typeof(Tutorial_09_RouletteSpinState_Mini)] = new Tutorial_09_RouletteSpinState_Mini(this, sceneRoot, roulettePresenter, rouletteBallPresenter, rouletteValueHistoryPresenter, metric_GameCount, metric_GameTypeCount);
+        states[typeof(Tutorial_10_ShowResultState_Mini)] = new Tutorial_10_ShowResultState_Mini(this, sceneRoot, betPresenter, animationFrameProvider, dialoguePresenter);
+
+
+        states[typeof(MainState_Mini)] = new MainState_Mini(this, sceneRoot, betPresenter, pseudoChipActivatorProvider, betCellActivatorProvider);
         states[typeof(RouletteState_Mini)] = new RouletteState_Mini(this, sceneRoot, roulettePresenter, rouletteBallPresenter, rouletteValueHistoryPresenter, metric_GameCount, metric_GameTypeCount);
         states[typeof(ResultState_Mini)] = new ResultState_Mini(this, sceneRoot, betPresenter, animationFrameProvider);
     }
 
     public void Initialize()
     {
-        SetState(GetState<MainState_Mini>());
+        SetState(GetState<CheckTutorialState_Mini>());
     }
 
     public void Dispose()

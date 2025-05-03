@@ -7,6 +7,8 @@ using Vector3 = System.Numerics.Vector3;
 
 public class BetModel
 {
+    public event Action OnAddBet;
+
     public event Action<int, Chip, int, TypeCell, Vector3> OnAddChip;
     public event Action<int, int> OnReturnChip;
     public event Action<int, int> OnFallenChip;
@@ -63,6 +65,8 @@ public class BetModel
 
                 _currentBets.Add(new BetInfo(id, chip, positionIndexes[i]));
             }
+
+            OnAddBet?.Invoke();
         }
     }
     

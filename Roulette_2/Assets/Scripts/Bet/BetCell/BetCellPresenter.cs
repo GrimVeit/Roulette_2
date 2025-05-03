@@ -1,7 +1,7 @@
 using System;
 using System.Numerics;
 
-public class BetCellPresenter
+public class BetCellPresenter : IBetCellActivatorProvider
 {
     private readonly BetCellModel _model;
     private readonly BetCellView _view;
@@ -41,4 +41,24 @@ public class BetCellPresenter
         _view.OnReturnLastChip -= _model.ReturnLastChip;
         _view.OnReturnAllBets -= _model.ReturnAllBets;
     }
+
+    #region Input
+
+    public void Activate()
+    {
+        _model.Activate();
+    }
+
+    public void Deactivate()
+    {
+        _model.Deactivate();
+    }
+
+    #endregion
+}
+
+public interface IBetCellActivatorProvider
+{
+    void Activate();
+    void Deactivate();
 }

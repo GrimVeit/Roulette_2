@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Numerics;
 
-public class BetPresenter : IBetProvider, IBetChipEventsProvider
+public class BetPresenter : IBetProvider, IBetProviderCallBack, IBetChipEventsProvider
 {
     private readonly BetModel _model;
     private readonly BetView _view;
@@ -73,6 +73,12 @@ public class BetPresenter : IBetProvider, IBetChipEventsProvider
 
     #region Output
 
+    public event Action OnAddBet
+    {
+        add => _model.OnAddBet += value;
+        remove => _model.OnAddBet -= value;
+    }
+
     public event Action<int, Chip, int, TypeCell, Vector3> OnAddChip
     {
         add => _model.OnAddChip += value;
@@ -92,6 +98,11 @@ public class BetPresenter : IBetProvider, IBetChipEventsProvider
     }
 
     #endregion
+}
+
+public interface IBetProviderCallBack
+{
+    public event Action OnAddBet;
 }
 
 public interface IBetProvider

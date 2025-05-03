@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93bc8d4795036ca4eac8752f5fabacf7, type: 3}
+  m_Name: DialogueGroup_Mini
+  m_EditorClassIdentifier: 
+  dialogues:
+  - idPerson: 0
+    idDesign: 0
+    description: And this is Monica and she'll tell you about each of the roulette
+      we have in stock
+  - idPerson: 1
+    idDesign: 0
+    description: Hi! Have you played roulette before? Otherwise, it doesn't matter.
+      I will tell
+  - idPerson: 1
+    idDesign: 1
+    description: This is a Mini Roulette game. There are only 12 numbers and Zero
+      in it
+  - idPerson: 1
+    idDesign: 1
+    description: You can also bet on which color will fall out
+  - idPerson: 1
+    idDesign: 2
+    description: These are your betting chips. You'll use them to place bets by putting
+      them on the table
+  - idPerson: 1
+    idDesign: 2
+    description: Lets's try placing one now. Choose any chip and place it on the
+      table
+  - idPerson: 1
+    idDesign: 2
+    description: An excellent choice, it remains only to wait for the result
+  - idPerson: 1
+    idDesign: 1
+    description: Oh! I think it was fascinating!

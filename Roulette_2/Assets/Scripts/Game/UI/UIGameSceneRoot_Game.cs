@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class UIGameSceneRoot_Game : UIRoot
 {
-    [SerializeField] private HeaderPanel_Game headerPanel;
+    [SerializeField] private HeaderPanel_Game balancePanel;
+    [SerializeField] private MenuPanel_Game menuPanel;
     [SerializeField] private MainPanel_Game mainPanel;
     [SerializeField] private FooterPanel_Game footerPanel;
     [SerializeField] private RoulettePanel_Game roulettePanel;
@@ -20,7 +21,8 @@ public class UIGameSceneRoot_Game : UIRoot
 
     public void Initialize()
     {
-        headerPanel.Initialize();
+        balancePanel.Initialize();
+        menuPanel.Initialize();
         mainPanel.Initialize();
         footerPanel.Initialize();
         roulettePanel.Initialize();
@@ -29,7 +31,8 @@ public class UIGameSceneRoot_Game : UIRoot
 
     public void Dispose()
     {
-        headerPanel.Dispose();
+        balancePanel.Dispose();
+        menuPanel.Dispose();
         mainPanel.Dispose();
         footerPanel.Dispose();
         roulettePanel.Dispose();
@@ -39,13 +42,13 @@ public class UIGameSceneRoot_Game : UIRoot
     public void Activate()
     {
         footerPanel.OnClickToSpin += HandleClickToSpin;
-        headerPanel.OnClickToMenu += HandleClickToMenu;
+        menuPanel.OnClickToMenu += HandleClickToMenu;
     }
 
     public void Deactivate()
     {
         footerPanel.OnClickToSpin -= HandleClickToSpin;
-        headerPanel.OnClickToMenu -= HandleClickToMenu;
+        menuPanel.OnClickToMenu -= HandleClickToMenu;
 
         if (currentPanel != null)
             CloseOtherPanel(currentPanel);
@@ -78,18 +81,35 @@ public class UIGameSceneRoot_Game : UIRoot
 
 
 
-    public void OpenHeaderPanel()
+    public void OpenBalancePanel()
     {
-        if(headerPanel.IsActive) return;
+        if(balancePanel.IsActive) return;
 
-        OpenOtherPanel(headerPanel);
+        OpenOtherPanel(balancePanel);
     }
 
-    public void CloseHeaderPanel()
+    public void CloseBalancePanel()
     {
-        if(!headerPanel.IsActive) return;
+        if(!balancePanel.IsActive) return;
 
-        CloseOtherPanel(headerPanel);
+        CloseOtherPanel(balancePanel);
+    }
+
+
+
+
+    public void OpenMenuPanel()
+    {
+        if(menuPanel.IsActive) return;
+
+        OpenOtherPanel(menuPanel);
+    }
+
+    public void CloseMenuPanel()
+    {
+        if(!menuPanel.IsActive) return;
+
+        CloseOtherPanel(menuPanel);
     }
 
 

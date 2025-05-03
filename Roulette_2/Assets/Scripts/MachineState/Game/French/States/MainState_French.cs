@@ -22,7 +22,7 @@ public class MainState_French : IState
         _sceneRoot.OnClickToSpin += ChangeStateToRoulette;
 
         _sceneRoot.OpenFooterPanel();
-        _sceneRoot.OpenHeaderPanel();
+        _sceneRoot.OpenBalancePanel();
         _sceneRoot.OpenMainPanel();
 
         _betPresenter.ClearTable();
@@ -35,7 +35,7 @@ public class MainState_French : IState
         _sceneRoot.OnClickToSpin -= ChangeStateToRoulette;
 
         _sceneRoot.CloseFooterPanel();
-        _sceneRoot.CloseHeaderPanel();
+        _sceneRoot.CloseBalancePanel();
     }
 
     private void ChangeStateToRoulette()

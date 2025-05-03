@@ -23,7 +23,7 @@ public class ResultState_America : IState
         Debug.Log("ACTIVATE STATE - RESULT");
 
         _betPresenter.SearchWin();
-        _sceneRoot.OpenHeaderPanel();
+        _sceneRoot.OpenBalancePanel();
         _sceneRoot.OpenResultPanel();
 
         _frameProvider.ActivateAnimation("Stars", 1);

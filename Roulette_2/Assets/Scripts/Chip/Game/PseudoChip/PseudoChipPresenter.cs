@@ -2,68 +2,78 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PseudoChipPresenter
+public class PseudoChipPresenter : IPseudoChipActivatorProvider
 {
-    private PseudoChipModel pseudoChipModel;
-    private PseudoChipView pseudoChipView;
+    private readonly PseudoChipModel _model;
+    private readonly PseudoChipView _view;
 
     public PseudoChipPresenter(PseudoChipModel pseudoChipModel, PseudoChipView pseudoChipView)
     {
-        this.pseudoChipModel = pseudoChipModel;
-        this.pseudoChipView = pseudoChipView;
+        this._model = pseudoChipModel;
+        this._view = pseudoChipView;
     }
 
     public void Initialize()
     {
         ActivateEvents();
 
-        pseudoChipView.Initialize();
+        _view.Initialize();
     }
 
     public void Dispose()
     {
         DeactivateEvents();
 
-        pseudoChipView.Dispose();
+        _view.Dispose();
     }
 
     private void ActivateEvents()
     {
-        pseudoChipView.OnGrabPseudoChip_Action += pseudoChipModel.GrabPseudoChip;
-        pseudoChipView.OnStartMove_Action += pseudoChipModel.StartMove;
-        pseudoChipView.OnMove_Action += pseudoChipModel.Move;
-        pseudoChipView.OnEndMove_Action += pseudoChipModel.EndMove;
+        _view.OnGrabPseudoChip_Action += _model.GrabPseudoChip;
+        _view.OnStartMove_Action += _model.StartMove;
+        _view.OnMove_Action += _model.Move;
+        _view.OnEndMove_Action += _model.EndMove;
 
-        pseudoChipModel.OnGrabPseudoChip += pseudoChipView.GrabPseudoChip;
-        pseudoChipModel.OnUngrabCurrentPseudoChip += pseudoChipView.UngrabCurrentPseudoChip;
-        pseudoChipModel.OnStartMove += pseudoChipView.StartMove;
-        pseudoChipModel.OnMove += pseudoChipView.Move;
-        pseudoChipModel.OnEndMove += pseudoChipView.EndMove;
-        pseudoChipModel.OnTeleporting += pseudoChipView.Teleport;
+        _model.OnGrabPseudoChip += _view.GrabPseudoChip;
+        _model.OnUngrabCurrentPseudoChip += _view.UngrabCurrentPseudoChip;
+        _model.OnStartMove += _view.StartMove;
+        _model.OnMove += _view.Move;
+        _model.OnEndMove += _view.EndMove;
+        _model.OnTeleporting += _view.Teleport;
     }
 
     private void DeactivateEvents()
     {
-        pseudoChipView.OnGrabPseudoChip_Action -= pseudoChipModel.GrabPseudoChip;
-        pseudoChipView.OnStartMove_Action -= pseudoChipModel.StartMove;
-        pseudoChipView.OnMove_Action -= pseudoChipModel.Move;
-        pseudoChipView.OnEndMove_Action -= pseudoChipModel.EndMove;
+        _view.OnGrabPseudoChip_Action -= _model.GrabPseudoChip;
+        _view.OnStartMove_Action -= _model.StartMove;
+        _view.OnMove_Action -= _model.Move;
+        _view.OnEndMove_Action -= _model.EndMove;
 
-        pseudoChipModel.OnGrabPseudoChip -= pseudoChipView.GrabPseudoChip;
-        pseudoChipModel.OnUngrabCurrentPseudoChip -= pseudoChipView.UngrabCurrentPseudoChip;
-        pseudoChipModel.OnStartMove -= pseudoChipView.StartMove;
-        pseudoChipModel.OnMove -= pseudoChipView.Move;
-        pseudoChipModel.OnEndMove -= pseudoChipView.EndMove;
-        pseudoChipModel.OnTeleporting -= pseudoChipView.Teleport;
+        _model.OnGrabPseudoChip -= _view.GrabPseudoChip;
+        _model.OnUngrabCurrentPseudoChip -= _view.UngrabCurrentPseudoChip;
+        _model.OnStartMove -= _view.StartMove;
+        _model.OnMove -= _view.Move;
+        _model.OnEndMove -= _view.EndMove;
+        _model.OnTeleporting -= _view.Teleport;
     }
 
-    #region Output
+    #region Input
 
-    //public event Action<ChipData, ICell, Vector2> OnSpawnChip
-    //{
-    //    add { pseudoChipModel.OnSpawnChip += value; }
-    //    remove { pseudoChipModel.OnSpawnChip -= value; }
-    //}
+    public void Activate()
+    {
+        _model.Activate();
+    }
+
+    public void Deactivate()
+    {
+        _model.Deactivate();
+    }
 
     #endregion
+}
+
+public interface IPseudoChipActivatorProvider
+{
+    void Activate();
+    void Deactivate();
 }
