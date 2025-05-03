@@ -17,14 +17,14 @@ public class HandPointer : MonoBehaviour
 
         transformHand.gameObject.SetActive(true);
 
-        tweenScale = transformHand.DOScale(1, 0.2f);
+        tweenScale = transformHand.DOScale(1, 0.3f);
     }
 
     public void Deactivate()
     {
         tweenScale?.Kill();
 
-        tweenScale = transformHand.DOScale(0, 0.2f).OnComplete(() => transformHand.gameObject.SetActive(false));
+        tweenScale = transformHand.DOScale(0, 0.3f).OnComplete(() => transformHand.gameObject.SetActive(false));
     }
 
     public void Move(Vector3 vectorPosition, Vector3 vectorRotate)
@@ -32,7 +32,7 @@ public class HandPointer : MonoBehaviour
         tweenMove?.Kill();
         tweenRotate?.Kill();
 
-        tweenMove = transformHand.DOMove(vectorPosition, 0.1f);
-        tweenRotate = transformHand.DORotate(vectorRotate, 0.1f);
+        tweenMove = transformHand.DOMove(vectorPosition, 0.3f);
+        tweenRotate = transformHand.DORotate(vectorRotate, 0.3f);
     }
 }

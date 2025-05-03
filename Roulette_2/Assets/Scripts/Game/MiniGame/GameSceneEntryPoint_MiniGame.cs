@@ -24,7 +24,8 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
 
     private StoreGameProgressPresenter storeGameProgressPresenter;
     private DialoguePresenter dialoguePresenter;
-    //private HandPointerPresenter handPointerPresenter;
+    private HighlightPresenter highlightPresenter;
+    private HandPointerPresenter handPointerPresenter;
 
     private StoreChipPresenter storeChipPresenter;
     private ChipGameCountVisualPresenter chipGameCountVisualPresenter;
@@ -82,7 +83,8 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
 
         storeGameProgressPresenter = new StoreGameProgressPresenter(new StoreGameProgressModel());
         dialoguePresenter = new DialoguePresenter(new DialogueModel(dialogueGroup), viewContainer.GetView<DialogueView>());
-        //handPointerPresenter = new HandPointerPresenter(new HandPointerModel(), viewContainer.GetView<HandPointerView>());
+        highlightPresenter = new HighlightPresenter(new HighlightModel(), viewContainer.GetView<HighlightView>());
+        handPointerPresenter = new HandPointerPresenter(new HandPointerModel(), viewContainer.GetView<HandPointerView>());
 
         stateMachine = new StateMachine_Mini
             (sceneRoot,
@@ -92,6 +94,8 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
             storeGameProgressPresenter,
             betPresenter,
             dialoguePresenter,
+            highlightPresenter,
+            handPointerPresenter,
             betCellPresenter,
             pseudoChipPresenter,
             metric_GameCountPresenter,
@@ -132,7 +136,8 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
 
         animationFramePresenter.Initialize();
 
-        //handPointerPresenter.Initialize();
+        handPointerPresenter.Initialize();
+        highlightPresenter.Initialize();
         dialoguePresenter.Initialize();
         storeGameProgressPresenter.Initialize();
 
@@ -191,7 +196,8 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
 
         animationFramePresenter.Dispose();
 
-        //handPointerPresenter.Dispose();
+        handPointerPresenter.Dispose();
+        highlightPresenter.Dispose();
         dialoguePresenter.Dispose();
         storeGameProgressPresenter.Dispose();
 

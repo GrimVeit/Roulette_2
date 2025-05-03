@@ -1,18 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HighlightModel : MonoBehaviour
+public class HighlightModel
 {
-    // Start is called before the first frame update
-    void Start()
+    public event Action<int> OnSelect;
+    public event Action<int> OnDeselect;
+    public event Action OnDeselectAll;
+
+    public void Select(int id)
     {
-        
+        OnSelect?.Invoke(id);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Deselect(int id)
     {
-        
+        OnDeselect?.Invoke(id);
+    }
+
+    public void DeselectAll()
+    {
+        OnDeselectAll?.Invoke();
     }
 }

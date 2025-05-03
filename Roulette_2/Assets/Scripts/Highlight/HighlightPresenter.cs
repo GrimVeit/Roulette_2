@@ -2,46 +2,56 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HighlightPresenter
+public class HighlightPresenter : IHighlightProvider
 {
     private readonly HighlightModel _model;
     private readonly HighlightView _view;
 
+    public HighlightPresenter(HighlightModel model, HighlightView view)
+    {
+        _model = model;
+        _view = view;
+    }
+
     public void Initialize()
     {
-
+        ActivateEvents();
     }
 
     public void Dispose()
     {
-
+        DeactivateEvents();
     }
 
     private void ActivateEvents()
     {
-
+        _model.OnSelect += _view.Select;
+        _model.OnDeselect += _view.Deselect;
+        _model.OnDeselectAll += _view.DeselectAll;
     }
 
     private void DeactivateEvents()
     {
-
+        _model.OnSelect -= _view.Select;
+        _model.OnDeselect -= _view.Deselect;
+        _model.OnDeselectAll -= _view.DeselectAll;
     }
 
     #region Input
 
-    public void ActivateHighlight(int id)
+    public void Select(int id)
     {
-
+        _model.Select(id);
     }
 
-    public void DeactivateHighlight(int id)
+    public void Deselect(int id)
     {
-
+        _model.Deselect(id);
     }
 
-    public void DeactivateAllHighlights()
+    public void DeselectAll()
     {
-
+        _model.DeselectAll();
     }
 
     #endregion
@@ -49,7 +59,7 @@ public class HighlightPresenter
 
 public interface IHighlightProvider
 {
-    void ActivateHighlight(int id);
-    void DeactivateHighlight(int id);
-    void DeactivateAllHighlights();
+    void Select(int id);
+    void Deselect(int id);
+    void DeselectAll();
 }

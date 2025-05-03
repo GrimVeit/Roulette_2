@@ -8,13 +8,15 @@ public class Tutorial_07_WaitChipPlaceState_Mini : IState
     private readonly IBetProviderCallBack _betProviderCallBack;
     private readonly IPseudoChipActivatorProvider _pseudoChipActivatorProvider;
     private readonly DialoguePresenter _dialoguePresenter;
+    private readonly IHandPointerProvider _handPointerProvider;
 
-    public Tutorial_07_WaitChipPlaceState_Mini(IGlobalStateMachineProvider stateMachine, IBetProviderCallBack betProviderCallBack, IPseudoChipActivatorProvider pseudoChipActivatorProvider, DialoguePresenter dialoguePresenter)
+    public Tutorial_07_WaitChipPlaceState_Mini(IGlobalStateMachineProvider stateMachine, IBetProviderCallBack betProviderCallBack, IPseudoChipActivatorProvider pseudoChipActivatorProvider, DialoguePresenter dialoguePresenter, IHandPointerProvider handPointerProvider)
     {
         _stateMachine = stateMachine;
         _betProviderCallBack = betProviderCallBack;
         _pseudoChipActivatorProvider = pseudoChipActivatorProvider;
         _dialoguePresenter = dialoguePresenter;
+        _handPointerProvider = handPointerProvider;
     }
 
     public void EnterState()
@@ -25,6 +27,7 @@ public class Tutorial_07_WaitChipPlaceState_Mini : IState
 
         _pseudoChipActivatorProvider.Activate();
         _dialoguePresenter.Deactivate();
+        _handPointerProvider.Deactivate();
     }
 
     public void ExitState()

@@ -7,14 +7,18 @@ public class Tutorial_05_ShowChipsState_Mini : IState
     private readonly IGlobalStateMachineProvider _stateMachine;
     private readonly DialoguePresenter _dialoguePresenter;
     private readonly UIGameSceneRoot_Game _sceneRoot;
+    private readonly IHighlightProvider _highlightProvider;
+    private readonly IHandPointerProvider _handPointerProvider;
 
     private IEnumerator timerCoroutine;
 
-    public Tutorial_05_ShowChipsState_Mini(IGlobalStateMachineProvider stateMachine, DialoguePresenter dialoguePresenter, UIGameSceneRoot_Game sceneRoot)
+    public Tutorial_05_ShowChipsState_Mini(IGlobalStateMachineProvider stateMachine, DialoguePresenter dialoguePresenter, UIGameSceneRoot_Game sceneRoot, IHighlightProvider highlightProvider, IHandPointerProvider handPointerProvider)
     {
         _stateMachine = stateMachine;
         _dialoguePresenter = dialoguePresenter;
         _sceneRoot = sceneRoot;
+        _highlightProvider = highlightProvider;
+        _handPointerProvider = handPointerProvider;
     }
 
     public void EnterState()
@@ -29,6 +33,8 @@ public class Tutorial_05_ShowChipsState_Mini : IState
 
         _dialoguePresenter.Next();
         _sceneRoot.OpenFooterPanel();
+        _highlightProvider.Select(2);
+        _handPointerProvider.Move(2);
     }
 
     public void ExitState()

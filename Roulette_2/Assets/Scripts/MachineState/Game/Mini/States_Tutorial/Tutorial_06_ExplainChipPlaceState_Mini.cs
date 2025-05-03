@@ -6,13 +6,15 @@ public class Tutorial_06_ExplainChipPlaceState_Mini : IState
 {
     private readonly IGlobalStateMachineProvider _stateMachine;
     private readonly DialoguePresenter _dialoguePresenter;
+    private readonly IHighlightProvider _highlightProvider;
 
     private IEnumerator timerCoroutine;
 
-    public Tutorial_06_ExplainChipPlaceState_Mini(IGlobalStateMachineProvider stateMachine, DialoguePresenter dialoguePresenter)
+    public Tutorial_06_ExplainChipPlaceState_Mini(IGlobalStateMachineProvider stateMachine, DialoguePresenter dialoguePresenter, IHighlightProvider highlightProvider)
     {
         _stateMachine = stateMachine;
         _dialoguePresenter = dialoguePresenter;
+        _highlightProvider = highlightProvider;
     }
 
     public void EnterState()
@@ -31,6 +33,8 @@ public class Tutorial_06_ExplainChipPlaceState_Mini : IState
     public void ExitState()
     {
         if (timerCoroutine != null) Coroutines.Stop(timerCoroutine);
+
+        _highlightProvider.DeselectAll();
     }
 
     private IEnumerator Timer(float seconds)

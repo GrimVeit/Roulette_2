@@ -9,16 +9,20 @@ public class Tutorial_10_ShowResultState_Mini : IState
     private readonly BetPresenter _betPresenter;
     private readonly IAnimationFrameProvider _frameProvider;
     private readonly DialoguePresenter _dialoguePresenter;
+    private readonly IGameProgressProvider_Write _gameProgressProvider_Write;
+    private readonly ITutorialProgressProvider_Write _tutorialProgressProvider_Write;
 
     private IEnumerator timerCoroutine;
 
-    public Tutorial_10_ShowResultState_Mini(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, BetPresenter betPresenter, IAnimationFrameProvider frameProvider, DialoguePresenter dialoguePresenter)
+    public Tutorial_10_ShowResultState_Mini(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, BetPresenter betPresenter, IAnimationFrameProvider frameProvider, DialoguePresenter dialoguePresenter, IGameProgressProvider_Write gameProgressProvider_Write, ITutorialProgressProvider_Write tutorialProgressProvider_Write)
     {
         _machineProvider = machineProvider;
         _sceneRoot = sceneRoot;
         _betPresenter = betPresenter;
         _frameProvider = frameProvider;
         _dialoguePresenter = dialoguePresenter;
+        _gameProgressProvider_Write = gameProgressProvider_Write;
+        _tutorialProgressProvider_Write = tutorialProgressProvider_Write;
     }
 
     public void EnterState()
@@ -51,6 +55,9 @@ public class Tutorial_10_ShowResultState_Mini : IState
     private IEnumerator Timer(int time)
     {
         yield return new WaitForSeconds(time);
+
+        _gameProgressProvider_Write.OpenGame(2);
+        _tutorialProgressProvider_Write.CompleteTutorial(1);
 
         ChangeStateToMain();
     }

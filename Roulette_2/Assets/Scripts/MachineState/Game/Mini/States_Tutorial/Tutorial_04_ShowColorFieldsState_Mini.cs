@@ -1,18 +1,21 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Tutorial_04_ShowColorFieldsState_Mini : IState
 {
     private readonly IGlobalStateMachineProvider _stateMachine;
     private readonly DialoguePresenter _dialoguePresenter;
+    private readonly IHighlightProvider _highlightProvider;
+    private readonly IHandPointerProvider _handPointerProvider;
 
     private IEnumerator timerCoroutine;
 
-    public Tutorial_04_ShowColorFieldsState_Mini(IGlobalStateMachineProvider stateMachine, DialoguePresenter dialoguePresenter)
+    public Tutorial_04_ShowColorFieldsState_Mini(IGlobalStateMachineProvider stateMachine, DialoguePresenter dialoguePresenter, IHighlightProvider highlightProvider, IHandPointerProvider handPointerProvider)
     {
         _stateMachine = stateMachine;
         _dialoguePresenter = dialoguePresenter;
+        _highlightProvider = highlightProvider;
+        _handPointerProvider = handPointerProvider;
     }
 
     public void EnterState()
@@ -26,11 +29,15 @@ public class Tutorial_04_ShowColorFieldsState_Mini : IState
 
 
         _dialoguePresenter.Next();
+        _highlightProvider.Select(1);
+        _handPointerProvider.Move(1);
     }
 
     public void ExitState()
     {
         if (timerCoroutine != null) Coroutines.Stop(timerCoroutine);
+
+        _highlightProvider.Deselect(1);
     }
 
     private IEnumerator Timer(float seconds)
