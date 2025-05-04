@@ -6,8 +6,6 @@ public class UIRoot : MonoBehaviour
 
     protected void OpenPanel(Panel panel)
     {
-        if (currentPanel == panel) return;
-
         if (currentPanel != null)
             currentPanel.DeactivatePanel();
 

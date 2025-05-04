@@ -7,14 +7,16 @@ public class Tutorial_07_RowColumnBetState_Euro : IState
     private readonly IGlobalStateMachineProvider _stateMachine;
     private readonly DialoguePresenter _dialoguePresenter;
     private readonly IHighlightProvider _highlightProvider;
+    private readonly IHandPointerProvider _handPointerProvider;
 
     private IEnumerator timerCoroutine;
 
-    public Tutorial_07_RowColumnBetState_Euro(IGlobalStateMachineProvider stateMachine, DialoguePresenter dialoguePresenter, IHighlightProvider highlightProvider)
+    public Tutorial_07_RowColumnBetState_Euro(IGlobalStateMachineProvider stateMachine, DialoguePresenter dialoguePresenter, IHighlightProvider highlightProvider, IHandPointerProvider handPointerProvider)
     {
         _stateMachine = stateMachine;
         _dialoguePresenter = dialoguePresenter;
         _highlightProvider = highlightProvider;
+        _handPointerProvider = handPointerProvider;
     }
 
     public void EnterState()
@@ -28,11 +30,13 @@ public class Tutorial_07_RowColumnBetState_Euro : IState
 
         _dialoguePresenter.Next();
         _highlightProvider.Select(5);
+        _handPointerProvider.Move(5);
     }
 
     public void ExitState()
     {
         _highlightProvider.DeselectAll();
+        _handPointerProvider.Deactivate();
 
         if (timerCoroutine != null) Coroutines.Stop(timerCoroutine);
     }

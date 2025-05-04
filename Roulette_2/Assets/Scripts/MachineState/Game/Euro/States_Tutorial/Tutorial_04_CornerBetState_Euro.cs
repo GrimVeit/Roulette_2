@@ -7,14 +7,16 @@ public class Tutorial_04_CornerBetState_Euro : IState
     private readonly IGlobalStateMachineProvider _stateMachine;
     private readonly DialoguePresenter _dialoguePresenter;
     private readonly IHighlightProvider _highlightProvider;
+    private readonly IHandPointerProvider _handPointerProvider;
 
     private IEnumerator timerCoroutine;
 
-    public Tutorial_04_CornerBetState_Euro(IGlobalStateMachineProvider stateMachine, DialoguePresenter dialoguePresenter, IHighlightProvider highlightProvider)
+    public Tutorial_04_CornerBetState_Euro(IGlobalStateMachineProvider stateMachine, DialoguePresenter dialoguePresenter, IHighlightProvider highlightProvider, IHandPointerProvider handPointerProvider)
     {
         _stateMachine = stateMachine;
         _dialoguePresenter = dialoguePresenter;
         _highlightProvider = highlightProvider;
+        _handPointerProvider = handPointerProvider;
     }
 
     public void EnterState()
@@ -28,6 +30,7 @@ public class Tutorial_04_CornerBetState_Euro : IState
 
         _dialoguePresenter.Next();
         _highlightProvider.Select(2);
+        _handPointerProvider.Move(2);
     }
 
     public void ExitState()

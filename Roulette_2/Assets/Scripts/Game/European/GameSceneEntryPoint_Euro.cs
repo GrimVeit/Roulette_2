@@ -26,7 +26,7 @@ public class GameSceneEntryPoint_Euro : MonoBehaviour
     private StoreGameProgressPresenter storeGameProgressPresenter;
     private DialoguePresenter dialoguePresenter;
     private HighlightPresenter highlightPresenter;
-    //private HandPointerPresenter handPointerPresenter;
+    private HandPointerPresenter handPointerPresenter;
 
     private StoreChipPresenter storeChipPresenter;
     private ChipGameCountVisualPresenter chipGameCountVisualPresenter;
@@ -85,7 +85,7 @@ public class GameSceneEntryPoint_Euro : MonoBehaviour
         storeGameProgressPresenter = new StoreGameProgressPresenter(new StoreGameProgressModel());
         dialoguePresenter = new DialoguePresenter(new DialogueModel(dialogueGroup), viewContainer.GetView<DialogueView>());
         highlightPresenter = new HighlightPresenter(new HighlightModel(), viewContainer.GetView<HighlightView>());
-        //handPointerPresenter = new HandPointerPresenter(new HandPointerModel(), viewContainer.GetView<HandPointerView>());
+        handPointerPresenter = new HandPointerPresenter(new HandPointerModel(), viewContainer.GetView<HandPointerView>());
 
         stateMachine = new StateMachine_Euro
             (sceneRoot,
@@ -96,7 +96,7 @@ public class GameSceneEntryPoint_Euro : MonoBehaviour
             betPresenter,
             dialoguePresenter,
             highlightPresenter,
-            //handPointerPresenter,
+            handPointerPresenter,
             betCellPresenter,
             pseudoChipPresenter,
             metric_GameCountPresenter,
@@ -136,7 +136,7 @@ public class GameSceneEntryPoint_Euro : MonoBehaviour
 
         animationFramePresenter.Initialize();
 
-        //handPointerPresenter.Initialize();
+        handPointerPresenter.Initialize();
         highlightPresenter.Initialize();
         dialoguePresenter.Initialize();
         storeGameProgressPresenter.Initialize();
@@ -196,7 +196,7 @@ public class GameSceneEntryPoint_Euro : MonoBehaviour
 
         animationFramePresenter.Dispose();
 
-        //handPointerPresenter.Dispose();
+        handPointerPresenter.Dispose();
         highlightPresenter.Dispose();
         dialoguePresenter.Dispose();
         storeGameProgressPresenter.Dispose();

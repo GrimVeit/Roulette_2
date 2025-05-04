@@ -7,15 +7,17 @@ public class Tutorial_02_EuroNumberState_Euro : IState
     private readonly DialoguePresenter _dialoguePresenter;
     private readonly UIGameSceneRoot_Game _sceneRoot;
     private readonly IHighlightProvider _highlightProvider;
+    private readonly IHandPointerProvider _handPointerProvider;
 
     private IEnumerator timerCoroutine;
 
-    public Tutorial_02_EuroNumberState_Euro(IGlobalStateMachineProvider stateMachine, DialoguePresenter dialoguePresenter, UIGameSceneRoot_Game sceneRoot, IHighlightProvider highlightProvider)
+    public Tutorial_02_EuroNumberState_Euro(IGlobalStateMachineProvider stateMachine, DialoguePresenter dialoguePresenter, UIGameSceneRoot_Game sceneRoot, IHighlightProvider highlightProvider, IHandPointerProvider handPointerProvider)
     {
         _stateMachine = stateMachine;
         _dialoguePresenter = dialoguePresenter;
         _sceneRoot = sceneRoot;
         _highlightProvider = highlightProvider;
+        _handPointerProvider = handPointerProvider;
     }
 
     public void EnterState()
@@ -32,6 +34,8 @@ public class Tutorial_02_EuroNumberState_Euro : IState
 
         _dialoguePresenter.Next();
         _highlightProvider.Select(0);
+        _handPointerProvider.Activate();
+        _handPointerProvider.Move(0);
     }
 
     public void ExitState()
