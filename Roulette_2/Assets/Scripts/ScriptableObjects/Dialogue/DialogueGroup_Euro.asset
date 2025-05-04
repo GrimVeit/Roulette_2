@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93bc8d4795036ca4eac8752f5fabacf7, type: 3}
+  m_Name: DialogueGroup_Euro
+  m_EditorClassIdentifier: 
+  dialogues:
+  - idPerson: 1
+    idDesign: 0
+    description: Great! European Roulette is a classic
+  - idPerson: 0
+    idDesign: 1
+    description: As you can see, there's a lot more room for your bets
+  - idPerson: 0
+    idDesign: 1
+    description: On any boundary between them by selecting two at once
+  - idPerson: 0
+    idDesign: 1
+    description: Or 4 numbers at once! Putting it on the crosshair
+  - idPerson: 0
+    idDesign: 1
+    description: By color
+  - idPerson: 0
+    idDesign: 1
+    description: Even/Odd
+  - idPerson: 0
+    idDesign: 1
+    description: Or one of the thirds
+  - idPerson: 1
+    idDesign: 0
+    description: Phew, it seems that everything!
+  - idPerson: 2
+    idDesign: 0
+    description: But that's not all! By the way, I'm Mary. And I'll tell you about
+      the probabilities
+  - idPerson: 2
+    idDesign: 2
+    description: The casino has an advantage in any roulette game. And it is determined
+      by a percenttage on the European board, this percentage is 2.7%. This is the
+      percentage that the casino earns on average from each bet on this. Now live
+      with it ;)

@@ -10,23 +10,41 @@ public class StateMachine_Euro : IGlobalStateMachineProvider
     private IState _currentState;
 
     public StateMachine_Euro
-        (UIGameSceneRoot_Game sceneRoot, 
-        RouletteBallPresenter rouletteBallPresenter, 
-        RoulettePresenter roulettePresenter, 
+        (UIGameSceneRoot_Game sceneRoot,
+        RouletteBallPresenter rouletteBallPresenter,
+        RoulettePresenter roulettePresenter,
         RouletteValueHistoryPresenter rouletteValueHistoryPresenter,
+        StoreGameProgressPresenter storeGameProgressPresenter,
         BetPresenter betPresenter,
-        IMetric_GameCount gameCount, 
-        IMetric_GameTypeCount typeCount,
+        DialoguePresenter dialoguePresenter,
+        //IHighlightProvider highlightProvider,
+        //IHandPointerProvider handPointerProvider,
+        IBetCellActivatorProvider betCellActivatorProvider,
+        IPseudoChipActivatorProvider pseudoChipActivatorProvider,
+        IMetric_GameCount metric_GameCount,
+        IMetric_GameTypeCount metric_GameTypeCount,
         IAnimationFrameProvider animationFrameProvider)
     {
-        states[typeof(MainState_Euro)] = new MainState_Euro(this, sceneRoot, betPresenter);
-        states[typeof(RouletteState_Euro)] = new RouletteState_Euro(this, sceneRoot, roulettePresenter, rouletteBallPresenter, rouletteValueHistoryPresenter, gameCount, typeCount);
+        states[typeof(CheckTutorialState_Euro)] = new CheckTutorialState_Euro(this, storeGameProgressPresenter);
+        states[typeof(Tutorial_01_EuroIntroState_Euro)] = new Tutorial_01_EuroIntroState_Euro(this, dialoguePresenter, betCellActivatorProvider, pseudoChipActivatorProvider);
+        states[typeof(Tutorial_02_EuroNumberState_Euro)] = new Tutorial_02_EuroNumberState_Euro(this, dialoguePresenter, sceneRoot);
+        states[typeof(Tutorial_03_SplitBetState_Euro)] = new Tutorial_03_SplitBetState_Euro(this, dialoguePresenter);
+        states[typeof(Tutorial_04_CornerBetState_Euro)] = new Tutorial_04_CornerBetState_Euro(this, dialoguePresenter);
+        states[typeof(Tutorial_05_ColorBetState_Euro)] = new Tutorial_05_ColorBetState_Euro(this, dialoguePresenter);
+        states[typeof(Tutorial_06_EvenOddBetState_Euro)] = new Tutorial_06_EvenOddBetState_Euro(this, dialoguePresenter);
+        states[typeof(Tutorial_07_RowColumnBetState_Euro)] = new Tutorial_07_RowColumnBetState_Euro(this, dialoguePresenter);
+        states[typeof(Tutorial_08_SummaryMonicaState_Euro)] = new Tutorial_08_SummaryMonicaState_Euro(this ,dialoguePresenter, sceneRoot);
+        states[typeof(Tutorial_09_NewCharacterIntroState_Euro)] = new Tutorial_09_NewCharacterIntroState_Euro(this, dialoguePresenter);
+        states[typeof(Tutorial_10_ChanceExplanationState_Euro)] = new Tutorial_10_ChanceExplanationState_Euro();
+
+        states[typeof(MainState_Euro)] = new MainState_Euro(this, sceneRoot, betPresenter, betCellActivatorProvider, pseudoChipActivatorProvider);
+        states[typeof(RouletteState_Euro)] = new RouletteState_Euro(this, sceneRoot, roulettePresenter, rouletteBallPresenter, rouletteValueHistoryPresenter, metric_GameCount, metric_GameTypeCount);
         states[typeof(ResultState_Euro)] = new ResultState_Euro(this, sceneRoot, betPresenter, animationFrameProvider);
     }
 
     public void Initialize()
     {
-        SetState(GetState<MainState_Euro>());
+        SetState(GetState<CheckTutorialState_Euro>());
     }
 
     public void Dispose()

@@ -64,6 +64,11 @@ public class UIGameSceneRoot_Game : UIRoot
         OpenPanel(mainPanel);
     }
 
+    public void CloseMainPanel()
+    {
+        CloseOtherPanel(mainPanel);
+    }
+
     public void OpenRoulettePanel()
     {
         if(roulettePanel.IsActive) return;

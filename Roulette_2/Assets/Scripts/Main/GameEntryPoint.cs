@@ -97,8 +97,8 @@ public class GameEntryPoint
         yield return new WaitForSeconds(0.1f);
 
         var sceneEntryPoint = Object.FindObjectOfType<GameSceneEntryPoint_Euro>();
-        sceneEntryPoint.Run(rootView);
 
+        sceneEntryPoint.Run(rootView);
         sceneEntryPoint.OnGoToMenu += () => coroutines.StartCoroutine(LoadAndStartMainMenu());
 
 
@@ -122,7 +122,6 @@ public class GameEntryPoint
         sceneEntryPoint.Run(rootView);
 
         sceneEntryPoint.OnGoToMenu += () => coroutines.StartCoroutine(LoadAndStartMainMenu());
-
 
         yield return rootView.HideLoadingScreen();
     }

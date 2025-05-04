@@ -1,10 +1,12 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameSceneEntryPoint_Euro : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
+    [SerializeField] private DialogueGroup dialogueGroup;
     [SerializeField] private TaskGroup taskGroup;
     [SerializeField] private ChipGroup chipGroup;
     [SerializeField] private Bets bets;
@@ -20,6 +22,11 @@ public class GameSceneEntryPoint_Euro : MonoBehaviour
     private RouletteBallPresenter rouletteBallPresenter;
 
     private RouletteValueHistoryPresenter rouletteValueHistoryPresenter;
+
+    private StoreGameProgressPresenter storeGameProgressPresenter;
+    private DialoguePresenter dialoguePresenter;
+    //private HighlightPresenter highlightPresenter;
+    //private HandPointerPresenter handPointerPresenter;
 
     private StoreChipPresenter storeChipPresenter;
     private ChipGameCountVisualPresenter chipGameCountVisualPresenter;
@@ -75,7 +82,26 @@ public class GameSceneEntryPoint_Euro : MonoBehaviour
 
         animationFramePresenter = new AnimationFramePresenter(new AnimationFrameModel(), viewContainer.GetView<AnimationFrameView>());
 
-        stateMachine = new StateMachine_Euro(sceneRoot, rouletteBallPresenter, roulettePresenter, rouletteValueHistoryPresenter, betPresenter, metric_GameCountPresenter, metric_GameTypeCountPresenter, animationFramePresenter);
+        storeGameProgressPresenter = new StoreGameProgressPresenter(new StoreGameProgressModel());
+        dialoguePresenter = new DialoguePresenter(new DialogueModel(dialogueGroup), viewContainer.GetView<DialogueView>());
+        //highlightPresenter = new HighlightPresenter(new HighlightModel(), viewContainer.GetView<HighlightView>());
+        //handPointerPresenter = new HandPointerPresenter(new HandPointerModel(), viewContainer.GetView<HandPointerView>());
+
+        stateMachine = new StateMachine_Euro
+            (sceneRoot,
+            rouletteBallPresenter,
+            roulettePresenter,
+            rouletteValueHistoryPresenter,
+            storeGameProgressPresenter,
+            betPresenter,
+            dialoguePresenter,
+            //highlightPresenter,
+            //handPointerPresenter,
+            betCellPresenter,
+            pseudoChipPresenter,
+            metric_GameCountPresenter,
+            metric_GameTypeCountPresenter,
+            animationFramePresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -109,6 +135,11 @@ public class GameSceneEntryPoint_Euro : MonoBehaviour
         metric_BetNumberPresenter.Initialize();
 
         animationFramePresenter.Initialize();
+
+        //handPointerPresenter.Initialize();
+        //highlightPresenter.Initialize();
+        dialoguePresenter.Initialize();
+        storeGameProgressPresenter.Initialize();
 
         stateMachine.Initialize();
     }
@@ -164,6 +195,11 @@ public class GameSceneEntryPoint_Euro : MonoBehaviour
         metric_BetNumberPresenter?.Dispose();
 
         animationFramePresenter.Dispose();
+
+        //handPointerPresenter.Dispose();
+        //highlightPresenter.Dispose();
+        dialoguePresenter.Dispose();
+        storeGameProgressPresenter.Dispose();
 
         stateMachine.Dispose();
     }

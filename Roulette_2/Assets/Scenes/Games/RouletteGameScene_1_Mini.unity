@@ -5838,7 +5838,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -9315,7 +9315,7 @@ MonoBehaviour:
   panel: {fileID: 871961747}
   from: {x: 0, y: 200, z: 0}
   to: {x: 0, y: 0, z: 0}
-  time: 0
+  time: 0.2
   canvasGroup: {fileID: 871961751}
 --- !u!1 &873125587
 GameObject:

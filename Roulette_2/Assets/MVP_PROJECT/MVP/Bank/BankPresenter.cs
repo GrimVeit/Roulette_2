@@ -2,57 +2,57 @@ using System;
 
 public class BankPresenter : IMoneyProvider
 {
-    private BankModel bankModel;
-    private BankView bankView;
+    private readonly BankModel _model;
+    private readonly BankView _view;
 
-    public BankPresenter(BankModel bankModel, BankView bankView)
+    public BankPresenter(BankModel model, BankView view)
     {
-        this.bankModel = bankModel;
-        this.bankView = bankView;
+        this._model = model;
+        this._view = view;
     }
 
     public void Initialize()
     {
-        bankModel.Initialize();
-        bankView.Initialize();
+        _model.Initialize();
+        _view.Initialize();
 
-        bankModel.OnAddMoney += bankView.AddMoney;
-        bankModel.OnRemoveMoney += bankView.RemoveMoney;
-        bankModel.OnChangeMoney += bankView.SendMoneyDisplay;
+        _model.OnAddMoney += _view.AddMoney;
+        _model.OnRemoveMoney += _view.RemoveMoney;
+        _model.OnChangeMoney += _view.SendMoneyDisplay;
 
-        bankView.SendMoneyDisplay(bankModel.Money);
+        _view.SendMoneyDisplay(_model.Money);
     }
 
     public void Dispose()
     {
-        bankModel.OnAddMoney -= bankView.AddMoney;
-        bankModel.OnRemoveMoney -= bankView.RemoveMoney;
-        bankModel.OnChangeMoney -= bankView.SendMoneyDisplay;
+        _model.OnAddMoney -= _view.AddMoney;
+        _model.OnRemoveMoney -= _view.RemoveMoney;
+        _model.OnChangeMoney -= _view.SendMoneyDisplay;
 
-        bankModel.Destroy();
+        _model.Destroy();
     }
 
     public void SendMoney(int money)
     {
-        bankModel.SendMoney(money);
+        _model.SendMoney(money);
     }
 
     public void SendMoney(float money)
     {
-        bankModel.SendMoney(money);
+        _model.SendMoney(money);
     }
 
     public bool CanAfford(float bet)
     {
-        return bankModel.CanAfford(bet);
+        return _model.CanAfford(bet);
     }
 
-    public float GetMoney() => bankModel.Money;
+    public float GetMoney() => _model.Money;
 
     public event Action<float> OnChangeMoney
     {
-        add { bankModel.OnChangeMoney += value; }
-        remove { bankModel.OnChangeMoney -= value; }
+        add { _model.OnChangeMoney += value; }
+        remove { _model.OnChangeMoney -= value; }
     }
 }
 

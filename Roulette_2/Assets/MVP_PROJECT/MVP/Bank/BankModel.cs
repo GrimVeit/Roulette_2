@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class BankModel
 {
-    public float Money { get; private set; }
+    public float Money => money;
+
+    private float money;
     public event Action OnAddMoney;
     public event Action OnRemoveMoney;
     public event Action<float> OnChangeMoney;
@@ -12,12 +14,12 @@ public class BankModel
 
     public void Initialize()
     {
-        Money = PlayerPrefs.GetFloat(BANK_MONEY, 90000);
+        money = PlayerPrefs.GetFloat(BANK_MONEY, 90000);
     }
 
     public void Destroy()
     {
-        PlayerPrefs.SetFloat(BANK_MONEY, Money);
+        PlayerPrefs.SetFloat(BANK_MONEY, money);
     }
 
     public void SendMoney(float money)
@@ -32,16 +34,16 @@ public class BankModel
         {
             OnRemoveMoney?.Invoke();
         }
-        Money += money;
-        Money = Mathf.Round(Money * 10f) / 10f;
-        MathF.Round(Money, 1);
-        OnChangeMoney?.Invoke(Money);
+        this.money += money;
+        this.money = Mathf.Round(this.money * 10f) / 10f;
+        MathF.Round(this.money, 1);
+        OnChangeMoney?.Invoke(this.money);
 
-        Debug.Log(Money);
+        Debug.Log(this.money);
     }
 
     public bool CanAfford(float bet)
     {
-        return Money >= bet;
+        return money >= bet;
     }
 }
