@@ -6,13 +6,15 @@ public class Tutorial_03_SplitBetState_Euro : IState
 {
     private readonly IGlobalStateMachineProvider _stateMachine;
     private readonly DialoguePresenter _dialoguePresenter;
+    private readonly IHighlightProvider _highlightProvider;
 
     private IEnumerator timerCoroutine;
 
-    public Tutorial_03_SplitBetState_Euro(IGlobalStateMachineProvider stateMachine, DialoguePresenter dialoguePresenter)
+    public Tutorial_03_SplitBetState_Euro(IGlobalStateMachineProvider stateMachine, DialoguePresenter dialoguePresenter, IHighlightProvider highlightProvider)
     {
         _stateMachine = stateMachine;
         _dialoguePresenter = dialoguePresenter;
+        _highlightProvider = highlightProvider;
     }
 
     public void EnterState()
@@ -25,10 +27,13 @@ public class Tutorial_03_SplitBetState_Euro : IState
         Coroutines.Start(timerCoroutine);
 
         _dialoguePresenter.Next();
+        _highlightProvider.Select(1);
     }
 
     public void ExitState()
     {
+        _highlightProvider.Deselect(1);
+
         if (timerCoroutine != null) Coroutines.Stop(timerCoroutine);
     }
 
