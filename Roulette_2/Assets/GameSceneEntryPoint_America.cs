@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameSceneEntryPoint_America : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
+    [SerializeField] private DialogueGroup dialogueGroup;
     [SerializeField] private TaskGroup taskGroup;
     [SerializeField] private ChipGroup chipGroup;
     [SerializeField] private Bets bets;
@@ -20,6 +21,11 @@ public class GameSceneEntryPoint_America : MonoBehaviour
     private RouletteBallPresenter rouletteBallPresenter;
 
     private RouletteValueHistoryPresenter rouletteValueHistoryPresenter;
+
+    private StoreGameProgressPresenter storeGameProgressPresenter;
+    private DialoguePresenter dialoguePresenter;
+    private HighlightPresenter highlightPresenter;
+    private HandPointerPresenter handPointerPresenter;
 
     private StoreChipPresenter storeChipPresenter;
     private ChipGameCountVisualPresenter chipGameCountVisualPresenter;
@@ -58,6 +64,11 @@ public class GameSceneEntryPoint_America : MonoBehaviour
 
         rouletteValueHistoryPresenter = new RouletteValueHistoryPresenter(new RouletteValueHistoryModel(new List<IRouletteValueProvider>() { roulettePresenter }), viewContainer.GetView<RouletteValueHistoryView>());
 
+        storeGameProgressPresenter = new StoreGameProgressPresenter(new StoreGameProgressModel());
+        dialoguePresenter = new DialoguePresenter(new DialogueModel(dialogueGroup), viewContainer.GetView<DialogueView>());
+        highlightPresenter = new HighlightPresenter(new HighlightModel(), viewContainer.GetView<HighlightView>());
+        handPointerPresenter = new HandPointerPresenter(new HandPointerModel(), viewContainer.GetView<HandPointerView>());
+
         storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
         chipGameCountVisualPresenter = new ChipGameCountVisualPresenter(new ChipGameCountVisualModel(storeChipPresenter), viewContainer.GetView<ChipGameCountVisualView>());
         pseudoChipPresenter = new PseudoChipPresenter(new PseudoChipModel(soundPresenter), viewContainer.GetView<PseudoChipView>());
@@ -75,7 +86,21 @@ public class GameSceneEntryPoint_America : MonoBehaviour
 
         animationFramePresenter = new AnimationFramePresenter(new AnimationFrameModel(), viewContainer.GetView<AnimationFrameView>());
 
-        stateMachine = new StateMachine_America(sceneRoot, rouletteBallPresenter, roulettePresenter, rouletteValueHistoryPresenter, betPresenter, metric_GameCountPresenter, metric_GameTypeCountPresenter, animationFramePresenter);
+        stateMachine = new StateMachine_America
+            (sceneRoot,
+            rouletteBallPresenter,
+            roulettePresenter,
+            rouletteValueHistoryPresenter,
+            storeGameProgressPresenter,
+            betPresenter,
+            dialoguePresenter,
+            highlightPresenter,
+            handPointerPresenter,
+            betCellPresenter,
+            pseudoChipPresenter,
+            metric_GameCountPresenter,
+            metric_GameTypeCountPresenter,
+            animationFramePresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -109,6 +134,11 @@ public class GameSceneEntryPoint_America : MonoBehaviour
         metric_BetNumberPresenter.Initialize();
 
         animationFramePresenter.Initialize();
+
+        handPointerPresenter.Initialize();
+        highlightPresenter.Initialize();
+        dialoguePresenter.Initialize();
+        storeGameProgressPresenter.Initialize();
 
         stateMachine.Initialize();
     }
@@ -163,6 +193,11 @@ public class GameSceneEntryPoint_America : MonoBehaviour
         metric_BetNumberPresenter?.Dispose();
 
         animationFramePresenter.Dispose();
+
+        handPointerPresenter.Dispose();
+        highlightPresenter.Dispose();
+        dialoguePresenter.Dispose();
+        storeGameProgressPresenter.Dispose();
 
         stateMachine.Dispose();
     }

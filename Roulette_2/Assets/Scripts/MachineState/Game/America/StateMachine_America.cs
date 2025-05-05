@@ -10,23 +10,34 @@ public class StateMachine_America : IGlobalStateMachineProvider
     private IState _currentState;
 
     public StateMachine_America
-        (UIGameSceneRoot_Game sceneRoot, 
-        RouletteBallPresenter rouletteBallPresenter, 
-        RoulettePresenter roulettePresenter, 
-        RouletteValueHistoryPresenter rouletteValueHistoryPresenter, 
+        (UIGameSceneRoot_Game sceneRoot,
+        RouletteBallPresenter rouletteBallPresenter,
+        RoulettePresenter roulettePresenter,
+        RouletteValueHistoryPresenter rouletteValueHistoryPresenter,
+        StoreGameProgressPresenter storeGameProgressPresenter,
         BetPresenter betPresenter,
-        IMetric_GameCount gameCount, 
-        IMetric_GameTypeCount typeCount,
+        DialoguePresenter dialoguePresenter,
+        IHighlightProvider highlightProvider,
+        IHandPointerProvider handPointerProvider,
+        IBetCellActivatorProvider betCellActivatorProvider,
+        IPseudoChipActivatorProvider pseudoChipActivatorProvider,
+        IMetric_GameCount metric_GameCount,
+        IMetric_GameTypeCount metric_GameTypeCount,
         IAnimationFrameProvider animationFrameProvider)
     {
+        states[typeof(CheckTutorialState_America)] = new CheckTutorialState_America(this, storeGameProgressPresenter);
+        states[typeof(Tutorial_01_AmericaIntroState_America)] = new Tutorial_01_AmericaIntroState_America(this, dialoguePresenter, betCellActivatorProvider, pseudoChipActivatorProvider);
+        states[typeof(Tutorial_02_DoubleZeroBetState_America)] = new Tutorial_02_DoubleZeroBetState_America(this, dialoguePresenter, handPointerProvider, highlightProvider, sceneRoot);
+        states[typeof(Tutorial_03_ChanceExplanationState_America)] = new Tutorial_03_ChanceExplanationState_America(this, dialoguePresenter, handPointerProvider, highlightProvider, storeGameProgressPresenter, storeGameProgressPresenter);
+
         states[typeof(MainState_America)] = new MainState_America(this, sceneRoot, betPresenter);
-        states[typeof(RouletteState_America)] = new RouletteState_America(this, sceneRoot, roulettePresenter, rouletteBallPresenter, rouletteValueHistoryPresenter, gameCount, typeCount);
+        states[typeof(RouletteState_America)] = new RouletteState_America(this, sceneRoot, roulettePresenter, rouletteBallPresenter, rouletteValueHistoryPresenter, metric_GameCount, metric_GameTypeCount);
         states[typeof(ResultState_America)] = new ResultState_America(this, sceneRoot, betPresenter, animationFrameProvider);
     }
 
     public void Initialize()
     {
-        SetState(GetState<MainState_America>());
+        SetState(GetState<CheckTutorialState_America>());
     }
 
     public void Dispose()

@@ -16,11 +16,6 @@ public class BankDisplayView : MonoBehaviour
         defaultMoneyTableScale = moneyDisplay.localScale;
     }
 
-    public void Dispose()
-    {
-
-    }
-
     public void AddMoney()
     {
         moneyDisplay.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 0.1f).OnComplete(() => moneyDisplay.DOScale(defaultMoneyTableScale, 0.2f));

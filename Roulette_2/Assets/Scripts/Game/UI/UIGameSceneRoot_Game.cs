@@ -59,6 +59,8 @@ public class UIGameSceneRoot_Game : UIRoot
 
     public void OpenMainPanel()
     {
+        if (mainPanel.IsActive) return;
+
         OpenPanel(mainPanel);
     }
 

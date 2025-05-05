@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93bc8d4795036ca4eac8752f5fabacf7, type: 3}
+  m_Name: DialogueGroup_America
+  m_EditorClassIdentifier: 
+  dialogues:
+  - idPerson: 0
+    idDesign: 0
+    description: American roulette... Sweet sounds of Las Vegas
+  - idPerson: 1
+    idDesign: 1
+    description: This is the usual European roulette, but here we just added a Double
+      Zero
+  - idPerson: 2
+    idDesign: 1
+    description: Just added a Double Zero and just increased the percentage od advantage
+      to 5.26%

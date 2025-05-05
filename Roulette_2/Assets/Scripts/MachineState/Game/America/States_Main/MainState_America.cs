@@ -23,6 +23,7 @@ public class MainState_America : IState
 
         _sceneRoot.OpenFooterPanel();
         _sceneRoot.OpenBalancePanel();
+        _sceneRoot.OpenMenuPanel();
         _sceneRoot.OpenMainPanel();
 
         _betPresenter.ClearTable();
@@ -35,6 +36,7 @@ public class MainState_America : IState
         _sceneRoot.OnClickToSpin -= ChangeStateToRoulette;
 
         _sceneRoot.CloseFooterPanel();
+        _sceneRoot.CloseMenuPanel();
         _sceneRoot.CloseBalancePanel();
     }
 
