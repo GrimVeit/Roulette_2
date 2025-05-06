@@ -342,8 +342,6 @@ public class BetModel
         _currentBets.Clear();
         winningPosIndexes.Clear();
         rouletteNumbers.Clear();
-
-        Debug.Log(winningPosIndexes.Count);
     }
 
 }

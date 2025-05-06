@@ -2,21 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tutorial_01_AmericaIntroState_America : IState
+public class Tutorial_01_AmericaTrackerIntroState_AmericaTracker : IState
 {
     private readonly IGlobalStateMachineProvider _stateMachine;
     private readonly DialoguePresenter _dialoguePresenter;
     private readonly IBetCellActivatorProvider _betCellActivatorProvider;
     private readonly IPseudoChipActivatorProvider _pseudoChipActivatorProvider;
+    private readonly UIGameSceneRoot_Game _sceneRoot;
 
     private IEnumerator timerCoroutine;
 
-    public Tutorial_01_AmericaIntroState_America(IGlobalStateMachineProvider stateMachine, DialoguePresenter dialoguePresenter, IBetCellActivatorProvider betCellActivatorProvider, IPseudoChipActivatorProvider pseudoChipActivatorProvider)
+    public Tutorial_01_AmericaTrackerIntroState_AmericaTracker(IGlobalStateMachineProvider stateMachine, DialoguePresenter dialoguePresenter, IBetCellActivatorProvider betCellActivatorProvider, IPseudoChipActivatorProvider pseudoChipActivatorProvider, UIGameSceneRoot_Game sceneRoot)
     {
         _stateMachine = stateMachine;
         _dialoguePresenter = dialoguePresenter;
         _betCellActivatorProvider = betCellActivatorProvider;
         _pseudoChipActivatorProvider = pseudoChipActivatorProvider;
+        _sceneRoot = sceneRoot;
     }
 
     public void EnterState()
@@ -28,6 +30,8 @@ public class Tutorial_01_AmericaIntroState_America : IState
         timerCoroutine = Timer(3);
         Coroutines.Start(timerCoroutine);
 
+        _sceneRoot.OpenMainPanel();
+        _sceneRoot.OpenBalancePanel();
 
         _dialoguePresenter.Activate();
         _betCellActivatorProvider.Deactivate();
@@ -48,6 +52,6 @@ public class Tutorial_01_AmericaIntroState_America : IState
 
     private void ChangeStateTo02()
     {
-        _stateMachine.SetState(_stateMachine.GetState<Tutorial_02_DoubleZeroBetState_America>());
+        _stateMachine.SetState(_stateMachine.GetState<Tutorial_02_VoisinsDuZeroState_AmericaTracker>());
     }
 }

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93bc8d4795036ca4eac8752f5fabacf7, type: 3}
+  m_Name: DialogueGroup_AmericaTracker
+  m_EditorClassIdentifier: 
+  dialogues:
+  - idPerson: 0
+    idDesign: 0
+    description: Oh, this table is suitable for true strategists! Let's figure it
+      out together
+  - idPerson: 1
+    idDesign: 0
+    description: Voisins du Zero are the 16 neighbors of Zero and the hero of the
+      occasion himself
+  - idPerson: 1
+    idDesign: 0
+    description: Tiers du Cylindre is a third of the wheel opposite Zero
+  - idPerson: 1
+    idDesign: 0
+    description: Orphelins is the next third of the wheel
+  - idPerson: 1
+    idDesign: 0
+    description: Jeu Zero is 7 numbers around Zero... including Zero
+  - idPerson: 0
+    idDesign: 0
+    description: I hope i didn't let you down. See you later!

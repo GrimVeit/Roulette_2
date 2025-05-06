@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 2811272161001977123}
   - component: {fileID: 5574349954248998052}
   m_Layer: 5
-  m_Name: 2_Design
+  m_Name: 1_Design
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -208,7 +208,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6926066732849363302}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -224,18 +224,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f2b3804909eaa48959a359f6de2c34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1
+  id: 0
   movePanel: {fileID: 5574349954248998052}
   dialogueAvatars:
     dialogueAvatars:
     - id: 0
-      apriteAvatar: {fileID: 21300000, guid: 5bda8cb5381c9c94391644347c5d2c6f, type: 3}
+      apriteAvatar: {fileID: 21300000, guid: bd3022ac1dbfbc74c8c318830dcfdd54, type: 3}
     - id: 1
-      apriteAvatar: {fileID: 21300000, guid: d14ffe3883cd8bb42a7764b785f82d14, type: 3}
-    - id: 2
-      apriteAvatar: {fileID: 21300000, guid: 60059d307255ea344b78096cffbfd8a3, type: 3}
-    - id: 3
-      apriteAvatar: {fileID: 21300000, guid: 20a7ea50e5d400641a44155551fadfd8, type: 3}
+      apriteAvatar: {fileID: 21300000, guid: e2582b271477d1d46a03c724f8aebe1e, type: 3}
   imageAvatar: {fileID: 4400551977960236671}
   textDescription: {fileID: 4242987399840970642}
 --- !u!114 &5574349954248998052
