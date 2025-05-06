@@ -6,13 +6,17 @@ public class Tutorial_07_CompleteState_AmericaMulti : IState
 {
     private readonly IGlobalStateMachineProvider _stateMachine;
     private readonly DialoguePresenter _dialoguePresenter;
+    private readonly IGameProgressProvider_Write _gameProgressProvider_Write;
+    private readonly ITutorialProgressProvider_Write _tutorialProgressProvider_Write; 
 
     private IEnumerator timerCoroutine;
 
-    public Tutorial_07_CompleteState_AmericaMulti(IGlobalStateMachineProvider stateMachine, DialoguePresenter dialoguePresenter)
+    public Tutorial_07_CompleteState_AmericaMulti(IGlobalStateMachineProvider stateMachine, DialoguePresenter dialoguePresenter, IGameProgressProvider_Write gameProgressProvider_Write, ITutorialProgressProvider_Write tutorialProgressProvider_Write)
     {
         _stateMachine = stateMachine;
         _dialoguePresenter = dialoguePresenter;
+        _gameProgressProvider_Write = gameProgressProvider_Write;
+        _tutorialProgressProvider_Write = tutorialProgressProvider_Write;
     }
 
     public void EnterState()
@@ -38,6 +42,8 @@ public class Tutorial_07_CompleteState_AmericaMulti : IState
         yield return new WaitForSeconds(seconds);
 
         _dialoguePresenter.Deactivate();
+        _gameProgressProvider_Write.OpenGame(5);
+        _tutorialProgressProvider_Write.CompleteTutorial(4);
 
         ChangeStateToRoulette();
     }

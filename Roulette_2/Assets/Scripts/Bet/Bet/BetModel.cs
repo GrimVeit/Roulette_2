@@ -235,18 +235,22 @@ public class BetModel
             {
                 var betInfo = _currentBets[i];
 
+                Bet bet = _bets.GetBetById(betInfo.PosIndex);
+
+                if (bet.Numbers.Contains(number.Number))
+                {
+                    int win = betInfo.Chip.Nominal * bet.MultiplyPayout;
+                    totalWin += win;
+                }
+
                 if (winningPosIndexes.Contains(betInfo.PosIndex))
                     continue;
-
-                Bet bet = _bets.GetBetById(betInfo.PosIndex);
 
                 Debug.Log("Number:" + number.NumberVisual + "//" + bet + "//" + betInfo.PosIndex);
 
                 if (bet.Numbers.Contains(number.Number))
                 {
                     winningPosIndexes.Add(betInfo.PosIndex);
-                    int win = betInfo.Chip.Nominal * bet.MultiplyPayout;
-                    totalWin += win;
                 }
             }
         }

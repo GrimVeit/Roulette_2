@@ -30,7 +30,7 @@ public class StateMachine_AmericaMulti : IGlobalStateMachineProvider
         states[typeof(Tutorial_04_MonicaSurpriseState_AmericaMulti)] = new Tutorial_04_MonicaSurpriseState_AmericaMulti(this, dialoguePresenter, sceneRoot);
         states[typeof(Tutorial_05_KingState_AmericaMulti)] = new Tutorial_05_KingState_AmericaMulti(this, dialoguePresenter);
         states[typeof(Tutorial_06_BetCutState_AmericaMulti)] = new Tutorial_06_BetCutState_AmericaMulti(this, dialoguePresenter);
-        states[typeof(Tutorial_07_CompleteState_AmericaMulti)] = new Tutorial_07_CompleteState_AmericaMulti(this, dialoguePresenter);
+        states[typeof(Tutorial_07_CompleteState_AmericaMulti)] = new Tutorial_07_CompleteState_AmericaMulti(this, dialoguePresenter, storeGameProgressPresenter, storeGameProgressPresenter);
 
         states[typeof(MainState_AmericaMulti)] = new MainState_AmericaMulti(this, sceneRoot, betPresenter, betCellActivatorProvider, pseudoChipActivatorProvider);
         states[typeof(RouletteState_AmericaMulti)] = new RouletteState_AmericaMulti(this, sceneRoot, roulettePresenters, rouletteBallPresenters, rouletteValueHistoryPresenter, gameCount, typeCount);
