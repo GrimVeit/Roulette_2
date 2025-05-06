@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameSceneEntryPoint_AmericaMulti : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
+    [SerializeField] private DialogueGroup dialogueGroup;
     [SerializeField] private TaskGroup taskGroup;
     [SerializeField] private ChipGroup chipGroup;
     [SerializeField] private Bets bets;
@@ -30,6 +31,9 @@ public class GameSceneEntryPoint_AmericaMulti : MonoBehaviour
     private RouletteBallPresenter rouletteBallPresenter_6;
 
     private RouletteValueHistoryPresenter rouletteValueHistoryPresenter;
+
+    private StoreGameProgressPresenter storeGameProgressPresenter;
+    private DialoguePresenter dialoguePresenter;
 
     private StoreChipPresenter storeChipPresenter;
     private ChipGameCountVisualPresenter chipGameCountVisualPresenter;
@@ -79,6 +83,9 @@ public class GameSceneEntryPoint_AmericaMulti : MonoBehaviour
         rouletteValueHistoryPresenter = new RouletteValueHistoryPresenter(new RouletteValueHistoryModel(new List<IRouletteValueProvider>() 
         { roulettePresenter_1, roulettePresenter_2, roulettePresenter_3, roulettePresenter_4, roulettePresenter_5, roulettePresenter_6 }), viewContainer.GetView<RouletteValueHistoryView>());
 
+        storeGameProgressPresenter = new StoreGameProgressPresenter(new StoreGameProgressModel());
+        dialoguePresenter = new DialoguePresenter(new DialogueModel(dialogueGroup), viewContainer.GetView<DialogueView>());
+
         storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
         chipGameCountVisualPresenter = new ChipGameCountVisualPresenter(new ChipGameCountVisualModel(storeChipPresenter), viewContainer.GetView<ChipGameCountVisualView>());
         pseudoChipPresenter = new PseudoChipPresenter(new PseudoChipModel(soundPresenter), viewContainer.GetView<PseudoChipView>());
@@ -116,6 +123,10 @@ public class GameSceneEntryPoint_AmericaMulti : MonoBehaviour
             },
             rouletteValueHistoryPresenter,
             betPresenter,
+            storeGameProgressPresenter,
+            betCellPresenter,
+            pseudoChipPresenter,
+            dialoguePresenter,
             metric_GameCountPresenter,
             metric_GameTypeCountPresenter,
             animationFramePresenter);
@@ -162,6 +173,9 @@ public class GameSceneEntryPoint_AmericaMulti : MonoBehaviour
         metric_BetNumberPresenter.Initialize();
 
         animationFramePresenter.Initialize();
+
+        dialoguePresenter.Initialize();
+        storeGameProgressPresenter.Initialize();
 
         stateMachine.Initialize();
     }
@@ -227,6 +241,9 @@ public class GameSceneEntryPoint_AmericaMulti : MonoBehaviour
         metric_BetNumberPresenter?.Dispose();
 
         animationFramePresenter.Dispose();
+
+        dialoguePresenter.Dispose();
+        storeGameProgressPresenter.Dispose();
 
         stateMachine.Dispose();
     }

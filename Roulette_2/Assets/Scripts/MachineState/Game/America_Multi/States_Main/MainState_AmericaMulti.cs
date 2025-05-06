@@ -7,12 +7,16 @@ public class MainState_AmericaMulti : IState
     private readonly IGlobalStateMachineProvider _stateProvider;
     private readonly UIGameSceneRoot_Game _sceneRoot;
     private readonly BetPresenter _betPresenter;
+    private readonly IBetCellActivatorProvider _betCellActivatorProvider;
+    private readonly IPseudoChipActivatorProvider _pseudoChipActivatorProvider;
 
-    public MainState_AmericaMulti(IGlobalStateMachineProvider stateProvider, UIGameSceneRoot_Game sceneRoot, BetPresenter betPresenter)
+    public MainState_AmericaMulti(IGlobalStateMachineProvider stateProvider, UIGameSceneRoot_Game sceneRoot, BetPresenter betPresenter, IBetCellActivatorProvider betCellActivatorProvider, IPseudoChipActivatorProvider pseudoChipActivatorProvider)
     {
         _sceneRoot = sceneRoot;
         _stateProvider = stateProvider;
         _betPresenter = betPresenter;
+        _betCellActivatorProvider = betCellActivatorProvider;
+        _pseudoChipActivatorProvider = pseudoChipActivatorProvider;
     }
 
     public void EnterState()
@@ -23,9 +27,13 @@ public class MainState_AmericaMulti : IState
 
         _sceneRoot.OpenFooterPanel();
         _sceneRoot.OpenBalancePanel();
+        _sceneRoot.OpenMenuPanel();
         _sceneRoot.OpenMainPanel();
 
         _betPresenter.ClearTable();
+
+        _pseudoChipActivatorProvider.Activate();
+        _betCellActivatorProvider.Activate();
     }
 
     public void ExitState()
@@ -36,6 +44,10 @@ public class MainState_AmericaMulti : IState
 
         _sceneRoot.CloseFooterPanel();
         _sceneRoot.CloseBalancePanel();
+        _sceneRoot.CloseMenuPanel();
+
+        _betCellActivatorProvider.Deactivate();
+        _pseudoChipActivatorProvider.Deactivate();
     }
 
     private void ChangeStateToRoulette()
