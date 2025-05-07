@@ -277,11 +277,6 @@ public class MainMenuEntryPoint : MonoBehaviour
         //{
         //    storeGameProgressPresenter.OpenGame(5);
         //}
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            notificationPresenter.SendMessage("Пошёл нахуй!", "Хуета");
-        }
     }
 
     private void OnDestroy()

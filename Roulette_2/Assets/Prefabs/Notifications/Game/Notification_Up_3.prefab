@@ -110,9 +110,9 @@ RectTransform:
   - {fileID: 1085700006165189549}
   m_Father: {fileID: 276907149555891051}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -226, y: -300}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -65}
   m_SizeDelta: {x: 452, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8595537934111242405
@@ -436,7 +436,7 @@ GameObject:
   - component: {fileID: 7267853372297218645}
   - component: {fileID: 7885370498382349787}
   m_Layer: 5
-  m_Name: Notification_Right_1
+  m_Name: Notification_Up_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -459,7 +459,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 200, y: 0}
+  m_AnchoredPosition: {x: 0, y: 200}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1571759571877313817
@@ -498,7 +498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 9013568427340212865}
-  from: {x: 200, y: 0, z: 0}
+  from: {x: 0, y: 200, z: 0}
   to: {x: 0, y: 0, z: 0}
   time: 0.2
   canvasGroup: {fileID: 7885370498382349787}

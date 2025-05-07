@@ -43,6 +43,9 @@ public class GameSceneEntryPoint_French : MonoBehaviour
 
     private AnimationFramePresenter animationFramePresenter;
 
+    private NotificationPresenter notificationPresenter;
+    private NotificationGameTypePresenter notificationGameTypePresenter;
+
     private StateMachine_French stateMachine;
 
     public void Run(UIRootView uIRootView)
@@ -82,6 +85,9 @@ public class GameSceneEntryPoint_French : MonoBehaviour
         metric_GameTimeSessionPresenter = new Metric_GameTimeSessionPresenter(new Metric_GameTimeSessionModel(PlayerPrefsKeys.METRIC_GAME_TIME_SESSION, timerDailyPresenter, storeTaskPresenter, 15));
 
         animationFramePresenter = new AnimationFramePresenter(new AnimationFrameModel(), viewContainer.GetView<AnimationFrameView>());
+
+        notificationPresenter = new NotificationPresenter(new NotificationModel(), viewContainer.GetView<NotificationView>());
+        notificationGameTypePresenter = new NotificationGameTypePresenter(new NotificationGameTypeModel(notificationPresenter, storeGameProgressPresenter), viewContainer.GetView<NotificationGameTypeView>());
 
         stateMachine = new StateMachine_French
             (sceneRoot,
@@ -134,6 +140,9 @@ public class GameSceneEntryPoint_French : MonoBehaviour
         highlightPresenter.Initialize();
         dialoguePresenter.Initialize();
         storeGameProgressPresenter.Initialize();
+
+        notificationGameTypePresenter.Initialize();
+        notificationPresenter.Initialize();
 
         stateMachine.Initialize();
     }
@@ -192,6 +201,9 @@ public class GameSceneEntryPoint_French : MonoBehaviour
         highlightPresenter.Dispose();
         dialoguePresenter.Dispose();
         storeGameProgressPresenter.Dispose();
+
+        notificationPresenter?.Dispose();
+        notificationGameTypePresenter?.Dispose();
 
         stateMachine.Dispose();
     }

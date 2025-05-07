@@ -52,6 +52,11 @@ public class UIGameSceneRoot_Game : UIRoot
 
         if (currentPanel != null)
             CloseOtherPanel(currentPanel);
+
+        CloseBalancePanel();
+        CloseFooterPanel();
+        CloseMainPanel();
+        CloseMenuPanel();
     }
 
 

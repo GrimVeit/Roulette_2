@@ -35,7 +35,26 @@ public class StoreChipModel
 
             for (int i = 0; i < chipGroup.Chips.Count; i++)
             {
-                chipDatas.Add(new ChipData(0));
+                if(i == 0)
+                {
+                    chipDatas.Add(new ChipData(10));
+                }
+                else if(i == 1)
+                {
+                    chipDatas.Add(new ChipData(5));
+                }
+                else if (i == 2)
+                {
+                    chipDatas.Add(new ChipData(3));
+                }
+                else if (i == 3)
+                {
+                    chipDatas.Add(new ChipData(1));
+                }
+                else
+                {
+                    chipDatas.Add(new ChipData(0));
+                }
             }
         }
 

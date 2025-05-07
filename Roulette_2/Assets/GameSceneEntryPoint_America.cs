@@ -44,6 +44,9 @@ public class GameSceneEntryPoint_America : MonoBehaviour
 
     private AnimationFramePresenter animationFramePresenter;
 
+    private NotificationPresenter notificationPresenter;
+    private NotificationGameTypePresenter notificationGameTypePresenter;
+
     private StateMachine_America stateMachine;
 
     public void Run(UIRootView uIRootView)
@@ -85,6 +88,9 @@ public class GameSceneEntryPoint_America : MonoBehaviour
         metric_BetNumberPresenter = new Metric_BetNumberPresenter(new Metric_BetNumberModel(PlayerPrefsKeys.METRIC_BET_NUMBER_COUNTS, 1, timerDailyPresenter, storeTaskPresenter));
 
         animationFramePresenter = new AnimationFramePresenter(new AnimationFrameModel(), viewContainer.GetView<AnimationFrameView>());
+
+        notificationPresenter = new NotificationPresenter(new NotificationModel(), viewContainer.GetView<NotificationView>());
+        notificationGameTypePresenter = new NotificationGameTypePresenter(new NotificationGameTypeModel(notificationPresenter, storeGameProgressPresenter), viewContainer.GetView<NotificationGameTypeView>());
 
         stateMachine = new StateMachine_America
             (sceneRoot,
@@ -139,6 +145,9 @@ public class GameSceneEntryPoint_America : MonoBehaviour
         highlightPresenter.Initialize();
         dialoguePresenter.Initialize();
         storeGameProgressPresenter.Initialize();
+
+        notificationGameTypePresenter.Initialize();
+        notificationPresenter.Initialize();
 
         stateMachine.Initialize();
     }
@@ -198,6 +207,9 @@ public class GameSceneEntryPoint_America : MonoBehaviour
         highlightPresenter.Dispose();
         dialoguePresenter.Dispose();
         storeGameProgressPresenter.Dispose();
+
+        notificationPresenter?.Dispose();
+        notificationGameTypePresenter?.Dispose();
 
         stateMachine.Dispose();
     }

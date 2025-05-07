@@ -14,7 +14,7 @@ public class BankModel
 
     public void Initialize()
     {
-        money = PlayerPrefs.GetFloat(BANK_MONEY, 90000);
+        money = PlayerPrefs.GetFloat(BANK_MONEY, 100);
     }
 
     public void Destroy()
