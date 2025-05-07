@@ -46,6 +46,9 @@ public class MainMenuEntryPoint : MonoBehaviour
     private Metric_WinCountPresenter metric_WinCountPresenter;
     private Metric_BetNumberPresenter metric_BetNumberPresenter;
 
+    private NotificationPresenter notificationPresenter;
+    private NotificationGameTypePresenter notificationGameTypePresenter;
+
     private StateMachine_Menu stateMachine;
 
     public void Run(UIRootView uIRootView)
@@ -97,6 +100,9 @@ public class MainMenuEntryPoint : MonoBehaviour
         metric_WinCountPresenter = new Metric_WinCountPresenter(new Metric_WinCountModel(PlayerPrefsKeys.METRIC_WIN_ROW_COUNTS, 3, timerDailyPresenter, storeTaskPresenter));
         metric_BetNumberPresenter = new Metric_BetNumberPresenter(new Metric_BetNumberModel(PlayerPrefsKeys.METRIC_BET_NUMBER_COUNTS, 1, timerDailyPresenter, storeTaskPresenter));
 
+        notificationPresenter = new NotificationPresenter(new NotificationModel(), viewContainer.GetView<NotificationView>());
+        notificationGameTypePresenter = new NotificationGameTypePresenter(new NotificationGameTypeModel(notificationPresenter, storeGameProgressPresenter), viewContainer.GetView<NotificationGameTypeView>());
+
         stateMachine = new StateMachine_Menu(sceneRoot, dialoguePresenter, handPointerPresenter, storeGameProgressPresenter, storeGameProgressPresenter, storeGameProgressPresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
@@ -138,6 +144,9 @@ public class MainMenuEntryPoint : MonoBehaviour
         metric_GameTypeCountPresenter.Initialize();
         metric_WinCountPresenter.Initialize();
         metric_BetNumberPresenter.Initialize();
+
+        notificationGameTypePresenter.Initialize();
+        notificationPresenter.Initialize();
 
         stateMachine.Initialize();
 
@@ -236,6 +245,9 @@ public class MainMenuEntryPoint : MonoBehaviour
         metric_WinCountPresenter?.Dispose();
         metric_BetNumberPresenter?.Dispose();
 
+        notificationPresenter?.Dispose();
+        notificationGameTypePresenter?.Dispose();
+
         stateMachine?.Dispose();
     }
 
@@ -265,6 +277,11 @@ public class MainMenuEntryPoint : MonoBehaviour
         //{
         //    storeGameProgressPresenter.OpenGame(5);
         //}
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            notificationPresenter.SendMessage("Пошёл нахуй!", "Хуета");
+        }
     }
 
     private void OnDestroy()

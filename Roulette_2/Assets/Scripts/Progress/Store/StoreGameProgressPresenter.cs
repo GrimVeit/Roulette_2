@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoreGameProgressPresenter : IStoreGameProgressEvents, IGameProgressProvider_Write, ITutorialProgressProvider_Read, ITutorialProgressProvider_Write
+public class StoreGameProgressPresenter : IStoreGameProgressEvents, IGameProgressProvider_Write, ITutorialProgressProvider_Read, ITutorialProgressProvider_Write, IGameProgressProvider_Read
 {
     private readonly StoreGameProgressModel _model;
 
@@ -28,6 +28,12 @@ public class StoreGameProgressPresenter : IStoreGameProgressEvents, IGameProgres
     {
         add => _model.OnChangeStatusGame += value;
         remove => _model.OnChangeStatusGame -= value;
+    }
+
+    public event Action<int> OnOpenGame
+    {
+        add => _model.OnOpenGame += value;
+        remove => _model.OnOpenGame -= value;
     }
 
     #endregion
@@ -65,6 +71,11 @@ public interface ITutorialProgressProvider_Read
 public interface ITutorialProgressProvider_Write
 {
     public void CompleteTutorial(int id);
+}
+
+public interface IGameProgressProvider_Read
+{
+    public event Action<int> OnOpenGame;
 }
 
 public interface IGameProgressProvider_Write

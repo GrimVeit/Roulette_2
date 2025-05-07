@@ -6,9 +6,10 @@ using UnityEngine;
 
 public class StoreGameProgressModel
 {
+    public event Action<int> OnOpenGame;
     public event Action<int, bool> OnChangeStatusGame;
 
-    private List<GameProgressData> gameProgressDatas = new List<GameProgressData>();
+    private List<GameProgressData> gameProgressDatas = new();
 
     public readonly string FilePath = Path.Combine(Application.persistentDataPath, "GameProgress.json");
 
@@ -60,7 +61,11 @@ public class StoreGameProgressModel
             return;
         }
 
-        gameProgressDatas[id].IsOpen = true;
+        if(gameProgress.IsOpen) return;
+
+        gameProgress.IsOpen = true;
+        Debug.Log(id);
+        OnOpenGame?.Invoke(id);
         OnChangeStatusGame?.Invoke(id, gameProgress.IsOpen);
     }
 

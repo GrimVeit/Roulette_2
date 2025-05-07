@@ -18,6 +18,7 @@ public class DialogueView : View
     public void Deactivate()
     {
         currentDialogueDesign?.Deactivate();
+        currentDialogueDesign = null;
     }
 
     public void SetDialogue(Dialogue dialogue)
@@ -31,6 +32,7 @@ public class DialogueView : View
         }
 
         currentDialogueDesign?.Deactivate();
+        currentDialogueDesign = null;
         currentDialogueDesign = Instantiate(dialogueDesign, transformSpawnDialogues);
 
         currentDialogueDesign.Initialize();

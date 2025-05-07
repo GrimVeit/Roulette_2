@@ -44,6 +44,9 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
 
     private AnimationFramePresenter animationFramePresenter;
 
+    private NotificationPresenter notificationPresenter;
+    private NotificationGameTypePresenter notificationGameTypePresenter;
+
     private StateMachine_Mini stateMachine;
 
     public void Run(UIRootView uIRootView)
@@ -85,6 +88,9 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         dialoguePresenter = new DialoguePresenter(new DialogueModel(dialogueGroup), viewContainer.GetView<DialogueView>());
         highlightPresenter = new HighlightPresenter(new HighlightModel(), viewContainer.GetView<HighlightView>());
         handPointerPresenter = new HandPointerPresenter(new HandPointerModel(), viewContainer.GetView<HandPointerView>());
+
+        notificationPresenter = new NotificationPresenter(new NotificationModel(), viewContainer.GetView<NotificationView>());
+        notificationGameTypePresenter = new NotificationGameTypePresenter(new NotificationGameTypeModel(notificationPresenter, storeGameProgressPresenter), viewContainer.GetView<NotificationGameTypeView>());
 
         stateMachine = new StateMachine_Mini
             (sceneRoot,
@@ -140,6 +146,9 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         highlightPresenter.Initialize();
         dialoguePresenter.Initialize();
         storeGameProgressPresenter.Initialize();
+
+        notificationGameTypePresenter.Initialize();
+        notificationPresenter.Initialize();
 
         stateMachine.Initialize();
     }
@@ -200,6 +209,9 @@ public class GameSceneEntryPoint_MiniGame : MonoBehaviour
         highlightPresenter.Dispose();
         dialoguePresenter.Dispose();
         storeGameProgressPresenter.Dispose();
+
+        notificationPresenter?.Dispose();
+        notificationGameTypePresenter?.Dispose();
 
         stateMachine?.Dispose();
     }
