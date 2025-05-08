@@ -40,11 +40,14 @@ public class GameSceneEntryPoint_French : MonoBehaviour
     private Metric_GameCountPresenter metric_GameCountPresenter;
     private Metric_GameTypeCountPresenter metric_GameTypeCountPresenter;
     private Metric_GameTimeSessionPresenter metric_GameTimeSessionPresenter;
+    private Metric_WinCountPresenter metric_WinCountPresenter;
+    private Metric_BetNumberPresenter metric_BetNumberPresenter;
 
     private AnimationFramePresenter animationFramePresenter;
 
     private NotificationPresenter notificationPresenter;
     private NotificationGameTypePresenter notificationGameTypePresenter;
+    private NotificationTaskPresenter notificationTaskPresenter;
 
     private StateMachine_French stateMachine;
 
@@ -66,6 +69,14 @@ public class GameSceneEntryPoint_French : MonoBehaviour
 
         rouletteValueHistoryPresenter = new RouletteValueHistoryPresenter(new RouletteValueHistoryModel(new List<IRouletteValueProvider>() { roulettePresenter }), viewContainer.GetView<RouletteValueHistoryView>());
 
+        timerDailyPresenter = new TimerDailyPresenter(new TimerDailyModel(PlayerPrefsKeys.LAST_EXIT_DATE));
+        storeTaskPresenter = new StoreTaskPresenter(new StoreTaskModel(taskGroup, bankPresenter, timerDailyPresenter));
+        metric_GameCountPresenter = new Metric_GameCountPresenter(new Metric_GameCountModel(PlayerPrefsKeys.METRIC_GAME_COUNTS, storeTaskPresenter, timerDailyPresenter, 10));
+        metric_GameTypeCountPresenter = new Metric_GameTypeCountPresenter(new Metric_GameTypeCountModel(PlayerPrefsKeys.METRIC_GAME_TYPE_COUNTS, 4, storeTaskPresenter, timerDailyPresenter));
+        metric_GameTimeSessionPresenter = new Metric_GameTimeSessionPresenter(new Metric_GameTimeSessionModel(PlayerPrefsKeys.METRIC_GAME_TIME_SESSION, timerDailyPresenter, storeTaskPresenter, 15));
+        metric_WinCountPresenter = new Metric_WinCountPresenter(new Metric_WinCountModel(PlayerPrefsKeys.METRIC_WIN_ROW_COUNTS, 3, timerDailyPresenter, storeTaskPresenter));
+        metric_BetNumberPresenter = new Metric_BetNumberPresenter(new Metric_BetNumberModel(PlayerPrefsKeys.METRIC_BET_NUMBER_COUNTS, 1, timerDailyPresenter, storeTaskPresenter));
+
         storeGameProgressPresenter = new StoreGameProgressPresenter(new StoreGameProgressModel());
         dialoguePresenter = new DialoguePresenter(new DialogueModel(dialogueGroup), viewContainer.GetView<DialogueView>());
         highlightPresenter = new HighlightPresenter(new HighlightModel(), viewContainer.GetView<HighlightView>());
@@ -74,20 +85,15 @@ public class GameSceneEntryPoint_French : MonoBehaviour
         storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
         chipGameCountVisualPresenter = new ChipGameCountVisualPresenter(new ChipGameCountVisualModel(storeChipPresenter), viewContainer.GetView<ChipGameCountVisualView>());
         pseudoChipPresenter = new PseudoChipPresenter(new PseudoChipModel(soundPresenter), viewContainer.GetView<PseudoChipView>());
-        betPresenter = new BetPresenter(new BetModel(chipGroup, storeChipPresenter, bets, new List<IRouletteValueProvider>() { roulettePresenter }, bankPresenter), viewContainer.GetView<BetView>());
+        betPresenter = new BetPresenter(new BetModel(chipGroup, storeChipPresenter, bets, new List<IRouletteValueProvider>() { roulettePresenter }, bankPresenter, metric_BetNumberPresenter), viewContainer.GetView<BetView>());
         betCellPresenter = new BetCellPresenter(new BetCellModel(betPresenter), viewContainer.GetView<BetCellView>());
         chipGameVisualPresenter = new ChipGameVisualPresenter(new ChipGameVisualModel(betPresenter), viewContainer.GetView<ChipGameVisualView>());
-
-        timerDailyPresenter = new TimerDailyPresenter(new TimerDailyModel(PlayerPrefsKeys.LAST_EXIT_DATE));
-        storeTaskPresenter = new StoreTaskPresenter(new StoreTaskModel(taskGroup, bankPresenter, timerDailyPresenter));
-        metric_GameCountPresenter = new Metric_GameCountPresenter(new Metric_GameCountModel(PlayerPrefsKeys.METRIC_GAME_COUNTS, storeTaskPresenter, timerDailyPresenter, 10));
-        metric_GameTypeCountPresenter = new Metric_GameTypeCountPresenter(new Metric_GameTypeCountModel(PlayerPrefsKeys.METRIC_GAME_TYPE_COUNTS, 4, storeTaskPresenter, timerDailyPresenter));
-        metric_GameTimeSessionPresenter = new Metric_GameTimeSessionPresenter(new Metric_GameTimeSessionModel(PlayerPrefsKeys.METRIC_GAME_TIME_SESSION, timerDailyPresenter, storeTaskPresenter, 15));
 
         animationFramePresenter = new AnimationFramePresenter(new AnimationFrameModel(), viewContainer.GetView<AnimationFrameView>());
 
         notificationPresenter = new NotificationPresenter(new NotificationModel(), viewContainer.GetView<NotificationView>());
         notificationGameTypePresenter = new NotificationGameTypePresenter(new NotificationGameTypeModel(notificationPresenter, storeGameProgressPresenter), viewContainer.GetView<NotificationGameTypeView>());
+        notificationTaskPresenter = new NotificationTaskPresenter(new NotificationTaskModel(notificationPresenter, storeTaskPresenter), viewContainer.GetView<NotificationTaskView>());
 
         stateMachine = new StateMachine_French
             (sceneRoot,
@@ -133,6 +139,8 @@ public class GameSceneEntryPoint_French : MonoBehaviour
         metric_GameCountPresenter.Initialize();
         metric_GameTypeCountPresenter.Initialize();
         metric_GameTimeSessionPresenter.Initialize();
+        metric_WinCountPresenter.Initialize();
+        metric_BetNumberPresenter.Initialize();
 
         animationFramePresenter.Initialize();
 
@@ -141,6 +149,7 @@ public class GameSceneEntryPoint_French : MonoBehaviour
         dialoguePresenter.Initialize();
         storeGameProgressPresenter.Initialize();
 
+        notificationTaskPresenter.Initialize();
         notificationGameTypePresenter.Initialize();
         notificationPresenter.Initialize();
 
@@ -194,6 +203,8 @@ public class GameSceneEntryPoint_French : MonoBehaviour
         metric_GameCountPresenter.Dispose();
         metric_GameTypeCountPresenter.Dispose();
         metric_GameTimeSessionPresenter.Dispose();
+        metric_WinCountPresenter.Dispose();
+        metric_BetNumberPresenter.Dispose();
 
         animationFramePresenter.Dispose();
 
@@ -204,6 +215,7 @@ public class GameSceneEntryPoint_French : MonoBehaviour
 
         notificationPresenter?.Dispose();
         notificationGameTypePresenter?.Dispose();
+        notificationTaskPresenter?.Dispose();
 
         stateMachine.Dispose();
     }

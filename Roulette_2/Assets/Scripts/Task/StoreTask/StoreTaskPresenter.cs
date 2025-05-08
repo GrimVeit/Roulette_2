@@ -1,6 +1,6 @@
 using System;
 
-public class StoreTaskPresenter : ITaskProviderEvents, IActivateTaskProvider, ICompleteTaskProvider
+public class StoreTaskPresenter : ITaskProviderEvents, IActivateTaskProvider, ICompleteTaskProvider, ITaskCompletedProviderEvent
 {
     private readonly StoreTaskModel _model;
 
@@ -65,10 +65,18 @@ public class StoreTaskPresenter : ITaskProviderEvents, IActivateTaskProvider, IC
         add => _model.OnActiveTask += value;
         remove => _model.OnActiveTask -= value;
     }
+
+
     public event Action<Task> OnCompletedTask
     {
         add => _model.OnCompletedTask += value;
         remove => _model.OnCompletedTask -= value;
+    }
+
+    public event Action<Task> OnComplete
+    {
+        add => _model.OnComplete += value;
+        remove => _model.OnComplete -= value;
     }
 
     #endregion
@@ -82,6 +90,11 @@ public interface ITaskProviderEvents
     public event Action<Task> OnInactiveTask;
     public event Action<Task> OnActiveTask;
     public event Action<Task> OnCompletedTask;
+}
+
+public interface ITaskCompletedProviderEvent
+{
+    public event Action<Task> OnComplete;
 }
 
 public interface IActivateTaskProvider

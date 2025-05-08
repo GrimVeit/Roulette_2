@@ -30,7 +30,7 @@ public class StateMachine_America : IGlobalStateMachineProvider
         states[typeof(Tutorial_02_DoubleZeroBetState_America)] = new Tutorial_02_DoubleZeroBetState_America(this, dialoguePresenter, handPointerProvider, highlightProvider, sceneRoot);
         states[typeof(Tutorial_03_ChanceExplanationState_America)] = new Tutorial_03_ChanceExplanationState_America(this, dialoguePresenter, handPointerProvider, highlightProvider, storeGameProgressPresenter, storeGameProgressPresenter);
 
-        states[typeof(MainState_America)] = new MainState_America(this, sceneRoot, betPresenter);
+        states[typeof(MainState_America)] = new MainState_America(this, sceneRoot, betPresenter, betCellActivatorProvider, pseudoChipActivatorProvider);
         states[typeof(RouletteState_America)] = new RouletteState_America(this, sceneRoot, roulettePresenter, rouletteBallPresenter, rouletteValueHistoryPresenter, metric_GameCount, metric_GameTypeCount);
         states[typeof(ResultState_America)] = new ResultState_America(this, sceneRoot, betPresenter, animationFrameProvider);
     }

@@ -10,18 +10,13 @@ public class Tutorial_09_RouletteSpinState_Mini : IState
     private readonly RouletteBallPresenter _rouletteBallPresenter;
     private readonly RouletteValueHistoryPresenter _rouletteValueHistoryPresenter;
 
-    private readonly IMetric_GameCount _gameCountMetric;
-    private readonly IMetric_GameTypeCount _gameTypeCountMetric;
-
-    public Tutorial_09_RouletteSpinState_Mini(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, RoulettePresenter roulettePresenter, RouletteBallPresenter rouletteBallPresenter, RouletteValueHistoryPresenter rouletteValueHistoryPresenter, IMetric_GameCount gameCountMetric, IMetric_GameTypeCount gameTypeCount)
+    public Tutorial_09_RouletteSpinState_Mini(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, RoulettePresenter roulettePresenter, RouletteBallPresenter rouletteBallPresenter, RouletteValueHistoryPresenter rouletteValueHistoryPresenter)
     {
         _machineProvider = machineProvider;
         _sceneRoot = sceneRoot;
         _roulettePresenter = roulettePresenter;
         _rouletteBallPresenter = rouletteBallPresenter;
         _rouletteValueHistoryPresenter = rouletteValueHistoryPresenter;
-        _gameCountMetric = gameCountMetric;
-        _gameTypeCountMetric = gameTypeCount;
     }
 
     public void EnterState()
@@ -36,9 +31,6 @@ public class Tutorial_09_RouletteSpinState_Mini : IState
         _sceneRoot.OpenRoulettePanel();
         _roulettePresenter.StartSpin();
         _rouletteBallPresenter.StartSpin();
-
-        _gameCountMetric.AddGame();
-        _gameTypeCountMetric.AddGameType(1);
     }
 
     public void ExitState()

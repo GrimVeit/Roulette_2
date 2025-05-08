@@ -30,13 +30,16 @@ public class BetModel
 
     private readonly IMoneyProvider _moneyProvider;
 
-    public BetModel(IChipGroupBet chipGroupBet, IStoreChip storeChip, Bets bets, List<IRouletteValueProvider> rouletteValueProviders, IMoneyProvider moneyProvider)
+    private readonly IMetric_BetNumber _metricBetNumber;
+
+    public BetModel(IChipGroupBet chipGroupBet, IStoreChip storeChip, Bets bets, List<IRouletteValueProvider> rouletteValueProviders, IMoneyProvider moneyProvider, IMetric_BetNumber metricBetNumber)
     {
         _chipGroupBet = chipGroupBet;
         _storeChip = storeChip;
         _bets = bets;
         _rouletteValueProviders = rouletteValueProviders;
         _moneyProvider = moneyProvider;
+        _metricBetNumber = metricBetNumber;
     }
 
     public void Initialize()
@@ -54,10 +57,15 @@ public class BetModel
         rouletteNumbers.Add(rouletteNumber);
     }
 
-    public void AddChip(int id, Chip chip, List<int> positionIndexes, TypeCell typeCell, Vector3 vector)
+    public void AddChip(int id, Chip chip, List<int> positionIndexes, TypeCell typeCell, bool isNumber, Vector3 vector)
     {
         if (_chipGroupBet.CanHaveCountChipsByOneId(id, positionIndexes.Count))
         {
+            if (isNumber)
+            {
+                _metricBetNumber.BetNumber();
+            }
+
             for (int i = 0; i < positionIndexes.Count; i++)
             {
                 RemoveChipFromStore(id);

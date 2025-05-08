@@ -35,13 +35,13 @@ public class BetCellView : View
     public event Action OnReturnLastChip;
     public event Action OnReturnAllBets;
 
-    public event Action<int, Chip, List<int>, TypeCell, System.Numerics.Vector3> OnAddBet;
+    public event Action<int, Chip, List<int>, TypeCell, bool, System.Numerics.Vector3> OnAddBet;
 
-    private void HandleAddBet(int index, Chip chip, List<int> betCellsIndexes, TypeCell typeCell, System.Numerics.Vector3 vector)
+    private void HandleAddBet(int index, Chip chip, List<int> betCellsIndexes, TypeCell typeCell, bool isNumber, System.Numerics.Vector3 vector)
     {
         Debug.Log("Chip id: " + index);
         Debug.Log("bet cells indexes: " + string.Join(", ", betCellsIndexes));
-        OnAddBet?.Invoke(index, chip, betCellsIndexes, typeCell, vector);
+        OnAddBet?.Invoke(index, chip, betCellsIndexes, typeCell, isNumber, vector);
     }
 
     #endregion

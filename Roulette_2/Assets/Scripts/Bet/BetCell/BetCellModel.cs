@@ -15,9 +15,9 @@ public class BetCellModel
         _betProvider = betProvider;
     }
 
-    public void AddChip(int id, Chip chip, List<int> positionIndexes, TypeCell typeCell, Vector3 vector)
+    public void AddChip(int id, Chip chip, List<int> positionIndexes, TypeCell typeCell, bool isNumber, Vector3 vector)
     {
-        _betProvider.AddChip(id, chip, positionIndexes, typeCell, vector);
+        _betProvider.AddChip(id, chip, positionIndexes, typeCell, isNumber, vector);
     }
 
     public void ReturnLastChip()

@@ -39,9 +39,9 @@ public class BetPresenter : IBetProvider, IBetProviderCallBack, IBetChipEventsPr
 
     #region Input
 
-    public void AddChip(int id, Chip chip, List<int> positionIndexes, TypeCell typeCell, Vector3 vector)
+    public void AddChip(int id, Chip chip, List<int> positionIndexes, TypeCell typeCell, bool isNumber, Vector3 vector)
     {
-        _model.AddChip(id, chip, positionIndexes, typeCell, vector);
+        _model.AddChip(id, chip, positionIndexes, typeCell, isNumber, vector);
     }
 
     public void ReturnAllChips()
@@ -107,7 +107,7 @@ public interface IBetProviderCallBack
 
 public interface IBetProvider
 {
-    public void AddChip(int id, Chip chip, List<int> positionIndexes, TypeCell typeCell, Vector3 vector);
+    public void AddChip(int id, Chip chip, List<int> positionIndexes, TypeCell typeCell, bool isNumber, Vector3 vector);
 
     public void ReturnAllChips();
     public void ReturnLastChip();

@@ -10,6 +10,8 @@ public class StoreTaskModel
     public event Action<Task> OnActivate;
     public event Action<Task> OnDeactivate;
 
+    public event Action<Task> OnComplete;
+
     public event Action<Task> OnInactiveTask;
     public event Action<Task> OnActiveTask;
     public event Action<Task> OnCompletedTask;
@@ -122,6 +124,7 @@ public class StoreTaskModel
         if(task.TaskData.TaskStatus != TaskStatus.Inactive || task.TaskData.IsActive == false) return;
 
         task.TaskData.SetStatus(TaskStatus.Active);
+        OnComplete?.Invoke(task);
         OnActiveTask?.Invoke(task);
     }
 
@@ -129,7 +132,7 @@ public class StoreTaskModel
     {
         var task = _taskGroup.GetTaskByNumber(number);
 
-        if(task.TaskData.TaskStatus != TaskStatus.Active) return;
+        if(task.TaskData.TaskStatus != TaskStatus.Active || task.TaskData.TaskStatus == TaskStatus.Completed) return;
 
         task.TaskData.SetStatus(TaskStatus.Completed);
         _moneyProvider.SendMoney(task.Bonus);

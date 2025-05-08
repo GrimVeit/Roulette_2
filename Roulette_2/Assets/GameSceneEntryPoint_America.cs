@@ -46,6 +46,7 @@ public class GameSceneEntryPoint_America : MonoBehaviour
 
     private NotificationPresenter notificationPresenter;
     private NotificationGameTypePresenter notificationGameTypePresenter;
+    private NotificationTaskPresenter notificationTaskPresenter;
 
     private StateMachine_America stateMachine;
 
@@ -67,18 +68,6 @@ public class GameSceneEntryPoint_America : MonoBehaviour
 
         rouletteValueHistoryPresenter = new RouletteValueHistoryPresenter(new RouletteValueHistoryModel(new List<IRouletteValueProvider>() { roulettePresenter }), viewContainer.GetView<RouletteValueHistoryView>());
 
-        storeGameProgressPresenter = new StoreGameProgressPresenter(new StoreGameProgressModel());
-        dialoguePresenter = new DialoguePresenter(new DialogueModel(dialogueGroup), viewContainer.GetView<DialogueView>());
-        highlightPresenter = new HighlightPresenter(new HighlightModel(), viewContainer.GetView<HighlightView>());
-        handPointerPresenter = new HandPointerPresenter(new HandPointerModel(), viewContainer.GetView<HandPointerView>());
-
-        storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
-        chipGameCountVisualPresenter = new ChipGameCountVisualPresenter(new ChipGameCountVisualModel(storeChipPresenter), viewContainer.GetView<ChipGameCountVisualView>());
-        pseudoChipPresenter = new PseudoChipPresenter(new PseudoChipModel(soundPresenter), viewContainer.GetView<PseudoChipView>());
-        betPresenter = new BetPresenter(new BetModel(chipGroup, storeChipPresenter, bets, new List<IRouletteValueProvider>() { roulettePresenter }, bankPresenter), viewContainer.GetView<BetView>());
-        betCellPresenter = new BetCellPresenter(new BetCellModel(betPresenter), viewContainer.GetView<BetCellView>());
-        chipGameVisualPresenter = new ChipGameVisualPresenter(new ChipGameVisualModel(betPresenter), viewContainer.GetView<ChipGameVisualView>());
-
         timerDailyPresenter = new TimerDailyPresenter(new TimerDailyModel(PlayerPrefsKeys.LAST_EXIT_DATE));
         storeTaskPresenter = new StoreTaskPresenter(new StoreTaskModel(taskGroup, bankPresenter, timerDailyPresenter));
         metric_GameCountPresenter = new Metric_GameCountPresenter(new Metric_GameCountModel(PlayerPrefsKeys.METRIC_GAME_COUNTS, storeTaskPresenter, timerDailyPresenter, 10));
@@ -87,10 +76,23 @@ public class GameSceneEntryPoint_America : MonoBehaviour
         metric_WinCountPresenter = new Metric_WinCountPresenter(new Metric_WinCountModel(PlayerPrefsKeys.METRIC_WIN_ROW_COUNTS, 3, timerDailyPresenter, storeTaskPresenter));
         metric_BetNumberPresenter = new Metric_BetNumberPresenter(new Metric_BetNumberModel(PlayerPrefsKeys.METRIC_BET_NUMBER_COUNTS, 1, timerDailyPresenter, storeTaskPresenter));
 
+        storeGameProgressPresenter = new StoreGameProgressPresenter(new StoreGameProgressModel());
+        dialoguePresenter = new DialoguePresenter(new DialogueModel(dialogueGroup), viewContainer.GetView<DialogueView>());
+        highlightPresenter = new HighlightPresenter(new HighlightModel(), viewContainer.GetView<HighlightView>());
+        handPointerPresenter = new HandPointerPresenter(new HandPointerModel(), viewContainer.GetView<HandPointerView>());
+
+        storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
+        chipGameCountVisualPresenter = new ChipGameCountVisualPresenter(new ChipGameCountVisualModel(storeChipPresenter), viewContainer.GetView<ChipGameCountVisualView>());
+        pseudoChipPresenter = new PseudoChipPresenter(new PseudoChipModel(soundPresenter), viewContainer.GetView<PseudoChipView>());
+        betPresenter = new BetPresenter(new BetModel(chipGroup, storeChipPresenter, bets, new List<IRouletteValueProvider>() { roulettePresenter }, bankPresenter, metric_BetNumberPresenter), viewContainer.GetView<BetView>());
+        betCellPresenter = new BetCellPresenter(new BetCellModel(betPresenter), viewContainer.GetView<BetCellView>());
+        chipGameVisualPresenter = new ChipGameVisualPresenter(new ChipGameVisualModel(betPresenter), viewContainer.GetView<ChipGameVisualView>());
+
         animationFramePresenter = new AnimationFramePresenter(new AnimationFrameModel(), viewContainer.GetView<AnimationFrameView>());
 
         notificationPresenter = new NotificationPresenter(new NotificationModel(), viewContainer.GetView<NotificationView>());
         notificationGameTypePresenter = new NotificationGameTypePresenter(new NotificationGameTypeModel(notificationPresenter, storeGameProgressPresenter), viewContainer.GetView<NotificationGameTypeView>());
+        notificationTaskPresenter = new NotificationTaskPresenter(new NotificationTaskModel(notificationPresenter, storeTaskPresenter), viewContainer.GetView<NotificationTaskView>());
 
         stateMachine = new StateMachine_America
             (sceneRoot,
@@ -146,6 +148,7 @@ public class GameSceneEntryPoint_America : MonoBehaviour
         dialoguePresenter.Initialize();
         storeGameProgressPresenter.Initialize();
 
+        notificationTaskPresenter.Initialize();
         notificationGameTypePresenter.Initialize();
         notificationPresenter.Initialize();
 
@@ -210,6 +213,7 @@ public class GameSceneEntryPoint_America : MonoBehaviour
 
         notificationPresenter?.Dispose();
         notificationGameTypePresenter?.Dispose();
+        notificationTaskPresenter?.Dispose();
 
         stateMachine.Dispose();
     }

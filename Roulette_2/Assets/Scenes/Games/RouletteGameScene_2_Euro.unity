@@ -848,6 +848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 03000000
 --- !u!1 &55187575
 GameObject:
@@ -1186,6 +1187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 0
   bettCells: 25000000
 --- !u!1 &58755106
 GameObject:
@@ -1637,6 +1639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 0
   bettCells: 30000000
 --- !u!1 &72933502
 GameObject:
@@ -2364,6 +2367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 0
   bettCells: 2d000000
 --- !u!1 &129813851
 GameObject:
@@ -2757,6 +2761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 0
   bettCells: 27000000
 --- !u!1 &157495901
 GameObject:
@@ -4120,6 +4125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 0a000000
 --- !u!1 &221408222
 GameObject:
@@ -5125,6 +5131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 0c000000
 --- !u!1 &268820893
 GameObject:
@@ -5303,6 +5310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 17000000
 --- !u!1 &271682456
 GameObject:
@@ -5708,6 +5716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 24000000
 --- !u!1 &281145087
 GameObject:
@@ -5845,6 +5854,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 08000000
 --- !u!1 &285056784
 GameObject:
@@ -6386,6 +6396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 1a000000
 --- !u!1 &320756550
 GameObject:
@@ -6523,6 +6534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 1d000000
 --- !u!1 &323192899
 GameObject:
@@ -7513,6 +7525,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 0
   bettCells: 26000000
 --- !u!1 &374479875
 GameObject:
@@ -11306,6 +11319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 21000000
 --- !u!1 &694228216
 GameObject:
@@ -11680,6 +11694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 12000000
 --- !u!1 &726640574
 GameObject:
@@ -12566,6 +12581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 0b000000
 --- !u!1 &821161848
 GameObject:
@@ -13004,6 +13020,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 15000000
 --- !u!1 &841791541
 GameObject:
@@ -13230,6 +13247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 23000000
 --- !u!1 &853119616
 GameObject:
@@ -13925,6 +13943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 0e000000
 --- !u!1 &875130207
 GameObject:
@@ -14196,6 +14215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 0d000000
 --- !u!1 &882544129
 GameObject:
@@ -15052,6 +15072,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 05000000
 --- !u!1 &949564485
 GameObject:
@@ -15851,6 +15872,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 0
   bettCells: 2f000000
 --- !u!1 &1006547893
 GameObject:
@@ -17128,6 +17150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 1e000000
 --- !u!1 &1053186535
 GameObject:
@@ -17819,6 +17842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 04000000
 --- !u!1 &1074722148
 GameObject:
@@ -18009,6 +18033,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 02000000
 --- !u!1 &1085666706
 GameObject:
@@ -18652,6 +18677,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 06000000
 --- !u!1 &1118936374
 GameObject:
@@ -19534,6 +19560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 14000000
 --- !u!1 &1198985776
 GameObject:
@@ -19565,6 +19592,7 @@ RectTransform:
   m_Children:
   - {fileID: 205696256}
   - {fileID: 1015503515}
+  - {fileID: 1615209824}
   m_Father: {fileID: 466457223}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -20089,6 +20117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 0
   bettCells: 28000000
 --- !u!1 &1243676452
 GameObject:
@@ -20226,6 +20255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 22000000
 --- !u!1 &1246408402
 GameObject:
@@ -20363,6 +20393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 0
   bettCells: 2c000000
 --- !u!1 &1247122405
 GameObject:
@@ -22173,6 +22204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 11000000
 --- !u!1 &1403950046
 GameObject:
@@ -22544,6 +22576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 01000000
 --- !u!1 &1436342246
 GameObject:
@@ -23308,6 +23341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 0f000000
 --- !u!1 &1458436952
 GameObject:
@@ -24323,6 +24357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 19000000
 --- !u!1 &1506816586
 GameObject:
@@ -24586,6 +24621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 00000000
 --- !u!1 &1514795341
 GameObject:
@@ -25759,6 +25795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 13000000
 --- !u!1 &1603731115
 GameObject:
@@ -26081,6 +26118,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1607603136}
   m_CullTransparentMesh: 1
+--- !u!1 &1615209823
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1615209824}
+  - component: {fileID: 1615209825}
+  m_Layer: 5
+  m_Name: Notification_Task
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1615209824
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615209823}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1198985777}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 5.625, y: 10}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1615209825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615209823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b84f2e518ae99a4bb225685aae468c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  notificationGameTypes:
+  - id: 10games
+    nameTask: Play 10 games
+  - id: 4DifferentRoulettes
+    nameTask: Play 4 different roulettes
+  - id: BetNumber
+    nameTask: Bet on a number
+  - id: Win3TimesRow
+    nameTask: Win 3 times in a row
+  - id: Spend15Minutes
+    nameTask: Spend 15 minutes in the game
 --- !u!1 &1641142067
 GameObject:
   m_ObjectHideFlags: 0
@@ -26351,6 +26447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 09000000
 --- !u!1 &1643126506
 GameObject:
@@ -27636,7 +27733,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 171.7, y: -54}
+  m_AnchoredPosition: {x: 171.70001, y: -54}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1700426434
@@ -29179,6 +29276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 0
   bettCells: 29000000
 --- !u!1 &1804585224
 GameObject:
@@ -29576,6 +29674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 1c000000
 --- !u!1 &1823986458
 GameObject:
@@ -29847,6 +29946,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 20000000
 --- !u!1 &1843464641
 GameObject:
@@ -30214,6 +30314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 16000000
 --- !u!1 &1867472618
 GameObject:
@@ -30678,6 +30779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 07000000
 --- !u!1 &1898766795
 GameObject:
@@ -31385,6 +31487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 18000000
 --- !u!1 &1927974419
 GameObject:
@@ -31917,6 +32020,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 0
   bettCells: 2e000000
 --- !u!1 &1975955787
 GameObject:
@@ -32456,6 +32560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 1b000000
 --- !u!1 &2020114922
 GameObject:
@@ -32593,6 +32698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 1f000000
 --- !u!1 &2034293038
 GameObject:
@@ -32730,6 +32836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 1
   bettCells: 10000000
 --- !u!1 &2038576040
 GameObject:
@@ -33144,6 +33251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 0
   bettCells: 2a000000
 --- !u!1 &2080970980
 GameObject:
@@ -34353,6 +34461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeCell: 0
+  isNumber: 0
   bettCells: 2b000000
 --- !u!1 &2140127397
 GameObject:

@@ -48,6 +48,7 @@ public class MainMenuEntryPoint : MonoBehaviour
 
     private NotificationPresenter notificationPresenter;
     private NotificationGameTypePresenter notificationGameTypePresenter;
+    private NotificationTaskPresenter notificationTaskPresenter;
 
     private StateMachine_Menu stateMachine;
 
@@ -102,6 +103,7 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         notificationPresenter = new NotificationPresenter(new NotificationModel(), viewContainer.GetView<NotificationView>());
         notificationGameTypePresenter = new NotificationGameTypePresenter(new NotificationGameTypeModel(notificationPresenter, storeGameProgressPresenter), viewContainer.GetView<NotificationGameTypeView>());
+        notificationTaskPresenter = new NotificationTaskPresenter(new NotificationTaskModel(notificationPresenter, storeTaskPresenter), viewContainer.GetView<NotificationTaskView>());
 
         stateMachine = new StateMachine_Menu(sceneRoot, dialoguePresenter, handPointerPresenter, storeGameProgressPresenter, storeGameProgressPresenter, storeGameProgressPresenter);
 
@@ -145,6 +147,7 @@ public class MainMenuEntryPoint : MonoBehaviour
         metric_WinCountPresenter.Initialize();
         metric_BetNumberPresenter.Initialize();
 
+        notificationTaskPresenter.Initialize();
         notificationGameTypePresenter.Initialize();
         notificationPresenter.Initialize();
 
@@ -247,6 +250,7 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         notificationPresenter?.Dispose();
         notificationGameTypePresenter?.Dispose();
+        notificationTaskPresenter?.Dispose();
 
         stateMachine?.Dispose();
     }

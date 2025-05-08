@@ -13,12 +13,12 @@ public class Metric_WinCountPresenter : IMetric_WinCount
 
     public void Initialize()
     {
-
+        _model.Initialize();
     }
 
     public void Dispose()
     {
-
+        _model.Dispose();
     }
 
     #region Inpit
