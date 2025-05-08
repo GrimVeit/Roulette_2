@@ -7,12 +7,14 @@ public class ChipBuyModel
     private readonly IChipGroupStore _chipGroupStore;
     private readonly IStoreChip _storeChip;
     private readonly IMoneyProvider _moneyProvider;
+    private readonly INotificationProvider _notificationProvider;
 
-    public ChipBuyModel(IChipGroupStore chipGroupStore, IStoreChip storeChip, IMoneyProvider moneyProvider)
+    public ChipBuyModel(IChipGroupStore chipGroupStore, IStoreChip storeChip, IMoneyProvider moneyProvider, INotificationProvider notificationProvider)
     {
         _chipGroupStore = chipGroupStore;
         _storeChip = storeChip;
         _moneyProvider = moneyProvider;
+        _notificationProvider = notificationProvider;
     }
 
     public void AddChip(int id)
@@ -30,6 +32,12 @@ public class ChipBuyModel
             Debug.LogWarning(nominal);
             _storeChip.AddChip(id);
             _moneyProvider.SendMoney(-nominal);
+        }
+        else
+        {
+            var need = nominal - _moneyProvider.GetMoney();
+
+            _notificationProvider.SendMessage($"Need <color=#ffccd4>{need}</color> more coins to buy a <color=#ffccd4>{nominal} chip</color>", "<color=#ffccd4>Not Enough Coins!</color>");
         }
     }
 
