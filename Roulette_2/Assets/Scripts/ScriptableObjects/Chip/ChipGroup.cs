@@ -54,6 +54,14 @@ public class ChipGroup : ScriptableObject, IChipGroupStore, IChipGroupBet
     {
         return GetChipsById(id).Chip;
     }
+
+    public int HowNeedChipsById(int id, int countChip)
+    {
+        var count = GetChipsById(id).ChipData.ChipsCount;
+
+
+        return countChip - count;
+    }
 }
 
 public interface IChipGroupStore
@@ -66,6 +74,7 @@ public interface IChipGroupStore
 
 public interface IChipGroupBet
 {
+    public int HowNeedChipsById(int id, int countChip);    
     public bool CanHaveCountChipsByOneId(int id, int countChip);
     public bool CanHaveCountChipsByManyId(Dictionary<int, int> countChips);
 }

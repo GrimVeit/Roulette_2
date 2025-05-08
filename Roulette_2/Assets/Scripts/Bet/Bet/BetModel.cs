@@ -31,8 +31,10 @@ public class BetModel
     private readonly IMoneyProvider _moneyProvider;
 
     private readonly IMetric_BetNumber _metricBetNumber;
+    private readonly IMetric_WinCount _metric_WinCount;
+    private readonly INotificationProvider _notificationProvider;
 
-    public BetModel(IChipGroupBet chipGroupBet, IStoreChip storeChip, Bets bets, List<IRouletteValueProvider> rouletteValueProviders, IMoneyProvider moneyProvider, IMetric_BetNumber metricBetNumber)
+    public BetModel(IChipGroupBet chipGroupBet, IStoreChip storeChip, Bets bets, List<IRouletteValueProvider> rouletteValueProviders, IMoneyProvider moneyProvider, IMetric_BetNumber metricBetNumber, IMetric_WinCount metric_WinCount, INotificationProvider notificationProvider)
     {
         _chipGroupBet = chipGroupBet;
         _storeChip = storeChip;
@@ -40,6 +42,8 @@ public class BetModel
         _rouletteValueProviders = rouletteValueProviders;
         _moneyProvider = moneyProvider;
         _metricBetNumber = metricBetNumber;
+        _metric_WinCount = metric_WinCount;
+        _notificationProvider = notificationProvider;
     }
 
     public void Initialize()
@@ -75,6 +79,12 @@ public class BetModel
             }
 
             OnAddBet?.Invoke();
+        }
+        else
+        {
+            int need = _chipGroupBet.HowNeedChipsById(id, positionIndexes.Count);
+            Debug.Log(need);
+            _notificationProvider.SendMessage($"<color=#ffccd4>{need} chips</color> are missing with a face value of <color=#ffccd4>{chip.Nominal}</color> for a bet", "<color=#ffccd4>Not Enough Chips!</color>");
         }
     }
     
@@ -261,6 +271,15 @@ public class BetModel
                     winningPosIndexes.Add(betInfo.PosIndex);
                 }
             }
+        }
+
+        if(totalWin == 0)
+        {
+            _metric_WinCount.Reset();
+        }
+        else
+        {
+            _metric_WinCount.Win();
         }
 
         _moneyProvider.SendMoney(totalWin);
