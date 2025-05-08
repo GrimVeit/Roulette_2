@@ -83,14 +83,17 @@ public class BetModel
         else
         {
             int need = _chipGroupBet.HowNeedChipsById(id, positionIndexes.Count);
-            Debug.Log(need);
             _notificationProvider.SendMessage($"<color=#ffccd4>{need} chips</color> are missing with a face value of <color=#ffccd4>{chip.Nominal}</color> for a bet", "<color=#ffccd4>Not Enough Chips!</color>");
         }
     }
     
     public void ReturnLastChip()
     {
-        if (_currentBets.Count == 0) return;
+        if (_currentBets.Count == 0)
+        {
+            _notificationProvider.SendMessage("All chips have already been removed", "<color=#ffccd4>Action Not Needed!</color>");
+            return;
+        }
 
         var lastBet = _currentBets.Last();
 
@@ -102,7 +105,11 @@ public class BetModel
 
     public void ReturnAllChips()
     {
-        if (_currentBets.Count == 0) return;
+        if (_currentBets.Count == 0)
+        {
+            _notificationProvider.SendMessage("All chips have already been removed", "<color=#ffccd4>Action Not Needed!</color>");
+            return;
+        }
 
         for (int i = 0; i < _currentBets.Count; i++)
         {
@@ -115,7 +122,11 @@ public class BetModel
 
     public void ReturnAllBets()
     {
-        if(_savedBets.Count == 0) return;
+        if(_savedBets.Count == 0)
+        {
+            _notificationProvider.SendMessage("No previous bets to repeat", "<color=#ffccd4>Action Not Needed!</color>");
+            return;
+        }
 
         var requiredChips = new Dictionary<int, int>();
 
@@ -139,7 +150,7 @@ public class BetModel
         }
         else
         {
-            Debug.Log("Õ≈ ’¬¿“¿≈“ ‘»ÿ≈ ");
+            _notificationProvider.SendMessage("Not enough chips to repeat previous bet", "<color=#ffccd4>Not Enough Chips!</color>");
         }
     }
 
