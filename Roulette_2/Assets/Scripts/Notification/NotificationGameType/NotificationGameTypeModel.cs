@@ -43,6 +43,6 @@ public class NotificationGameTypeModel
 
     public void SetGameTypeName(string gameTypeName)
     {
-        _notificationProvider.SendMessage($"You've unlocked the <color=#ffd580>{gameTypeName}</color> mode. {strings[UnityEngine.Random.Range(0, strings.Count)]}", "New Game Mode!");
+        _notificationProvider.SendMessage($"You've unlocked the <color=#ffd580>{gameTypeName}</color> mode. {strings[UnityEngine.Random.Range(0, strings.Count)]}", "New Game Mode!", 0);
     }
 }

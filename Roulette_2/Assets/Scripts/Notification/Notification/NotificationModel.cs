@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class NotificationModel
 {
-    public event Action<string, string> OnSendMessage;
+    public event Action<string, string, int> OnSendMessage;
 
-    public  void SendMessage(string description, string title)
+    public  void SendMessage(string description, string title, int type)
     {
-        OnSendMessage?.Invoke(description, title);
+        OnSendMessage?.Invoke(description, title, type);
     }
 }

@@ -37,7 +37,7 @@ public class ChipBuyModel
         {
             var need = nominal - _moneyProvider.GetMoney();
 
-            _notificationProvider.SendMessage($"Need <color=#ffccd4>{need}</color> more coins to buy a <color=#ffccd4>{nominal} chip</color>", "<color=#ffccd4>Not Enough Coins!</color>");
+            _notificationProvider.SendMessage($"Need <color=#ffccd4>{need}</color> more coins to buy a <color=#ffccd4>{nominal} chip</color>", "<color=#ffccd4>Not Enough Coins!</color>", 0);
         }
     }
 

@@ -37,6 +37,6 @@ public class NotificationTaskModel
 
     public void SetTaskName(string taskName)
     {
-        _notificationProvider.SendMessage($"<color=#ffd580>{taskName}</color>", "Daily Task Completed!");
+        _notificationProvider.SendMessage($"<color=#ffd580>{taskName}</color>", "Daily Task Completed!", 1);
     }
 }

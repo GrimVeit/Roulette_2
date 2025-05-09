@@ -83,7 +83,7 @@ public class BetModel
         else
         {
             int need = _chipGroupBet.HowNeedChipsById(id, positionIndexes.Count);
-            _notificationProvider.SendMessage($"<color=#ffccd4>{need} chips</color> are missing with a face value of <color=#ffccd4>{chip.Nominal}</color> for a bet", "<color=#ffccd4>Not Enough Chips!</color>");
+            _notificationProvider.SendMessage($"<color=#ffccd4>{need} chips</color> are missing with a face value of <color=#ffccd4>{chip.Nominal}</color> for a bet", "<color=#ffccd4>Not Enough Chips!</color>", 1);
         }
     }
     
@@ -91,7 +91,7 @@ public class BetModel
     {
         if (_currentBets.Count == 0)
         {
-            _notificationProvider.SendMessage("All chips have already been removed", "<color=#ffccd4>Action Not Needed!</color>");
+            _notificationProvider.SendMessage("All chips have already been removed", "<color=#ffccd4>Action Not Needed!</color>", 1);
             return;
         }
 
@@ -107,7 +107,7 @@ public class BetModel
     {
         if (_currentBets.Count == 0)
         {
-            _notificationProvider.SendMessage("All chips have already been removed", "<color=#ffccd4>Action Not Needed!</color>");
+            _notificationProvider.SendMessage("All chips have already been removed", "<color=#ffccd4>Action Not Needed!</color>", 1);
             return;
         }
 
@@ -124,7 +124,7 @@ public class BetModel
     {
         if(_savedBets.Count == 0)
         {
-            _notificationProvider.SendMessage("No previous bets to repeat", "<color=#ffccd4>Action Not Needed!</color>");
+            _notificationProvider.SendMessage("No previous bets to repeat", "<color=#ffccd4>Action Not Needed!</color>", 1);
             return;
         }
 
@@ -150,7 +150,7 @@ public class BetModel
         }
         else
         {
-            _notificationProvider.SendMessage("Not enough chips to repeat previous bet", "<color=#ffccd4>Not Enough Chips!</color>");
+            _notificationProvider.SendMessage("Not enough chips to repeat previous bet", "<color=#ffccd4>Not Enough Chips!</color>", 1);
         }
     }
 
@@ -253,7 +253,7 @@ public class BetModel
 
     public void SearchWin()
     {
-        int totalWin = 0;
+        float totalWin = 0;
         winningPosIndexes.Clear();
 
         Debug.Log(rouletteNumbers.Count);
@@ -268,7 +268,7 @@ public class BetModel
 
                 if (bet.Numbers.Contains(number.Number))
                 {
-                    int win = betInfo.Chip.Nominal * bet.MultiplyPayout;
+                    float win = betInfo.Chip.Nominal * bet.MultiplyPayout;
                     totalWin += win;
                 }
 
@@ -293,8 +293,10 @@ public class BetModel
             _metric_WinCount.Win();
         }
 
-        _moneyProvider.SendMoney(totalWin);
-        OnGetWin?.Invoke(totalWin);
+        float winFloat = Mathf.Round(totalWin * 10f) / 10f;
+        int winInt = (int)Math.Round(winFloat, 1);
+        _moneyProvider.SendMoney(winInt);
+        OnGetWin?.Invoke(winInt);
 
         Debug.Log("Winnings:" + string.Join(", ", winningPosIndexes));
     }

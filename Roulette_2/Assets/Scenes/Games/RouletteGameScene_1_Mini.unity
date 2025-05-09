@@ -2480,6 +2480,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   notificationPrefab: {fileID: 5871928081335839651, guid: 3dc2c15801df41a4ab0d25ff5eb3b522, type: 3}
+  notificationPrefabs:
+  - {fileID: 5871928081335839651, guid: 3dc2c15801df41a4ab0d25ff5eb3b522, type: 3}
+  - {fileID: 5871928081335839651, guid: 3dc2c15801df41a4ab0d25ff5eb3b522, type: 3}
   transformSpawnNotification: {fileID: 912668149}
 --- !u!1 &233395440
 GameObject:

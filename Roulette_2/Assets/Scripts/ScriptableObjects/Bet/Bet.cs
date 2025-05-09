@@ -8,8 +8,8 @@ public class Bet
 
     [SerializeField] private int id;
     [SerializeField] private List<int> numbers = new List<int>();
-    [SerializeField] private int multiplyPayout;
+    [SerializeField] private float multiplyPayout;
 
     public List<int> Numbers => numbers;
-    public int MultiplyPayout => multiplyPayout;
+    public float MultiplyPayout => multiplyPayout;
 }

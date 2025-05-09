@@ -35,9 +35,9 @@ public class NotificationPresenter : INotificationProvider
 
     #region Input
 
-    public void SendMessage(string description, string header)
+    public void SendMessage(string description, string header, int type)
     {
-        _model.SendMessage(description, header);
+        _model.SendMessage(description, header, type);
     }
 
     #endregion
@@ -45,5 +45,5 @@ public class NotificationPresenter : INotificationProvider
 
 public interface INotificationProvider
 {
-    void SendMessage(string description, string header);
+    void SendMessage(string description, string header, int type);
 }
