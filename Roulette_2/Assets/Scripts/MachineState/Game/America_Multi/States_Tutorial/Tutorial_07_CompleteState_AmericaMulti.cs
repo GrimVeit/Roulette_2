@@ -25,7 +25,7 @@ public class Tutorial_07_CompleteState_AmericaMulti : IState
 
         if (timerCoroutine != null) Coroutines.Stop(timerCoroutine);
 
-        timerCoroutine = Timer(3);
+        timerCoroutine = Timer(2);
         Coroutines.Start(timerCoroutine);
 
 

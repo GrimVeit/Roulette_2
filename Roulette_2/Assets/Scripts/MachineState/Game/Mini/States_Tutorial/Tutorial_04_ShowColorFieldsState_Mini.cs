@@ -24,7 +24,7 @@ public class Tutorial_04_ShowColorFieldsState_Mini : IState
 
         if (timerCoroutine != null) Coroutines.Stop(timerCoroutine);
 
-        timerCoroutine = Timer(3);
+        timerCoroutine = Timer(2);
         Coroutines.Start(timerCoroutine);
 
 

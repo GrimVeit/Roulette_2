@@ -11,6 +11,8 @@ public class BankDisplayView : MonoBehaviour
 
     private Vector3 defaultMoneyTableScale;
 
+    private Tween tweenScale;
+
     public void Initialize()
     {
         defaultMoneyTableScale = moneyDisplay.localScale;
@@ -18,12 +20,20 @@ public class BankDisplayView : MonoBehaviour
 
     public void AddMoney()
     {
-        moneyDisplay.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 0.1f).OnComplete(() => moneyDisplay.DOScale(defaultMoneyTableScale, 0.2f));
+        tweenScale?.Kill();
+
+        moneyDisplay.localScale = defaultMoneyTableScale;
+
+        tweenScale = moneyDisplay.DOScale(new Vector3(1.1f, 1.1f, 1.1f), 0.1f).OnComplete(() => tweenScale = moneyDisplay.DOScale(defaultMoneyTableScale, 0.2f));
     }
 
     public void RemoveMoney()
     {
-        moneyDisplay.DOScale(new Vector3(1.1f, 1.1f, 1.1f), 0.1f).OnComplete(() => moneyDisplay.DOScale(defaultMoneyTableScale, 0.2f));
+        tweenScale?.Kill();
+
+        moneyDisplay.localScale = defaultMoneyTableScale;
+
+        tweenScale = moneyDisplay.DOScale(new Vector3(1.1f, 1.1f, 1.1f), 0.1f).OnComplete(() => tweenScale = moneyDisplay.DOScale(defaultMoneyTableScale, 0.2f));
     }
 
     public void SendMoneyDisplay(float money)

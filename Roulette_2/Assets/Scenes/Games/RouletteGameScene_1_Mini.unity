@@ -2479,7 +2479,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7c47ce68b1804a46b3835a8c3de9ad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notificationPrefab: {fileID: 5871928081335839651, guid: 3dc2c15801df41a4ab0d25ff5eb3b522, type: 3}
   notificationPrefabs:
   - {fileID: 5871928081335839651, guid: 3dc2c15801df41a4ab0d25ff5eb3b522, type: 3}
   - {fileID: 5871928081335839651, guid: 3dc2c15801df41a4ab0d25ff5eb3b522, type: 3}
@@ -8087,7 +8086,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 200}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &742484505
@@ -9402,7 +9401,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 200}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &871961750

@@ -29,7 +29,7 @@ public class Tutorial_06_DailyBonus1State_Menu : IState
 
         if (coroutineTimer != null) Coroutines.Stop(coroutineTimer);
 
-        coroutineTimer = Timer(3);
+        coroutineTimer = Timer(4);
         Coroutines.Start(coroutineTimer);
     }
 

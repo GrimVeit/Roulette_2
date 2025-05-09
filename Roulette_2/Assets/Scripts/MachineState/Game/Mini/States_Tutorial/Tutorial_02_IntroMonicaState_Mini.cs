@@ -21,7 +21,7 @@ public class Tutorial_02_IntroMonicaState_Mini : IState
 
         if (timerCoroutine != null) Coroutines.Stop(timerCoroutine);
 
-        timerCoroutine = Timer(3);
+        timerCoroutine = Timer(4);
         Coroutines.Start(timerCoroutine);
 
 

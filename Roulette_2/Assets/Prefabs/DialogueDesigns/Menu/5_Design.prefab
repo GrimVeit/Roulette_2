@@ -208,7 +208,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2931357150305699892}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 0.13
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -360,7 +360,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -36, y: 0}
-  m_SizeDelta: {x: 402, y: 206.5}
+  m_SizeDelta: {x: 405, y: 207}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6521515117713278110
 CanvasRenderer:
@@ -417,12 +417,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55
+  m_fontSize: 53
   m_fontSizeBase: 55
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 50
-  m_fontSizeMax: 55
+  m_fontSizeMax: 53
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256

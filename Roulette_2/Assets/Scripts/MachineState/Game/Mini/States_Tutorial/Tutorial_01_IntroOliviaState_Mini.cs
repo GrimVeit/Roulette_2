@@ -25,7 +25,7 @@ public class Tutorial_01_IntroOliviaState_Mini : IState
 
         if (timerCoroutine != null) Coroutines.Stop(timerCoroutine);
 
-        timerCoroutine = Timer(3);
+        timerCoroutine = Timer(4);
         Coroutines.Start(timerCoroutine);
 
 

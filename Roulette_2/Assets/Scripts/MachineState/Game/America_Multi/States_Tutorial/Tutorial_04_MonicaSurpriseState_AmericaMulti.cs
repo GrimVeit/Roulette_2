@@ -23,7 +23,7 @@ public class Tutorial_04_MonicaSurpriseState_AmericaMulti : IState
 
         if (timerCoroutine != null) Coroutines.Stop(timerCoroutine);
 
-        timerCoroutine = Timer(3);
+        timerCoroutine = Timer(4);
         Coroutines.Start(timerCoroutine);
 
 

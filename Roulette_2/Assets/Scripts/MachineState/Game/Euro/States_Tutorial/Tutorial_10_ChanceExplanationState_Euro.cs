@@ -25,7 +25,7 @@ public class Tutorial_10_ChanceExplanationState_Euro : IState
 
         if (timerCoroutine != null) Coroutines.Stop(timerCoroutine);
 
-        timerCoroutine = Timer(3);
+        timerCoroutine = Timer(7);
         Coroutines.Start(timerCoroutine);
 
         _dialoguePresenter.Next();

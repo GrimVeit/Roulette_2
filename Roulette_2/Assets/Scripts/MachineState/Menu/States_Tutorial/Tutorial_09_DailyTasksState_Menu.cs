@@ -25,7 +25,7 @@ public class Tutorial_09_DailyTasksState_Menu : IState
 
         if (coroutineTimer != null) Coroutines.Stop(coroutineTimer);
 
-        coroutineTimer = Timer(3);
+        coroutineTimer = Timer(4);
         Coroutines.Start(coroutineTimer);
     }
 

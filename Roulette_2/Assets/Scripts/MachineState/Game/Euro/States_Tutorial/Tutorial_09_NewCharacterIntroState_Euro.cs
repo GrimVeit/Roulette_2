@@ -21,7 +21,7 @@ public class Tutorial_09_NewCharacterIntroState_Euro : IState
 
         if (timerCoroutine != null) Coroutines.Stop(timerCoroutine);
 
-        timerCoroutine = Timer(3);
+        timerCoroutine = Timer(4);
         Coroutines.Start(timerCoroutine);
 
         _dialoguePresenter.Next();
