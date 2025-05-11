@@ -16,15 +16,17 @@ public class DailyRewardModel
     private DailyRewardValues _rewardValues;
     private readonly string _rewardDayKey;
     private readonly IMoneyProvider _moneyProvider;
+    private readonly ISoundProvider _soundProvider;
 
     private readonly int _maxDay;
 
-    public DailyRewardModel(string rewardDayKey, DailyRewardValues rewardValues, IMoneyProvider moneyProvider)
+    public DailyRewardModel(string rewardDayKey, DailyRewardValues rewardValues, IMoneyProvider moneyProvider, ISoundProvider soundProvider)
     {
         _rewardDayKey = rewardDayKey;
         _rewardValues = rewardValues;
         _moneyProvider = moneyProvider;
         _maxDay = _rewardValues.GetCountDays() - 1;
+        _soundProvider = soundProvider;
     }
 
     public void Initialize()
@@ -48,6 +50,7 @@ public class DailyRewardModel
         OnGetDailyReward?.Invoke();
 
         _moneyProvider.SendMoney(_rewardValues.GetRewardValueFromDay(_currentDayReward));
+        _soundProvider.PlayOneShot("DailyBonus");
 
         if(_currentDayReward == _maxDay)
         {

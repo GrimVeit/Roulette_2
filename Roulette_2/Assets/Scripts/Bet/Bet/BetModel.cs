@@ -33,8 +33,9 @@ public class BetModel
     private readonly IMetric_BetNumber _metricBetNumber;
     private readonly IMetric_WinCount _metric_WinCount;
     private readonly INotificationProvider _notificationProvider;
+    private readonly ISoundProvider _soundProvider;
 
-    public BetModel(IChipGroupBet chipGroupBet, IStoreChip storeChip, Bets bets, List<IRouletteValueProvider> rouletteValueProviders, IMoneyProvider moneyProvider, IMetric_BetNumber metricBetNumber, IMetric_WinCount metric_WinCount, INotificationProvider notificationProvider)
+    public BetModel(IChipGroupBet chipGroupBet, IStoreChip storeChip, Bets bets, List<IRouletteValueProvider> rouletteValueProviders, IMoneyProvider moneyProvider, IMetric_BetNumber metricBetNumber, IMetric_WinCount metric_WinCount, INotificationProvider notificationProvider, ISoundProvider soundProvider)
     {
         _chipGroupBet = chipGroupBet;
         _storeChip = storeChip;
@@ -44,6 +45,7 @@ public class BetModel
         _metricBetNumber = metricBetNumber;
         _metric_WinCount = metric_WinCount;
         _notificationProvider = notificationProvider;
+        _soundProvider = soundProvider;
     }
 
     public void Initialize()
@@ -78,12 +80,14 @@ public class BetModel
                 _currentBets.Add(new BetInfo(id, chip, positionIndexes[i]));
             }
 
+            _soundProvider.PlayOneShot("ChipDrop");
             OnAddBet?.Invoke();
         }
         else
         {
             int need = _chipGroupBet.HowNeedChipsById(id, positionIndexes.Count);
             _notificationProvider.SendMessage($"<color=#ffccd4>{need} chips</color> are missing with a face value of <color=#ffccd4>{chip.Nominal}</color> for a bet", "<color=#ffccd4>Not Enough Chips!</color>", 1);
+            _soundProvider.PlayOneShot("Error");
         }
     }
     
@@ -92,6 +96,7 @@ public class BetModel
         if (_currentBets.Count == 0)
         {
             _notificationProvider.SendMessage("All chips have already been removed", "<color=#ffccd4>Action Not Needed!</color>", 1);
+            _soundProvider.PlayOneShot("Error");
             return;
         }
 
@@ -101,6 +106,7 @@ public class BetModel
         OnReturnChip?.Invoke(lastBet.IdChipGroup, lastBet.PosIndex);
 
         _currentBets.Remove(lastBet);
+        _soundProvider.PlayOneShot("Whoosh");
     }
 
     public void ReturnAllChips()
@@ -108,6 +114,7 @@ public class BetModel
         if (_currentBets.Count == 0)
         {
             _notificationProvider.SendMessage("All chips have already been removed", "<color=#ffccd4>Action Not Needed!</color>", 1);
+            _soundProvider.PlayOneShot("Error");
             return;
         }
 
@@ -117,6 +124,8 @@ public class BetModel
             OnReturnChip?.Invoke(_currentBets[i].IdChipGroup, _currentBets[i].PosIndex);
         }
 
+        _soundProvider.PlayOneShot("Whoosh");
+
         _currentBets.Clear();
     }
 
@@ -125,6 +134,7 @@ public class BetModel
         if(_savedBets.Count == 0)
         {
             _notificationProvider.SendMessage("No previous bets to repeat", "<color=#ffccd4>Action Not Needed!</color>", 1);
+            _soundProvider.PlayOneShot("Error");
             return;
         }
 
@@ -151,6 +161,7 @@ public class BetModel
         else
         {
             _notificationProvider.SendMessage("Not enough chips to repeat previous bet", "<color=#ffccd4>Not Enough Chips!</color>", 1);
+            _soundProvider.PlayOneShot("Error");
         }
     }
 

@@ -8,6 +8,7 @@ public class NotificationGameTypeModel
 
     private readonly IGameProgressProvider_Read _gameProgressProvider;
     private readonly INotificationProvider _notificationProvider;
+    private readonly ISoundProvider _soundProvider;
     private readonly List<string> strings = new()
     {
         "Ready to try your luck?",
@@ -16,12 +17,13 @@ public class NotificationGameTypeModel
 
     };
 
-    public NotificationGameTypeModel(INotificationProvider notificationProvider, IGameProgressProvider_Read gameProgressProvider)
+    public NotificationGameTypeModel(INotificationProvider notificationProvider, IGameProgressProvider_Read gameProgressProvider, ISoundProvider soundProvider)
     {
         _notificationProvider = notificationProvider;
         _gameProgressProvider = gameProgressProvider;
 
         _gameProgressProvider.OnOpenGame += SendGameType;
+        _soundProvider = soundProvider;
     }
 
     public void Initialize()
@@ -44,5 +46,6 @@ public class NotificationGameTypeModel
     public void SetGameTypeName(string gameTypeName)
     {
         _notificationProvider.SendMessage($"You've unlocked the <color=#ffd580>{gameTypeName}</color> mode. {strings[UnityEngine.Random.Range(0, strings.Count)]}", "New Game Mode!", 0);
+        _soundProvider.PlayOneShot("Success");
     }
 }

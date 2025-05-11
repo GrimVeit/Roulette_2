@@ -23,7 +23,8 @@ public class StateMachine_Mini : IGlobalStateMachineProvider
         IPseudoChipActivatorProvider pseudoChipActivatorProvider,
         IMetric_GameCount metric_GameCount,
         IMetric_GameTypeCount metric_GameTypeCount,
-        IAnimationFrameProvider animationFrameProvider)
+        IAnimationFrameProvider animationFrameProvider,
+        ISoundProvider soundProvider)
     {
         states[typeof(CheckTutorialState_Mini)] = new CheckTutorialState_Mini(this, storeGameProgressPresenter);
         states[typeof(Tutorial_01_IntroOliviaState_Mini)] = new Tutorial_01_IntroOliviaState_Mini(this, dialoguePresenter, betCellActivatorProvider, pseudoChipActivatorProvider);
@@ -40,7 +41,7 @@ public class StateMachine_Mini : IGlobalStateMachineProvider
 
         states[typeof(MainState_Mini)] = new MainState_Mini(this, sceneRoot, betPresenter, pseudoChipActivatorProvider, betCellActivatorProvider);
         states[typeof(RouletteState_Mini)] = new RouletteState_Mini(this, sceneRoot, roulettePresenter, rouletteBallPresenter, rouletteValueHistoryPresenter, metric_GameCount, metric_GameTypeCount);
-        states[typeof(ResultState_Mini)] = new ResultState_Mini(this, sceneRoot, betPresenter, animationFrameProvider);
+        states[typeof(ResultState_Mini)] = new ResultState_Mini(this, sceneRoot, betPresenter, animationFrameProvider, soundProvider);
     }
 
     public void Initialize()

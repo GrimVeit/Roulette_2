@@ -75,7 +75,7 @@ public class MainMenuEntryPoint : MonoBehaviour
         timerDailyVisualPresenter = new TimerDailyVisualPresenter(new TimerDailyVisualModel(timerDailyPresenter), viewContainer.GetView<TimerDailyVisualView>());
 
         cooldownPresenter_DailyReward = new CooldownPresenter(new CooldownModel(PlayerPrefsKeys.COOLDOWN_DAILY_REWARD, TimeSpan.FromDays(1)), viewContainer.GetView<CooldownView>());
-        dailyRewardPresenter = new DailyRewardPresenter(new DailyRewardModel(PlayerPrefsKeys.DAY_DAILY_REWARD, dailyRewardValues, bankPresenter), viewContainer.GetView<DailyRewardView>());
+        dailyRewardPresenter = new DailyRewardPresenter(new DailyRewardModel(PlayerPrefsKeys.DAY_DAILY_REWARD, dailyRewardValues, bankPresenter, soundPresenter), viewContainer.GetView<DailyRewardView>());
         dailyRewardScalePresenter = new DailyRewardScalePresenter(new DailyRewardScaleModel(), viewContainer.GetView<DailyRewardScaleView>());
         dailyRewardVisualPresenter = new DailyRewardVisualPresenter(new DailyRewardVisualModel(), viewContainer.GetView<DailyRewardVisualView>());
 
@@ -92,11 +92,11 @@ public class MainMenuEntryPoint : MonoBehaviour
         avatarPresenter = new AvatarPresenter(new AvatarModel(), viewContainer.GetView<AvatarView>());
 
         notificationPresenter = new NotificationPresenter(new NotificationModel(), viewContainer.GetView<NotificationView>());
-        notificationGameTypePresenter = new NotificationGameTypePresenter(new NotificationGameTypeModel(notificationPresenter, storeGameProgressPresenter), viewContainer.GetView<NotificationGameTypeView>());
-        notificationTaskPresenter = new NotificationTaskPresenter(new NotificationTaskModel(notificationPresenter, storeTaskPresenter), viewContainer.GetView<NotificationTaskView>());
+        notificationGameTypePresenter = new NotificationGameTypePresenter(new NotificationGameTypeModel(notificationPresenter, storeGameProgressPresenter, soundPresenter), viewContainer.GetView<NotificationGameTypeView>());
+        notificationTaskPresenter = new NotificationTaskPresenter(new NotificationTaskModel(notificationPresenter, storeTaskPresenter, soundPresenter), viewContainer.GetView<NotificationTaskView>());
 
         storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
-        chipBuyPresenter = new ChipBuyPresenter(new ChipBuyModel(chipGroup, storeChipPresenter, bankPresenter, notificationPresenter), viewContainer.GetView<ChipBuyView>());
+        chipBuyPresenter = new ChipBuyPresenter(new ChipBuyModel(chipGroup, storeChipPresenter, bankPresenter, notificationPresenter, soundPresenter), viewContainer.GetView<ChipBuyView>());
         chipCountVisualPresenter = new ChipMenuCountVisualPresenter(new ChipMenuCountVisualModel(), viewContainer.GetView<ChipMenuCountVisualView>());
 
         metric_GameTimeSessionPresenter = new Metric_GameTimeSessionPresenter(new Metric_GameTimeSessionModel(PlayerPrefsKeys.METRIC_GAME_TIME_SESSION, timerDailyPresenter, storeTaskPresenter, 15));

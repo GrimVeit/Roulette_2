@@ -154,16 +154,22 @@ public class UIMainMenuRoot : UIRoot
 
     private void HandleClickToDailyReward_Main()
     {
+        _soundProvider.PlayOneShot("Click");
+
         OnClickToDailyReward_Main?.Invoke();
     }
 
     private void HandleClickToTasks_Main()
     {
+        _soundProvider.PlayOneShot("Click");
+
         OnClickToTasks_Main?.Invoke();
     }
 
     private void HandleClickToChips_Main()
     {
+        _soundProvider.PlayOneShot("Click");
+
         OnClickToChips_Main?.Invoke();
     }
 
@@ -181,31 +187,43 @@ public class UIMainMenuRoot : UIRoot
 
     private void HandleClickToMini()
     {
+        _soundProvider.PlayOneShot("Click");
+
         OnClickToMini?.Invoke();
     }
 
     private void HandleClickToEuro()
     {
+        _soundProvider.PlayOneShot("Click");
+
         OnClickToEuro?.Invoke();
     }
 
     private void HandleClickToAmerica()
     {
+        _soundProvider.PlayOneShot("Click");
+
         OnClickToAmerica?.Invoke();
     }
 
     private void HandleClickToAmericaMulti()
     {
+        _soundProvider.PlayOneShot("Click");
+
         OnClickToAmericaMulti?.Invoke();
     }
 
     private void HandleClickToFrench()
     {
+        _soundProvider.PlayOneShot("Click");
+
         OnClickToFrench?.Invoke();
     }
 
     private void HandleClickToAmericaTracker()
     {
+        _soundProvider.PlayOneShot("Click");
+
         OnClickToAmericaTracker?.Invoke();
     }
 
@@ -217,6 +235,8 @@ public class UIMainMenuRoot : UIRoot
 
     private void HandleClickToBack_DailyReward()
     {
+        _soundProvider.PlayOneShot("Click");
+
         OnClickToBack_DailyReward?.Invoke();
     }
 
@@ -228,6 +248,8 @@ public class UIMainMenuRoot : UIRoot
 
     private void HandleClickToBack_Tasks()
     {
+        _soundProvider.PlayOneShot("Click");
+
         OnClickToBack_Tasks?.Invoke();
     }
 
@@ -239,6 +261,8 @@ public class UIMainMenuRoot : UIRoot
 
     private void HandleClickToBack_Chips()
     {
+        _soundProvider.PlayOneShot("Click");
+
         OnClickToBack_Chips?.Invoke();
     }
 

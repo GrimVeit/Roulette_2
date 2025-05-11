@@ -9,13 +9,15 @@ public class NotificationTaskModel
 
     private readonly ITaskCompletedProviderEvent _taskCompletedProvider;
     private readonly INotificationProvider _notificationProvider;
+    private readonly ISoundProvider _soundProvider;
 
-    public NotificationTaskModel(INotificationProvider notificationProvider, ITaskCompletedProviderEvent taskCompletedProviderEvent)
+    public NotificationTaskModel(INotificationProvider notificationProvider, ITaskCompletedProviderEvent taskCompletedProviderEvent, ISoundProvider soundProvider)
     {
         _notificationProvider = notificationProvider;
         _taskCompletedProvider = taskCompletedProviderEvent;
 
         _taskCompletedProvider.OnComplete += SendTask;
+        _soundProvider = soundProvider;
     }
 
     public void Initialize()
@@ -38,5 +40,6 @@ public class NotificationTaskModel
     public void SetTaskName(string taskName)
     {
         _notificationProvider.SendMessage($"<color=#ffd580>{taskName}</color>", "Daily Task Completed!", 1);
+        _soundProvider.PlayOneShot("Success");
     }
 }

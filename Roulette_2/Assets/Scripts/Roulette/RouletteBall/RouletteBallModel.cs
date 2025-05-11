@@ -6,21 +6,28 @@ public class RouletteBallModel
     public event Action<Vector3> OnBallStopped;
     public event Action OnStartSpin;
 
-    private ISoundProvider soundProvider;
+    private ISoundProvider _soundProvider;
+    private ISound _soundSpin;
+    private ISound _soundFall;
 
     public RouletteBallModel(ISoundProvider soundProvider)
     {
-        this.soundProvider = soundProvider;
+        _soundProvider = soundProvider;
+        _soundSpin = _soundProvider.GetSound("BallSpin");
+        _soundFall = _soundProvider.GetSound("BallFall");
     }
     public void StartSpin()
     {
-        //soundProvider.PlayOneShot("RouletteBallWheel");
         OnStartSpin?.Invoke();
+
+        _soundSpin.Play();
     }
 
     public void BallStopped(Vector3 vector)
     {
-        //soundProvider.PlayOneShot("RouletteBallFallen");
         OnBallStopped?.Invoke(vector);
+
+        _soundSpin.Stop();
+        _soundFall.Play();
     }
 }

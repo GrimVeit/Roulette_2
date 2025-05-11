@@ -12,11 +12,11 @@ public class UIGameSceneRoot_Game : UIRoot
     [SerializeField] private RoulettePanel_Game roulettePanel;
     [SerializeField] private ResultPanel_Game resultPanel;
 
-    private ISoundProvider soundProvider;
+    private ISoundProvider _soundProvider;
 
     public void SetSoundProvider(ISoundProvider soundProvider)
     {
-        this.soundProvider = soundProvider;
+        this._soundProvider = soundProvider;
     }
 
     public void Initialize()
@@ -146,6 +146,8 @@ public class UIGameSceneRoot_Game : UIRoot
 
     private void HandleClickToMenu()
     {
+        _soundProvider.PlayOneShot("Click");
+
         OnClickToMenu?.Invoke();
     }
 
@@ -154,6 +156,8 @@ public class UIGameSceneRoot_Game : UIRoot
 
     private void HandleClickToSpin()
     {
+        _soundProvider.PlayOneShot("Click");
+
         OnClickToSpin?.Invoke();
     }
 

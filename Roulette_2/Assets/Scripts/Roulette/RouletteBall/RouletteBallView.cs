@@ -17,7 +17,8 @@ public class RouletteBallView : View, IIdentify
     [SerializeField] private Transform transformEnd;
     private float startRadius;
     private float endRadius;
-    [SerializeField] private float duration;
+    [SerializeField] private float minDuration;
+    [SerializeField] private float maxDuration;
     [SerializeField] private float startSpeed;
     [SerializeField] private float endSpeed = 0;
 
@@ -41,8 +42,8 @@ public class RouletteBallView : View, IIdentify
     public void StartSpin()
     {
         Coroutines.Start(MoveBall());
-        DOTween.To(() => currentRadius, x => currentRadius = x, endRadius, duration);
-        DOTween.To(() => currentSpeed, x => currentSpeed = x, endSpeed, duration);
+        DOTween.To(() => currentRadius, x => currentRadius = x, endRadius, minDuration);
+        DOTween.To(() => currentSpeed, x => currentSpeed = x, endSpeed, minDuration);
     }
 
     private IEnumerator MoveBall()

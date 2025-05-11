@@ -14,11 +14,11 @@ public class PseudoChipModel
 
     private bool isActive = true;
 
-    private ISoundProvider soundProvider;
+    private ISoundProvider _soundProvider;
 
     public PseudoChipModel(ISoundProvider soundProvider)
     {
-        this.soundProvider = soundProvider;
+        _soundProvider = soundProvider;
     }
 
     public void GrabPseudoChip(PseudoChip pseudoChip)
@@ -62,7 +62,7 @@ public class PseudoChipModel
             }
         }
 
-        //soundProvider.PlayOneShot("ChipWhoosh");
+        _soundProvider.PlayOneShot("Whoosh");
         OnEndMove?.Invoke();
     }
 
