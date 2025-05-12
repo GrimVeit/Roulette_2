@@ -137,7 +137,8 @@ public class GameSceneEntryPoint_AmericaMulti : MonoBehaviour
             dialoguePresenter,
             metric_GameCountPresenter,
             metric_GameTypeCountPresenter,
-            animationFramePresenter);
+            animationFramePresenter,
+            soundPresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();

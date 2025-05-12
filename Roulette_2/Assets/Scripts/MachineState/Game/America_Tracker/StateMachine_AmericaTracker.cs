@@ -23,7 +23,8 @@ public class StateMachine_AmericaTracker : IGlobalStateMachineProvider
         IPseudoChipActivatorProvider pseudoChipActivatorProvider,
         IMetric_GameCount metric_GameCount,
         IMetric_GameTypeCount metric_GameTypeCount,
-        IAnimationFrameProvider animationFrameProvider)
+        IAnimationFrameProvider animationFrameProvider,
+        ISoundProvider soundProvider)
     {
         states[typeof(CheckTutorialStates_AmericaTracker)] = new CheckTutorialStates_AmericaTracker(this, storeGameProgressPresenter);
         states[typeof(Tutorial_01_AmericaTrackerIntroState_AmericaTracker)] = new Tutorial_01_AmericaTrackerIntroState_AmericaTracker(this, dialoguePresenter, betCellActivatorProvider, pseudoChipActivatorProvider, sceneRoot);
@@ -35,7 +36,7 @@ public class StateMachine_AmericaTracker : IGlobalStateMachineProvider
 
         states[typeof(MainState_AmericaTracker)] = new MainState_AmericaTracker(this, sceneRoot, betPresenter, betCellActivatorProvider, pseudoChipActivatorProvider);
         states[typeof(RouletteState_AmericaTracker)] = new RouletteState_AmericaTracker(this, sceneRoot, roulettePresenter, rouletteBallPresenter, rouletteValueHistoryPresenter, metric_GameCount, metric_GameTypeCount);
-        states[typeof(ResultState_AmericaTracker)] = new ResultState_AmericaTracker(this, sceneRoot, betPresenter, animationFrameProvider);
+        states[typeof(ResultState_AmericaTracker)] = new ResultState_AmericaTracker(this, sceneRoot, betPresenter, animationFrameProvider, soundProvider);
     }
 
     public void Initialize()

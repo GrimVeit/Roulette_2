@@ -23,7 +23,8 @@ public class StateMachine_America : IGlobalStateMachineProvider
         IPseudoChipActivatorProvider pseudoChipActivatorProvider,
         IMetric_GameCount metric_GameCount,
         IMetric_GameTypeCount metric_GameTypeCount,
-        IAnimationFrameProvider animationFrameProvider)
+        IAnimationFrameProvider animationFrameProvider,
+        ISoundProvider soundProvider)
     {
         states[typeof(CheckTutorialState_America)] = new CheckTutorialState_America(this, storeGameProgressPresenter);
         states[typeof(Tutorial_01_AmericaIntroState_America)] = new Tutorial_01_AmericaIntroState_America(this, dialoguePresenter, betCellActivatorProvider, pseudoChipActivatorProvider);
@@ -32,7 +33,7 @@ public class StateMachine_America : IGlobalStateMachineProvider
 
         states[typeof(MainState_America)] = new MainState_America(this, sceneRoot, betPresenter, betCellActivatorProvider, pseudoChipActivatorProvider);
         states[typeof(RouletteState_America)] = new RouletteState_America(this, sceneRoot, roulettePresenter, rouletteBallPresenter, rouletteValueHistoryPresenter, metric_GameCount, metric_GameTypeCount);
-        states[typeof(ResultState_America)] = new ResultState_America(this, sceneRoot, betPresenter, animationFrameProvider);
+        states[typeof(ResultState_America)] = new ResultState_America(this, sceneRoot, betPresenter, animationFrameProvider, soundProvider);
     }
 
     public void Initialize()

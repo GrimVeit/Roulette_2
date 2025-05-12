@@ -41,9 +41,11 @@ public class RouletteBallView : View, IIdentify
 
     public void StartSpin()
     {
+        float value = UnityEngine.Random.Range(minDuration, maxDuration);
+
         Coroutines.Start(MoveBall());
-        DOTween.To(() => currentRadius, x => currentRadius = x, endRadius, minDuration);
-        DOTween.To(() => currentSpeed, x => currentSpeed = x, endSpeed, minDuration);
+        DOTween.To(() => currentRadius, x => currentRadius = x, endRadius, value);
+        DOTween.To(() => currentSpeed, x => currentSpeed = x, endSpeed, value);
     }
 
     private IEnumerator MoveBall()

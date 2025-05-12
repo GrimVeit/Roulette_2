@@ -21,7 +21,8 @@ public class StateMachine_French : IGlobalStateMachineProvider
         IPseudoChipActivatorProvider pseudoChipActivatorProvider,
         IMetric_GameCount metric_GameCount,
         IMetric_GameTypeCount metric_GameTypeCount,
-        IAnimationFrameProvider animationFrameProvider)
+        IAnimationFrameProvider animationFrameProvider,
+        ISoundProvider soundProvider)
     {
         states[typeof(CheckTutorialState_French)] = new CheckTutorialState_French(this, storeGameProgressPresenter);
         states[typeof(Tutorial_01_IntroFrenchState_French)] = new Tutorial_01_IntroFrenchState_French(this, dialoguePresenter, betCellActivatorProvider, pseudoChipActivatorProvider, sceneRoot);
@@ -33,7 +34,7 @@ public class StateMachine_French : IGlobalStateMachineProvider
 
         states[typeof(MainState_French)] = new MainState_French(this, sceneRoot, betPresenter, betCellActivatorProvider, pseudoChipActivatorProvider);
         states[typeof(RouletteState_French)] = new RouletteState_French(this, sceneRoot, roulettePresenter, rouletteBallPresenter, rouletteValueHistoryPresenter, metric_GameCount, metric_GameTypeCount);
-        states[typeof(ResultState_French)] = new ResultState_French(this, sceneRoot, betPresenter, animationFrameProvider);
+        states[typeof(ResultState_French)] = new ResultState_French(this, sceneRoot, betPresenter, animationFrameProvider, soundProvider);
     }
 
     public void Initialize()

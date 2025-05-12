@@ -9,16 +9,16 @@ public class RouletteModel
     public event Action<Vector3> OnRollBallToSlot;
     public event Action OnStartSpin;
 
-    private ISoundProvider soundProvider;
+    private ISoundProvider _soundProvider;
 
     public RouletteModel(ISoundProvider soundProvider)
     {
-        this.soundProvider = soundProvider;
+        this._soundProvider = soundProvider;
     }
 
     public void StartSpin()
     {
-        //soundProvider.PlayOneShot("RouletteWheel");
+        _soundProvider.PlayOneShot("RouletteSpin");
         OnStartSpin?.Invoke();
     }
 

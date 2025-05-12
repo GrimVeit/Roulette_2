@@ -7,16 +7,19 @@ public class ResultState_AmericaTracker : IState
     private readonly UIGameSceneRoot_Game _sceneRoot;
     private readonly BetPresenter _betPresenter;
     private readonly IAnimationFrameProvider _frameProvider;
+    private readonly ISoundProvider _soundProvider;
+    private readonly ISound _soundBackground;
 
     private IEnumerator timerCoroutine;
 
-    public ResultState_AmericaTracker(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, BetPresenter betPresenter, IAnimationFrameProvider frameProvider)
+    public ResultState_AmericaTracker(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, BetPresenter betPresenter, IAnimationFrameProvider frameProvider, ISoundProvider soundProvider)
     {
         _machineProvider = machineProvider;
         _sceneRoot = sceneRoot;
-        _frameProvider = frameProvider;
         _betPresenter = betPresenter;
         _frameProvider = frameProvider;
+        _soundProvider = soundProvider;
+        _soundBackground = _soundProvider.GetSound("Background");
     }
 
     public void EnterState()
@@ -33,7 +36,7 @@ public class ResultState_AmericaTracker : IState
         if (timerCoroutine != null)
             Coroutines.Stop(timerCoroutine);
 
-        timerCoroutine = Timer(3);
+        timerCoroutine = Timer();
         Coroutines.Start(timerCoroutine);
     }
 
@@ -45,9 +48,16 @@ public class ResultState_AmericaTracker : IState
             Coroutines.Stop(timerCoroutine);
     }
 
-    private IEnumerator Timer(int time)
+    private IEnumerator Timer()
     {
-        yield return new WaitForSeconds(time);
+        _soundProvider.PlayOneShot("Win");
+        _soundBackground.SetVolume(0.5f, 0.2f, 0.1f);
+
+        yield return new WaitForSeconds(2);
+
+        _soundBackground.SetVolume(0.2f, 0.5f, 0.1f);
+
+        yield return new WaitForSeconds(1);
 
         ChangeStateToMain();
     }

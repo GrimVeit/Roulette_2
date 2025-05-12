@@ -18,7 +18,7 @@ public class MovePanel : Panel
 
     public override void ActivatePanel()
     {
-        if (tween != null) { tween.Kill(); }
+        if (tween != null) { tween?.Kill(); }
 
         panel.SetActive(true);
         isActive = true;
@@ -28,7 +28,7 @@ public class MovePanel : Panel
 
     public override void DeactivatePanel()
     {
-        if (tween != null) { tween.Kill(); }
+        if (tween != null) { tween?.Kill(); }
 
         isActive = false;
         tween = panel.transform.DOLocalMove(from, time).OnComplete(() => 

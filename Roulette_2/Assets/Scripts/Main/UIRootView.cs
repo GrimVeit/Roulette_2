@@ -7,27 +7,19 @@ public class UIRootView : MonoBehaviour
     [SerializeField] private Canvas canvas;
     [SerializeField] private List<Panel> loadScreens = new List<Panel>();
     [SerializeField] private Transform uiSceneContainer;
-
-    private Panel loadScreen;
-
-    public void SetLoadScreen(int index)
-    {
-        this.loadScreen = loadScreens[index];
-    }
-
-    public IEnumerator ShowLoadingScreen()
+    public IEnumerator ShowLoadingScreen(int index)
     {
         Debug.Log("Start Show");
-        loadScreen.ActivatePanel();
-        yield return new WaitForSeconds(0.2f);
+        loadScreens[index].ActivatePanel();
+        yield return new WaitForSeconds(0.3f);
         Debug.Log("End Show");
     }
 
-    public IEnumerator HideLoadingScreen()
+    public IEnumerator HideLoadingScreen(int index)
     {
         Debug.Log("Start Hide");
-        loadScreen.DeactivatePanel();
-        yield return new WaitForSeconds(0.2f);
+        loadScreens[index].DeactivatePanel();
+        yield return new WaitForSeconds(0.3f);
         Debug.Log("End Hide");
     }
 

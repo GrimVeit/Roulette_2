@@ -23,7 +23,8 @@ public class StateMachine_Euro : IGlobalStateMachineProvider
         IPseudoChipActivatorProvider pseudoChipActivatorProvider,
         IMetric_GameCount metric_GameCount,
         IMetric_GameTypeCount metric_GameTypeCount,
-        IAnimationFrameProvider animationFrameProvider)
+        IAnimationFrameProvider animationFrameProvider,
+        ISoundProvider soundProvider)
     {
         states[typeof(CheckTutorialState_Euro)] = new CheckTutorialState_Euro(this, storeGameProgressPresenter);
         states[typeof(Tutorial_01_EuroIntroState_Euro)] = new Tutorial_01_EuroIntroState_Euro(this, dialoguePresenter, betCellActivatorProvider, pseudoChipActivatorProvider);
@@ -39,7 +40,7 @@ public class StateMachine_Euro : IGlobalStateMachineProvider
 
         states[typeof(MainState_Euro)] = new MainState_Euro(this, sceneRoot, betPresenter, betCellActivatorProvider, pseudoChipActivatorProvider);
         states[typeof(RouletteState_Euro)] = new RouletteState_Euro(this, sceneRoot, roulettePresenter, rouletteBallPresenter, rouletteValueHistoryPresenter, metric_GameCount, metric_GameTypeCount);
-        states[typeof(ResultState_Euro)] = new ResultState_Euro(this, sceneRoot, betPresenter, animationFrameProvider);
+        states[typeof(ResultState_Euro)] = new ResultState_Euro(this, sceneRoot, betPresenter, animationFrameProvider, soundProvider);
     }
 
     public void Initialize()

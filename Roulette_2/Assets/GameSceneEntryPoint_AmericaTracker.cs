@@ -105,7 +105,8 @@ public class GameSceneEntryPoint_AmericaTracker : MonoBehaviour
             pseudoChipPresenter,
             metric_GameCountPresenter,
             metric_GameTypeCountPresenter,
-            animationFramePresenter);
+            animationFramePresenter,
+            soundPresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();

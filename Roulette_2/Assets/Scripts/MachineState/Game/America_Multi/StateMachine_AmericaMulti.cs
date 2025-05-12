@@ -21,7 +21,8 @@ public class StateMachine_AmericaMulti : IGlobalStateMachineProvider
         DialoguePresenter dialoguePresenter,
         IMetric_GameCount gameCount, 
         IMetric_GameTypeCount typeCount,
-        IAnimationFrameProvider animationFrameProvider) 
+        IAnimationFrameProvider animationFrameProvider,
+        ISoundProvider soundProvider) 
     {
         states[typeof(CheckTutorialState_AmericaMulti)] = new CheckTutorialState_AmericaMulti(this, storeGameProgressPresenter);
         states[typeof(Tutorial_01_MonicaAgainState_AmericaMulti)] = new Tutorial_01_MonicaAgainState_AmericaMulti(this, dialoguePresenter, betCellActivatorProvider, pseudoChipActivatorProvider, sceneRoot);
@@ -34,7 +35,7 @@ public class StateMachine_AmericaMulti : IGlobalStateMachineProvider
 
         states[typeof(MainState_AmericaMulti)] = new MainState_AmericaMulti(this, sceneRoot, betPresenter, betCellActivatorProvider, pseudoChipActivatorProvider);
         states[typeof(RouletteState_AmericaMulti)] = new RouletteState_AmericaMulti(this, sceneRoot, roulettePresenters, rouletteBallPresenters, rouletteValueHistoryPresenter, gameCount, typeCount);
-        states[typeof(ResultState_AmericaMulti)] = new ResultState_AmericaMulti(this, sceneRoot, betPresenter, animationFrameProvider);
+        states[typeof(ResultState_AmericaMulti)] = new ResultState_AmericaMulti(this, sceneRoot, betPresenter, animationFrameProvider, soundProvider);
     }
 
     public void Initialize()
