@@ -6,16 +6,14 @@ public class Tutorial_07_DailyBonus2State_Menu : IState
 {
     private readonly IGlobalStateMachineProvider _globalStateMachineProvider;
     private readonly DialoguePresenter _dialoguePresenter;
-    private readonly UIMainMenuRoot _sceneRoot;
     private readonly IHandPointerProvider _handPointerProvider;
 
     private IEnumerator coroutineTimer;
 
-    public Tutorial_07_DailyBonus2State_Menu(IGlobalStateMachineProvider globalStateMachineProvider, DialoguePresenter dialoguePresenter, UIMainMenuRoot sceneRoot, IHandPointerProvider handPointerProvider)
+    public Tutorial_07_DailyBonus2State_Menu(IGlobalStateMachineProvider globalStateMachineProvider, DialoguePresenter dialoguePresenter, IHandPointerProvider handPointerProvider)
     {
         _globalStateMachineProvider = globalStateMachineProvider;
         _dialoguePresenter = dialoguePresenter;
-        _sceneRoot = sceneRoot;
         _handPointerProvider = handPointerProvider;
     }
 

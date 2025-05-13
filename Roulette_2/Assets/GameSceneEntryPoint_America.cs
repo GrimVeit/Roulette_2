@@ -77,7 +77,7 @@ public class GameSceneEntryPoint_America : MonoBehaviour
         metric_BetNumberPresenter = new Metric_BetNumberPresenter(new Metric_BetNumberModel(PlayerPrefsKeys.METRIC_BET_NUMBER_COUNTS, 1, timerDailyPresenter, storeTaskPresenter));
 
         storeGameProgressPresenter = new StoreGameProgressPresenter(new StoreGameProgressModel());
-        dialoguePresenter = new DialoguePresenter(new DialogueModel(dialogueGroup), viewContainer.GetView<DialogueView>());
+        dialoguePresenter = new DialoguePresenter(new DialogueModel(dialogueGroup, soundPresenter), viewContainer.GetView<DialogueView>());
         highlightPresenter = new HighlightPresenter(new HighlightModel(), viewContainer.GetView<HighlightView>());
         handPointerPresenter = new HandPointerPresenter(new HandPointerModel(), viewContainer.GetView<HandPointerView>());
 

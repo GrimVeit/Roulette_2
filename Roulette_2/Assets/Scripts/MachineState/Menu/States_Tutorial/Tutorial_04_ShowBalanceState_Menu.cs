@@ -24,6 +24,7 @@ public class Tutorial_04_ShowBalanceState_Menu : IState
         Debug.Log("<color=red>ACTIVATE STATE - TUTORIAL 04 STATE / MENU</color>");
 
         _dialoguePresenter.Next();
+
         _handPointerProvider.Activate();
         _handPointerProvider.Move(0);
         _sceneRoot.OpenMainPanel();

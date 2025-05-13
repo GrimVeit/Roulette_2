@@ -24,7 +24,7 @@ public class StateMachine_Menu : IGlobalStateMachineProvider
         states[typeof(Tutorial_04_ShowBalanceState_Menu)] = new Tutorial_04_ShowBalanceState_Menu(this, dialoguePresenter, sceneRoot, handPointerProvider);
         states[typeof(Tutorial_05_HighlightBonusBtnState_Menu)] = new Tutorial_05_HighlightBonusBtnState_Menu(this, dialoguePresenter, sceneRoot, handPointerProvider);
         states[typeof(Tutorial_06_DailyBonus1State_Menu)] = new Tutorial_06_DailyBonus1State_Menu(this, dialoguePresenter, sceneRoot, handPointerProvider);
-        states[typeof(Tutorial_07_DailyBonus2State_Menu)] = new Tutorial_07_DailyBonus2State_Menu(this, dialoguePresenter, sceneRoot, handPointerProvider);
+        states[typeof(Tutorial_07_DailyBonus2State_Menu)] = new Tutorial_07_DailyBonus2State_Menu(this, dialoguePresenter, handPointerProvider);
         states[typeof(Tutorial_08_HighlightTasksBtnState_Menu)] = new Tutorial_08_HighlightTasksBtnState_Menu(this, dialoguePresenter, sceneRoot, handPointerProvider);
         states[typeof(Tutorial_09_DailyTasksState_Menu)] = new Tutorial_09_DailyTasksState_Menu(this, dialoguePresenter, sceneRoot);
         states[typeof(Tutorial_10_CompleteState_Menu)] = new Tutorial_10_CompleteState_Menu(this, dialoguePresenter, tutorialProgressProvider_Write, sceneRoot, gameProgressProvider_Write);

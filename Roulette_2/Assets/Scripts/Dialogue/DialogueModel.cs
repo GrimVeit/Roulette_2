@@ -11,9 +11,12 @@ public class DialogueModel
 
     private int _dialogueIndex = 0;
 
-    public DialogueModel(DialogueGroup dialogueGroup)
+    private readonly ISoundProvider _soundProvider;
+
+    public DialogueModel(DialogueGroup dialogueGroup, ISoundProvider soundProvider)
     {
         _dialogueGroup = dialogueGroup;
+        _soundProvider = soundProvider;
     }
 
     public void Activate()
@@ -28,6 +31,7 @@ public class DialogueModel
 
         OnActivate?.Invoke();
         OnChangeDialogue?.Invoke(dialogue);
+        _soundProvider.PlayOneShot("TutorNext");
     }
 
     public void Deactivate()
@@ -48,5 +52,6 @@ public class DialogueModel
         }
 
         OnChangeDialogue?.Invoke(dialogue);
+        _soundProvider.PlayOneShot("TutorNext");
     }
 }

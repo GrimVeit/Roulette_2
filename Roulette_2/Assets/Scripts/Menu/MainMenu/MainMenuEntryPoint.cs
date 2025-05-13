@@ -85,7 +85,7 @@ public class MainMenuEntryPoint : MonoBehaviour
         storeGameProgressPresenter = new StoreGameProgressPresenter(new StoreGameProgressModel());
         gameProgressVisualPresenter = new GameProgressVisualPresenter(new GameProgressVisualModel(storeGameProgressPresenter), viewContainer.GetView<GameProgressVisualView>());
 
-        dialoguePresenter = new DialoguePresenter(new DialogueModel(dialogueGroup), viewContainer.GetView<DialogueView>());
+        dialoguePresenter = new DialoguePresenter(new DialogueModel(dialogueGroup, soundPresenter), viewContainer.GetView<DialogueView>());
         handPointerPresenter = new HandPointerPresenter(new HandPointerModel(), viewContainer.GetView<HandPointerView>());
 
         nicknamePresenter = new NicknamePresenter(new NicknameModel(soundPresenter), viewContainer.GetView<NicknameView>());

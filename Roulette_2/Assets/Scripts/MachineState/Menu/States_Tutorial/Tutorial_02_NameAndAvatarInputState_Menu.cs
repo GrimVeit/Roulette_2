@@ -21,6 +21,7 @@ public class Tutorial_02_NameAndAvatarInputState_Menu : IState
         _sceneRoot.OnClickToSave_AvatarNickname += ChangeStateTo_03;
 
         _dialoguePresenter.Next();
+
         _sceneRoot.OpenAvatarNicknamePanel();
         _sceneRoot.OpenSaveAvatarDataPanel();
     }
