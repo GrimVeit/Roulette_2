@@ -12,12 +12,12 @@ public class Notification : MonoBehaviour
 
     public void Initialize()
     {
-        movePanel.OnDeactivatePanel += HandleDestroy;
+        movePanel.OnDeactivatePanel_Data += HandleDestroy;
     }
 
     public void Dispose()
     {
-        movePanel.OnDeactivatePanel -= HandleDestroy;
+        movePanel.OnDeactivatePanel_Data -= HandleDestroy;
     }
 
     public void Activate()

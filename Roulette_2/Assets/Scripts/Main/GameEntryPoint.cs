@@ -80,7 +80,7 @@ public class GameEntryPoint
 
     private IEnumerator LoadAndStartGameScene_2_Euro()
     {
-        yield return rootView.ShowLoadingScreen(1);
+        yield return rootView.ShowLoadingScreen(2);
 
         yield return LoadScene(Scenes.BOOT);
         yield return LoadScene(Scenes.GAME_2_EURO);
@@ -93,12 +93,12 @@ public class GameEntryPoint
         sceneEntryPoint.OnGoToMenu += () => coroutines.StartCoroutine(LoadAndStartMainMenu());
 
 
-        yield return rootView.HideLoadingScreen(1);
+        yield return rootView.HideLoadingScreen(2);
     }
 
     private IEnumerator LoadAndStartGameScene_3_America()
     {
-        yield return rootView.ShowLoadingScreen(1);
+        yield return rootView.ShowLoadingScreen(3);
 
         yield return LoadScene(Scenes.BOOT);
         yield return LoadScene(Scenes.GAME_3_AMERICA);
@@ -110,12 +110,12 @@ public class GameEntryPoint
 
         sceneEntryPoint.OnGoToMenu += () => coroutines.StartCoroutine(LoadAndStartMainMenu());
 
-        yield return rootView.HideLoadingScreen(1);
+        yield return rootView.HideLoadingScreen(3);
     }
 
     private IEnumerator LoadAndStartGameScene_4_AmericaMulti()
     {
-        yield return rootView.ShowLoadingScreen(1);
+        yield return rootView.ShowLoadingScreen(4);
 
         yield return LoadScene(Scenes.BOOT);
         yield return LoadScene(Scenes.GAME_4_AMERICA_MULTI);
@@ -128,12 +128,12 @@ public class GameEntryPoint
         sceneEntryPoint.OnGoToMenu += () => coroutines.StartCoroutine(LoadAndStartMainMenu());
 
 
-        yield return rootView.HideLoadingScreen(1);
+        yield return rootView.HideLoadingScreen(4);
     }
 
     private IEnumerator LoadAndStartGameScene_5_French()
     {
-        yield return rootView.ShowLoadingScreen(1);
+        yield return rootView.ShowLoadingScreen(5);
 
         yield return LoadScene(Scenes.BOOT);
         yield return LoadScene(Scenes.GAME_5_FRENCH);
@@ -146,12 +146,12 @@ public class GameEntryPoint
         sceneEntryPoint.OnGoToMenu += () => coroutines.StartCoroutine(LoadAndStartMainMenu());
 
 
-        yield return rootView.HideLoadingScreen(1);
+        yield return rootView.HideLoadingScreen(5);
     }
 
     private IEnumerator LoadAndStartGameScene_6_AmericaTracker()
     {
-        yield return rootView.ShowLoadingScreen(1);
+        yield return rootView.ShowLoadingScreen(6);
 
         yield return new WaitForSeconds(0.3f);
 
@@ -166,7 +166,7 @@ public class GameEntryPoint
         sceneEntryPoint.OnGoToMenu += () => coroutines.StartCoroutine(LoadAndStartMainMenu());
 
 
-        yield return rootView.HideLoadingScreen(1);
+        yield return rootView.HideLoadingScreen(6);
     }
 
     private IEnumerator LoadScene(string scene)

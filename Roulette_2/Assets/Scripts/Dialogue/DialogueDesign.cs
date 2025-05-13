@@ -18,12 +18,12 @@ public class DialogueDesign : MonoBehaviour
 
     public void Initialize()
     {
-        movePanel.OnDeactivatePanel += DestroyObj;
+        movePanel.OnDeactivatePanel_Data += DestroyObj;
     }
 
     public void Dispose()
     {
-        movePanel.OnDeactivatePanel -= DestroyObj;
+        movePanel.OnDeactivatePanel_Data -= DestroyObj;
     }
 
     public void Activate()
