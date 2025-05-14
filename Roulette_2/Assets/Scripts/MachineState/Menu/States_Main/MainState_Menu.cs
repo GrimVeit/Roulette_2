@@ -18,6 +18,7 @@ public class MainState_Menu : IState
         Debug.Log("<color=red>ACTIVATE STATE - MAIN STATE / MENU</color>");
 
         _sceneRoot.OnClickToDailyReward_Main += ChangeStateToDailyReward;
+        _sceneRoot.OnClickToLeaderboard += ChangeStateToLeaderboard;
         _sceneRoot.OnClickToTasks_Main += ChangeStateToDailyTasks;
         _sceneRoot.OnClickToChips_Main += ChangeStateToChipStore;
 
@@ -27,6 +28,7 @@ public class MainState_Menu : IState
     public void ExitState()
     {
         _sceneRoot.OnClickToDailyReward_Main -= ChangeStateToDailyReward;
+        _sceneRoot.OnClickToLeaderboard -= ChangeStateToLeaderboard;
         _sceneRoot.OnClickToTasks_Main -= ChangeStateToDailyTasks;
         _sceneRoot.OnClickToChips_Main -= ChangeStateToChipStore;
     }
@@ -34,6 +36,11 @@ public class MainState_Menu : IState
     private void ChangeStateToDailyTasks()
     {
         _machineProvider.SetState(_machineProvider.GetState<DailyTasksState_Menu>());
+    }
+
+    private void ChangeStateToLeaderboard()
+    {
+        _machineProvider.SetState(_machineProvider.GetState<LeaderboardState_Menu>());
     }
 
     private void ChangeStateToDailyReward()

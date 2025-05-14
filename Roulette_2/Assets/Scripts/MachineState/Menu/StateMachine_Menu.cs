@@ -32,6 +32,7 @@ public class StateMachine_Menu : IGlobalStateMachineProvider
 
         states[typeof(MainState_Menu)] = new MainState_Menu(this, sceneRoot);
         states[typeof(DailyRewardState_Menu)] = new DailyRewardState_Menu(this, sceneRoot);
+        states[typeof(LeaderboardState_Menu)] = new LeaderboardState_Menu(this, sceneRoot);
         states[typeof(DailyTasksState_Menu)] = new DailyTasksState_Menu(this, sceneRoot);
         states[typeof(ChipStoreState_Menu)] = new ChipStoreState_Menu(this, sceneRoot);
     }

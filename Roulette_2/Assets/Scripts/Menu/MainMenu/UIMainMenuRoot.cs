@@ -5,6 +5,7 @@ public class UIMainMenuRoot : UIRoot
 {
     [SerializeField] private MainPanel_Menu _mainPanel;
     [SerializeField] private DailyRewardPanel_Menu _dailyRewardPanel;
+    [SerializeField] private LeaderboardPanel_Menu _leaderboardPanel;
     [SerializeField] private TasksPanel_Menu _tasksPanel;
     [SerializeField] private ChipsPanel_Menu _chipsPanel;
 
@@ -23,6 +24,7 @@ public class UIMainMenuRoot : UIRoot
     {
         _mainPanel.Initialize();
         _dailyRewardPanel.Initialize();
+        _leaderboardPanel.Initialize();
         _tasksPanel.Initialize();
         _chipsPanel.Initialize();
 
@@ -35,10 +37,12 @@ public class UIMainMenuRoot : UIRoot
         _saveAvatarNicknameDataPanel.OnClickToSave += HandleClickToSave_AvatarNickname;
 
         _dailyRewardPanel.OnClickToBack += HandleClickToBack_DailyReward;
+        _leaderboardPanel.OnClickToBack += HandleClickToBack_Leaderboard;
         _tasksPanel.OnClickToBack += HandleClickToBack_Tasks;
         _chipsPanel.OnClickToBack += HandleClickToBack_Chips;
 
         _mainPanel.OnClickToDailyReward += HandleClickToDailyReward_Main;
+        _mainPanel.OnClickToLeaderboard += HandleClickToLeaderboard_Main;
         _mainPanel.OnClickToTasks += HandleClickToTasks_Main;
         _mainPanel.OnClickToChips += HandleClickToChips_Main;
 
@@ -56,10 +60,12 @@ public class UIMainMenuRoot : UIRoot
         _saveAvatarNicknameDataPanel.OnClickToSave -= HandleClickToSave_AvatarNickname;
 
         _dailyRewardPanel.OnClickToBack -= HandleClickToBack_DailyReward;
+        _leaderboardPanel.OnClickToBack -= HandleClickToBack_Leaderboard;
         _tasksPanel.OnClickToBack -= HandleClickToBack_Tasks;
         _chipsPanel.OnClickToBack -= HandleClickToBack_Chips;
 
         _mainPanel.OnClickToDailyReward -= HandleClickToDailyReward_Main;
+        _mainPanel.OnClickToLeaderboard -= HandleClickToLeaderboard_Main;
         _mainPanel.OnClickToTasks -= HandleClickToTasks_Main;
         _mainPanel.OnClickToChips -= HandleClickToChips_Main;
 
@@ -78,6 +84,7 @@ public class UIMainMenuRoot : UIRoot
     {
         _mainPanel.Dispose();
         _dailyRewardPanel.Dispose();
+        _leaderboardPanel.Dispose();
         _tasksPanel.Dispose();
         _chipsPanel.Dispose();
 
@@ -94,6 +101,11 @@ public class UIMainMenuRoot : UIRoot
     public void OpenDailyRewardPanel()
     {
         OpenPanel(_dailyRewardPanel);
+    }
+
+    public void OpenLeaderboardPanel()
+    {
+        OpenPanel(_leaderboardPanel);
     }
 
     public void OpenTasksPanel()
@@ -149,6 +161,7 @@ public class UIMainMenuRoot : UIRoot
     #region MainPanel
 
     public event Action OnClickToDailyReward_Main;
+    public event Action OnClickToLeaderboard;
     public event Action OnClickToTasks_Main;
     public event Action OnClickToChips_Main;
 
@@ -157,6 +170,13 @@ public class UIMainMenuRoot : UIRoot
         _soundProvider.PlayOneShot("Click");
 
         OnClickToDailyReward_Main?.Invoke();
+    }
+
+    private void HandleClickToLeaderboard_Main()
+    {
+        _soundProvider.PlayOneShot("Click");
+
+        OnClickToLeaderboard?.Invoke();
     }
 
     private void HandleClickToTasks_Main()
@@ -238,6 +258,19 @@ public class UIMainMenuRoot : UIRoot
         _soundProvider.PlayOneShot("Click");
 
         OnClickToBack_DailyReward?.Invoke();
+    }
+
+    #endregion
+
+    #region LeaderboardPanel
+
+    public event Action OnClickToBack_Leaderboard;
+
+    private void HandleClickToBack_Leaderboard()
+    {
+        _soundProvider.PlayOneShot("Click");
+
+        OnClickToBack_Leaderboard?.Invoke();
     }
 
     #endregion

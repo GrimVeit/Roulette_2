@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class MainPanel_Menu : MovePanel
 {
     [SerializeField] private Button buttonDailyReward;
+    [SerializeField] private Button buttonLeaderboard;
     [SerializeField] private Button buttonTasks;
     [SerializeField] private Button buttonChips;
 
@@ -22,6 +23,7 @@ public class MainPanel_Menu : MovePanel
         base.Initialize();
 
         buttonDailyReward.onClick.AddListener(() => OnClickToDailyReward?.Invoke());
+        buttonLeaderboard.onClick.AddListener(() => OnClickToLeaderboard?.Invoke());
         buttonTasks.onClick.AddListener(() => OnClickToTasks?.Invoke());
         buttonChips.onClick.AddListener(() => OnClickToChips?.Invoke());
 
@@ -38,6 +40,7 @@ public class MainPanel_Menu : MovePanel
         base.Dispose();
 
         buttonDailyReward.onClick.RemoveListener(() => OnClickToDailyReward?.Invoke());
+        buttonLeaderboard.onClick.RemoveListener(() => OnClickToLeaderboard?.Invoke());
         buttonTasks.onClick.RemoveListener(() => OnClickToTasks?.Invoke());
         buttonChips.onClick.RemoveListener(() => OnClickToChips?.Invoke());
 
@@ -52,6 +55,7 @@ public class MainPanel_Menu : MovePanel
     #region Output
 
     public event Action OnClickToDailyReward;
+    public event Action OnClickToLeaderboard;
     public event Action OnClickToTasks;
     public event Action OnClickToChips;
 
