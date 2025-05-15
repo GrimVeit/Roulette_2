@@ -23,8 +23,6 @@ public class Tutorial_03_IntroConfirmationState_Menu : IState
 
         _dialoguePresenter.Next();
 
-        _sceneRoot.CloseSaveAvatarDataPanel();
-
         if (coroutineTimer != null) Coroutines.Stop(coroutineTimer);
 
         coroutineTimer = Timer(3);
@@ -33,8 +31,6 @@ public class Tutorial_03_IntroConfirmationState_Menu : IState
 
     public void ExitState()
     {
-        _sceneRoot.CloseAvatarNicknamePanel();
-
         if (coroutineTimer != null) Coroutines.Stop(coroutineTimer);
     }
 

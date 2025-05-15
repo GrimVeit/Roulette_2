@@ -6,31 +6,37 @@ using UnityEngine.Networking;
 
 public class NicknameModel
 {
-    public event Action<string> OnGetNickname;
+    public event Action<string> OnChooseNickname;
 
     public event Action OnCorrectNickname;
     public event Action OnIncorrectNickname;
     public event Action<string> OnEnterRegisterLoginError;
 
-    public event Action<string> OnGetRandomNickname;
-
     private readonly Regex mainRegex = new("^[a-zA-Z0-9._]*$");
     private readonly Regex invalidRegex = new(@"(\.{2,}|/{2,})");
-    private const string URL = "https://dinoipsum.com/api/?format=text&paragraphs=1&words=1";
 
     public string Nickname { get; private set; }
 
-    private ISoundProvider soundProvider;
+    private readonly string keyNickname;
 
-    public NicknameModel(ISoundProvider soundProvider)
+    private ISoundProvider _soundProvider;
+
+    public NicknameModel(string keyNickname, ISoundProvider soundProvider)
     {
-        this.soundProvider = soundProvider;
+        this.keyNickname = keyNickname;
+        _soundProvider = soundProvider;
+    }
+
+    public void Initialize()
+    {
+        Nickname = PlayerPrefs.GetString(keyNickname, "ABCD123");
+        OnChooseNickname?.Invoke(Nickname);
     }
 
     public void ChangeNickname(string value)
     {
         Nickname = value;
-        OnGetNickname?.Invoke(Nickname);
+        OnChooseNickname?.Invoke(Nickname);
 
         //soundProvider.PlayOneShot("TextEnter");
 

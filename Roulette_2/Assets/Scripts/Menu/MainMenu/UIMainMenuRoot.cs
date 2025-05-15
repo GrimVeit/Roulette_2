@@ -12,6 +12,7 @@ public class UIMainMenuRoot : UIRoot
     [Header("Others")]
     [SerializeField] private AvatarNicknamePanel_Menu _avatarNicknamePanel;
     [SerializeField] private SaveAvatarNicknameDataPanel_Menu _saveAvatarNicknameDataPanel;
+    [SerializeField] private MovePanel _loadRegistrationPanel;
 
     private ISoundProvider _soundProvider;
 
@@ -30,6 +31,7 @@ public class UIMainMenuRoot : UIRoot
 
         _avatarNicknamePanel.Initialize();
         _saveAvatarNicknameDataPanel.Initialize();
+        _loadRegistrationPanel.Initialize();
     }
 
     public void Activate()
@@ -90,6 +92,7 @@ public class UIMainMenuRoot : UIRoot
 
         _avatarNicknamePanel.Dispose();
         _saveAvatarNicknameDataPanel.Dispose();
+        _loadRegistrationPanel.Dispose();
     }
 
 
@@ -140,6 +143,17 @@ public class UIMainMenuRoot : UIRoot
     public void CloseSaveAvatarDataPanel()
     {
         CloseOtherPanel(_saveAvatarNicknameDataPanel);
+    }
+
+
+    public void OpenLoadRegistrationPanel()
+    {
+        OpenOtherPanel(_loadRegistrationPanel);
+    }
+
+    public void CloseLoadRegistrationPanel()
+    {
+        CloseOtherPanel(_loadRegistrationPanel);
     }
 
     #endregion

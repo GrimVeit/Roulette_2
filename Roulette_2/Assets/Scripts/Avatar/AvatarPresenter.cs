@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -44,4 +45,14 @@ public class AvatarPresenter
         _model.OnSelectAvatar -= _view.Select;
         _model.OnDeselectAvatar -= _view.Deselect;
     }
+
+    #region Output
+
+    public event Action<int> OnChooseAvatar
+    {
+        add => _model.OnSelectAvatar += value;
+        remove => _model.OnSelectAvatar -= value;
+    }
+
+    #endregion
 }

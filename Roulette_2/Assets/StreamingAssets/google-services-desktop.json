@@ -1,0 +1,32 @@
+{
+  "project_info": {
+    "project_number": "363238923911",
+    "firebase_url": "https://roulette2-4a44a-default-rtdb.firebaseio.com",
+    "project_id": "roulette2-4a44a",
+    "storage_bucket": "roulette2-4a44a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:363238923911:ios:eb7e3d39ddef9f3832a222",
+        "android_client_info": {
+          "package_name": "com.RouletteCompany.Roulette2"
+        }
+      },
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6upceOzC_5gC5AeK2CE7b7JrN8uxTfe0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 0
+        },
+        "appinvite_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

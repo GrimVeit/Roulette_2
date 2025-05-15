@@ -48,11 +48,11 @@ public class Tutorial_10_CompleteState_Menu : IState
         _gameProgressProvider_Write.OpenGame(1);
         _tutorialProgressProvider_Write.CompleteTutorial(0);
 
-        ChangeStateToMain();
+        ChangeStateToStartMain();
     }
 
-    private void ChangeStateToMain()
+    private void ChangeStateToStartMain()
     {
-        _globalStateMachineProvider.SetState(_globalStateMachineProvider.GetState<MainState_Menu>());
+        _globalStateMachineProvider.SetState(_globalStateMachineProvider.GetState<StartMainState_Menu>());
     }
 }

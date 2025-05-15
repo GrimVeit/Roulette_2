@@ -29,7 +29,7 @@ public class NicknamePresenter
     {
         nicknameView.OnChangeNickname += nicknameModel.ChangeNickname;
 
-        nicknameModel.OnGetNickname += nicknameView.ChangeNickname;
+        nicknameModel.OnChooseNickname += nicknameView.ChangeNickname;
         nicknameModel.OnEnterRegisterLoginError += nicknameView.DisplayDescription;
 
         nicknameModel.OnCorrectNickname += nicknameView.ActivateButton;
@@ -40,7 +40,7 @@ public class NicknamePresenter
     {
         nicknameView.OnChangeNickname -= nicknameModel.ChangeNickname;
 
-        nicknameModel.OnGetNickname -= nicknameView.ChangeNickname;
+        nicknameModel.OnChooseNickname -= nicknameView.ChangeNickname;
         nicknameModel.OnEnterRegisterLoginError -= nicknameView.DisplayDescription;
 
         nicknameModel.OnCorrectNickname -= nicknameView.ActivateButton;
@@ -49,10 +49,10 @@ public class NicknamePresenter
 
     #region Input
 
-    public event Action<string> OnGetNickname
+    public event Action<string> OnChooseNickname
     {
-        add { nicknameModel.OnGetNickname += value; }
-        remove { nicknameModel.OnGetNickname -= value; }
+        add { nicknameModel.OnChooseNickname += value; }
+        remove { nicknameModel.OnChooseNickname -= value; }
     }
 
     public event Action OnCorrectNickname

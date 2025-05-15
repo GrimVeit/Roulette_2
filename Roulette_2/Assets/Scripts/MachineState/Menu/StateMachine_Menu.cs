@@ -11,6 +11,10 @@ public class StateMachine_Menu : IGlobalStateMachineProvider
 
     public StateMachine_Menu
         (UIMainMenuRoot sceneRoot,
+        NicknamePresenter nicknamePresenter,
+        AvatarPresenter avatarPresenter,
+        FirebaseAuthenticationPresenter firebaseAuthenticationPresenter,
+        FirebaseDatabasePresenter firebaseDatabasePresenter,
         DialoguePresenter dialoguePresenter,
         IHandPointerProvider handPointerProvider,
         ITutorialProgressProvider_Read tutorialProgressProvider_Read,
@@ -19,7 +23,9 @@ public class StateMachine_Menu : IGlobalStateMachineProvider
     {
         states[typeof(CheckTutorialState_Menu)] = new CheckTutorialState_Menu(this, tutorialProgressProvider_Read);
         states[typeof(Tutorial_01_IntroGreetingState_Menu)] = new Tutorial_01_IntroGreetingState_Menu(this, dialoguePresenter);
-        states[typeof(Tutorial_02_NameAndAvatarInputState_Menu)] = new Tutorial_02_NameAndAvatarInputState_Menu(this, dialoguePresenter, sceneRoot);
+        states[typeof(Tutorial_02_NameAndAvatarInputState_Menu)] = new Tutorial_02_NameAndAvatarInputState_Menu(this, dialoguePresenter, sceneRoot, nicknamePresenter, avatarPresenter, firebaseAuthenticationPresenter, firebaseDatabasePresenter);
+        states[typeof(RegistrationState_Menu)] = new RegistrationState_Menu(this, sceneRoot, firebaseAuthenticationPresenter, firebaseDatabasePresenter);
+        states[typeof(Tutorial_02_RepeatNameAndAvatarInputState_Menu)] = new Tutorial_02_RepeatNameAndAvatarInputState_Menu(this, sceneRoot, nicknamePresenter, avatarPresenter, firebaseAuthenticationPresenter, firebaseDatabasePresenter);
         states[typeof(Tutorial_03_IntroConfirmationState_Menu)] = new Tutorial_03_IntroConfirmationState_Menu(this, dialoguePresenter, sceneRoot);
         states[typeof(Tutorial_04_ShowBalanceState_Menu)] = new Tutorial_04_ShowBalanceState_Menu(this, dialoguePresenter, sceneRoot, handPointerProvider);
         states[typeof(Tutorial_05_HighlightBonusBtnState_Menu)] = new Tutorial_05_HighlightBonusBtnState_Menu(this, dialoguePresenter, sceneRoot, handPointerProvider);
@@ -30,6 +36,7 @@ public class StateMachine_Menu : IGlobalStateMachineProvider
         states[typeof(Tutorial_10_CompleteState_Menu)] = new Tutorial_10_CompleteState_Menu(this, dialoguePresenter, tutorialProgressProvider_Write, sceneRoot, gameProgressProvider_Write);
 
 
+        states[typeof(StartMainState_Menu)] = new StartMainState_Menu(this, firebaseDatabasePresenter);
         states[typeof(MainState_Menu)] = new MainState_Menu(this, sceneRoot);
         states[typeof(DailyRewardState_Menu)] = new DailyRewardState_Menu(this, sceneRoot);
         states[typeof(LeaderboardState_Menu)] = new LeaderboardState_Menu(this, sceneRoot);

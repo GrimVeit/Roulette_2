@@ -20,7 +20,7 @@ public class CheckTutorialState_Menu : IState
 
         if (_tutorialProgressProvider.HasPlayedTutorialById(0))
         {
-            ChangeStateToMain();
+            ChangeStateToStartMain();
         }
         else
         {
@@ -38,8 +38,8 @@ public class CheckTutorialState_Menu : IState
         _machineProvider.SetState(_machineProvider.GetState<Tutorial_01_IntroGreetingState_Menu>());
     }
 
-    private void ChangeStateToMain()
+    private void ChangeStateToStartMain()
     {
-        _machineProvider.SetState(_machineProvider.GetState<MainState_Menu>());
+        _machineProvider.SetState(_machineProvider.GetState<StartMainState_Menu>());
     }
 }

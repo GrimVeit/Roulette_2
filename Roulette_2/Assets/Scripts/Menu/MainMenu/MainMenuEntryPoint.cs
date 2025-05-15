@@ -1,4 +1,8 @@
 using System;
+using Firebase;
+using Firebase.Auth;
+using Firebase.Database;
+using Firebase.Extensions;
 using UnityEngine;
 
 public class MainMenuEntryPoint : MonoBehaviour
@@ -37,6 +41,8 @@ public class MainMenuEntryPoint : MonoBehaviour
 
     private NicknamePresenter nicknamePresenter;
     private AvatarPresenter avatarPresenter;
+    private FirebaseAuthenticationPresenter firebaseAuthenticationPresenter;
+    private FirebaseDatabasePresenter firebaseDatabasePresenter;
 
     private TimerDailyPresenter timerDailyPresenter;
     private TimerDailyVisualPresenter timerDailyVisualPresenter;
@@ -54,104 +60,136 @@ public class MainMenuEntryPoint : MonoBehaviour
 
     public void Run(UIRootView uIRootView)
     {
-        sceneRoot = menuRootPrefab;
- 
-        uIRootView.AttachSceneUI(sceneRoot.gameObject, Camera.main);
+        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
+        {
+            var dependencyStatus = task.Result;
 
-        viewContainer = sceneRoot.GetComponent<ViewContainer>();
-        viewContainer.Initialize();
+            if (dependencyStatus == DependencyStatus.Available)
+            {
+                sceneRoot = menuRootPrefab;
 
-        soundPresenter = new SoundPresenter
-            (new SoundModel(sounds.sounds, PlayerPrefsKeys.IS_MUTE_SOUNDS),
-            viewContainer.GetView<SoundView>());
+                uIRootView.AttachSceneUI(sceneRoot.gameObject, Camera.main);
 
-        particleEffectPresenter = new ParticleEffectPresenter
-            (new ParticleEffectModel(),
-            viewContainer.GetView<ParticleEffectView>());
+                FirebaseDatabase.DefaultInstance.SetPersistenceEnabled(false);
+                FirebaseAuth firebaseAuth = FirebaseAuth.DefaultInstance;
+                DatabaseReference databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
 
-        bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
+                viewContainer = sceneRoot.GetComponent<ViewContainer>();
+                viewContainer.Initialize();
 
-        timerDailyPresenter = new TimerDailyPresenter(new TimerDailyModel(PlayerPrefsKeys.LAST_EXIT_DATE));
-        timerDailyVisualPresenter = new TimerDailyVisualPresenter(new TimerDailyVisualModel(timerDailyPresenter), viewContainer.GetView<TimerDailyVisualView>());
+                soundPresenter = new SoundPresenter
+                    (new SoundModel(sounds.sounds, PlayerPrefsKeys.IS_MUTE_SOUNDS),
+                    viewContainer.GetView<SoundView>());
 
-        cooldownPresenter_DailyReward = new CooldownPresenter(new CooldownModel(PlayerPrefsKeys.COOLDOWN_DAILY_REWARD, TimeSpan.FromDays(1)), viewContainer.GetView<CooldownView>());
-        dailyRewardPresenter = new DailyRewardPresenter(new DailyRewardModel(PlayerPrefsKeys.DAY_DAILY_REWARD, dailyRewardValues, bankPresenter, soundPresenter), viewContainer.GetView<DailyRewardView>());
-        dailyRewardScalePresenter = new DailyRewardScalePresenter(new DailyRewardScaleModel(), viewContainer.GetView<DailyRewardScaleView>());
-        dailyRewardVisualPresenter = new DailyRewardVisualPresenter(new DailyRewardVisualModel(), viewContainer.GetView<DailyRewardVisualView>());
+                particleEffectPresenter = new ParticleEffectPresenter
+                    (new ParticleEffectModel(),
+                    viewContainer.GetView<ParticleEffectView>());
 
-        storeTaskPresenter = new StoreTaskPresenter(new StoreTaskModel(taskGroup, bankPresenter, timerDailyPresenter));
-        taskVisualPresenter = new TaskVisualPresenter(new TaskVisualModel(storeTaskPresenter, storeTaskPresenter, soundPresenter), viewContainer.GetView<TaskVisualView>());
+                bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
 
-        storeGameProgressPresenter = new StoreGameProgressPresenter(new StoreGameProgressModel());
-        gameProgressVisualPresenter = new GameProgressVisualPresenter(new GameProgressVisualModel(storeGameProgressPresenter), viewContainer.GetView<GameProgressVisualView>());
+                timerDailyPresenter = new TimerDailyPresenter(new TimerDailyModel(PlayerPrefsKeys.LAST_EXIT_DATE));
+                timerDailyVisualPresenter = new TimerDailyVisualPresenter(new TimerDailyVisualModel(timerDailyPresenter), viewContainer.GetView<TimerDailyVisualView>());
 
-        dialoguePresenter = new DialoguePresenter(new DialogueModel(dialogueGroup, soundPresenter), viewContainer.GetView<DialogueView>());
-        handPointerPresenter = new HandPointerPresenter(new HandPointerModel(), viewContainer.GetView<HandPointerView>());
+                cooldownPresenter_DailyReward = new CooldownPresenter(new CooldownModel(PlayerPrefsKeys.COOLDOWN_DAILY_REWARD, TimeSpan.FromDays(1)), viewContainer.GetView<CooldownView>());
+                dailyRewardPresenter = new DailyRewardPresenter(new DailyRewardModel(PlayerPrefsKeys.DAY_DAILY_REWARD, dailyRewardValues, bankPresenter, soundPresenter), viewContainer.GetView<DailyRewardView>());
+                dailyRewardScalePresenter = new DailyRewardScalePresenter(new DailyRewardScaleModel(), viewContainer.GetView<DailyRewardScaleView>());
+                dailyRewardVisualPresenter = new DailyRewardVisualPresenter(new DailyRewardVisualModel(), viewContainer.GetView<DailyRewardVisualView>());
 
-        nicknamePresenter = new NicknamePresenter(new NicknameModel(soundPresenter), viewContainer.GetView<NicknameView>());
-        avatarPresenter = new AvatarPresenter(new AvatarModel(), viewContainer.GetView<AvatarView>());
+                storeTaskPresenter = new StoreTaskPresenter(new StoreTaskModel(taskGroup, bankPresenter, timerDailyPresenter));
+                taskVisualPresenter = new TaskVisualPresenter(new TaskVisualModel(storeTaskPresenter, storeTaskPresenter, soundPresenter), viewContainer.GetView<TaskVisualView>());
 
-        notificationPresenter = new NotificationPresenter(new NotificationModel(), viewContainer.GetView<NotificationView>());
-        notificationGameTypePresenter = new NotificationGameTypePresenter(new NotificationGameTypeModel(notificationPresenter, storeGameProgressPresenter, soundPresenter), viewContainer.GetView<NotificationGameTypeView>());
-        notificationTaskPresenter = new NotificationTaskPresenter(new NotificationTaskModel(notificationPresenter, storeTaskPresenter, soundPresenter), viewContainer.GetView<NotificationTaskView>());
+                storeGameProgressPresenter = new StoreGameProgressPresenter(new StoreGameProgressModel());
+                gameProgressVisualPresenter = new GameProgressVisualPresenter(new GameProgressVisualModel(storeGameProgressPresenter), viewContainer.GetView<GameProgressVisualView>());
 
-        storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
-        chipBuyPresenter = new ChipBuyPresenter(new ChipBuyModel(chipGroup, storeChipPresenter, bankPresenter, notificationPresenter, soundPresenter), viewContainer.GetView<ChipBuyView>());
-        chipCountVisualPresenter = new ChipMenuCountVisualPresenter(new ChipMenuCountVisualModel(), viewContainer.GetView<ChipMenuCountVisualView>());
+                dialoguePresenter = new DialoguePresenter(new DialogueModel(dialogueGroup, soundPresenter), viewContainer.GetView<DialogueView>());
+                handPointerPresenter = new HandPointerPresenter(new HandPointerModel(), viewContainer.GetView<HandPointerView>());
 
-        metric_GameTimeSessionPresenter = new Metric_GameTimeSessionPresenter(new Metric_GameTimeSessionModel(PlayerPrefsKeys.METRIC_GAME_TIME_SESSION, timerDailyPresenter, storeTaskPresenter, 15));
-        metric_GameCountPresenter = new Metric_GameCountPresenter(new Metric_GameCountModel(PlayerPrefsKeys.METRIC_GAME_COUNTS, storeTaskPresenter, timerDailyPresenter, 10));
-        metric_GameTypeCountPresenter = new Metric_GameTypeCountPresenter(new Metric_GameTypeCountModel(PlayerPrefsKeys.METRIC_GAME_TYPE_COUNTS, 4, storeTaskPresenter, timerDailyPresenter));
-        metric_WinCountPresenter = new Metric_WinCountPresenter(new Metric_WinCountModel(PlayerPrefsKeys.METRIC_WIN_ROW_COUNTS, 3, timerDailyPresenter, storeTaskPresenter));
-        metric_BetNumberPresenter = new Metric_BetNumberPresenter(new Metric_BetNumberModel(PlayerPrefsKeys.METRIC_BET_NUMBER_COUNTS, 1, timerDailyPresenter, storeTaskPresenter));
+                nicknamePresenter = new NicknamePresenter(new NicknameModel(PlayerPrefsKeys.NICKNAME, soundPresenter), viewContainer.GetView<NicknameView>());
+                avatarPresenter = new AvatarPresenter(new AvatarModel(PlayerPrefsKeys.AVATAR), viewContainer.GetView<AvatarView>());
+                firebaseAuthenticationPresenter = new FirebaseAuthenticationPresenter(new FirebaseAuthenticationModel(firebaseAuth, soundPresenter), viewContainer.GetView<FirebaseAuthenticationView>());
+                firebaseDatabasePresenter = new FirebaseDatabasePresenter(new FirebaseDatabaseModel(firebaseAuth, databaseReference, soundPresenter), viewContainer.GetView<FirebaseDatabaseView>());
 
-        stateMachine = new StateMachine_Menu(sceneRoot, dialoguePresenter, handPointerPresenter, storeGameProgressPresenter, storeGameProgressPresenter, storeGameProgressPresenter);
+                notificationPresenter = new NotificationPresenter(new NotificationModel(), viewContainer.GetView<NotificationView>());
+                notificationGameTypePresenter = new NotificationGameTypePresenter(new NotificationGameTypeModel(notificationPresenter, storeGameProgressPresenter, soundPresenter), viewContainer.GetView<NotificationGameTypeView>());
+                notificationTaskPresenter = new NotificationTaskPresenter(new NotificationTaskModel(notificationPresenter, storeTaskPresenter, soundPresenter), viewContainer.GetView<NotificationTaskView>());
 
-        sceneRoot.SetSoundProvider(soundPresenter);
-        sceneRoot.Activate();
+                storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
+                chipBuyPresenter = new ChipBuyPresenter(new ChipBuyModel(chipGroup, storeChipPresenter, bankPresenter, notificationPresenter, soundPresenter), viewContainer.GetView<ChipBuyView>());
+                chipCountVisualPresenter = new ChipMenuCountVisualPresenter(new ChipMenuCountVisualModel(), viewContainer.GetView<ChipMenuCountVisualView>());
 
-        ActivateEvents();
+                metric_GameTimeSessionPresenter = new Metric_GameTimeSessionPresenter(new Metric_GameTimeSessionModel(PlayerPrefsKeys.METRIC_GAME_TIME_SESSION, timerDailyPresenter, storeTaskPresenter, 15));
+                metric_GameCountPresenter = new Metric_GameCountPresenter(new Metric_GameCountModel(PlayerPrefsKeys.METRIC_GAME_COUNTS, storeTaskPresenter, timerDailyPresenter, 10));
+                metric_GameTypeCountPresenter = new Metric_GameTypeCountPresenter(new Metric_GameTypeCountModel(PlayerPrefsKeys.METRIC_GAME_TYPE_COUNTS, 4, storeTaskPresenter, timerDailyPresenter));
+                metric_WinCountPresenter = new Metric_WinCountPresenter(new Metric_WinCountModel(PlayerPrefsKeys.METRIC_WIN_ROW_COUNTS, 3, timerDailyPresenter, storeTaskPresenter));
+                metric_BetNumberPresenter = new Metric_BetNumberPresenter(new Metric_BetNumberModel(PlayerPrefsKeys.METRIC_BET_NUMBER_COUNTS, 1, timerDailyPresenter, storeTaskPresenter));
 
-        soundPresenter.Initialize();
-        particleEffectPresenter.Initialize();
-        sceneRoot.Initialize();
-        bankPresenter.Initialize();
+                stateMachine = new StateMachine_Menu
+                (sceneRoot, 
+                nicknamePresenter,
+                avatarPresenter,
+                firebaseAuthenticationPresenter,
+                firebaseDatabasePresenter,
+                dialoguePresenter, 
+                handPointerPresenter, 
+                storeGameProgressPresenter, 
+                storeGameProgressPresenter, 
+                storeGameProgressPresenter);
 
-        dailyRewardPresenter.Initialize();
-        cooldownPresenter_DailyReward.Initialize();
-        dailyRewardScalePresenter.Initialize();
-        dailyRewardVisualPresenter.Initialize();
+                sceneRoot.SetSoundProvider(soundPresenter);
+                sceneRoot.Activate();
 
-        taskVisualPresenter.Initialize();
-        storeTaskPresenter.Initialize();
+                ActivateEvents();
 
-        chipBuyPresenter.Initialize();
-        chipCountVisualPresenter.Initialize();
-        storeChipPresenter.Initialize();
+                soundPresenter.Initialize();
+                particleEffectPresenter.Initialize();
+                sceneRoot.Initialize();
+                bankPresenter.Initialize();
 
-        timerDailyPresenter.Initialize();
-        timerDailyVisualPresenter.Initialize();
+                dailyRewardPresenter.Initialize();
+                cooldownPresenter_DailyReward.Initialize();
+                dailyRewardScalePresenter.Initialize();
+                dailyRewardVisualPresenter.Initialize();
 
-        gameProgressVisualPresenter.Initialize();
-        storeGameProgressPresenter.Initialize();
+                taskVisualPresenter.Initialize();
+                storeTaskPresenter.Initialize();
 
-        dialoguePresenter.Initialize();
-        handPointerPresenter.Initialize();
+                chipBuyPresenter.Initialize();
+                chipCountVisualPresenter.Initialize();
+                storeChipPresenter.Initialize();
 
-        nicknamePresenter.Initialize();
-        avatarPresenter.Initialize();
+                timerDailyPresenter.Initialize();
+                timerDailyVisualPresenter.Initialize();
 
-        metric_GameTimeSessionPresenter.Initialize();
-        metric_GameCountPresenter.Initialize();
-        metric_GameTypeCountPresenter.Initialize();
-        metric_WinCountPresenter.Initialize();
-        metric_BetNumberPresenter.Initialize();
+                gameProgressVisualPresenter.Initialize();
+                storeGameProgressPresenter.Initialize();
 
-        notificationTaskPresenter.Initialize();
-        notificationGameTypePresenter.Initialize();
-        notificationPresenter.Initialize();
+                dialoguePresenter.Initialize();
+                handPointerPresenter.Initialize();
 
-        stateMachine.Initialize();
+                nicknamePresenter.Initialize();
+                avatarPresenter.Initialize();
+                firebaseAuthenticationPresenter.Initialize();
+                firebaseDatabasePresenter.Initialize();
+
+                metric_GameTimeSessionPresenter.Initialize();
+                metric_GameCountPresenter.Initialize();
+                metric_GameTypeCountPresenter.Initialize();
+                metric_WinCountPresenter.Initialize();
+                metric_BetNumberPresenter.Initialize();
+
+                notificationTaskPresenter.Initialize();
+                notificationGameTypePresenter.Initialize();
+                notificationPresenter.Initialize();
+
+                stateMachine.Initialize();
+            }
+            else
+            {
+                Debug.LogError(string.Format(
+                  "Could not resolve all Firebase dependencies: {0}", dependencyStatus));
+                // Firebase Unity SDK is not safe to use here.
+            }
+        });
 
     }
 
@@ -241,6 +279,8 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         nicknamePresenter?.Dispose();
         avatarPresenter?.Dispose();
+        firebaseAuthenticationPresenter?.Dispose();
+        firebaseDatabasePresenter?.Dispose();
 
         metric_GameTimeSessionPresenter?.Dispose();
         metric_GameCountPresenter?.Dispose();
