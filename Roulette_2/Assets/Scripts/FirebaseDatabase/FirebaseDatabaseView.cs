@@ -9,6 +9,17 @@ public class FirebaseDatabaseView : View
 {
     [SerializeField] private List<TopRecord> topRecords = new List<TopRecord>();
     [SerializeField] private SpriteAvatars spriteAvatars;
+    private List<UserData> pagedPlayers = new List<UserData>();
+
+    [SerializeField] private Transform transformParent;
+    [SerializeField] private UserGrid userGridPrefab;
+
+    [Header("Config")]
+    [SerializeField] private int topCount = 3;
+    [SerializeField] private int playersPerPage = 2;
+
+    private int currentPage = 0;
+    private int totalPages => Mathf.CeilToInt(pagedPlayers.Count / (float)playersPerPage);
 
     public void Initialize()
     {
@@ -27,11 +38,59 @@ public class FirebaseDatabaseView : View
 
     public void DisplayUsersRecords(List<UserData> users)
     {
-        var top = users.Take(3).ToList();
+        var top = users.Take(topCount).ToList();
 
         for (int i = 0; i < top.Count; i++)
         {
             topRecords[i].SetData(top[i].Nickname, top[i].Record, spriteAvatars.GetSpriteById(top[i].Avatar));
+        }
+
+        pagedPlayers = users.Skip(topCount).ToList();
+
+        Debug.Log(totalPages);
+
+        ShowCurrentPage();
+    }
+
+    private void ShowCurrentPage()
+    {
+        foreach (Transform child in transformParent)
+        {
+            Destroy(child.gameObject);
+        }
+
+        var pageData = pagedPlayers
+            .Skip(currentPage * playersPerPage)
+            .Take(playersPerPage)
+            .ToList();
+
+        int rankOffset = topCount + currentPage * playersPerPage + 1;
+
+        foreach(var player in pageData)
+        {
+            var grid = Instantiate(userGridPrefab, transformParent);
+
+            grid.SetData(rankOffset, player.Nickname, player.Record, spriteAvatars.GetSpriteById(player.Avatar));
+
+            rankOffset += 1;
+        }
+    }
+
+    public void NextPage()
+    {
+        if(currentPage < totalPages - 1)
+        {
+            currentPage += 1;
+            ShowCurrentPage();
+        }
+    }
+
+    public void PreviosPage()
+    {
+        if(currentPage > 0)
+        {
+            currentPage -= 1;
+            ShowCurrentPage();
         }
     }
 }

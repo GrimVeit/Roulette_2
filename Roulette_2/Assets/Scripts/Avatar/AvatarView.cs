@@ -1,12 +1,15 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AvatarView : View
 {
     [SerializeField] private List<AvatarVisual> avatarVisuals = new List<AvatarVisual>();
+    [SerializeField] private List<Image> imageAvatars = new List<Image>();
+    [SerializeField] private SpriteAvatars spriteAvatars;
 
     public void Initialize()
     {
@@ -39,6 +42,13 @@ public class AvatarView : View
         }
 
         visual.Select();
+
+        var avatar = spriteAvatars.GetSpriteById(id);
+
+        for (int i = 0; i < imageAvatars.Count; i++)
+        {
+            imageAvatars[i].sprite = avatar;
+        }
     }
 
     public void Deselect(int id)

@@ -36,7 +36,7 @@ public class StateMachine_Menu : IGlobalStateMachineProvider
         states[typeof(Tutorial_10_CompleteState_Menu)] = new Tutorial_10_CompleteState_Menu(this, dialoguePresenter, tutorialProgressProvider_Write, sceneRoot, gameProgressProvider_Write);
 
 
-        states[typeof(StartMainState_Menu)] = new StartMainState_Menu(this, firebaseDatabasePresenter);
+        states[typeof(StartMainState_Menu)] = new StartMainState_Menu(this, firebaseDatabasePresenter, firebaseAuthenticationPresenter);
         states[typeof(MainState_Menu)] = new MainState_Menu(this, sceneRoot);
         states[typeof(DailyRewardState_Menu)] = new DailyRewardState_Menu(this, sceneRoot);
         states[typeof(LeaderboardState_Menu)] = new LeaderboardState_Menu(this, sceneRoot);

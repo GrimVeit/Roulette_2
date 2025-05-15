@@ -22,6 +22,7 @@ public class Tutorial_03_IntroConfirmationState_Menu : IState
         Debug.Log("<color=red>ACTIVATE STATE - TUTORIAL 03 STATE / MENU</color>");
 
         _dialoguePresenter.Next();
+        _sceneRoot.OpenPlayerDataPanel();
 
         if (coroutineTimer != null) Coroutines.Stop(coroutineTimer);
 
@@ -31,6 +32,8 @@ public class Tutorial_03_IntroConfirmationState_Menu : IState
 
     public void ExitState()
     {
+        _sceneRoot.ClosePlayerDataPanel();
+
         if (coroutineTimer != null) Coroutines.Stop(coroutineTimer);
     }
 

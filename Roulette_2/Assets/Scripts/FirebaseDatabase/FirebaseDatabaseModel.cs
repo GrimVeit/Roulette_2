@@ -120,6 +120,8 @@ public class FirebaseDatabaseModel
             userRecordsDictionary.Add(new UserData(name, record, avatar));
         }
 
+        userRecordsDictionary.Reverse();
+
         OnGetUsersRecords?.Invoke(userRecordsDictionary);
     }
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Firebase;
 using Firebase.Auth;
 using Firebase.Database;
@@ -60,22 +61,22 @@ public class MainMenuEntryPoint : MonoBehaviour
 
     public void Run(UIRootView uIRootView)
     {
+        sceneRoot = menuRootPrefab;
+
+        uIRootView.AttachSceneUI(sceneRoot.gameObject, Camera.main);
+
+        viewContainer = sceneRoot.GetComponent<ViewContainer>();
+        viewContainer.Initialize();
+
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
         {
             var dependencyStatus = task.Result;
 
             if (dependencyStatus == DependencyStatus.Available)
             {
-                sceneRoot = menuRootPrefab;
-
-                uIRootView.AttachSceneUI(sceneRoot.gameObject, Camera.main);
-
                 FirebaseDatabase.DefaultInstance.SetPersistenceEnabled(false);
                 FirebaseAuth firebaseAuth = FirebaseAuth.DefaultInstance;
                 DatabaseReference databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
-
-                viewContainer = sceneRoot.GetComponent<ViewContainer>();
-                viewContainer.Initialize();
 
                 soundPresenter = new SoundPresenter
                     (new SoundModel(sounds.sounds, PlayerPrefsKeys.IS_MUTE_SOUNDS),
