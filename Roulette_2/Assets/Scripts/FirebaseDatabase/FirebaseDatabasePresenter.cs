@@ -1,45 +1,38 @@
 using System;
+using System.Collections.Generic;
 
-public class FirebaseDatabasePresenter
+public class FirebaseDatabasePresenter : IDatabaseRecordsEvents
 {
     private readonly FirebaseDatabaseModel _model;
-    private readonly FirebaseDatabaseView _view;
 
-    public FirebaseDatabasePresenter(FirebaseDatabaseModel model, FirebaseDatabaseView view)
+    public FirebaseDatabasePresenter(FirebaseDatabaseModel model)
     {
         _model = model;
-        _view = view;
     }
 
     public void Initialize()
     {
-        ActivateEvents();
-
         _model.Initialize();
-        _view.Initialize();
     }
 
     public void Dispose()
     {
-        DeactivateEvents();
-
         _model.Dispose();
-        _view.Dispose();
     }
 
-    private void ActivateEvents()
+    #region Output
+
+    public event Action<List<UserData>> OnGetUsersRecords
     {
-        _model.OnGetUsersRecords += _view.DisplayUsersRecords;
-        _model.OnGetNickname += _view.TestDebugNickname;
+        add => _model.OnGetUsersRecords += value;
+        remove => _model.OnGetUsersRecords -= value;
     }
 
-    private void DeactivateEvents()
+    public event Action<List<string>> OnGetCountries
     {
-        _model.OnGetUsersRecords -= _view.DisplayUsersRecords;
-        _model.OnGetNickname -= _view.TestDebugNickname;
+        add => _model.OnGetCountries += value;
+        remove => _model.OnGetCountries -= value;
     }
-
-    #region Input
 
     public event Action<UserData> OnGetUserFromPlace
     {
@@ -77,5 +70,15 @@ public class FirebaseDatabasePresenter
         _model.GetUserFromPlace(place);
     }
 
+    public void GetCountries()
+    {
+        _model.GetCountries();
+    }
+
     #endregion
+}
+
+public interface IDatabaseRecordsEvents
+{
+    public event Action<List<UserData>> OnGetUsersRecords;
 }

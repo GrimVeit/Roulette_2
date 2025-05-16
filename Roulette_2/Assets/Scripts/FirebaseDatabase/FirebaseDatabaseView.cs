@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -13,6 +14,8 @@ public class FirebaseDatabaseView : View
 
     [SerializeField] private Transform transformParent;
     [SerializeField] private UserGrid userGridPrefab;
+    [SerializeField] private Button buttonLeft;
+    [SerializeField] private Button buttonRight;
 
     [Header("Config")]
     [SerializeField] private int topCount = 3;
@@ -20,6 +23,8 @@ public class FirebaseDatabaseView : View
 
     private int currentPage = 0;
     private int totalPages => Mathf.CeilToInt(pagedPlayers.Count / (float)playersPerPage);
+
+    private IEnumerator coroutineTimer;
 
     public void Initialize()
     {
@@ -45,7 +50,8 @@ public class FirebaseDatabaseView : View
             topRecords[i].SetData(top[i].Nickname, top[i].Record, spriteAvatars.GetSpriteById(top[i].Avatar));
         }
 
-        pagedPlayers = users.Skip(topCount).ToList();
+        //pagedPlayers = users.Skip(topCount).ToList();
+        pagedPlayers = users.ToList();
 
         Debug.Log(totalPages);
 
@@ -54,32 +60,23 @@ public class FirebaseDatabaseView : View
 
     private void ShowCurrentPage()
     {
+        if(coroutineTimer != null) Coroutines.Stop(coroutineTimer);
+
         foreach (Transform child in transformParent)
         {
             Destroy(child.gameObject);
         }
 
-        var pageData = pagedPlayers
-            .Skip(currentPage * playersPerPage)
-            .Take(playersPerPage)
-            .ToList();
-
-        int rankOffset = topCount + currentPage * playersPerPage + 1;
-
-        foreach(var player in pageData)
-        {
-            var grid = Instantiate(userGridPrefab, transformParent);
-
-            grid.SetData(rankOffset, player.Nickname, player.Record, spriteAvatars.GetSpriteById(player.Avatar));
-
-            rankOffset += 1;
-        }
+        coroutineTimer = Timer();
+        Coroutines.Start(coroutineTimer);
     }
 
     public void NextPage()
     {
         if(currentPage < totalPages - 1)
         {
+            if (coroutineTimer != null) Coroutines.Stop(coroutineTimer);
+
             currentPage += 1;
             ShowCurrentPage();
         }
@@ -89,8 +86,32 @@ public class FirebaseDatabaseView : View
     {
         if(currentPage > 0)
         {
+            if (coroutineTimer != null) Coroutines.Stop(coroutineTimer);
+
             currentPage -= 1;
             ShowCurrentPage();
+        }
+    }
+
+    private IEnumerator Timer()
+    {
+        var pageData = pagedPlayers
+            .Skip(currentPage * playersPerPage)
+            .Take(playersPerPage)
+            .ToList();
+
+        int rankOffset = topCount + currentPage * playersPerPage + 1;
+
+        foreach (var player in pageData)
+        {
+            var grid = Instantiate(userGridPrefab, transformParent);
+
+            grid.SetData(rankOffset, player.Nickname, player.Record, spriteAvatars.GetSpriteById(player.Avatar));
+            grid.ActivateRight();
+
+            rankOffset += 1;
+
+            yield return new WaitForSeconds(0.1f);
         }
     }
 }

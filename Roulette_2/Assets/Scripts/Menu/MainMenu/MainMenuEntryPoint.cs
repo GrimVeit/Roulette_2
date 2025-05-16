@@ -44,6 +44,7 @@ public class MainMenuEntryPoint : MonoBehaviour
     private AvatarPresenter avatarPresenter;
     private FirebaseAuthenticationPresenter firebaseAuthenticationPresenter;
     private FirebaseDatabasePresenter firebaseDatabasePresenter;
+    private LeaderboardPresenter leaderboardPresenter;
 
     private TimerDailyPresenter timerDailyPresenter;
     private TimerDailyVisualPresenter timerDailyVisualPresenter;
@@ -108,7 +109,8 @@ public class MainMenuEntryPoint : MonoBehaviour
                 nicknamePresenter = new NicknamePresenter(new NicknameModel(PlayerPrefsKeys.NICKNAME, soundPresenter), viewContainer.GetView<NicknameView>());
                 avatarPresenter = new AvatarPresenter(new AvatarModel(PlayerPrefsKeys.AVATAR), viewContainer.GetView<AvatarView>());
                 firebaseAuthenticationPresenter = new FirebaseAuthenticationPresenter(new FirebaseAuthenticationModel(firebaseAuth, soundPresenter), viewContainer.GetView<FirebaseAuthenticationView>());
-                firebaseDatabasePresenter = new FirebaseDatabasePresenter(new FirebaseDatabaseModel(firebaseAuth, databaseReference, soundPresenter), viewContainer.GetView<FirebaseDatabaseView>());
+                firebaseDatabasePresenter = new FirebaseDatabasePresenter(new FirebaseDatabaseModel(firebaseAuth, databaseReference, soundPresenter));
+                leaderboardPresenter = new LeaderboardPresenter(new LeaderboardModel(firebaseDatabasePresenter), viewContainer.GetView<LeaderboardView>());
 
                 notificationPresenter = new NotificationPresenter(new NotificationModel(), viewContainer.GetView<NotificationView>());
                 notificationGameTypePresenter = new NotificationGameTypePresenter(new NotificationGameTypeModel(notificationPresenter, storeGameProgressPresenter, soundPresenter), viewContainer.GetView<NotificationGameTypeView>());
@@ -169,6 +171,7 @@ public class MainMenuEntryPoint : MonoBehaviour
 
                 nicknamePresenter.Initialize();
                 avatarPresenter.Initialize();
+                leaderboardPresenter.Initialize();
                 firebaseAuthenticationPresenter.Initialize();
                 firebaseDatabasePresenter.Initialize();
 
@@ -280,6 +283,7 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         nicknamePresenter?.Dispose();
         avatarPresenter?.Dispose();
+        leaderboardPresenter?.Dispose();
         firebaseAuthenticationPresenter?.Dispose();
         firebaseDatabasePresenter?.Dispose();
 

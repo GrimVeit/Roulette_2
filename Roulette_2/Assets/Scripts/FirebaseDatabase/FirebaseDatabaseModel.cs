@@ -12,6 +12,7 @@ public class FirebaseDatabaseModel
     public event Action<int> OnGetAvatar;
 
     public event Action<List<UserData>> OnGetUsersRecords;
+    public event Action<List<string>> OnGetCountries;
 
     public string Nickname { get; private set; }
     public int Record { get; private set; }
@@ -35,13 +36,14 @@ public class FirebaseDatabaseModel
     public void Initialize()
     {
         Record = PlayerPrefs.GetInt(PlayerPrefsKeys.RECORD, 0);
+        Avatar = PlayerPrefs.GetInt(PlayerPrefsKeys.AVATAR, 0);
 
         Debug.Log(Record);
     }
 
     public void Dispose()
     {
-        PlayerPrefs.SetInt(PlayerPrefsKeys.RECORD, Record);
+
     }
 
     public void CreateNewAccountInServer()
@@ -86,6 +88,43 @@ public class FirebaseDatabaseModel
         Coroutines.Start(GetUser(number));
     }
 
+    #region Countries
+
+    public void GetCountries()
+    {
+        Coroutines.Start(GetCountriesCoro());
+    }
+
+    private IEnumerator GetCountriesCoro()
+    {
+        var task = databaseReference.Child("Cs").GetValueAsync();
+
+        yield return new WaitUntil(() => task.IsCompleted);
+
+        if (task.IsFaulted)
+        {
+            Debug.Log("Error display countries");
+            yield break;
+        }
+
+        DataSnapshot data = task.Result;
+
+        Debug.Log("Success " + data.ChildrenCount);
+
+        List<string> countries = new();
+
+        foreach (var user in data.Children)
+        {
+            string name = user.Child("cs").Value.ToString();
+            countries.Add(name);
+            Debug.Log($"{name}");
+        }
+
+        OnGetCountries?.Invoke(countries);
+    }
+
+    #endregion
+
     #region Records
 
     public void DisplayUsersRecords()
@@ -96,7 +135,7 @@ public class FirebaseDatabaseModel
     private IEnumerator GetUsersRecords()
     {
         //var task = databaseReference.Child("Users").OrderByChild("Record").LimitToFirst(15).GetValueAsync();
-        var task = databaseReference.Child("Users").OrderByChild("Record").LimitToLast(10).GetValueAsync();
+        var task = databaseReference.Child("Users").OrderByChild("Record").LimitToLast(20).GetValueAsync();
 
         yield return new WaitUntil(() => task.IsCompleted);
 

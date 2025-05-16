@@ -33,6 +33,7 @@ public class GameSceneEntryPoint_AmericaTracker : MonoBehaviour
     private BetCellPresenter betCellPresenter;
     private BetPresenter betPresenter;
     private ChipGameVisualPresenter chipGameVisualPresenter;
+    private ScoreRecordPresenter scoreRecordPresenter;
 
     private StoreTaskPresenter storeTaskPresenter;
     private TimerDailyPresenter timerDailyPresenter;
@@ -83,10 +84,11 @@ public class GameSceneEntryPoint_AmericaTracker : MonoBehaviour
         notificationPresenter = new NotificationPresenter(new NotificationModel(), viewContainer.GetView<NotificationView>());
         notificationTaskPresenter = new NotificationTaskPresenter(new NotificationTaskModel(notificationPresenter, storeTaskPresenter, soundPresenter), viewContainer.GetView<NotificationTaskView>());
 
+        scoreRecordPresenter = new ScoreRecordPresenter(new ScoreRecordModel(PlayerPrefsKeys.RECORD));
         storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
         chipGameCountVisualPresenter = new ChipGameCountVisualPresenter(new ChipGameCountVisualModel(storeChipPresenter), viewContainer.GetView<ChipGameCountVisualView>());
         pseudoChipPresenter = new PseudoChipPresenter(new PseudoChipModel(soundPresenter), viewContainer.GetView<PseudoChipView>());
-        betPresenter = new BetPresenter(new BetModel(chipGroup, storeChipPresenter, bets, new List<IRouletteValueProvider>() { roulettePresenter }, bankPresenter, metric_BetNumberPresenter, metric_WinCountPresenter, notificationPresenter, soundPresenter), viewContainer.GetView<BetView>());
+        betPresenter = new BetPresenter(new BetModel(chipGroup, storeChipPresenter, bets, new List<IRouletteValueProvider>() { roulettePresenter }, bankPresenter, metric_BetNumberPresenter, metric_WinCountPresenter, notificationPresenter, soundPresenter, scoreRecordPresenter), viewContainer.GetView<BetView>());
         betCellPresenter = new BetCellPresenter(new BetCellModel(betPresenter), viewContainer.GetView<BetCellView>());
         chipGameVisualPresenter = new ChipGameVisualPresenter(new ChipGameVisualModel(betPresenter), viewContainer.GetView<ChipGameVisualView>());
 
@@ -130,6 +132,7 @@ public class GameSceneEntryPoint_AmericaTracker : MonoBehaviour
         betPresenter.Initialize();
         betCellPresenter.Initialize();
         chipGameVisualPresenter.Initialize();
+        scoreRecordPresenter.Initialize();
 
         timerDailyPresenter.Initialize();
         storeTaskPresenter.Initialize();
@@ -186,6 +189,14 @@ public class GameSceneEntryPoint_AmericaTracker : MonoBehaviour
         roulettePresenter.Dispose();
 
         rouletteValueHistoryPresenter.Dispose();
+
+        chipGameCountVisualPresenter.Dispose();
+        storeChipPresenter.Dispose();
+        pseudoChipPresenter.Dispose();
+        betPresenter.Dispose();
+        betCellPresenter.Dispose();
+        chipGameVisualPresenter.Dispose();
+        scoreRecordPresenter.Dispose();
 
         timerDailyPresenter.Dispose();
         storeTaskPresenter.Dispose();

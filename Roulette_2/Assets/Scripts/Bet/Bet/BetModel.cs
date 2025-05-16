@@ -34,8 +34,9 @@ public class BetModel
     private readonly IMetric_WinCount _metric_WinCount;
     private readonly INotificationProvider _notificationProvider;
     private readonly ISoundProvider _soundProvider;
+    private readonly IScoreRecordProvider _scoreProvider;
 
-    public BetModel(IChipGroupBet chipGroupBet, IStoreChip storeChip, Bets bets, List<IRouletteValueProvider> rouletteValueProviders, IMoneyProvider moneyProvider, IMetric_BetNumber metricBetNumber, IMetric_WinCount metric_WinCount, INotificationProvider notificationProvider, ISoundProvider soundProvider)
+    public BetModel(IChipGroupBet chipGroupBet, IStoreChip storeChip, Bets bets, List<IRouletteValueProvider> rouletteValueProviders, IMoneyProvider moneyProvider, IMetric_BetNumber metricBetNumber, IMetric_WinCount metric_WinCount, INotificationProvider notificationProvider, ISoundProvider soundProvider, IScoreRecordProvider scoreProvider)
     {
         _chipGroupBet = chipGroupBet;
         _storeChip = storeChip;
@@ -46,6 +47,7 @@ public class BetModel
         _metric_WinCount = metric_WinCount;
         _notificationProvider = notificationProvider;
         _soundProvider = soundProvider;
+        _scoreProvider = scoreProvider;
     }
 
     public void Initialize()
@@ -307,6 +309,7 @@ public class BetModel
         float winFloat = Mathf.Round(totalWin * 10f) / 10f;
         int winInt = (int)Math.Round(winFloat, 1);
         _moneyProvider.SendMoney(winInt);
+        _scoreProvider.SetScore(winInt);
         OnGetWin?.Invoke(winInt);
 
         Debug.Log("Winnings:" + string.Join(", ", winningPosIndexes));

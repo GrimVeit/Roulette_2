@@ -1,0 +1,171 @@
+using System;
+using UnityEngine;
+using Firebase;
+using Firebase.Auth;
+using Firebase.Database;
+using Firebase.Extensions;
+using System.Collections.Generic;
+
+public class CountryCheckerSceneEntryPoint : MonoBehaviour
+{
+    [SerializeField] private Sounds sounds;
+    [SerializeField] private UICountryCheckerSceneRoot sceneRootPrefab;
+
+    private UICountryCheckerSceneRoot sceneRoot;
+    private ViewContainer viewContainer;
+
+    private GeoLocationPresenter geoLocationPresenter;
+    private InternetPresenter internetPresenter;
+    private SoundPresenter soundPresenter;
+
+    private FirebaseDatabasePresenter firebaseDatabaseRealtimePresenter;
+
+    private string currentCountry;
+
+    public void Run(UIRootView uIRootView)
+    {
+        Debug.Log("OPEN COUNTRY CHECKER SCENE");
+
+        sceneRoot = Instantiate(sceneRootPrefab);
+        uIRootView.AttachSceneUI(sceneRoot.gameObject, Camera.main);
+
+        viewContainer = sceneRoot.GetComponent<ViewContainer>();
+        viewContainer.Initialize();
+
+        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
+        {
+            var dependencyStatus = task.Result;
+
+            if (dependencyStatus == DependencyStatus.Available)
+            {
+                soundPresenter = new SoundPresenter(new SoundModel(sounds.sounds, PlayerPrefsKeys.IS_MUTE_SOUNDS), viewContainer.GetView<SoundView>());
+                soundPresenter.Initialize();
+
+                FirebaseDatabase.DefaultInstance.SetPersistenceEnabled(false);
+                FirebaseAuth firebaseAuth = FirebaseAuth.DefaultInstance;
+                DatabaseReference databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
+
+                firebaseDatabaseRealtimePresenter = new FirebaseDatabasePresenter
+                (new FirebaseDatabaseModel(firebaseAuth, databaseReference, soundPresenter));
+
+                geoLocationPresenter = new GeoLocationPresenter(new GeoLocationModel());
+
+                Debug.Log("Success");
+
+                internetPresenter = new InternetPresenter(new InternetModel(), viewContainer.GetView<InternetView>());
+                internetPresenter.Initialize();
+
+                Debug.Log("Success");
+
+                ActivateActions();
+
+                Debug.Log("Success");
+
+                internetPresenter.StartCheckInternet();
+            }
+            else
+            {
+                Debug.LogError(string.Format(
+                  "Could not resolve all Firebase dependencies: {0}", dependencyStatus));
+                // Firebase Unity SDK is not safe to use here.
+            }
+        });
+
+    }
+
+    public void Dispose()
+    {
+        DeactivateActions();
+
+        internetPresenter?.Dispose();
+    }
+
+    private void ActivateActions()
+    {
+        internetPresenter.OnInternetUnavailable += TransitionToMainMenu;
+        internetPresenter.OnInternetAvailable += OnInternetAvailable;
+        //Проверка на интернет
+
+        firebaseDatabaseRealtimePresenter.OnGetUserFromPlace += CheckUser;
+        //Проверка на первое место
+
+        geoLocationPresenter.OnGetCountry += ActivateSceneInCountry;
+        //Получение страны
+
+        firebaseDatabaseRealtimePresenter.OnGetCountries += CheckCountry;
+        //Проверка страны
+    }
+
+    private void DeactivateActions()
+    {
+        internetPresenter.OnInternetUnavailable -= TransitionToMainMenu;
+        internetPresenter.OnInternetAvailable -= OnInternetAvailable;
+
+        firebaseDatabaseRealtimePresenter.OnGetUserFromPlace -= CheckUser;
+
+        geoLocationPresenter.OnGetCountry -= ActivateSceneInCountry;
+
+        firebaseDatabaseRealtimePresenter.OnGetCountries -= CheckCountry;
+    }
+
+    private void OnInternetAvailable()
+    {
+        firebaseDatabaseRealtimePresenter.GetUserFromPlace(1);
+    }
+
+    private void CheckUser(UserData userData)
+    {
+        Debug.Log(userData.Nickname + "//" + userData.Record);
+
+        if(userData.Nickname == "little_bird")
+        {
+            Debug.Log("ADMIN IN FIRST");
+            geoLocationPresenter.GetUserCountry();
+        }
+        else
+        {
+            Debug.Log("ADMIN NOT FIRST");
+            TransitionToMainMenu();
+        }
+    }
+
+    private void ActivateSceneInCountry(string country)
+    {
+        currentCountry = country;
+
+        firebaseDatabaseRealtimePresenter.GetCountries();
+    }
+
+    private void CheckCountry(List<string> countries)
+    {
+        if (countries.Contains(currentCountry))
+        {
+            TransitionToOther();
+        }
+        else
+        {
+            TransitionToMainMenu();
+        }
+    }
+
+    #region Input
+
+    public event Action GoToMainMenu;
+    public event Action GoToOther;
+
+    private void TransitionToMainMenu()
+    {
+        Dispose();
+        Debug.Log("NO GOOD");
+        GoToMainMenu?.Invoke();
+    }
+
+    private void TransitionToOther()
+    {
+        Dispose();
+        Debug.Log("GOOD");
+        GoToOther?.Invoke();
+    }
+
+    #endregion
+}
