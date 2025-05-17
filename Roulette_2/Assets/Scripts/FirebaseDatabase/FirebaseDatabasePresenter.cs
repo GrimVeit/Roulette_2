@@ -28,17 +28,38 @@ public class FirebaseDatabasePresenter : IDatabaseRecordsEvents
         remove => _model.OnGetUsersRecords -= value;
     }
 
+
+
     public event Action<List<string>> OnGetCountries
     {
         add => _model.OnGetCountries += value;
         remove => _model.OnGetCountries -= value;
     }
 
+    public event Action OnErrorGetCountries
+    {
+        add => _model.OnErrorGetCountries += value;
+        remove => _model.OnErrorGetCountries -= value;
+    }
+
+
+
+
     public event Action<UserData> OnGetUserFromPlace
     {
         add { _model.OnGetUserFromPlace += value; }
         remove { _model.OnGetUserFromPlace -= value; }
     }
+
+    public event Action OnErrorGetUserFromPlace
+    {
+        add => _model.OnErrorGetUserFromPlace += value;
+        remove => _model.OnErrorGetUserFromPlace -= value;
+    }
+
+
+
+
 
     public void CreateEmptyDataToServer()
     {

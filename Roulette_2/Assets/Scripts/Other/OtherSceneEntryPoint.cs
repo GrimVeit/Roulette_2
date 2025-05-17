@@ -26,7 +26,7 @@ public class OtherSceneEntryPoint : MonoBehaviour
         otherWebViewPresenter.Initialize();
 
         ActivateActions();
-        otherWebViewPresenter.GetLinkInTitleFromURL("https://rollingpoints.online/daily");
+        otherWebViewPresenter.GetLinkInTitleFromURL("https://dssm.us/1py6Kc");
     }
 
     private void ActivateActions()

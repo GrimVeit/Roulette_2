@@ -56,8 +56,6 @@ public class GameEntryPoint
 
     private IEnumerator LoadAndStartOther()
     {
-        yield return rootView.ShowLoadingScreen(0);
-
         yield return LoadScene(Scenes.BOOT);
         yield return LoadScene(Scenes.OTHER);
 

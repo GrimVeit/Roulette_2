@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 
 public class GeoLocationModel
 {
+    public event Action OnErrorGetCountry;
     public event Action<string> OnGetCountry;
 
     private string URL_GET_IP = "https://ipinfo.io/json";
@@ -18,21 +19,26 @@ public class GeoLocationModel
 
     private IEnumerator GetIPInfo_Coroutine()
     {
-        using (UnityWebRequest request = UnityWebRequest.Get(URL_GET_IP))
-        {
-            yield return request.SendWebRequest();
+        UnityWebRequest request = UnityWebRequest.Get(URL_GET_IP);
 
-            if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
-            {
-                Debug.LogError("Error: " + request.error);
-            }
-            else if (request.result == UnityWebRequest.Result.Success)
-            {
-                var jsonResult = request.downloadHandler.text;
-                IPInfo ipInfo = JsonUtility.FromJson<IPInfo>(jsonResult);
-                Debug.Log($"Country: {ipInfo.country}");
-                OnGetCountry?.Invoke(ipInfo.country);
-            }
+        var operation = request.SendWebRequest();
+
+        float timeOut = 3f;
+        float startTime = Time.time;
+
+        yield return new WaitUntil(() => operation.isDone || (Time.time - startTime) > timeOut);
+
+        if (request.result != UnityWebRequest.Result.Success || !operation.isDone)
+        {
+            Debug.LogError("Error: " + request.result);
+            OnErrorGetCountry?.Invoke();
+        }
+        else if (request.result == UnityWebRequest.Result.Success)
+        {
+            var jsonResult = request.downloadHandler.text;
+            IPInfo ipInfo = JsonUtility.FromJson<IPInfo>(jsonResult);
+            Debug.Log($"Country: {ipInfo.country}");
+            OnGetCountry?.Invoke(ipInfo.country);
         }
     }
 }

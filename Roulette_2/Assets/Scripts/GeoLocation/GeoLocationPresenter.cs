@@ -19,6 +19,12 @@ public class GeoLocationPresenter
         geoLocationModel.GetUserCountry();
     }
 
+    public event Action OnErrorGetCountry
+    {
+        add => geoLocationModel.OnErrorGetCountry += value;
+        remove => geoLocationModel.OnErrorGetCountry -= value;
+    }
+
     public event Action<string> OnGetCountry
     {
         add { geoLocationModel.OnGetCountry += value; }

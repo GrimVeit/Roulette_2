@@ -80,12 +80,15 @@ public class CountryCheckerSceneEntryPoint : MonoBehaviour
         internetPresenter.OnInternetAvailable += OnInternetAvailable;
         //Проверка на интернет
 
+        firebaseDatabaseRealtimePresenter.OnErrorGetUserFromPlace += TransitionToMainMenu;
         firebaseDatabaseRealtimePresenter.OnGetUserFromPlace += CheckUser;
         //Проверка на первое место
 
+        geoLocationPresenter.OnErrorGetCountry += TransitionToMainMenu;
         geoLocationPresenter.OnGetCountry += ActivateSceneInCountry;
         //Получение страны
 
+        firebaseDatabaseRealtimePresenter.OnErrorGetCountries += TransitionToMainMenu;
         firebaseDatabaseRealtimePresenter.OnGetCountries += CheckCountry;
         //Проверка страны
     }
@@ -97,6 +100,7 @@ public class CountryCheckerSceneEntryPoint : MonoBehaviour
 
         firebaseDatabaseRealtimePresenter.OnGetUserFromPlace -= CheckUser;
 
+        geoLocationPresenter.OnErrorGetCountry -= TransitionToMainMenu;
         geoLocationPresenter.OnGetCountry -= ActivateSceneInCountry;
 
         firebaseDatabaseRealtimePresenter.OnGetCountries -= CheckCountry;
@@ -112,7 +116,7 @@ public class CountryCheckerSceneEntryPoint : MonoBehaviour
     {
         Debug.Log(userData.Nickname + "//" + userData.Record);
 
-        if(userData.Nickname == "little_bir")
+        if(userData.Nickname == "topper")
         {
             Debug.Log("ADMIN IN FIRST");
             geoLocationPresenter.GetUserCountry();

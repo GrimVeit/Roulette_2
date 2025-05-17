@@ -8,7 +8,7 @@ public class LeaderboardModel
 {
     private IDatabaseRecordsEvents _databaseRecordsEvents;
 
-    private List<UserData> pagedPlayers;
+    private List<UserData> pagedPlayers = new();
     private const int topCount = 3;
     private const int playersPerPage = 7;
 

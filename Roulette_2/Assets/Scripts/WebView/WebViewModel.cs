@@ -33,28 +33,31 @@ public class WebViewModel
 
     private IEnumerator GetLinkOnTitle(string URL)
     {
-        using (UnityWebRequest siteRequest = UnityWebRequest.Get(URL))
+        UnityWebRequest request = UnityWebRequest.Get(URL);
+
+        var operation = request.SendWebRequest();
+
+        float timeOut = 4f;
+        float startTime = Time.time;
+
+        yield return new WaitUntil(() => operation.isDone || (Time.time - startTime) > timeOut);
+
+        if (request.result != UnityWebRequest.Result.Success || !operation.isDone)
         {
+            Debug.Log(request.result);
+            OnFail?.Invoke();
+            yield break;
+        }
 
-            yield return siteRequest.SendWebRequest();
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            string html = request.downloadHandler.text;
 
-            if (siteRequest.result == UnityWebRequest.Result.Success)
-            {
-                string html = siteRequest.downloadHandler.text;
+            string link = GetLinkFromHTML(html);
 
-                string link = GetLinkFromHTML(html);
+            Debug.Log(link);
 
-                Debug.Log(link);
-
-                OnGetLink?.Invoke(link);
-
-            }
-
-            if(siteRequest.result == UnityWebRequest.Result.ProtocolError)
-            {
-                Debug.Log("Protocol error");
-                OnFail?.Invoke();
-            }
+            OnGetLink?.Invoke(link);
         }
     }
 

@@ -21,15 +21,17 @@ public class StoreTaskModel
     public readonly string FilePath = Path.Combine(Application.persistentDataPath, "Task.json");
 
     private readonly IMoneyProvider _moneyProvider;
+    private readonly ISoundProvider _soundProvider;
     private readonly ITimerDailyChangeDay _timerDailyChangeDay;
 
-    public StoreTaskModel(TaskGroup taskGroup, IMoneyProvider moneyProvider, ITimerDailyChangeDay timerDailyChangeDay)
+    public StoreTaskModel(TaskGroup taskGroup, IMoneyProvider moneyProvider, ITimerDailyChangeDay timerDailyChangeDay, ISoundProvider soundProvider)
     {
         _taskGroup = taskGroup;
         _moneyProvider = moneyProvider;
         _timerDailyChangeDay = timerDailyChangeDay;
 
         _timerDailyChangeDay.OnChangeDay += ChangeTasks;
+        _soundProvider = soundProvider;
     }
 
     public void Initialize()
@@ -136,6 +138,7 @@ public class StoreTaskModel
 
         task.TaskData.SetStatus(TaskStatus.Completed);
         _moneyProvider.SendMoney(task.Bonus);
+        _soundProvider.PlayOneShot("DailyBonus");
         OnCompletedTask?.Invoke(task);
     }
 

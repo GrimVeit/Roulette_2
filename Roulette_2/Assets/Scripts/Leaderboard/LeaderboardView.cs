@@ -15,7 +15,7 @@ public class LeaderboardView : View
     [SerializeField] private Button buttonLeft;
     [SerializeField] private Button buttonRight;
 
-    private readonly List<UserGrid> userGrids = new List<UserGrid>();
+    [SerializeField] private List<UserGrid> userGrids = new List<UserGrid>();
 
     private int currentRank = 0;
     private IEnumerator coroutineTimer;

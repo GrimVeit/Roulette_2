@@ -11,7 +11,6 @@ public class TaskVisualModel
 
     private readonly ITaskProviderEvents _taskEventsProvider;
     private readonly ICompleteTaskProvider _taskCompletedProvider;
-    private readonly ISoundProvider _soundProvider;
 
     public TaskVisualModel(ITaskProviderEvents taskEventsProvider, ICompleteTaskProvider completeTaskProvider, ISoundProvider soundProvider)
     {
@@ -23,7 +22,6 @@ public class TaskVisualModel
         _taskEventsProvider.OnActiveTask += SetActivateTask;
         _taskEventsProvider.OnInactiveTask += SetInactivaTask;
         _taskEventsProvider.OnCompletedTask += SetCompletedTask;
-        _soundProvider = soundProvider;
     }
 
     public void Initialize()
@@ -70,7 +68,6 @@ public class TaskVisualModel
     public void ChooseTask(int number)
     {
         _taskCompletedProvider.CompletedTask(number);
-        _soundProvider.PlayOneShot("DailyBonus");
     }
         
 }

@@ -5,22 +5,18 @@ using UnityEngine;
 public class UIRootView : MonoBehaviour
 {
     [SerializeField] private Canvas canvas;
-    [SerializeField] private List<Panel> loadScreens = new List<Panel>();
+    [SerializeField] private List<MovePanel> loadScreens = new List<MovePanel>();
     [SerializeField] private Transform uiSceneContainer;
     public IEnumerator ShowLoadingScreen(int index)
     {
-        Debug.Log("Start Show");
         loadScreens[index].ActivatePanel();
         yield return new WaitForSeconds(0.3f);
-        Debug.Log("End Show");
     }
 
     public IEnumerator HideLoadingScreen(int index)
     {
-        Debug.Log("Start Hide");
         loadScreens[index].DeactivatePanel();
         yield return new WaitForSeconds(0.3f);
-        Debug.Log("End Hide");
     }
 
     public void AttachSceneUI(GameObject sceneUI, Camera camera)

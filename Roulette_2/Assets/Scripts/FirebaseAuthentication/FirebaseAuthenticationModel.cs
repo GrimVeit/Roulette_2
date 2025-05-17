@@ -89,28 +89,8 @@ public class FirebaseAuthenticationModel
 
     #region Coroutines
 
-    private IEnumerator SignInCoroutine(string emailTextValue, string passwordTextValue)
-    {
-        Task<AuthResult> task = auth.SignInWithEmailAndPasswordAsync(emailTextValue, passwordTextValue);
-
-        yield return new WaitUntil(() => task.IsCompleted);
-        yield return null;
-
-        if (task.Exception != null)
-        {
-            OnSignInError_Action?.Invoke(task.Exception.Message);
-            yield break;
-        }
-
-        //OnChangeUser?.Invoke();
-        OnChangeUser?.Invoke(auth.CurrentUser.UserId);
-        OnSignIn_Action?.Invoke();
-    }
-
     private IEnumerator SignUpCoroutine(string emailTextValue, string passwordTextValue)
     {
-        //OnSignUpMessage_Action?.Invoke("Loading...");
-
         var task = auth.CreateUserWithEmailAndPasswordAsync(emailTextValue, passwordTextValue);
 
         yield return new WaitUntil(predicate: () => task.IsCompleted);
@@ -140,12 +120,13 @@ public class FirebaseAuthenticationModel
             }
 
             Debug.Log("Не удалось создать аккаунт - " + task.Exception);
-
+            soundProvider.PlayOneShot("SignUpError");
             OnSignUpError_Action?.Invoke();
             yield break;
         }
 
         Debug.Log("Аккаунт создан");
+        soundProvider.PlayOneShot("SignUpSuccess");
         OnSignUpMessage_Action?.Invoke("Success!");
         OnChangeUser?.Invoke(auth.CurrentUser.UserId);
         OnSignUp_Action?.Invoke();

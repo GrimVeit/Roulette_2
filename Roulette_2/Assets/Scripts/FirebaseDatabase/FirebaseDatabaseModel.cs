@@ -8,11 +8,15 @@ using UnityEngine;
 public class FirebaseDatabaseModel
 {
     public event Action<UserData> OnGetUserFromPlace;
+    public event Action OnErrorGetUserFromPlace;
+
     public event Action<string> OnGetNickname;
     public event Action<int> OnGetAvatar;
 
     public event Action<List<UserData>> OnGetUsersRecords;
+
     public event Action<List<string>> OnGetCountries;
+    public event Action OnErrorGetCountries;
 
     public string Nickname { get; private set; }
     public int Record { get; private set; }
@@ -99,11 +103,15 @@ public class FirebaseDatabaseModel
     {
         var task = databaseReference.Child("Cs").GetValueAsync();
 
-        yield return new WaitUntil(() => task.IsCompleted);
+        float timeOut = 5f;
+        float startTime = Time.time;
 
-        if (task.IsFaulted)
+        yield return new WaitUntil(() => task.IsCompleted || (Time.time - startTime) > timeOut);
+
+        if (task.IsFaulted || task.IsCanceled || !task.IsCompleted)
         {
             Debug.Log("Error display countries");
+            OnErrorGetCountries?.Invoke();
             yield break;
         }
 
@@ -167,11 +175,17 @@ public class FirebaseDatabaseModel
         //var task = databaseReference.Child("Users").OrderByChild("Record").LimitToFirst(number).GetValueAsync();
         var task = databaseReference.Child("Users").OrderByChild("Record").LimitToLast(number).GetValueAsync();
 
-        yield return new WaitUntil(() => task.IsCompleted);
+        float timeOut = 5f;
+        float startTime = Time.time;
 
-        if (task.IsFaulted)
+        yield return new WaitUntil(() => task.IsCompleted || (Time.time - startTime) > timeOut);
+
+        Debug.Log("END");
+
+        if (task.IsFaulted || task.IsCanceled || !task.IsCompleted)
         {
-            Debug.Log("Error display record");
+            Debug.Log("Error display user");
+            OnErrorGetUserFromPlace?.Invoke();
             yield break;
         }
 
