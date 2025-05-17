@@ -29,9 +29,8 @@ public class GeoLocationModel
             else if (request.result == UnityWebRequest.Result.Success)
             {
                 var jsonResult = request.downloadHandler.text;
-                Debug.Log(jsonResult);
                 IPInfo ipInfo = JsonUtility.FromJson<IPInfo>(jsonResult);
-                Debug.Log($"IP: {ipInfo.ip}, City: {ipInfo.city}, Region: {ipInfo.region}, Country: {ipInfo.country}");
+                Debug.Log($"Country: {ipInfo.country}");
                 OnGetCountry?.Invoke(ipInfo.country);
             }
         }

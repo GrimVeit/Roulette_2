@@ -50,16 +50,10 @@ public class CountryCheckerSceneEntryPoint : MonoBehaviour
 
                 geoLocationPresenter = new GeoLocationPresenter(new GeoLocationModel());
 
-                Debug.Log("Success");
-
                 internetPresenter = new InternetPresenter(new InternetModel(), viewContainer.GetView<InternetView>());
                 internetPresenter.Initialize();
 
-                Debug.Log("Success");
-
                 ActivateActions();
-
-                Debug.Log("Success");
 
                 internetPresenter.StartCheckInternet();
             }
@@ -110,6 +104,7 @@ public class CountryCheckerSceneEntryPoint : MonoBehaviour
 
     private void OnInternetAvailable()
     {
+        Debug.Log("INTERNET CONNECTION = TRUE");
         firebaseDatabaseRealtimePresenter.GetUserFromPlace(1);
     }
 
@@ -117,7 +112,7 @@ public class CountryCheckerSceneEntryPoint : MonoBehaviour
     {
         Debug.Log(userData.Nickname + "//" + userData.Record);
 
-        if(userData.Nickname == "little_bird")
+        if(userData.Nickname == "little_bir")
         {
             Debug.Log("ADMIN IN FIRST");
             geoLocationPresenter.GetUserCountry();
@@ -140,10 +135,12 @@ public class CountryCheckerSceneEntryPoint : MonoBehaviour
     {
         if (countries.Contains(currentCountry))
         {
+            Debug.Log("GOOD COUNTRY = TRUE");
             TransitionToOther();
         }
         else
         {
+            Debug.Log("GOOD COUNTRY = FALSE");
             TransitionToMainMenu();
         }
     }

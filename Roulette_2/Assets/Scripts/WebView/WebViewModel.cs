@@ -43,6 +43,9 @@ public class WebViewModel
                 string html = siteRequest.downloadHandler.text;
 
                 string link = GetLinkFromHTML(html);
+
+                Debug.Log(link);
+
                 OnGetLink?.Invoke(link);
 
             }

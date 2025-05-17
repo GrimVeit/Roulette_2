@@ -109,8 +109,6 @@ public class FirebaseDatabaseModel
 
         DataSnapshot data = task.Result;
 
-        Debug.Log("Success " + data.ChildrenCount);
-
         List<string> countries = new();
 
         foreach (var user in data.Children)
@@ -178,8 +176,6 @@ public class FirebaseDatabaseModel
         }
 
         DataSnapshot data = task.Result;
-
-        Debug.Log("Success " + data.ChildrenCount);
 
         foreach (var user in data.Children)
         {

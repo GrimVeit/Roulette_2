@@ -13,12 +13,10 @@ public class InternetModel
 
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
-            Debug.Log("Internet disable");
             OnInternetUnvailable?.Invoke();
         }
         else
         {
-            Debug.Log("Internet enable");
             OnInternetAvailable?.Invoke();
         }
     }
