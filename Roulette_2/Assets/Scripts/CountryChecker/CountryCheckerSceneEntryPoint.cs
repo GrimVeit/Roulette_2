@@ -78,19 +78,15 @@ public class CountryCheckerSceneEntryPoint : MonoBehaviour
     {
         internetPresenter.OnInternetUnavailable += TransitionToMainMenu;
         internetPresenter.OnInternetAvailable += OnInternetAvailable;
-        //Проверка на интернет
 
         firebaseDatabaseRealtimePresenter.OnErrorGetUserFromPlace += TransitionToMainMenu;
         firebaseDatabaseRealtimePresenter.OnGetUserFromPlace += CheckUser;
-        //Проверка на первое место
 
         geoLocationPresenter.OnErrorGetCountry += TransitionToMainMenu;
         geoLocationPresenter.OnGetCountry += ActivateSceneInCountry;
-        //Получение страны
 
         firebaseDatabaseRealtimePresenter.OnErrorGetCountries += TransitionToMainMenu;
         firebaseDatabaseRealtimePresenter.OnGetCountries += CheckCountry;
-        //Проверка страны
     }
 
     private void DeactivateActions()
@@ -98,11 +94,13 @@ public class CountryCheckerSceneEntryPoint : MonoBehaviour
         internetPresenter.OnInternetUnavailable -= TransitionToMainMenu;
         internetPresenter.OnInternetAvailable -= OnInternetAvailable;
 
+        firebaseDatabaseRealtimePresenter.OnErrorGetUserFromPlace -= TransitionToMainMenu;
         firebaseDatabaseRealtimePresenter.OnGetUserFromPlace -= CheckUser;
 
         geoLocationPresenter.OnErrorGetCountry -= TransitionToMainMenu;
         geoLocationPresenter.OnGetCountry -= ActivateSceneInCountry;
 
+        firebaseDatabaseRealtimePresenter.OnErrorGetCountries -= TransitionToMainMenu;
         firebaseDatabaseRealtimePresenter.OnGetCountries -= CheckCountry;
     }
 
