@@ -42,6 +42,7 @@ public class Metric_WinCountModel
     public void Reset()
     {
         winRowCount = 0;
+        PlayerPrefs.SetInt(KEY, 0);
     }
 
     public void Dispose()

@@ -42,6 +42,7 @@ public class Metric_BetNumberModel
     private void Reset()
     {
         betNumberCount = 0;
+        PlayerPrefs.SetInt(KEY, 0);
     }
 
     public void Dispose()

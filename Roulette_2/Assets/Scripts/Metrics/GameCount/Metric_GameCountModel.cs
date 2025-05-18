@@ -29,6 +29,7 @@ public class Metric_GameCountModel
     {
         isAlreadyActivated = false;
         currentGameCount = 0;
+        PlayerPrefs.SetInt(KEY, currentGameCount);
     }
 
     public void AddGame()

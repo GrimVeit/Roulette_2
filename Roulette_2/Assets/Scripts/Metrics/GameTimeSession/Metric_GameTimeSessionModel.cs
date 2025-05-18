@@ -57,6 +57,7 @@ public class Metric_GameTimeSessionModel
     public void Reset()
     {
         totalGameTime = TimeSpan.Zero;
+        PlayerPrefs.SetFloat(KEY, (float)totalGameTime.TotalSeconds);
     }
 
     private IEnumerator TimerCoroutine()
